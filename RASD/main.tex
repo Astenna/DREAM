@@ -1,0 +1,23 @@
+\documentclass[a4paper, 11pt, oneside, openright, english]{memoir}
+
+\usepackage{styles/preamble}
+% \usepackage{styles/alloy}
+
+\begin{document}
+	\include{title_page/title_page}
+
+	\pagenumbering{Roman}
+
+	\include{chapters/0_Revision_History}
+
+	\tableofcontents
+
+	\pagenumbering{arabic}
+
+	\include{chapters/1_Introduction}
+	\include{chapters/2_Overall_Description}
+	\include{chapters/3_Specific_Requirements}
+	\include{chapters/4_Formal_Analysis_using_Alloy}
+	\include{chapters/5_Effort_Spent}
+    \include{chapters/6_References}
+\end{document}
