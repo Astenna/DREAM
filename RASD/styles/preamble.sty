@@ -1,5 +1,5 @@
 % \ProvidesPackage{preamble}
-
+\RequirePackage{makecell}
 \RequirePackage{geometry}
 
 \newgeometry{left=3cm,right=3cm,bottom=3.5cm,top=3.5cm}
@@ -23,6 +23,15 @@
 \RequirePackage{enumitem}
 \RequirePackage{caption}
 \RequirePackage{booktabs}
+
+\RequirePackage[backend=biber, defernumbers=true]{biblatex}
+% \usepackage[backend=biber]{biblatex}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+\bibliography{bibliography}
+
+% \RequirePackage[resetlabels, labeled]{multibib}
+% \newcites{Intro}{Reference Documents}
 
 % Keep prettyref before the hyperref package
 \RequirePackage{prettyref}

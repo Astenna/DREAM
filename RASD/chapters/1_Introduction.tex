@@ -2,68 +2,68 @@
 
 \section{Purpose}
 
-Telengana’s government wants to promote data-driven policymaking in the state by designing, developing, and demonstrating anticipatory governance models for food systems utilizing digital public goods and community-centric approaches.
+% TODO: To introduce some background based on the Context.
+
+% rising food demand
+% climate change
+% covid19 pandemic
+
+Over 58 percent of rural Indian households rely on agriculture as their primary source of income, with 80 percent of them being smallholder farmers with less than 2 hectares of land. Furthermore, more than 20 percent of smallholder agricultural households live in poverty. Food consumption is anticipated to climb by 59 percent to 98 percent by 2050, according to the Harvard Business Review \cite{global_demand_for_food}. 
+
+With climate change posing a serious danger to agriculture, a complete overhaul of the system that transports food from farmers to our tables is required. On the top of that, the coronavirus pandemic created a huge disruption in food supply chains, exposing the weak parts of small-scale farmers as well as the significance of constructing resilient food systems.
+
+Telengana is India's 11th biggest state, having a land area of 122,077$km^2$ and a population of 35,193,978 people (data from 2011) \cite{telengana}. \textbf{DREAM}'s goal is to help Telengana’s government promote data-driven policymaking in the state by designing, developing, and demonstrating anticipatory governance models for food systems utilizing digital public goods and community-centric approaches \cite{reference_doc}.
 
 \subsection{Goals}
 \begin{itemize}
-    \item Allow Telengana's policymakers to identify farmers who are performing well.
-    \item Allow Telengana's policymakers to identify farmers who are performing particularly badly.
-    \item Allow Telengana's policymakers to determine whether the steering initiatives carried out by agronomists produce significant results.
-    \item Allow Farmers to visualize data relevant to them e.g. weather forecasts.
-    \item Allow Farmers to insert data about their production and any problem they face.
-    \item Allow Farmers to request help and suggestions by agronomists and other farmers.
-    \item Allow Farmers to share hints and advices with each other.
-    \item Allow Agronomists to insert the area of responsibility.
-    \item Give Agronomists a possibility to receive information regarding help requests and answers to them.
-    \item Allow Agronomists to see data visualizations concerning weather forecasts, as well as the best performing farmers in the area.
-    \item Allow Agronomists to visualize and update a daily schedule for visiting farms in the area. All farms must be visited at least twice a year, but those that are underperforming should be visited more regularly, depending on the sort of difficulties they are experiencing.
-    \item Allow Agronomists to confirm the execution of the daily plan at the end of each day, and additionally, to specify the deviations from the plan.
-    
-    \item -------------
-    
+    \item Strengthen data-driven policymaking in Telengana.
     \item Allow assessment of performance of the farmers in accordance to the external factors.
-    \begin{itemize}
-        \item Collect information about external factors - weather forecasts, irrigation system data and humidity of soil.
-        \item Collect farmer's production data.
-    \end{itemize}
-    \item Allow the exchange of hints and problems.
-    \begin{itemize}
-        \item Allow farmers to receive help from agronomists.
-        \item Allow farmers to exchange their knowledge.
-    \end{itemize}
-    \item Grant that every farm will be visited regularly by an agronomist. 
-
-    \item -------------
-    
-    \item Support poorly performing farmers.
-    \begin{itemize}
-        \item Share knowledge and good practices among farmers.
-        \item Help agronomists in focusing on poorly performing farmers.
-    \end{itemize}
-    \item Collect knowledge regarding good practices among well performing farmers\dots
-    \item Ensure that agronomists are focusing on farmers in need according to their area of responsibility (?)
-
-        
+    \item Ensure regular support of farmers by agronomists.
+    \item Allow farmers to exchange their knowledge.
 \end{itemize}
 
 \section{Scope}
+% How does the system assess the performance of farmers
+
 
 \subsection{World Phenomena}
 
 \begin{itemize}
-    \item [\textbf{WP.1}] 
-    \item [\textbf{WP.2}] 
+    \item [\textbf{WP.1}] Data concerning meteorological short-term and long-term forecasts are being collected by Telegana's government \cite{tsdps}.
+    % \item [\textbf{WP.2}] 
 \end{itemize}
 
 \subsection{Shared Phenomena}
 
+% \begin{itemize}
+    % \item [\textbf{SP.1}] Farmers insert what types of product they produce (world controlled) % choose or just insert in the system?
+    % \item [\textbf{SP.2}] Farmers request for help and suggestions 
+    % % TODO: add to dictionary to explain what is discussion forum
+    % \item [\textbf{SP.3}] Farmers create discussion forums 
+    % \item [\textbf{SP.5}] Agronomists choose the area they are responsible for  % choose or just insert in the system?
+    % \item [\textbf{SP.4}] The system assesses performance of the farmers
+    % \item [\textbf{SP.5}] An agronomist visits a farm 
+% \end{itemize}
+
+
+
 \begin{itemize}
-    \item [\textbf{SP.1}] Farmers choose what types of products to produce (world controlled) % choose or just insert in the system?
+    \item Sensors collect information about the humidity of the soil at given farm
+    \item Water irrigation systems collect information about the amount of water used by each farm
+    \item The system reads the data collected by the humidity sensors at given farm
+    \item The system reads the data collected by water irrigation systems at given farm.
+    \item [\textbf{WP.1}] Telegana's government collects data concerning meteorological short-term and long-term forecasts
+    \item The systems saves data concerning meteorological short-term and long-term forecasts collected by Telegana's government
+    \item 
+    \item The systems asks w
+    \item [\textbf{SP.1}] Farmers insert what types of products they produce (world controlled) % choose or just insert in the system?
     \item [\textbf{SP.2}] Farmers request for help and suggestions 
     % TODO: add to dictionary to explain what is discussion forum
     \item [\textbf{SP.3}] Farmers create discussion forums 
     \item [\textbf{SP.5}] Agronomists choose the area they are responsible for  % choose or just insert in the system?
-    \item [\textbf{SP.4}] The system assesses performance of the farmers
+    % TODO: identify how the perfomances is assessed 
+    % \item [\textbf{SP.4}] The system assesses performance of the farmers
+    \item [\textbf{SP.5}] An agronomist visits a farm 
 \end{itemize}
 
 \section{Definitions, Acronyms, Abbreviations}
@@ -121,11 +121,7 @@ Telengana’s government wants to promote data-driven policymaking in the state 
 	\end{tabular}
 \end{center}
 
-\section{Reference Documents}
-
-\begin{itemize}
-    \item \textit{Assignment RDD AY 2021-2022} ("Requirement Engineering and Design Project: goal, schedule and rules")
-\end{itemize}
+\printbibliography[title={Reference Documents},keyword=intro, heading=subbibnumbered]
 
 \section{Document Structure}
 
