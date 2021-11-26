@@ -1,0 +1,69 @@
+@startuml Class
+
+class PolicyMaker
+class AreaOfResponsibility
+class Agronomist
+class Farmer {
+    +note: Note
+}
+class Farm
+abstract class User
+class Mandal
+class Production {
+    +amount
+    +date
+}
+class WaterIrrigationSystem
+class SensorSystem
+abstract class ExternalSystem
+class ProductionType {
+    +name
+}
+enum Note {
+    Positive
+    Neutral
+    Negative
+}
+class HelpRequest 
+class HelpResponse 
+class Visit {
+    +date
+} 
+class Thread
+class Comment
+
+PolicyMaker <|-- User
+Agronomist <|-- User
+Farmer <|-- User
+
+WaterIrrigationSystem <|-- ExternalSystem
+SensorSystem <|-- ExternalSystem
+
+
+Farm "0..*" -- "1" Mandal
+Farm "1" -- "0..*" Production
+Farm "1" -- "1" WaterIrrigationSystem
+Farm "1" -- "1" SensorSystem
+
+AreaOfResponsibility "1..*" -- "1..*" Mandal
+Production "0..*" -- "1" ProductionType
+
+AreaOfResponsibility "1" --* "1" Agronomist
+Farm "1" --* "1" Farmer
+
+Farmer "1" *-- "0..*" HelpRequest : creates >
+Farmer "0..*" -- "0..*" HelpRequest : receives < 
+Agronomist "0..*" -- "0..*" HelpRequest : receives < 
+HelpRequest "1" *-- "0..*" HelpResponse : contains >
+HelpResponse "0..*" -- "0..1" Farmer : created by >
+HelpResponse "0..*" -- "0..1" Agronomist : created by >
+'XOR 
+
+Agronomist "1" *-- "0..*" Visit : has >
+Visit "0..*" -- "1" Farm : refers to >
+
+Thread "1" -- "0..*" Comment : has >
+Thread "0..*" -- "1" Farmer : created by >
+Comment "0..*" -- "1" Farmer : created by >
+
+@enduml
