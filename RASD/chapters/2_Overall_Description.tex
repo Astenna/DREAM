@@ -1,9 +1,74 @@
 \chapter{Overall Description}
+% Statecharts:
+% daily plan
+% request for help
+%  
 
 \section{Product Perspective}
+% class diagram
+% state diagrams
 
 \section{Product Functions}
+% description of functions?
+% scenarios
+% use cases
+\subsection{Scenarios}
+\subsection*{Farmer's performance assessment by a policy maker}
+John, a policy maker logs in to the application to see how farmers are performing. He goes through the list of farmers and notices that despite very dry weather in the region, the Joe Sharma's production of carrots has significantly increased. John gives Sharma's a positive note, then he continues to look at the list of farmers. He spots that the production of Tamia Anand and Amar Khatri has plunged. He thinks it may be an effect of droughts that were reported in the system. He gives both farmers a negative note, hoping that other farmers and agronomists will be able to help them.
+
+\subsection*{Policy maker checks whether a farmer obtained proper help}
+Shaila, a policy maker is already logged to the application. She wants to see if farmers with negative notes are obtaining proper help. Therefore, she looks at the farmer's summary belonging to Amar Khatri, who was marked with negative note. She reads the advices provided by agronomists working in the area and Joe Sharma, who is a farmer with a positive note. Joe Sharma shared some best practices on how to deal with droughts in the farm. Shaila wants to wait to see if the production of Amar Khatri will be better in the following month, but is happy to see that the farmer obtained meaningful advices.
+
+\subsection*{A farmer reads individualized recommendations}
+Ishaan Patel produces potatoes and wants to prepare a planting plan on his farm. For that reason, he opens the application and looks for a weather forecast in his region. Ishaan finds out that it is going to rain next weekend, but afterwards the weather will be perfect for planting. Hence, he decides to start planting next Monday. Next to the weather forecasts, among farmer's relevant data, Ishaan reads a recommendation about potassium salt that can be used to increase the potato crops. As a result, Ishaan thinks about including potassium salt fertilization in his planting plan. 
+
+\subsection*{A farmer inserts production data}
+Shalene Reddy assessed that she produced 40 tons of rice on her farm in the last month. She logs in to the application and fills the production data. % czy chcemy tu coś dodać? np. że porównuje swoją produkcję z poprzednim miesiącem/rokiem, bo te dane też kiedyś wprowadziła?
+
+\subsection*{A farmer requests for help}
+Nalin Laghari experiences difficulties on his cotton farm. He is striving to fight off bollworms.
 
 \section{User Characteristics}
 
+DREAM is a project whose key component is data acquisition and integration. All of this is used to support the work of three distinct types of actors: agronomists, farmers, and policy makers.
+
+\subsection{Agronomist}
+
+% Who he is
+
+% What he does
+
+% How the system helps him in achieving his goal
+
+\subsection{Farmer}
+
+% Who he is
+This actor is directly involved in Telengana's food production. He owns a farm where he raises crops that are later distributed around the region.
+
+% What he does
+During the production process, a farmer faces many difficulties caused by external factors such as weather conditions.
+
+% How the system helps him in achieving his goal
+To assist a farmer in accomplishing his objective, the system visualizes data important to him, such as tailored advice about which crops to plant or which fertilizers to use depending on his location and kind of production, as well as weather forecasts. Furthermore, it enables him to create discussion forums, where he could share his difficulties and solicit recommendations or assistance from agronomists and other farmers.
+
+\subsection{Policy maker}
+
+% Who he is
+
+% What he does
+
+% How the system helps him in achieving his goal
+
 \section{Assumptions, Dependencies and Constraints}
+\subsection{Assumptions}
+\begin{itemize}
+    \item A farmer can possess only one farm.
+    \item A farm belongs to one farmer.
+    \item A farm has at least one humidity sensor.
+    \item A farm has irrigation system.
+    \item A farm belongs to a district.
+\end{itemize}
+TODO:
+\begin{itemize}
+    \item Meteorological data are collected with relevance to a district
+\end{itemize}
