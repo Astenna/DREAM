@@ -14,7 +14,7 @@ With climate change posing a serious danger to agriculture, a complete overhaul 
 
 Telengana is India's 11th biggest state, having a land area of 122,077$km^2$ and a population of 35,193,978 people (data from 2011) \cite{telengana}. \textbf{DREAM}'s goal is to help Telengana’s government promote data-driven policy-making in the state by designing, developing, and demonstrating anticipatory governance models for food systems utilizing digital public goods and community-centric approaches \cite{reference_doc}.
 
-\subsection{Goals}
+\subsection{Goals} \label{subsec:goals}
 \begin{itemize}
     \item [\textbf{G1.}] Strengthen data-driven policy-making in Telengana.
     \item [\textbf{G2.}] Allow performance assessment of the farmers.
@@ -32,51 +32,65 @@ The system aims to enable policy makers to identify farmers who perform well, es
 
 Another group that would benefit from the system are the farmers, since it will allow them to exchange good practices between each other and request help when needed. All of that will be supplemented with visualizations of relevant data, including suggestions and weather forecasts.
 
-The project also intends to facilitate the work of agronomists by creating a daily schedule for field visits, giving statistics on farmers' performance, and informing them about incoming assistance requests.
+The project also intends to facilitate the work of agronomists by creating a daily plan for field visits, giving statistics on farmers' performance, and informing them about incoming assistance requests.
 
 The system attempts to address a highly difficult topic, which necessitates the coordination of numerous individuals. All of these criteria requires the system to be very easy to use, intuitive, and straightforward, so that everyone can get the most out of it.
 
 \subsection{World Phenomena}
 
-\begin{itemize}
-    \item [\textbf{WP}] Telengana collects information concerning short-term and long-term meteorological forecasts.
-    \item [\textbf{WP}] Water irrigation systems collect information about the amount of water used by each farm
-    \item [\textbf{WP}] Sensors collect information about the humidity of the soil at a given farm.
-    \item [\textbf{WP}] An agronomist visits a farm.
-    \item [\textbf{WP}] Farmer produces products on the farm.
-    \item [\textbf{WP}] Farmer experiences issues on the farm.
-\end{itemize}
+\begin{center}
+	\begin{tabular}{@{}p{0.06\linewidth} p{0.92\linewidth}@{}}
+		\toprule
+		\textbf{ID}   & \textbf{Phenomena}\\
+		\midrule
+		\autonum{WP} & Telengana collects information concerning short-term and long-term meteorological forecasts.\\
+		\autonum{WP} & Water irrigation systems collect information about the amount of water used by each farm\\
+		\autonum{WP} & Sensors collect information about the humidity of the soil at a given farm.\\
+		\autonum{WP} & An agronomist visits a farm.\\
+		\autonum{WP} & Farmer produces products on the farm.\\
+		\autonum{WP} & Farmer experiences issues on the farm.\\
+		\autonum{WP} & A user forgets password.\\
+		\bottomrule
+	\end{tabular}
+\end{center}
 
 \subsection{Shared Phenomena}
 
-\begin{itemize}
-    \item [\textbf{SP W}] A user logs in to the system.
-    \item [\textbf{SP W}] An unregistered user registers into the system.
-    \item [\textbf{SP M}] The system reads information about short-term and long-term meteorological forecasts provided by Telengana API.
-    \item [\textbf{SP M}] The system reads information about the amount of water used by each farm, provided by water irrigation systems API.
-    \item [\textbf{SP M}] The system reads the data collected by the sensors at a given farm.
-    \item [\textbf{SP W}] An agronomist saves information collected during a farm visit in the system.
-    \item [\textbf{SP M}] The system notifies an agronomist about a scheduled visit in a farm.
-    \item [\textbf{SP W}] Policy maker assesses farmer performance, giving him negative, neutral or positive note and saves it in the system.
-    \item [\textbf{SP M}] The system shows a list of farmers.
-    \item [\textbf{SP M}] The system shows farmer's summary.
-    \item [\textbf{SP W}] A policy maker understands whether activities performed by an agronomists and farmers helped a farmer with a negative note using data from the system.
-    \item [\textbf{SP M}] The system shows farmer's relevant data.
-    \item [\textbf{SP M}] The system determines personalized suggestions concerning farmer.
-    \item [\textbf{SP W}] Farmer inserts production data to the system.
-    \item [\textbf{SP W}] Farmer request for help in the system.
-    \item [\textbf{SP M}] The system sends a request for help to well performing farmers and agronomists in a given region. [happens in two cases: when a policy maker gives a negative note and when a farmer requests help]
-    \item [\textbf{SP W}] Farmer creates a thread on the forum. 
-    \item [\textbf{SP W}] Farmer comments on a given thread.
-    \item [\textbf{SP W}] Agronomist inserts the area of responsibility into the system.
-    \item [\textbf{SP M}] The system shows weather forecasts.
-    \item [\textbf{SP M}] The system visualizes data about farmers with positive note in the area of responsibility for agronomist.
-    \item [\textbf{SP M}] The system shows the daily plan of an agronomist.
-    \item [\textbf{SP W}] Agronomist updates daily plan.
-    \item [\textbf{SP W}] Agronomist confirms the execution of daily plan at the end of each day.
-    \item [\textbf{SP W}] Agronomist rejects the execution of daily plan, while specifying deviations from the plan.
-    \item [\textbf{SP M}] The system generates visits to a farm by an agronomist in a given area of responsibility.
-\end{itemize}
+\begin{longtable}{p{0.06\linewidth} p{0.73\linewidth} p{0.20\linewidth}}
+	\toprule
+	\textbf{ID}  & \textbf{Content} & \textbf{Controlled by}\\
+	\midrule
+	\autonum{SP} & A user logs in to the system. & World \\
+	\autonum{SP} & An unregistered user creates account in the system. & World \\
+	\autonum{SP} & The system reads information about short-term and long-term meteorological forecasts provided by Telengana API. & Machine \\
+	\autonum{SP} & The system reads information about the amount of water used by each farm, provided by water irrigation systems API. & Machine \\
+	\autonum{SP} & The system reads the data collected by the sensors at a given farm. & Machine \\
+	\autonum{SP} & An agronomist saves information collected during a farm visit in the system. & World \\
+	\autonum{SP} & The system notifies an agronomist about a scheduled visit in a farm. & Machine \\
+	\autonum{SP} & Policy maker assesses farmer performance, giving him negative, neutral or positive note and saves it in the system. & World \\
+	\autonum{SP} & The system shows a list of farmers. & Machine \\
+	\autonum{SP} & The system shows farmer's summary. & Machine \\
+	\autonum{SP} & A policy maker understands whether activities performed by an agronomists and farmers helped a farmer with a negative note using data from the system. & World \\
+	\autonum{SP} & The system shows farmer's relevant data. & Machine \\
+	\autonum{SP} & The system determines personalized suggestions concerning farmer. & Machine \\
+	\autonum{SP} & Farmer inserts production data to the system. & World \\
+	\autonum{SP} & Farmer request for help in the system. & World \\
+	\autonum{SP} & The system sends a request for help to well performing farmers and agronomists in a given region. [happens in two cases: when a policy maker gives a negative note and when a farmer requests help] & Machine \\
+	\autonum{SP} & Farmer creates a thread on the forum.  & World \\
+	\autonum{SP} & Farmer comments on a given thread. & World \\
+	\autonum{SP} & Agronomist inserts the area of responsibility into the system. & World \\
+	\autonum{SP} & The system shows weather forecasts. & Machine \\
+	\autonum{SP} & The system visualizes data about farmers with positive note in the area of responsibility for agronomist. & Machine \\
+	\autonum{SP} & The system shows the daily plan of an agronomist. & Machine \\
+	\autonum{SP} & Agronomist updates daily plan. & World \\
+	\autonum{SP} & Agronomist confirms the execution of daily plan at the end of each day. & World \\
+	\autonum{SP} & Agronomist rejects the execution of daily plan, while specifying deviations from the plan. & World \\
+	\autonum{SP} & The system generates visits to a farm by an agronomist in a given area of responsibility. & Machine \\
+	\autonum{SP} & A user requests password reset. & World \\
+	\autonum{SP} & The system sends an email with passwords reset link. & Machine \\
+	\autonum{SP} & A user uses a password reset link obtained in an email. & World \\
+	\bottomrule
+\end{longtable}
 
 \section{Definitions, Acronyms, Abbreviations}
 
@@ -95,8 +109,10 @@ The system attempts to address a highly difficult topic, which necessitates the 
         Farmer's relevant data  & Weather predictions, individualized recommendations on which crops to plant or which fertilizers to use – all depending on their location and kind of production.\\
         Production data         & Information provided by a farmer about his production. It lists product categories and quantities generated per product.\\
         Mandal                  & A local government area in India.\\
-        Agronomist's area of responsibility  & Set of mandals that an agronomist is responsible for.\\
-        Agronomist's daily plan & A daily schedule for visiting farms in a certain area of responsibility.\\
+        Dashboard               & The first screen that appears to the user after logging in to the system.\\
+        Area of responsibility  & Set of mandals that an agronomist is responsible for.\\
+        Daily plan & A daily schedule for visiting farms in a certain area of responsibility.\\
+        Request for help & An issue created by a farmer. It contains a topic and a description of a problem. The system automatically forwards it to farmers and agronomists in the same mandal.
 	\end{tabular}
 \end{center}
 

@@ -35,27 +35,28 @@ rectangle DREAM {
     ' (Provide information about weather forecasts) -- WeatherForecastSystem 
     ' (Provide information about soil humidity) -- SensorSystem
     ' (Provide information about used water) -- WaterIrrigationSystem
-    Farmer -- (Insert production data)
+    Farmer -- (Update production data)
     Farmer -- (Request help)
     Farmer -- (Create forum thread)
     Farmer -- (Create forum comment)
     
     '''''''''''Agronomist'''''''''''
-    Agronomist -- (Insert area of responsibility)
+    Agronomist -- (Insert area of responsibility TODO: extend create account action)
     Agronomist -- (Receive request notification)
     (Receive request notification) <.. (Answer to request) : <<extend>>
-    Agronomist -- (Visualize farmer data)
+    Agronomist -- (View farmer's summary)
     Agronomist -- (Update daily plan)
     Agronomist -- (Confirm daily plan execution)
     Agronomist -- (Reject daily plan execution)
-    (Update daily plan) ..> (Open visit calendar) : <<include>>
-    (Confirm daily plan execution) ..> (Open visit calendar) : <<include>>
-    (Reject daily plan execution) ..> (Open visit calendar) : <<include>>
-    (Save farm visit information) ..> (Open visit calendar) : <<include>>
+    Agronomist -- (Save farm visit information)
+    (Update daily plan) ..> (Open daily plan) : <<include>>
+    (Confirm daily plan execution) ..> (Open daily plan) : <<include>>
+    (Reject daily plan execution) ..> (Open daily plan) : <<include>>
+    (Save farm visit information) ..> (Open daily plan) : <<include>>
 
     '''''''''''Policy maker'''''''''''
-    PolMaker -- (Assess farmer performance)
-    (Assess farmer performance) ..> (View farmer summary) : <<include>>
+    PolMaker -- (Assess farmer's performance)
+    (Assess farmer's performance) ..> (View farmer's summary) : <<include>>
 
 }
 

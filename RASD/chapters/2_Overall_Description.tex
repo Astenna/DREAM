@@ -11,7 +11,7 @@
 \subsection{Scenarios}
 \subsection*{Farmer's performance assessment by a policy maker}
 John, a policy maker, logs in to the application to see how farmers are performing. He goes through the list of farmers and notices that despite very dry weather conditions in the region, the Joe Sharma's production of carrots has significantly increased. John gives Sharma's a positive note, and then he continues to look at the list of farmers. He spots that the production of Tamia Anand and Amar Khatri has plunged. He thinks it may be an effect of droughts that were reported in the system. He gives both farmers a negative note, hoping that other farmers and agronomists will be able to help them. 
-% (TODO) dodać komentarz co robi system po daniu noty
+\todo{dodać komentarz co robi system po daniu noty}
 
 \subsection*{Policy maker checks whether a farmer obtained proper help}
 Shaila, a policy maker, is already logged in to the application. She wants to see if farmers with negative notes are obtaining proper help. Therefore, she looks at the farmer's summary belonging to Amar Khatri, who was marked with a negative note. She reads the advice provided by both agronomists working in the area and Joe Sharma, who is a farmer with a positive note. Joe Sharma shared some best practices on how to deal with droughts in the farm. Shaila wants to wait to see if the production of Amar Khatri will improve in the following month, but is happy to see that the farmer obtained meaningful advices.
@@ -27,26 +27,75 @@ Nalin Laghari experiences difficulties on his cotton farm. He is striving to fig
 
 The application automatically delegates a request for help to both the agronomists in the given area of responsibility and farmers nearby. As a result, an agronomist, Devraj Jain receives a notification about a request for help. Devraj knows some theory as well as several practices that farmers used before to deal with bollworms, so he shares some hints in a response to the request. The same notification is also obtained by a farmer, Joe Sharma. Joe recommends one of the insecticides in the response, since he successfully fought off bollworms a year ago.
 
+\subsection*{A farmer creates a discussion forum}
+Paidi Jairaj has a large carrot farm in Jagtial. Lately, he heard some rumors about potato farming becoming more and more profitable. He is wondering if it is worth switching his type of production to another type of crops in the next season. He wants to reach other farmers in his mandal to get to know their opinion. To do this, Paidi logs into DREAM application and chooses the option to create a discussion thread, in which he specifies the topic and description of his dilemma.
+
+Gajam Anjaiah, a potato farmer from Jagtial, logs in to DREAM application to check, if there are any interesting discussions on the discussion forum. He sees Paidi's thread, and knowing a lot about potatoes production, creates a comment in the thread, containing various advice and remarks concerning potato's production.
+
+\subsection*{An agronomist manages daily plan}
+Zakir Hussain, a governmental agronomist, wants to visualize and check his daily plan. He logs in to DREAM app, chooses the option to see plan and then clicks on the following day. After reading the generated plan, he realizes that he will be driving near Syed Nayeemuddin's farm, who recently asked for help. He decides to alter his plan to visit Syed's farm. He chooses the option to edit the plan, types Syed's name in a search bar and chooses him from the list, which contains suggestions of farmers in Zakir's area of responsibility, as well as information regarding how many times they were visited in the current year. Lastly, Zakir confirms the edits he made.
+
+\subsection*{An agronomist rejects plan execution}
+Rahul Bheke, a governmental agronomist, wasn't able to realize his daily plan for the preceding day completely. He logs into DREAM app, chooses the option to see plan calendar, and then clicks on the preceding day. In the daily plan view, he selects the option to reject the daily plan. A pop-up appears, which tells him to choose farms he has and hasn't visited. After completing the form, Rahul confirms the rejection of the plan.
+
 \section{Product Functions}
-% description of functions?
+
+This section provides a summary of the major functions that the system will introduce to achieve the goals outlined in the section \ref{subsec:goals}.
+
 \subsection{Registration}
 % Area of responsibility for agronomists, crops for farmers. Farm creation
+The system allows for registration of three different types of users: agronomists, farmers, and policy makers. Characteristics of each user are described in the section \ref{sec:user_characteristics}.
+
+\subsubsection*{Agronomist}
+
+\begin{itemize}
+    \item Provides email and password.
+    \item Inserts his area of responsibility.
+\end{itemize}
+
+\subsubsection*{Farmer}
+
+\begin{itemize}
+    \item Enters email and password.
+    \item Introduces relevant data regarding the location of his farm.
+    \item The system automatically creates an abstraction of a farm based on the information provided. \todo{Probably should be moved to the sequence diagram's description}
+\end{itemize}
+
+\subsubsection*{Policy maker}
+
+\begin{itemize}
+    \item Inserts email and password.
+\end{itemize}
+
+Additionally, the system introduces a functionality to retrieve a forgotten password. The user needs to press on a dedicated button and provide his email address. He will later receive a link to a webpage where he will be able to introduce a new password. 
 
 \subsection{Performance assessment of the farmers}
 % Water irigation systems, sensors.
 
+DREAM system utilizes external services such as water irrigation systems and sensors measuring the humidity of the soil to extract valuable data. Based on that, together with production data which is updated by a farmer, and the weather conditions, a policy maker is able to assess the performance of a farmer by assigning him a positive, negative, or neutral note.
+
 \subsection{Update production data (Farmer)}
+
+The system allows a farmer to update his production data. It is required to specify the type of crops as well as their quantity produced during the entire month. This data is further used for the performance assessment of each farmer.
 
 \subsection{Request for help}
 % together with a response
 
+Using DREAM enables farmers to request assistance and advice from agronomists and other farmers in a convenient way. The system asks them to create an issue by describing their problems, and subsequently sends a notification to all the agronomists and farmers from the same mandal. Then each of the recipients can provide help. The track of the issue remains visible only to the people involved as well as the policy makers.
+
 \subsection{Coordinate agronomist's daily plan}
+
+Each farm should be inspected at least twice a year, but those that are underperforming should be visited more frequently, depending on the nature of the problem. The system automates these visits by developing a daily plan for each agronomist, which is accessible via the dashboard. Furthermore, at the end of each day, an agronomist can validate the completion of the daily plan or identify deviations from it.
 
 \subsection{Create discussion forum}
 
+The system provides also a possibility for a farmer to freely create discussion forums with other farmers. Such threads do not have any restrictions on their topic. They can include suggestions, queries, and even off-topic material. Each farmer can participate in a certain thread by leaving a comment. All forum threads are visible to all the registered farmers.
+
 \subsection{Visualize farmer's relevant data}
 
-\section{User Characteristics}
+The system enables farmers to display data relevant to them, such as weather forecasts and tailored recommendations for certain crops to plant or fertilizers to utilize, based on their region and kind of production. This information will be visible on the main dashboard after logging in to the system.
+
+\section{User Characteristics} \label{sec:user_characteristics}
 
 DREAM is a project whose key component is data acquisition and integration. All of this is used to support the work of three distinct types of registered actors: agronomists, farmers, and policy makers. Additionally, there is a description of an unregistered user provided.
 
@@ -100,6 +149,9 @@ An individual belonging to one of the aforementioned groups who is not yet regis
     \item A farm has at least one humidity sensor.
     \item A farm has irrigation system.
     \item A farm belongs to a district.
+    \item A farm updates production data each month.
+    \item Weather is consistent in given mandal.
+    \item Initially every farmer has a neutral note.
 \end{itemize}
 TODO:
 \begin{itemize}
