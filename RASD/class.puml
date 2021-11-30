@@ -1,7 +1,6 @@
 @startuml Class
 
 class PolicyMaker
-class AreaOfResponsibility
 class Agronomist
 class Farmer {
     +note: Note
@@ -13,9 +12,11 @@ class Production {
     +amount
     +date
 }
-class WaterIrrigationSystem
-class SensorSystem
-abstract class ExternalSystem
+
+class WaterIrrigationResponse
+class SensorSystemResponse
+class WeatherSystemResponse
+
 class ProductionType {
     +name
 }
@@ -29,26 +30,24 @@ class HelpResponse
 class Visit {
     +date
 } 
-class Thread
+class ForumThread
 class Comment
 
 PolicyMaker <|-- User
 Agronomist <|-- User
 Farmer <|-- User
 
-WaterIrrigationSystem <|-- ExternalSystem
-SensorSystem <|-- ExternalSystem
-
 
 Farm "0..*" -- "1" Mandal
 Farm "1" -- "0..*" Production
-Farm "1" -- "1" WaterIrrigationSystem
-Farm "1" -- "1" SensorSystem
+Farm "1" -- "0..*" WaterIrrigationSystemResponse
+Farm "1" -- "0..*" SensorSystemResponse
 
-AreaOfResponsibility "1..*" -- "1..*" Mandal
+Mandal "1" -- "0..*" WeatherSystemResponse
+
+Agronomist "1..*" -- "1..*" Mandal
 Production "0..*" -- "1" ProductionType
 
-AreaOfResponsibility "1" --* "1" Agronomist
 Farm "1" --* "1" Farmer
 
 Farmer "1" *-- "0..*" HelpRequest : creates >
@@ -62,8 +61,8 @@ HelpResponse "0..*" -- "0..1" Agronomist : created by >
 Agronomist "1" *-- "0..*" Visit : has >
 Visit "0..*" -- "1" Farm : refers to >
 
-Thread "1" -- "0..*" Comment : has >
-Thread "0..*" -- "1" Farmer : created by >
+ForumThread "1" -- "0..*" Comment : has >
+ForumThread "0..*" -- "1" Farmer : created by >
 Comment "0..*" -- "1" Farmer : created by >
 
 @enduml
