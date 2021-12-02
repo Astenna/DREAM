@@ -1,54 +1,116 @@
 @startuml Class
 
-abstract class User {
+enum Note {
+    Positive
+    Neutral
+    Negative
+}
+enum WeatherType {
+    Sunny
+    MostlyCloudy
+    Cloudy
+    Rainy
+    Lightning
+}
+enum VisitState {
+    planned
+    confirmed
+    rejected
+}
 
+abstract class User {
+    +email
+    +name
+    +surname
+    +password
 }
 class PolicyMaker
 class Agronomist
 class Farmer {
     +note: Note
 }
-class Farm
-class Mandal
+class Farm {
+    +id
+    +name
+}
+class Mandal {
+    +id
+    +name
+}
 class Production {
+    +id
     +amount
     +date
 }
 
-class WaterIrrigationSystemResponse
-class SensorSystemResponse
-class WeatherSystemResponse
+class WaterIrrigationSystemResponse {
+    +id
+    +waterUsed
+    +date
+}
+class SensorSystemResponse {
+    +id
+    +sensorId
+    +humidity
+    +date
+}
+class WeatherSystemResponse {
+    +id
+    +degrees
+    +rainfall
+    +type: WeatherType
+    +date
+}
 
 class ProductionType {
+    +id
     +name
 }
-enum Note {
-    Positive
-    Neutral
-    Negative
+class HelpRequest {
+    +id
+    +topic
+    +message
+    +createDateTime
 }
-class HelpRequest 
-class HelpResponse 
+class HelpResponse {
+    +id
+    +message
+    +createDateTime
+}
 class Visit {
+    +id
+    +comment
     +date
+    +state: VisitState
+' reject?
 } 
-class ForumThread
-class Comment
+class ForumThread {
+    +id
+    +topic
+    +message
+    +createDateTime
+}
+class Comment {
+    +id
+    +message
+    +createDateTime
+}
+'ForumComment?
 
 PolicyMaker <|-- User
 Agronomist <|-- User
 Farmer <|-- User
 
 
-Farm "0..*" -- "1" Mandal
-Farm "1" *-- "0..*" Production
-Farm "1" *-- "0..*" WaterIrrigationSystemResponse
-Farm "1" *-- "0..*" SensorSystemResponse
+Farm "0..*" o-- "1" Mandal : belongs to >
+Farm "1" *-- "0..*" Production : produces >
+Farm "1" *-- "0..*" WaterIrrigationSystemResponse : has >
+Farm "1" *-- "0..*" SensorSystemResponse : has >
 
-Mandal "1" *-- "0..*" WeatherSystemResponse
+Mandal "1" *-- "0..*" WeatherSystemResponse : has >
 
-Agronomist "1..*" o-- "1..*" Mandal
-Production "0..*" o-- "1" ProductionType
+Agronomist "1..*" o-- "1..*" Mandal : belongs to >
+Production "0..*" o-- "1" ProductionType : has a >
 
 Farm "1" --* "1" Farmer
 
@@ -60,8 +122,8 @@ HelpResponse "0..*" o-- "0..1" Farmer : created by >
 HelpResponse "0..*" o-- "0..1" Agronomist : created by >
 'XOR 
 
-Agronomist "1" *-- "0..*" Visit : has >
-Visit "0..*" --o "1" Farm : refers to >
+Agronomist "1" *-- "0..*" Visit : does >
+Visit "0..*" o-- "1" Farm : refers to >
 
 ForumThread "1" *-- "0..*" Comment : has >
 ForumThread "0..*" o-- "1" Farmer : created by >
