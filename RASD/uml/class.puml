@@ -90,7 +90,7 @@ class ForumThread {
     +message
     +createDateTime
 }
-class Comment {
+class ForumComment {
     +id
     +message
     +createDateTime
@@ -125,8 +125,8 @@ HelpResponse "0..*" o-- "0..1" Agronomist : created by >
 Agronomist "1" *-- "0..*" Visit : does >
 Visit "0..*" o-- "1" Farm : refers to >
 
-ForumThread "1" *-- "0..*" Comment : has >
+ForumThread "1" *-- "0..*" ForumComment : has >
 ForumThread "0..*" o-- "1" Farmer : created by >
-Comment "0..*" o-- "1" Farmer : created by >
+ForumComment "0..*" o-- "1" Farmer : created by >
 
 @enduml
