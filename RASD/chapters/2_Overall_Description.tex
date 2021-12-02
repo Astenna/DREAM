@@ -11,7 +11,10 @@
 \subsection{Scenarios}
 \subsection*{Farmer's performance assessment by a policy maker}
 John, a policy maker, logs in to the application to see how farmers are performing. He goes through the list of farmers and notices that despite very dry weather conditions in the region, the Joe Sharma's production of carrots has significantly increased. John gives Sharma's a positive note, and then he continues to look at the list of farmers. He spots that the production of Tamia Anand and Amar Khatri has plunged. He thinks it may be an effect of droughts that were reported in the system. He gives both farmers a negative note, hoping that other farmers and agronomists will be able to help them. 
-\todo{dodać komentarz co robi system po daniu noty}
+
+Dream automatically creates and delegates the requests for help about poorly perfoming farmers to both the agronomists in the given area of responsibility and farmers nearby. As a result, an agronomist, Rajesh Khanna receives a notification that indicates the farmers with negative note. Rajesh looks through the farmers' summaries, to determine any possible reasons for the farmers' bad performance. In the case of Tamia Anan's, he notices that her irrigation system entries from the last month show understated values. Rajesh advises Tamia to check if the system is working properly in the response. 
+
+The same notifications are also obtained by a farmer, Trisha Gupta who lives in the same mandal. She shares some general advices about dealing with adverse weather conditions in the mandal in the responses.
 
 \subsection*{Policy maker checks whether a farmer obtained proper help}
 Shaila, a policy maker, is already logged in to the application. She wants to see if farmers with negative notes are obtaining proper help. Therefore, she looks at the farmer's summary belonging to Amar Khatri, who was marked with a negative note. She reads the advice provided by both agronomists working in the area and Joe Sharma, who is a farmer with a positive note. Joe Sharma shared some best practices on how to deal with droughts in the farm. Shaila wants to wait to see if the production of Amar Khatri will improve in the following month, but is happy to see that the farmer obtained meaningful advices.
@@ -74,7 +77,7 @@ Additionally, the system introduces a functionality to retrieve a forgotten pass
 
 DREAM system utilizes external services such as water irrigation systems and sensors measuring the humidity of the soil to extract valuable data. Based on that, together with production data which is updated by a farmer, and the weather conditions, a policy maker is able to assess the performance of a farmer by assigning him a positive, negative, or neutral note.
 
-\subsection{Update production data (Farmer)}
+\subsection{Update production data (farmer)}
 
 The system allows a farmer to update his production data. It is required to specify the type of crops as well as their quantity produced during the entire month. This data is further used for the performance assessment of each farmer.
 
@@ -137,23 +140,19 @@ The system's purpose is to help them identify which farmers are performing well 
 An individual belonging to one of the aforementioned groups who is not yet registered in the system.
 
 \section{Assumptions, Dependencies and Constraints}
-% New farm inserted = daily plan of agronomists modified, new visits are added 
-% Visit confirmed = the systems plans another visit in the next year 
-
-% Every mandal has at least one agronomist
 
 \subsection{Assumptions}
 \begin{itemize}
-    \item A farmer can possess only one farm.
+    \item A farmer possess one farm.
     \item A farm belongs to one farmer.
     \item A farm has at least one humidity sensor.
-    \item A farm has irrigation system.
-    \item A farm belongs to a district.
-    \item A farm updates production data each month.
-    \item Weather is consistent in given mandal.
-    \item Initially every farmer has a neutral note.
-\end{itemize}
-TODO:
-\begin{itemize}
-    \item Meteorological data are collected with relevance to a district
+    \item A farm has an irrigation system.
+    \item A farm is inside one mandal.
+    \item A farmer updates his production data each month.
+    \item Weather is consistent in a given mandal.
+    \item Initially, each farmer has a neutral note.
+    \item Agronomist's area of responsibility contains at least one mandal.
+    \item A registered user can be only one of the actors: an agronomist, a farmer, or a policy maker.
+    \item Farmers and agronomists are eager to help farmers with negative notes.
+    \item Each mandal has at least one agronomist who is responsible for the farms inside that area.
 \end{itemize}

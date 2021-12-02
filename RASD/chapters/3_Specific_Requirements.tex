@@ -5,12 +5,168 @@
 \subsection{User Interfaces}
 
 \subsection{Hardware Interfaces}
+DREAM is a web application, as such each user should own a device capable of installing a modern browser. Form factor of the device doesn't matter, as DREAM application is fully responsive.
 
 \subsection{Software Interfaces}
+A modern browser is necessary to use the system. DREAM supports most major browsers. However, in order to ensure full functionality, below is a list of browsers that are fully supported.
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Google Chrome
+    \item Firefox
+    \item Safari
+    \item Microsoft Edge
+\end{itemize}
+User should always update their browser to keep up with security, compatibility and functionality.
 
 \subsection{Communication Interfaces}
+To perform any kind of operation using the system, a stable internet connection is required (WiFi or cellular).
 
 \section{Functional Requirements}
+% Definition of use case diagrams, 
+% use cases and associated sequence/activity diagrams, 
+% and mapping on requirements
+
+\begin{table}[H]
+    \centering
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+		\toprule
+		\textbf{Name}               & Receive request notification\\
+		\midrule
+		\textbf{Id}                 & TODO\\
+		\midrule
+		\textbf{Actors}             & Agronomist, Farmer\\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The farmer or the agronomist is already logged in to the application
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The application indicates that unread notifications exist via a small number on the bell icon on the top bar.
+		    \item The farmer or the agronomist clicks on the icon.
+		    \item The application shows a list of unread notifications.
+		    \item The farmer or the agronomist selects the unread notification to see.
+		    \item The application shows details of the request.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The application showed the notification contents. \\
+		\midrule
+		
+		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The farmer or the agronomist cancels the operation during step 3.
+		\end{itemize}
+	    The system hides the list of unread notifications and shows only the main board screen.\\
+		\bottomrule
+	\end{tabular}
+	\caption{Your caption here} 
+\end{table}
+
+
+\begin{center}
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+		\toprule
+		\textbf{Name}               & Answer to a request\\
+		\midrule
+		\textbf{Id}                 & TODO\\
+		\midrule
+		\textbf{Actors}             & Agronomist, Farmer\\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The farmer or the agronomist is already logged in to the application
+		    \item The farmer or the agronomist has already read the notification
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The farmer or the agronomist clicks \textit{Reply} under the request contents.
+		    \item The farmer or the agronomist enters the contents of the reply message.
+		    \item The farmer or the agronomist clicks the \textit{Send} button.
+		    \item The application shows a message indicating successful sending of the message.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The application notifies a farmer about the reply to the request. \\
+		\midrule
+		
+		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The farmer or the agronomist cancels the operation during step 2.
+		\end{itemize}
+	    The system comes back to the screen with the list of notifications.\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\begin{center}
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+		\toprule
+		\textbf{Name}               & Update daily plan\\
+		\midrule
+		\textbf{Id}                 & TODO\\
+		\midrule
+		\textbf{Actors}             & Agronomist\\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The agronomist is already logged in to the application.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The agronomist selects the daily plan tab.
+		    \item The agronomist selects a visit he wants to rearrange.
+		    \item  The agronomist selects a new date for the visit selected in the previous step.
+		    \item The agronomist confirms his choice.
+		    \item The application shows a message indicating successful save of the visit's date.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The new date of the visit is successfully saved in the application. \\
+		\midrule
+		
+		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item An agronomist cancels the operation during the step 3. \todo{add another exception if a visit can't be delayed anymore?}
+		\end{itemize}
+	    The system shows the daily plan tab view.\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\begin{center}
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+		\toprule
+		\textbf{Name}               & Save farm visit information\\
+		\midrule
+		\textbf{Id}                 & TODO\\
+		\midrule
+		\textbf{Actors}             & Agronomist\\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The agronomist is already logged in to the application.
+		    \item The agronomist visited a farm.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The agronomist selects the daily plan tab.
+		    \todo{is it a tab? do wee need to define it?}
+		    \item The agronomist selects the visit to a farm he had already done. 
+		    \item The agronomist enters information he collected during a farm visit to the text box.
+		    \item The agronomist saves the information he entered.
+		    \item The application shows a message indicating successful save of entered data.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The information obtained during a visit to a farm is saved in the system. \\
+		\midrule
+		
+		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		    \item An agronomist cancels the operation during the step 3.
+		\end{itemize}
+	    The system shows the daily plan tab view. 
+	    \todo{the same as above}\\
+		\bottomrule
+	\end{tabular}
+\end{center}
 
 \section{Performance Requirements}
 

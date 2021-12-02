@@ -2,6 +2,10 @@
 \RequirePackage{makecell}
 \RequirePackage{geometry}
 
+% required for making todos inside centering and tabular environments
+\RequirePackage{marginnote}
+\renewcommand{\marginpar}{\marginnote}
+
 \newgeometry{left=3cm,right=3cm,bottom=3.5cm,top=3.5cm}
 
 \RequirePackage[dvipsnames]{xcolor}
