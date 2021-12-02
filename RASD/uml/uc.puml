@@ -1,17 +1,23 @@
 @startuml Use case
 left to right direction
 skinparam packageStyle rectangle
+skinparam actorStyle awesome
 
 'Primary - should be on the left side
 actor :Unregistered user: as UnregUser
-actor :Policy maker: as PolMaker
-actor :Farmer:
-actor :Agronomist:
+
+package RegisteredUser {
+    actor :Policy maker: as PolMaker
+    actor :Farmer:
+    actor :Agronomist:
+}
 
 'Secondary - should be on the right side
-actor :WeatherForecastSystem:
-actor :WaterIrrigationSystem:
-actor :SensorSystem:
+package ExternalSystem {
+    actor :WeatherForecastSystem:
+    actor :WaterIrrigationSystem:
+    actor :SensorSystem:
+}
 
 'visualisations - less details or additional phenomenas? as in lower diagram
 'there are MANY missing phenomenas, that can be deducted from UC
@@ -24,94 +30,41 @@ rectangle DREAM {
     UnregUser -- (Create account)
     PolMaker -- (Log in)
     Agronomist -- (Log in)
+    (Create account) ..> (Insert role specific data) : <<include>>
 
     '''''''''''Farmer'''''''''''
     Farmer -- (Log in)
     Farmer -- (Visualize relevant data)
-    'should providers be included? maybe a question to tamburri
-    ' (Visualize relevant data) ..> (Provide information about weather forecasts) : <<include>>
-    ' (Visualize relevant data) ..> (Provide information about soil humidity) : <<include>>
-    ' (Visualize relevant data) ..> (Provide information about used water) : <<include>>
-    ' (Provide information about weather forecasts) -- WeatherForecastSystem 
-    ' (Provide information about soil humidity) -- SensorSystem
-    ' (Provide information about used water) -- WaterIrrigationSystem
+    'should providers be included? maybe a question to Tamburri
+    (Visualize relevant data) ..> (Visualize farm data) : <<include>>
+    (Visualize farm data) ..> (Provide information about weather forecasts) : <<include>>
+    (Visualize farm data) ..> (Provide information about soil humidity) : <<include>>
+    (Visualize farm data) ..> (Provide information about water usage) : <<include>>
+    (Visualize relevant data) ..> (Display personal suggestions) : <<include>>
+    (Provide information about weather forecasts) -- WeatherForecastSystem
+    (Provide information about soil humidity) -- SensorSystem
+    (Provide information about water usage) -- WaterIrrigationSystem
     Farmer -- (Update production data)
     Farmer -- (Request help)
-    Farmer -- (Create forum thread)
-    Farmer -- (Create forum comment)
-    
+    Farmer -- (View forum)
+    (View forum) <.. (Create forum thread) : <<extend>>
+    (View forum) <.. (View forum thread) : <<extend>>
+    (View forum thread) <.. (Add forum comment) : <<extend>>
+    Farmer -- (View requests)
+
     '''''''''''Agronomist'''''''''''
-    Agronomist -- (Insert area of responsibility TODO: extend create account action)
-    Agronomist -- (Receive request notification)
-    (Receive request notification) <.. (Answer to request) : <<extend>>
     Agronomist -- (View farmer's summary)
-    Agronomist -- (Update daily plan)
-    Agronomist -- (Confirm daily plan execution)
-    Agronomist -- (Reject daily plan execution)
-    Agronomist -- (Save farm visit information)
-    (Update daily plan) ..> (Open daily plan) : <<include>>
-    (Confirm daily plan execution) ..> (Open daily plan) : <<include>>
-    (Reject daily plan execution) ..> (Open daily plan) : <<include>>
-    (Save farm visit information) ..> (Open daily plan) : <<include>>
+    Agronomist -- (View requests)
+    (View requests) <.. (Answer to request) : <<extend>>
+    (View farmer's summary) ..> (Visualize farm data) : <<include>>
+    Agronomist -- (View daily plan)
+    (View daily plan) <.. (Update daily plan) : <<extend>>
+    (View daily plan) <.. (Set daily plan execution state) : <<extend>>
+    (View daily plan) <.. (Save comment regarding farm visit) : <<extend>>
 
     '''''''''''Policy maker'''''''''''
     PolMaker -- (Assess farmer's performance)
     (Assess farmer's performance) ..> (View farmer's summary) : <<include>>
-
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-' rectangle DREAM {
-'     '''''''''''Common'''''''''''
-'     UnregUser -- (Create account)
-'     PolMaker -- (Log in)
-'     Agronomist -- (Log in)
-
-'     '''''''''''Farmer'''''''''''
-'     Farmer -- (Log in)
-'     Farmer -- (Visualize relevant data)
-'     'should providers be included? maybe a question to tamburri
-'     ' (Visualize relevant data) ..> (Provide information about weather forecasts) : <<include>>
-'     ' (Visualize relevant data) ..> (Provide information about soil humidity) : <<include>>
-'     ' (Visualize relevant data) ..> (Provide information about used water) : <<include>>
-'     ' (Provide information about weather forecasts) -- WeatherForecastSystem 
-'     ' (Provide information about soil humidity) -- SensorSystem
-'     ' (Provide information about used water) -- WaterIrrigationSystem
-'     Farmer -- (Visualize production data)
-'     (Visualize production data) <.. (Insert production data) : <<extend>>
-'     Farmer -- (Request help)
-'     Farmer -- (View forum)
-'     (View forum) <.. (Create forum thread) : <<extend>>
-'     (View forum) <.. (View forum thread) : <<extend>>
-'     (View forum thread) <. (Create forum comment) : <<extend>>
-    
-'     'visualisations - less details or additional phenomenas?
-'     '''''''''''Agronomist'''''''''''
-'     Agronomist -- (Visualize area of responsibility)
-'     (Visualize area of responsibility) <.. (Insert area of responsibility) : <<extend>>
-
-
-' }
 @enduml
