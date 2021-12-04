@@ -27,13 +27,16 @@ package ExternalSystem {
 '   "Agronomist visualizes data"
 rectangle DREAM {
     '''''''''''Common'''''''''''
+    RegisteredUser -- (Log in)
+    RegisteredUser -- (Remind password)
+    RegisteredUser -- (Delete account)
     UnregUser -- (Create account)
-    PolMaker -- (Log in)
-    Agronomist -- (Log in)
+    ' PolMaker -- (Log in)
+    ' Agronomist -- (Log in)
     (Create account) ..> (Insert role specific data) : <<include>>
 
     '''''''''''Farmer'''''''''''
-    Farmer -- (Log in)
+    ' Farmer -- (Log in)
     Farmer -- (Visualize relevant data)
     'should providers be included? maybe a question to Tamburri
     (Visualize relevant data) ..> (Visualize farm data) : <<include>>
