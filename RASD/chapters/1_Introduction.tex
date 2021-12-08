@@ -12,11 +12,11 @@ Over 58 percent of rural Indian households rely on agriculture as their primary 
 
 With climate change posing a serious danger to agriculture, a complete overhaul of the system that transports food from farmers to our tables is required. On the top of that, the coronavirus pandemic created a huge disruption in food supply chains, exposing the weak parts of small-scale farmers as well as the significance of constructing resilient food systems.
 
-Telengana is India's 11th biggest state, having a land area of 122,077$km^2$ and a population of 35,193,978 people (data from 2011) \cite{telengana}. \textbf{DREAM}'s goal is to help Telengana’s government promote data-driven policy-making in the state by designing, developing, and demonstrating anticipatory governance models for food systems utilizing digital public goods and community-centric approaches \cite{reference_doc}.
+Telangana is India's 11th biggest state, having a land area of 122,077$km^2$ and a population of 35,193,978 people (data from 2011) \cite{telangana}. The project's goal is to help Telangana’s government promote data-driven policy-making in the state by designing, developing, and demonstrating anticipatory governance models for food systems utilizing digital public goods and community-centric approaches \cite{reference_doc}.
 
 \subsection{Goals} \label{subsec:goals}
 \begin{itemize}
-    \item [\textbf{G1.}] Strengthen data-driven policy-making in Telengana.
+    \item [\textbf{G1.}] Strengthen data-driven policy-making in Telangana.
     \item [\textbf{G2.}] Allow performance assessment of the farmers.
     \item [\textbf{G3.}] Ensure regular support of farmers by agronomists.
     \item [\textbf{G4.}] Allow farmers to exchange their knowledge.
@@ -24,7 +24,7 @@ Telengana is India's 11th biggest state, having a land area of 122,077$km^2$ and
 
 \section{Scope}
 
-Data dRiven PrEdictive FArMing (DREAM) is a project that intends to redesign the food production process in the Telengana area in order to create more resilient agricultural systems that will be required to meet the region's rising food demand. To address such a broad issue, it is critical to bring together individuals from many professions and backgrounds; hence, the participation of groups such as stakeholders, policy makers, farmers, analysts, and agronomists is desirable.
+Data dRiven PrEdictive FArMing (DREAM) is a project that intends to redesign the food production process in the Telangana area in order to create more resilient agricultural systems that will be required to meet the region's rising food demand. To address such a broad issue, it is critical to bring together individuals from many professions and backgrounds; hence, the participation of groups such as stakeholders, policy makers, farmers, analysts, and agronomists is desirable.
 
 Data acquisition and combination can be viewed as the first feasible step in achieving the goal. This information might be gathered from farmers, specialized sensors installed on the ground that detect soil humidity, and government agronomists who visit fields on a regular basis.
 
@@ -39,11 +39,11 @@ The system attempts to address a highly difficult topic, which necessitates the 
 \subsection{World Phenomena}
 
 \begin{center}
-	\begin{tabular}{@{}p{0.06\linewidth} p{0.92\linewidth}@{}}
+	\begin{tabular}{@{}p{0.06\linewidth} p{0.90\linewidth}@{}}
 		\toprule
 		\textbf{ID}   & \textbf{Phenomena}\\
 		\midrule
-		\autonum{WP} & Telengana collects information concerning short-term and long-term meteorological forecasts.\\
+		\autonum{WP} & Telangana collects information concerning short-term and long-term meteorological forecasts.\\
 		\autonum{WP} & Water irrigation systems collect information about the amount of water used by each farm\\
 		\autonum{WP} & Sensors collect information about the humidity of the soil at a given farm.\\
 		\autonum{WP} & An agronomist visits a farm.\\
@@ -56,13 +56,13 @@ The system attempts to address a highly difficult topic, which necessitates the 
 
 \subsection{Shared Phenomena}
 
-\begin{longtable}{p{0.06\linewidth} p{0.73\linewidth} p{0.20\linewidth}}
+\begin{longtable}{@{}p{0.06\linewidth} p{0.67\linewidth} p{0.20\linewidth}@{}}
 	\toprule
 	\textbf{ID}  & \textbf{Content} & \textbf{Controlled by}\\
 	\midrule
 	\autonum{SP} & A user logs in to the system. & World \\
-	\autonum{SP} & An unregistered user creates account in the system. & World \\
-	\autonum{SP} & The system reads information about short-term and long-term meteorological forecasts provided by Telengana API. & Machine \\
+	\autonum{SP} & An unregistered user creates an account in the system. & World \\
+	\autonum{SP} & The system reads information about short-term and long-term meteorological forecasts provided by Telangana API. & Machine \\
 	\autonum{SP} & The system reads information about the amount of water used by each farm, provided by water irrigation systems API. & Machine \\
 	\autonum{SP} & The system reads the data collected by the sensors at a given farm. & Machine \\
 	\autonum{SP} & An agronomist saves information collected during a farm visit in the system. & World \\
@@ -88,7 +88,7 @@ The system attempts to address a highly difficult topic, which necessitates the 
 	\autonum{SP} & The system generates visits to a farm by an agronomist in a given area of responsibility. & Machine \\
 	\autonum{SP} & A user requests password reset. & World \\
 	\autonum{SP} & The system sends an email with passwords reset link. & Machine \\
-	\autonum{SP} & A user resets the password using link obtained in an email. & World \\
+	\autonum{SP} & A user resets the password using a link obtained in an email. & World \\
 	\bottomrule
 \end{longtable}
 
@@ -97,7 +97,7 @@ The system attempts to address a highly difficult topic, which necessitates the 
 \subsection{Definitions}
 
 \begin{center}
-	\begin{tabular}{@{}p{0.30\linewidth} p{0.70\linewidth}@{}}
+	\begin{tabular}{@{}p{0.28\linewidth} p{0.68\linewidth}@{}}
 		\toprule
 		\textbf{Expression}     & \textbf{Definition}\\
 		\midrule
@@ -106,24 +106,25 @@ The system attempts to address a highly difficult topic, which necessitates the 
         Farmer's summary        & Information available to policy makers and agronomists, containing data about their production, help requests and responses, weather conditions, and information from water irrigation system and sensors.\\
         Farmer's note           & Evaluation note given by a governmental policy maker based on a farmer's performance. Can be negative, neutral, or positive.\\
         Personalized suggestion & Suggestion determined by the system. concerning specific crops to plant or specific fertilizers to use – based on farmers location and type of production.\\
-        Farmer's relevant data  & Weather predictions, individualized recommendations on which crops to plant or which fertilizers to use – all depending on their location and kind of production.\\
+        Farmer's relevant data  & Previously entered production data, weather predictions, individualized recommendations on which crops to plant or which fertilizers to use – all depending on their location and kind of production.\\
         Production data         & Information provided by a farmer about his production. It lists product categories and quantities generated per product.\\
         Mandal                  & A local government area in India.\\
         Dashboard               & The first screen that appears to the user after logging in to the system.\\
         Area of responsibility  & Set of mandals that an agronomist is responsible for.\\
         Daily plan & A daily schedule for visiting farms in a certain area of responsibility.\\
-        Request for help & An issue created by a farmer. It contains a topic and a description of a problem. The system automatically forwards it to farmers and agronomists in the same mandal.
+        Request for help        & An issue created by a farmer. It contains a topic and a description of a problem. The system automatically forwards it to farmers and agronomists in the same mandal.\\
+        Peak hours              & 6 a.m. to 9 a.m., and 5 p.m. to 8 p.m. in the GMT+5:30 time zone.\\
 	\end{tabular}
 \end{center}
 
 \subsection{Acronyms}
 
 \begin{center}
-	\begin{tabular}{@{}p{0.25\linewidth} p{0.71\linewidth}@{}}
+	\begin{tabular}{@{}p{0.28\linewidth} p{0.68\linewidth}@{}}
 		\toprule
 		\textbf{Acronyms}   & \textbf{Expression}\\
 		\midrule
-		DREAM               & Data-dRiven PrEdictive FArMing in Telengana\\
+		DREAM               & Data-dRiven PrEdictive FArMing in Telangana\\
 		RASD                & Requirements Analysis and Specifications Document\\
 		G                   & Goal\\
 		WP                  & World Phenomena\\
@@ -134,7 +135,7 @@ The system attempts to address a highly difficult topic, which necessitates the 
 
 \subsection{Abbreviations}
 \begin{center}
-	\begin{tabular}{@{}p{0.25\linewidth} p{0.71\linewidth}@{}}
+	\begin{tabular}{@{}p{0.28\linewidth} p{0.68\linewidth}@{}}
 		\toprule
 		\textbf{Abbreviations}  & \textbf{Expression}\\
 		\midrule
