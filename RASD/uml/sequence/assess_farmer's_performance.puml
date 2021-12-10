@@ -13,7 +13,7 @@ PolMaker -> DREAM++: Pick a farmer
 DREAM --> PolMaker--: Display the farmer's summary
 
 opt Assess farmer's performance
-    PolMaker -> DREAM++: Evaluate the farmer's performance
+    PolMaker -> DREAM++: Assign a new note
     DREAM -> DREAM++: Update the farmer's note
     deactivate DREAM
 
