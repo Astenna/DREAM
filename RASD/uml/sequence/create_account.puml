@@ -1,0 +1,40 @@
+@startuml Create Account
+
+mainframe Create account
+autonumber
+
+actor "Unregistered user" as Unreg
+participant DREAM
+
+Unreg -> DREAM++: Create account
+DREAM -> Unreg--: Display registration form
+
+Unreg -> DREAM++: Provide registration data
+DREAM -> DREAM++: Validate data
+deactivate DREAM
+
+alt data correct
+    alt userType == Agronomist
+        DREAM -> DREAM++: Create new agronomist
+        deactivate DREAM
+    else userType == Farmer
+        DREAM -> DREAM++: Create new farm
+        deactivate DREAM
+        DREAM -> DREAM++: Create new farmer
+        deactivate DREAM
+    else userType == PolicyMaker
+        DREAM -> DREAM++: Create new policy maker
+        deactivate DREAM
+    end
+
+    alt operation successful
+        DREAM --> Unreg : Display success message
+    else operation failed
+        DREAM --> Unreg : Display error message
+    end
+
+else data incorrect
+    DREAM --> Unreg--: Display error message
+end
+
+@enduml
