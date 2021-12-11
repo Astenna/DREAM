@@ -1,21 +1,71 @@
 \chapter{Overall Description}
-% Statecharts:
-% daily plan
-% request for help
 
 \section{Product Perspective}
-% class diagram
 
-\begin{figure}[!ht]
+This section contains scenarios and further information on the shared phenomena, as well as a domain model consisting of a class diagram and state charts.
+
+\subsection{Class diagram}
+
+The class diagram presented in figure \ref{fig:class_diagram} provides a high-level overview of the system. Below are brief descriptions of the purpose of each class.
+
+\begin{itemize}
+    \item User classes:
+    
+    \begin{itemize}
+        \item \textbf{User:} an abstraction of a registered user, being a base of all the other user classes.
+        \item \textbf{Agronomist:} a class modeling an agronomist described in section \ref{subsec:agronomist}.
+        \item \textbf{Farmer:} identifies a farmer described in section \ref{subsec:farmer}.
+        \item \textbf{PolicyMaker:} a class modeling a policy maker whose description is to be found in section \ref{subsec:policy_maker}.
+    \end{itemize}
+    
+    \item Enumerators:
+    
+    \begin{itemize}
+        \item \textbf{VisitState:} describes the status of agronomist's visit to a farm.
+        \item \textbf{Note:} contains possible notes given to a farmer for his performance by a policy maker.
+        \item \textbf{WeatherType:} contains all weather condition types handled by the system.
+    \end{itemize}
+    
+    Responses from external systems:
+    
+    \begin{itemize}
+        \item \textbf{SensorSystemResponse:} models a response from the sensors available on a farm.
+        \item \textbf{WaterIrrigationSystemResponse:} models a response from the water irrigation system on a farm.
+        \item \textbf{WeatherSystemResponse:} models a response from the system providing meteorological forecasts.
+    \end{itemize}
+    
+    \item Others:
+    
+    \begin{itemize}
+        \item \textbf{Farm:} identifies a farm.
+        \item \textbf{Production:} a class modelling production on a given farm. It represents the amount of each type of crops produced. 
+        \item \textbf{ProductionType:} identifies a type of produced crops.
+        \item \textbf{Mandal:} identifies a local government area in India.
+        \item \textbf{Visit:} a class modelling agronomist's visit on a farm.
+        \item \textbf{HelpRequest:} a class representing a farmer's request for help.
+        \item \textbf{HelpResponse:} a class representing a response to a request for help.
+        \item \textbf{ForumThread:} identifies a discussion forum created by a farmer.
+        \item \textbf{ForumComment:} identifies comments posted on a discussion forum.
+    \end{itemize}    
+\end{itemize}
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.96\textheight, keepaspectratio, origin=c, angle=90]{diagrams/class}
     \caption{Class diagram}
     \label{fig:class_diagram}
 \end{figure}
 
-% state diagrams
+\subsection{State diagrams}
 
-\todo{Include state diagrams}
+The system was designed to be stateless except for the event of an agronomist visiting a farm. The event-ordered behavior of an object of the \textit{VisitState} class is presented in the figure \ref{fig:state_diagram}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio, origin=c]{diagrams/state}
+    \caption{State diagram presenting an agronomist's visit on a farm}
+    \label{fig:state_diagram}
+\end{figure}
 
 % scenarios
 % use cases
@@ -25,9 +75,9 @@
 John, a policy maker, logs in to the application to see how farmers are performing. He goes through the list of farmers and notices that despite very dry weather conditions in the region, the Joe Sharma's production of carrots has significantly increased. John gives Sharma's a positive note, and then he continues to look at the list of farmers. He spots that the production of Tamia Anand and Amar Khatri has plunged. He thinks it may be an effect of droughts that were reported in the system. He gives both farmers a negative note, hoping that other farmers and agronomists will be able to help them. 
 
 \subsection*{An agronomist and a farmer help a farmer who obtained a negative note}
-Dream automatically creates and delegates the requests for help about poorly performing farmers to both the agronomists in the given area of responsibility and farmers nearby. As a result, an agronomist, Rajesh Khanna, receives a notification that indicates the farmers with negative note. Rajesh looks through the farmers' summaries, to determine any possible reasons for the farmers' bad performance. In the case of Tamia Anand's, he notices that her irrigation system entries from the last month show understated values. Rajesh uses a response option to advise Tamia to check if the system is working properly. 
+Dream automatically creates and delegates the requests for help about poorly performing farmers to both the agronomists in the given area of responsibility and farmers with positive notes. As a result, an agronomist, Rajesh Khanna, receives requests that indicate the farmers with negative note. Rajesh looks through the farmers' summaries, to determine any possible reasons for the farmers' bad performance. In the case of Tamia Anand's, he notices that her irrigation system entries from the last month show understated values. Rajesh uses a response option to advise Tamia to check if the system is working properly. 
 
-The same notifications are also obtained by a farmer, Trisha Gupta, who lives in the same mandal. She shares some general advices about dealing with adverse weather conditions in the mandal using the response option.
+The same requests are also obtained by a farmer, Trisha Gupta, who  recently obtained a positive note. She shares some general advices about dealing with adverse weather conditions in the mandal using the response option.
 
 \subsection*{Policy maker checks whether a farmer obtained proper help}
 Shaila, a policy maker, is already logged in to the application. She wants to see if farmers with negative notes are obtaining proper help. Therefore, she looks at the farmer's summary belonging to Amar Khatri, who was marked with a negative note. She reads the advice provided by both agronomists working in the area and Joe Sharma, who is a farmer with a positive note. Joe Sharma shared some best practices on how to deal with droughts in the farm. Shaila wants to wait to see if the production of Amar Khatri will improve in the following month, but is happy to see that the farmer obtained meaningful advices.
@@ -41,7 +91,7 @@ Shalene Reddy assessed that she produced 40 tons of rice on her farm in the last
 \subsection*{A farmer requests for help}
 Nalin Laghari experiences difficulties on his cotton farm. He is striving to fight off bollworms. Thus, he wants to create a request for help in the application. He opens the application and describes the details of his problems with bollworms.
 
-The application automatically delegates a request for help to both the agronomists in the given area of responsibility and farmers nearby. As a result, an agronomist, Devraj Jain receives a notification about a request for help. Devraj knows some theory as well as several practices that farmers used before to deal with bollworms, so he shares some hints in a response to the request. The same notification is also obtained by a farmer, Joe Sharma. Joe recommends one of the insecticides in the response, since he successfully fought off bollworms a year ago.
+The application automatically delegates a request for help to both the agronomists in the given area of responsibility and well-performing farmers nearby. As a result, an agronomist, Devraj Jain receives a request for help. Devraj knows some theory as well as several practices that farmers used before to deal with bollworms, so he shares some hints in a response to the request. The same request is also obtained by a farmer, Joe Sharma. Joe recommends one of the insecticides in the response, since he successfully fought off bollworms a year ago.
 
 \subsection*{A farmer creates a discussion forum}
 Paidi Jairaj has a large carrot farm in Jagtial. Lately, he heard some rumors about potato farming becoming more and more profitable. He is wondering if it is worth switching his type of production to another type of crops in the next season. He wants to reach other farmers in his mandal to get to know their opinion. To do this, Paidi logs into DREAM application and chooses the option to create a discussion thread, in which he specifies the topic and description of his dilemma.
@@ -54,15 +104,16 @@ Zakir Hussain, a governmental agronomist, wants to visualize and check his daily
 % \subsection*{An agronomist rejects plan execution}
 % Rahul Bheke, a governmental agronomist, wasn't able to realize his daily plan for the preceding day completely. He logs into DREAM app, chooses the option to see plan calendar, and then clicks on the preceding day. In the daily plan view, he selects the option to submit daily plan's execution. A pop-up appears, which tells him to choose farms he has and hasn't visited. After completing the form, Rahul confirms the daily plan's execution.
 
-\subsection*{An agronomist submits daily plan's execution}
-Zakir Hussain, a governmental agronomist, has finished today's farm visits. During visits, he collected some notes about conditions of the farms. Unfortunately, he couldn't visit one of the farms. Zakir logs into DREAM app, chooses the option to see plan calendar, and then clicks on the current day. In the daily plan view, he selects the option to submit daily plan's execution. A pop-up appears, which tells him to choose farms he has and hasn't visited. For every farm he has visited, Zakir fills a short note. After completing the form, he confirms daily plan's execution.
+\subsection*{An agronomist sets daily plan's execution state}
+Zakir Hussain, a governmental agronomist, has finished today's farm visits. During visits, he collected some notes about conditions of the farms. Unfortunately, he couldn't visit one of the farms. Zakir logs into DREAM app, chooses the option to see plan calendar, and then clicks on the current day. In the daily plan view, he selects the option to set the daily plan's execution state. A pop-up appears, which tells him to specify deviations from the plan, indicating which farms he has and hasn't visited. For every farm he has visited, Zakir fills a short note. After completing the form, he confirms daily plan's execution.
 
-\subsection*{An agronomist responds to a farmer’s request for help}
-Sachindranath Mitra, a governmental agronomist, wants to check if any farmer in his area of responsibility needs help. He logs into DREAM app and sees a new help request in the dashboard from Paidi Jairaj. He chooses the option to manage help requests and clicks on Paidi's request. A pop-up appears, which allows him to provide an advice. After filling the form, he sends the note to the farmer.
+The application automatically plans new visits to farms that were visited. In case a farm was not visited, the application plans another visit as soon as possible.
 
-\subsection*{An agronomist visualizes data concerning weather forecasts and the best performing farmers in the area}
-Jarnail Singh, a governmental agronomist, wants to check if there is any new well-performing farmer in his area of responsibility. He logs into DREAM app, and on the dashboard he sees a quick summary, containing the weather forecast for the day and some of the best performing farmers. He clicks an option to see full summary, which allows him to see complete list of all the well-performing farmers in the area of responsibility. 
+\subsection*{An agronomist responds to a farmer’s request for help} 
+Sachindranath Mitra, a governmental agronomist, wants to check if any farmer in his area of responsibility needs help. He logs into DREAM app and sees a new help request in the dashboard from Paidi Jairaj. He chooses the option to manage help requests and clicks on Paidi's request. A pop-up appears, which allows him to provide advice. After filling the form, the response is sent to the farmer.
 
+\subsection*{An agronomist looks at the list of well performing farmers}
+Jarnail Singh, a governmental agronomist, wants to check if there is any new well-performing farmer in his area of responsibility. He logs into DREAM app, and on the dashboard he sees a quick summary, containing the weather forecast for the day and some best performing farmers. He clicks on the option to see full summary, which allows him to see a complete list of all the well-performing farmers in the area of responsibility. 
 
 \section{Product Functions}
 
@@ -84,7 +135,6 @@ The system allows for registration of three different types of users: agronomist
 \begin{itemize}
     \item Enters email and password.
     \item Introduces relevant data regarding the location of his farm.
-    \item The system automatically creates an abstraction of a farm based on the information provided. \todo{Probably should be moved to the sequence diagram's description}
 \end{itemize}
 
 \subsubsection*{Policy maker}
@@ -93,7 +143,7 @@ The system allows for registration of three different types of users: agronomist
     \item Inserts email and password.
 \end{itemize}
 
-Additionally, the system introduces a functionality to retrieve a forgotten password. The user needs to press on a dedicated button and provide his email address. He will later receive a link to a webpage where he will be able to introduce a new password. 
+Additionally, the system introduces a functionality to reset a forgotten password. The user needs to press on a dedicated button and provide his email address. He will later receive a link to a webpage where he will be able to introduce a new password. 
 
 \subsection{Performance assessment of the farmers}
 % Water irigation systems, sensors.
@@ -107,7 +157,7 @@ The system allows a farmer to update his production data. It is required to spec
 \subsection{Request for help}
 % together with a response
 
-Using DREAM enables farmers to request assistance and advice from agronomists and other farmers in a convenient way. The system asks them to create an issue by describing their problems, and subsequently sends a notification to all the agronomists and farmers from the same mandal. Then each of the recipients can provide help. The track of the issue remains visible only to the people involved as well as the policy makers.
+Using DREAM enables farmers to request assistance and advice from agronomists and other farmers in a convenient way. The system asks them to create an issue by describing their problems, and subsequently sends  requests to all the agronomists and well-performing farmers from the same mandal. Then each of the recipients can provide help. The track of the issue remains visible only to the people involved as well as the policy makers.
 
 \subsection{Coordinate agronomist's daily plan}
 
@@ -125,7 +175,7 @@ The system enables farmers to display data relevant to them, such as weather for
 
 DREAM is a project whose key component is data acquisition and integration. All of this is used to support the work of three distinct types of registered actors: agronomists, farmers, and policy makers. Additionally, there is a description of an unregistered user provided.
 
-\subsection{Agronomist}
+\subsection{Agronomist} \label{subsec:agronomist}
 
 % Who he is
 In the realm of agriculture, an agronomist serves as an intermediary between farmers and policy makers. He advises farmers on soil management and crop production.
@@ -136,7 +186,7 @@ Governmental agronomists in the Telangana region visit farms in their areas of r
 % How the system helps him in achieving his goal
 The system provides many functionalities in order to make agronomists' job more convenient. Firstly, it allows an agronomist to insert his area of responsibility. Then, it provides them with visualizations depicting best performing farmers in the region as well as weather forecasts. To help manage their schedule, it creates an interactive daily plan to visit farms for them, where they can confirm its execution and also specify any deviations from it. Additionally, the system significantly facilitates their contact with the farmers by notifying them about incoming help requests and providing an easy way to respond to them directly.
 
-\subsection{Farmer}
+\subsection{Farmer} \label{subsec:farmer}
 
 % Who he is
 This actor is directly involved in Telangana's food production. He owns a farm where he raises crops that are later distributed around the region.
@@ -147,7 +197,7 @@ During the production process, a farmer faces many difficulties caused by extern
 % How the system helps him in achieving his goal
 To assist a farmer in accomplishing his objective, the system allows him to set up his own profile where he can share his production data. Moreover, it provides information important to him, such as tailored advice about which crops to plant or which fertilizers to use depending on his location and kind of production, as well as weather forecasts. Furthermore, it enables him to create discussion forums, where he could share his difficulties and solicit recommendations or assistance from agronomists and other farmers.
 
-\subsection{Policy maker}
+\subsection{Policy maker} \label{subsec:policy_maker}
 
 % Who he is
 A member of Telangana's governmental department, which is in charge of developing new rules and legislation pertaining to food production.
@@ -165,20 +215,28 @@ An individual belonging to one of the aforementioned groups who is not yet regis
 \section{Assumptions, Dependencies and Constraints}
 
 \subsection{Assumptions}
-\begin{itemize}
-    \item Each farmer possess exactly one farm.
-    \item Each farm belongs to exactly one farmer.
-    \item Each farm has at least one humidity sensor.
-    \item Each farm has an irrigation system.
-    \item Each farm is inside exactly one mandal.
-    \item Each farmer updates his production data each month.
-    \item Weather is consistent in a given mandal.
-    \item Initially, each farmer has a neutral note.
-    \item Agronomist's area of responsibility contains at least one mandal.
-    \item Each registered user can be only one of the actors: an agronomist, a farmer, or a policy maker.
-    \item The information provided by a user during registration process is valid.
-    \item Farmers and agronomists are eager to help farmers with negative notes.
-    \item Each mandal has at least one agronomist who is responsible for the farms inside that area.
-    \item Based on farmer's summary, an agronomist is able to understand whether the help given by farmers and agronomists produces significant results.
-    \item Farmers create meaningful and not offensive threads and responses on the forum. \todo{added recently, to be reformulated}
-\end{itemize}
+
+\begin{longtable}{@{}p{0.06\linewidth} p{0.88\linewidth}}
+		\toprule
+		\textbf{ID}   & \textbf{Assumption}\\
+		\midrule
+     \autonum{A} & Each farmer possess exactly one farm.\\
+     \autonum{A} & Each farm belongs to exactly one farmer.\\ 
+     \autonum{A} & Each farm has at least one humidity sensor.\\ 
+     \autonum{A} & Each farm has an irrigation system.\\ 
+     \autonum{A} & Each farm is inside exactly one mandal.\\ 
+     \autonum{A} & Each farmer reliably updates his production data each month.\\ 
+     \autonum{A} & Weather is consistent in a given mandal.\\ 
+     \autonum{A} & Initially, each farmer has a neutral note.\\ 
+     \autonum{A} & Agronomist's area of responsibility contains at least one mandal.\\ 
+     \autonum{A} & Each registered user can be only one of the actors: an agronomist, a farmer, or a policy maker.\\ 
+     \autonum{A} & The information provided by a user during registration process is valid.\\ 
+     \autonum{A} & Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
+     \autonum{A} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\ 
+     \autonum{A} & Based on farmer's summary, a policy maker is able to understand whether the help given by farmers and agronomists produces significant results.\\ 
+     \autonum{A} & Farmers create meaningful and not offensive threads and comments on the forum.\\ 
+     \autonum{A} & Farmers and agronomists create meaningful and not offensive help requests and responses. \\
+     \autonum{A} & NEW \todo{verify new assumptions}\\
+     \autonum{A} & External systems are reliable and highly available.\\
+	\bottomrule
+\end{longtable}
