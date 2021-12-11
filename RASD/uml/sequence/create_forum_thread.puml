@@ -1,0 +1,25 @@
+@startuml Create forum thread
+
+mainframe Create forum thread
+autonumber
+
+actor Farmer
+participant DREAM
+
+Farmer -> DREAM++: Get the forum
+DREAM --> Farmer--: Display a list of forum threads
+
+Farmer -> DREAM++: Create a new forum thread
+DREAM --> Farmer--: Display the forum thread creation form
+
+Farmer -> DREAM++: Provide topic and details
+DREAM -> DREAM++: Create a new forum thread
+deactivate DREAM
+
+alt operation successful
+    DREAM --> Farmer : Display the new forum thread
+else operation failed
+    DREAM --> Farmer--: Show error message
+end
+
+@enduml

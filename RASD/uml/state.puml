@@ -1,0 +1,20 @@
+@startuml State
+
+mainframe Visit a farm
+hide empty description
+
+left to right direction
+
+state Planned
+state Confirmed
+state Rejected
+
+
+[*] --> Planned : Plan a visit
+Planned --> Confirmed : Confirm the visit
+Planned --> Rejected : Specify deviations
+
+Rejected --> [*]
+Confirmed --> [*]
+
+@enduml

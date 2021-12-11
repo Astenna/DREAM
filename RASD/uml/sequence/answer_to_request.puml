@@ -1,0 +1,27 @@
+@startuml Answer to a request
+
+mainframe Answer to help request
+autonumber
+
+actor Agronomist
+participant DREAM
+
+Agronomist -> DREAM++: Get help requests
+DREAM --> Agronomist--: Display a list of help requests
+
+Agronomist -> DREAM++: Pick one request
+DREAM --> Agronomist--: Display the request
+
+opt Respond to the request
+    Agronomist -> DREAM++: Respond to the request
+    DREAM -> DREAM++: Create a response
+    deactivate DREAM
+
+    alt operation successful
+        DREAM --> Agronomist : Display the response
+    else operation failed
+        DREAM --> Agronomist--: Display an error message
+    end
+end
+
+@enduml

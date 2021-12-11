@@ -1,0 +1,36 @@
+@startuml View daily plan
+
+mainframe View daily plan
+autonumber
+
+actor Agronomist
+participant DREAM
+
+Agronomist -> DREAM++: Get daily plan
+DREAM --> Agronomist--: Show daily plan
+
+Agronomist -> DREAM++: Set daily plan execution state
+
+loop for each visit in daily plan
+    alt deviations specified
+        DREAM -> DREAM++: Mark visit as rejected
+        deactivate DREAM
+        DREAM -> DREAM++: Create a new visit
+        deactivate DREAM
+    else no deviations specified
+        DREAM -> DREAM++: Mark visit as confirmed
+        deactivate DREAM
+        Agronomist -> DREAM++: Add notes to a visit
+        deactivate DREAM
+    DREAM -> DREAM++: Update visit
+    deactivate DREAM
+    end
+end
+
+alt operation successful
+    DREAM --> Agronomist : Display success message
+else operation failed
+    DREAM --> Agronomist : Display error message
+end
+
+@enduml

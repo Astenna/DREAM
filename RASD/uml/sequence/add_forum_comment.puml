@@ -1,0 +1,27 @@
+@startuml Add forum comment
+
+mainframe Add forum comment
+autonumber
+
+actor Farmer
+participant DREAM
+
+Farmer -> DREAM++ : Get the forum
+DREAM --> Farmer-- : Display a list of forum threads
+
+Farmer -> DREAM++: Pick a forum thread
+DREAM --> Farmer--: Display the forum thread
+
+opt Add a comment
+    Farmer -> DREAM++: Add a comment
+    DREAM -> DREAM++: Create a forum comment
+    deactivate DREAM
+
+    alt operation successful
+        DREAM --> Farmer: Display the forum comment
+    else operation failed
+        DREAM --> Farmer--: Display an error message
+    end
+end
+
+@enduml
