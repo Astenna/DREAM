@@ -12,12 +12,12 @@ package RegisteredUser {
     actor :Agronomist:
 }
 
-'Secondary - should be on the right side
-package ExternalSystem {
-    actor :WeatherForecastSystem:
-    actor :WaterIrrigationSystem:
-    actor :SensorSystem:
-}
+' 'Secondary - should be on the right side
+' package ExternalSystem {
+'     actor :WeatherForecastSystem:
+'     actor :WaterIrrigationSystem:
+'     actor :SensorSystem:
+' }
 
 'visualisations - less details or additional phenomenas? as in lower diagram
 'there are MANY missing phenomenas, that can be deducted from UC
@@ -28,7 +28,7 @@ package ExternalSystem {
 rectangle DREAM {
     '''''''''''Common'''''''''''
     RegisteredUser -- (Log in)
-    RegisteredUser -- (Remind password)
+    RegisteredUser -- (Reset password)
     RegisteredUser -- (Delete account)
     UnregUser -- (Create account)
     ' PolMaker -- (Log in)
@@ -40,13 +40,10 @@ rectangle DREAM {
     Farmer -- (Visualize relevant data)
     'should providers be included? maybe a question to Tamburri
     (Visualize relevant data) ..> (Visualize farm data) : <<include>>
-    (Visualize farm data) ..> (Provide information about weather forecasts) : <<include>>
-    (Visualize farm data) ..> (Provide information about soil humidity) : <<include>>
-    (Visualize farm data) ..> (Provide information about water usage) : <<include>>
+    (Visualize farm data) ..> (Get information about weather forecasts) : <<include>>
+    (Visualize farm data) ..> (Get information about soil humidity) : <<include>>
+    (Visualize farm data) ..> (Get information about water usage) : <<include>>
     (Visualize relevant data) ..> (Display personal suggestions) : <<include>>
-    (Provide information about weather forecasts) -- WeatherForecastSystem
-    (Provide information about soil humidity) -- SensorSystem
-    (Provide information about water usage) -- WaterIrrigationSystem
     Farmer -- (Update production data)
     Farmer -- (Request help)
     Farmer -- (View forum)
