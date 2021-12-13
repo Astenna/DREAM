@@ -61,6 +61,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\autonum{R} & The application reads and updates  weather forecasts every day. \\
 		\autonum{R} & The application reads and stores  data from humidity sensors every day. \\
 		\autonum{R} & The application stores data from irrigation systems every day. \\
+		\autonum{R} & The registered user is able to delete his account. \\
 	\bottomrule
 \end{longtable}
 
@@ -127,7 +128,6 @@ To perform any kind of operation using the system, a stable internet connection 
 
 
 \begin{table}[H]
-    \centering
 	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
 		\toprule
 		\textbf{Name}               & Create account \\
@@ -138,20 +138,20 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The unregistered user, who wants to create an account, is  on the welcome screen of the application. \todo{check if it is consistent with UI mocks}
+		    \item The unregistered user, who wants to create an account, is  on the welcome screen of the application.
 		\end{itemize}\\
 		\midrule
 		
 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The unregistered user clicks on \textit{Sign up} button.
+		    \item The unregistered user clicks on \textit{Create account} button on top.
 		    \item The application shows a form with role-irrelevant data (email, name, surname and password) to fill and a dropdown to choose the role.
 		    \item The unregistered user fills the form and selects a role.
-		    \item If a role of a farmer was chosen, the application shows another screen with text fields related to farm data to be filled.
-		    \item If a role of an agronomist was chosen, the application shows another screen that asks to add the mandals to the agronomist's area of responsibility.
+		    \item If a role of a farmer was chosen, the application another part of the form with text fields related to farm data to be filled.
+		    \item If a role of an agronomist was chosen, the application another part of the form that asks to add the mandals to the agronomist's area of responsibility.
 		    \item The unregistered user fills role-related data if there is any.
 		    \item If a role of a farmer was chosen, the system creates a farm for a farmer.
 		    \item If a role of an agronomist was chosen, the system adds selected mandals to the agronomist's area of responsibility.
-		    \item The unregistered user clicks on \textit{Register} button.
+		    \item The unregistered user clicks on \textit{Create account} button.
 		    \item The application creates a new user.
 		    \item The application shows a message indicating successful registration.
 		    \item The application shows the log in screen.
@@ -161,16 +161,21 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		
 		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		   \item The unregistered user resigns from registration in the application by clicking the left arrow next to the view title. 
+		   \item The unregistered user resigns from registration in the application by clicking the cross in the top right corner. 
 		\end{itemize}
-		The application shows the log in screen.\begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		The application shows the welcome screen.
+		\begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
 		   \item The user with the given email adress already exists. 
 		\end{itemize}
 		The application shows a message explaining that the user with given email already exists.
-	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item The application is not able to create a new user in step 10. 
+		\begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item Some part of the form was not filled or filled incorrectly.
 		\end{itemize}
-		The application shows a message indicating a possible cause of error.
+		The application shows a message explaining the type of error made by the user.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The application is not able to create a new user in step 10.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
 	    \\\bottomrule
 	\end{tabular}
 	\caption{Use case description: create account} 
@@ -181,7 +186,159 @@ To perform any kind of operation using the system, a stable internet connection 
     \centering
 	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
 \toprule
-		\textbf{Name}               & Assess farmer's performance \todo{check if it's consistent with UI mocks}\\
+		\textbf{Name}               & Log in\\
+		\midrule
+		\textbf{Actors}             & Policy maker, Agronomist, Farmer\\
+		\midrule
+		\textbf{Goals}              & TODO \\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The user who wants to log in, is  on the welcome screen of the application.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The user clicks on \textit{Log in} button in the top bar.
+		    \item The application shows a pop-up with text fields for e-mail and password.
+		    \item The user enters an e-mail and password.
+		    \item The application verifies the credentials.
+		    \item The application shows the dashboard view.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The user is successfully logged in. From now on, he can use role-specific functions of the DREAM application. \\
+		\midrule
+		
+		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The credentials entered in step 4 are not valid.
+		\end{itemize}
+		The application shows a message explaining the issue.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The user cancels the operation, clicking on a \textit{Cancel button} or a cross in the top right corner of the pop-up.
+		\end{itemize}
+		The application comes back to the welcome screen.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The application is not able to verify the credentials in step 4.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+		\\\bottomrule
+	\end{tabular}
+	\caption{Use case description: log in} 
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+\toprule
+		\textbf{Name}               & Delete account\\
+		\midrule
+		\textbf{Actors}             & Policy maker, Agronomist, Farmer\\
+		\midrule
+		\textbf{Goals}              & TODO \\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The user is already logged in to the application.
+		    \item The user is on a first view shown after a log-in (dashboard screen).
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The user scrolls to the bottom of the page.
+		    \item The user clicks on the \textit{Delete account} button.
+		    \item The application shows a pop-up with a text field for an e-mail, password, and explanation of the consequences of the account deletion.
+		    \item The user fills out the text fields.
+		    \item The user clicks on the \textit{Delete account} button on the pop-up.
+		    \item The application verifies the correctness of e-mail and password entered in the previous step.
+		    \item The application deletes the account.
+		    \item The application shows a message indicating successful account deletion.
+		    \item The application shows the welcome screen.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The account together with all related data is deleted from the system. \\
+		\midrule
+		
+		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The user cancels the operation by clicking on the \textit{Cancel} button or a cross in the top right corner of the pop-up in step 4.
+		\end{itemize}
+		The application show the welcome screen.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The verification of data entered by the user in step 4 does not succeed in step 6.
+		\end{itemize}
+		The application shows a message indicating the issue.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The application is not able to verify the credentials in step 6.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The application is not able to delete the account in step 7.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+		\\\bottomrule
+	\end{tabular}
+	\caption{Use case description: Delete account} 
+\end{table}
+
+\begin{table}[H]
+    \centering
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+\toprule
+		\textbf{Name}               & Reset password\\
+		\midrule
+		\textbf{Actors}             & Policy maker, Agronomist, Farmer\\
+		\midrule
+		\textbf{Goals}              & TODO \\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The user who wants to log in, is on the welcome screen of the application.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The user clicks on \textit{Log in} button in the top bar.
+		    \item The user clicks on \textit{Forgot password?} button.
+		    \item The application shows a pop-up with a text field to fill an e-mail.
+		    \item The user enter his e-mail.
+		    \item The application sends an e-mail with a password reset link.
+		    \item The user open his mailbox, goes to the email from DREAM app and clicks on a password reset link.
+		    \item The application opened in a given url shows two text fields to enter the new password twice.
+		    \item The user fills both text fields with a new password.
+		    \item The user clicks on a \textit{Save} button.
+		    \item The application verifies if both text fields contain the same passwords.
+		    \item The application saves the new password for a given user.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The new password is saved and can be used to log in to the application.
+		\\ \midrule
+		
+		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The two text fields contain different passwords in step 10.
+		\end{itemize}
+		The application shows a message explaining the issue.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The user cancels the operation, clicking on a \textit{Cancel button} or a cross in the top right corner of the pop-up.
+		\end{itemize}
+		The application comes back to the welcome screen.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The user resigns from resetting a password and decides not to use the reset link in step 6.
+		\end{itemize}
+		The user can still use the old password to log in to the application.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The application is not able to save a new password in step 11.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+		\\\bottomrule
+	\end{tabular}
+	\caption{Use case description: Reset password} 
+\end{table}
+
+\begin{table}[H]
+    \centering
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+\toprule
+		\textbf{Name}               & Assess farmer's performance\\
 		\midrule
 		\textbf{Actors}             & Policy maker\\
 		\midrule
@@ -197,6 +354,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
 		    \item The policy maker clicks on one of the farmers.
 		    \item The application shows the selected farmer's summary.
+		    \item The policy maker clicks on \textit{Change} button next to the current note of the farmer.
 		    \item The policy maker chooses a note from a dropdown.
 		    \item The policy maker clicks on \textit{Save} button.
 		    \item The application saves a new farmer's note.
@@ -207,13 +365,13 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		
 		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		   \item The policy maker resigns from changing the current note held by a farmer by clicking the left arrow next to the view title. 
+		   \item The policy maker resigns from changing the current note held by a farmer by clicking the cross next to the \textit{Save}. 
 		\end{itemize}
-	    The system comes back to the list of farmers' view.
+	    The system shows the farmer's summary view with the previous note in the note field.
 	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item The application is not able to save note assigned in step 5. 
+		   \item The application is not able to save note assigned in step 5.
 		\end{itemize}
-		The application shows a message indicating a possible cause of error.
+		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
 	\caption{Use case description: assess farmer's performance} 
@@ -249,13 +407,13 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		
 		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		   \item The farmer closes the pop-up showed in step 2.
+		   \item The farmer closes the pop-up showed in step 2 by clicking on a cross in the top right corner or the \textit{Cancel button} in the bottom.
 		\end{itemize}
 	    The system comes back to the \textit{Forum} view.
 	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
 		   \item The application is not able to create a forum thread in step 5. 
 		\end{itemize}
-		The application shows a message indicating a possible cause of error.
+		The application shows a message indicating a possible cause of the error.
         \\\bottomrule
 	\end{tabular}
 	\caption{Use case description: create forum thread} 
@@ -291,17 +449,197 @@ To perform any kind of operation using the system, a stable internet connection 
 		\textbf{Exit conditions} & The application saved the new comment in the thread. From now on, the new comment is visible to all farmers viewing the thread. \\
 		\midrule
 		
-		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		   \item The farmer cancels the operation, clicking on a left arrow next to the thread's title.
-		\end{itemize}
+		\textbf{Exceptions}         &
 	    The system comes back to the \textit{Forum} view.
 	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
 		   \item The application is not able to add a forum comment in step 5. 
 		\end{itemize}
-		The application shows a message indicating a possible cause of error.
+		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
 	\caption{Use case description: add forum comment} 
+\end{table}
+
+\begin{table}[H]
+    \centering
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+\toprule
+		\textbf{Name}               & Display personal suggestions\\
+		\midrule
+		\textbf{Actors}             & Farmer\\
+		\midrule
+		\textbf{Goals}              & TODO \\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The farmer is already logged in to the application.
+		    \item The farmer is on the dashboard view.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The application shows personal suggestions on the top right part called \textit{Tips and suggestions}o f the dashboard.
+		    \item The farmer reads personal suggestions from the list.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The farmer can read personalized suggestions showed in the dashboard view. \\
+		\midrule
+		
+		\textbf{Exceptions}         & 
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The application is not able to load personalized suggestions.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+		\\\bottomrule
+	\end{tabular}
+	\caption{Use case description: display personal suggestions} 
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+\toprule
+		\textbf{Name}               & Visualize relevant data \todo{discuss UC changes}\\
+		\midrule
+		\textbf{Actors}             & Farmer\\
+		\midrule
+		\textbf{Goals}              & TODO \\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The farmer is already logged in to the application.
+		    \item The farmer is on the dashboard view.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The user clicks on \textit{Relevant data} in the sidebar.
+		    \item The application shows farmer's relevant data.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The farmers is able to see the contents of farmer's relevant data. \\
+		\midrule
+		
+		\textbf{Exceptions}         & 
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The application is not able to load the farmer's relevant data.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+		\\\bottomrule
+	\end{tabular}
+	\caption{Use case description: visualize relevant data} 
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+        \toprule
+		\textbf{Name}               & View forum\\
+		\midrule
+		\textbf{Actors}             & Farmer\\
+		\midrule
+		\textbf{Goals}              & TODO \\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The farmer is already logged in to the application.
+		    \item The farmer is on the dashboard view.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The farmer clicks on \textit{Forum} in the sidebar.
+		    \item The application shows the forum view with a list of already created forum threads.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The farmer is able to see the read of already created forum threads. \\
+		\midrule
+		
+		\textbf{Exceptions}         & 
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The application is not able to load the list of already created forum threads.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+		\\\bottomrule
+	\end{tabular}
+	\caption{Use case description: view forum} 
+\end{table}
+
+\begin{table}[H]
+    \centering
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+        \toprule
+		\textbf{Name}               & View forum thread\\
+		\midrule
+		\textbf{Actors}             & Farmer\\
+		\midrule
+		\textbf{Goals}              & TODO \\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The farmer is already logged in to the application.
+		    \item The farmer is on the forum view.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The farmer finds a forum thread he is interested to see in the list.
+		    \item The farmer clicks on the forum thread he found in the previous step.
+		    \item The application loads the contents of the selected forum thread.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    &  The farmer is able to read the contents of the forum thread. \\
+		\midrule
+		
+		\textbf{Exceptions}         & 
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The application is not able to load the contents of the selected forum thread.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+		\\\bottomrule
+	\end{tabular}
+	\caption{Use case description: view forum} 
+\end{table}
+
+\begin{table}[H]
+    \centering
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+\toprule
+		\textbf{Name}               & Answer to request\\
+		\midrule
+		\textbf{Actors}             & Farmer\\
+		\midrule
+		\textbf{Goals}              & TODO \\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The farmer or the agronomist is already logged in to the application.
+		    \item The farmer or the agronomist is in the \textit{Provide help} view.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The farmer or the agronomist clicks on the requests he wants to reply. 
+		    \item The application shows a pop-up with textboxes to fill.
+		    \item The farmer or the agronomist enters the contents of the reply message.
+		    \item The farmer or the agronomist clicks the \textit{Send} button.
+		    \item The application sends an answer to the request to the farmer.
+		    \item The application shows a message indicating successful sending of the message.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The farmer can see the response by clicking on the request in the \textit{My help request tab}. \\
+		\midrule
+		
+		\textbf{Exceptions}         & 
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The application is not able to create an answer to a help request in step 5. 
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+		\\\bottomrule
+	\end{tabular}
+	\caption{Use case description: answer to request} 
 \end{table}
 
 \begin{table}[H]
@@ -324,23 +662,23 @@ To perform any kind of operation using the system, a stable internet connection 
 		    \item The farmer clicks on \textit{My help requests} view in the sidebar.
 		    \item The farmer clicks on \textit{Create help request} button.
 		    \item The application shows a pop-up with textboxes to fill.
-		    \item The farmer enters topic and description of the problem.
+		    \item The farmer enters topic and message describing of the problem.
 		    \item The farmer clicks on \textit{Send request} button.
-		    \item The application sends requests to the agronomists in the given area of responsibility and farmers with positive note. 
-		    \item The application shows a message indicating successful sending of the message.
+		    \item The application sends requests to the agronomists in the given area of responsibility and several farmers with positive note. 
+		    \item The application shows a message indicating successful sending of the help request.
 		\end{enumerate}\\
 		\midrule
 		\textbf{Exit conditions}    & The request can be seen in the \textit{Provide help} view by the recipients selected in step 6. Additionaly, the farmer who created the request can see it in the \textit{My help requests} view. \\
 		\midrule
 		
 		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		   \item The farmer closes the pop-up showed in step 3.
+		   \item The farmer closes the pop-up showed in step 3 by clicking on \textit{Cancel} button or on a  cross in a top right corner.
 		\end{itemize}
 	    The system comes back to the \textit{My help requests} view.
 	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
 		   \item The application is not able to create a request for help in step 6. 
 		\end{itemize}
-		The application shows a message indicating a possible cause of error.\\
+		The application shows a message indicating a possible cause of the error.\\
 		\bottomrule
 	\end{tabular}
 	\caption{Use case description: request help} 
@@ -375,17 +713,88 @@ To perform any kind of operation using the system, a stable internet connection 
 		\textbf{Exit conditions}    & The farmer can see the response by clicking on the request in the \textit{My help request tab}. \\
 		\midrule
 		
-		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		   \item The farmer closes the pop-up showed in step 2.
-		\end{itemize}
-	    The system comes back to the \textit{Provide help} view.
-	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		\textbf{Exceptions}         & 
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
 		   \item The application is not able to create an answer to a help request in step 5. 
 		\end{itemize}
-		The application shows a message indicating a possible cause of error.
+		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
 	\caption{Use case description: answer to request} 
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+\toprule
+		\textbf{Name}               & View farmer's summary \todo{discuss UC changes}\\
+		\midrule
+		\textbf{Actors}             & Agronomist, Policy maker\\
+		\midrule
+		\textbf{Goals}              & TODO \\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The user is already logged in to the application.
+		    \item The user is on the dashboard view.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The user clicks on \textit{Farmers} in the sidebar.
+		    \item The application shows a list of farmers.
+		    \item The user finds in a list a farmer whose summary he wants to see.
+		    \item The user clicks on an eye icon.
+		    \item The application shows a farmer's summary page of a given farmer.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The user is able to see the contents of farmer's summary of the selected farmer. \\
+		\midrule
+		
+		\textbf{Exceptions}         & 
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The application is not able to load the farmer's summary of the selected farmer.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+		\\\bottomrule
+	\end{tabular}
+	\caption{Use case description: view farmer's summary} 
+\end{table}
+
+\begin{table}[H]
+    \centering
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+        \toprule
+		\textbf{Name}               & View daily plan\\
+		\midrule
+		\textbf{Actors}             & Agronomist\\
+		\midrule
+		\textbf{Goals}              & TODO \\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The agronomist is already logged in to the application.
+		    \item The agronomist is on the dashboard view.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The agronomist clicks on \textit{Daily plan} in the sidebar.
+		    \item The application shows daily plan view.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The agronomist can choose different days from the calendar on the left to see the daily plan for selected days. \\
+		\midrule
+		
+		\textbf{Exceptions}         & 
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The application is not able to load the daily plan of the agronomist.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+		\\\bottomrule
+	\end{tabular}
+	\caption{Use case description: view daily plan} 
 \end{table}
 
 \begin{table}[H]
@@ -400,21 +809,35 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The farmer or the agronomist is already logged in to the application
-		    \item TODO \todo{To be completed}
+		    \item The farmer or the agronomist is already logged in to the application.
+		    \item The farmer or the agronomist is in the \textit{Daily plan} view.
 		\end{itemize}\\
 		\midrule
 		
 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item TODO
+		    \item The agronomist clicks on a day in the calendar for which execution state is to be set.
+		    \item The agronomist clicks on \textit{Submit execution state} button.
+		    \item The application shows a pop-up with a list of visits in a selected day.
+		    \item The agronomist marks each checkbox next to the visits he has done, leaving unmarked checkboxes next the visits he skipped.
+		    \item The application shows text fields below each visit with marked checkbox.
+		    \item The agronomist fills text fields shown in the previous step with notes he collected during the visits.
+		    \item The agronomist clicks on \textit{Submit} button to save the execution state.
+		    \item The application saves the execution state.
+		    \item The application plans new visits to farms that were visited in approximately in the next 6 months or less, depending on the performance of the farmer.
+		    \item The application plans new visits to the farms that were not visited in the next approximately 5 days.
 		\end{enumerate}\\
 		\midrule
-		\textbf{Exit conditions}    & TODO \\
+		\textbf{Exit conditions}    & The state of visits for the given date is saved in the system. New visits are planned in dates depending on the state of the last visit (if it was \textit{confirmed} or \textit{rejected}). \\
 		\midrule
 		
 		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		   \item TODO
+		   \item The agronomist cancels the operation in the steps 3-6 by clicking on the \textit{Cancel} button or a cross in the top right corner of the pop-up.
 		\end{itemize}
+		The application comes back to the daily plan view.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The application is not able to save the execution state in the step 8. 
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
 	    \\\bottomrule
 	\end{tabular}
 	\caption{Use case description: set daily plan execution state} 
@@ -424,7 +847,7 @@ To perform any kind of operation using the system, a stable internet connection 
     \centering
 	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
         \toprule
-		\textbf{Name}               & Update daily plan\\
+		\textbf{Name}               & Update daily plan \todo{define specific cases!}\\
 		\midrule
 		\textbf{Actors}             & Agronomist\\
 		\midrule
@@ -460,49 +883,12 @@ To perform any kind of operation using the system, a stable internet connection 
 	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
 		   \item The application is not able to save updates to the daily plan in step 6. 
 		\end{itemize}
-		The application shows a message indicating a possible cause of error.
+		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
 	\caption{Use case description: update daily plan} 
 \end{table}
 
-
-\begin{table}[H]
-    \centering
-	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
-        \toprule
-		\textbf{Name}               & Save comment regarding farm visit\\
-		\midrule
-		\textbf{Actors}             & Agronomist\\
-		\midrule
-		\textbf{Goals}              & TODO \\
-		\midrule
-		
-		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The agronomist is already logged in to the application.
-		    \item The agronomist is in the daily plan view.
-		\end{itemize}\\
-		\midrule
-		
-		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item TODO 
-		\end{enumerate}\\
-		\midrule
-		\textbf{Exit conditions}    & The information obtained during a visit to a farm is saved in the system. \\
-		\midrule
-		
-		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		    \item An agronomist cancels the operation during the step TODO.
-		\end{itemize}
-	    The system shows the daily plan view.
-	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item The application is not to save comment regarding a farm visit. 
-		\end{itemize}
-		The application shows a message indicating a possible cause of error.
-		\\ \bottomrule
-	\end{tabular}
-	\caption{Use case description: save comment regarding farm visit} 
-\end{table}
 
 \subsection{Mapping on requirements}
 % \begin{center}
