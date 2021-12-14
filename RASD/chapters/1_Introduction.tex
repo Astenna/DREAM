@@ -16,10 +16,10 @@ Telangana is India's 11th biggest state, having a land area of 122,077$km^2$ and
 
 \subsection{Goals} \label{subsec:goals}
 \begin{itemize}
-    \item [\textbf{G1.}] Strengthen data-driven policy-making in Telangana.
-    \item [\textbf{G2.}] Allow performance assessment of the farmers.
-    \item [\textbf{G3.}] Ensure regular support of farmers by agronomists.
-    \item [\textbf{G4.}] Allow farmers to exchange their knowledge.
+	\item [\textbf{G1.}] Acquire, combine, and visualize data from external systems and users.
+	\item [\textbf{G2.}] Facilitate performance assessment of the farmers.
+	\item [\textbf{G3.}] Ensure regular support of farmers by agronomists.
+	\item [\textbf{G4.}] Enable farmers to exchange their knowledge.
 \end{itemize}
 
 \section{Scope}
@@ -43,13 +43,13 @@ The system attempts to address a highly difficult topic, which necessitates the 
 		\toprule
 		\textbf{ID}   & \textbf{Phenomena}\\
 		\midrule
-		\autonum{WP} & Telangana collects information concerning short-term and long-term meteorological forecasts.\\
-		\autonum{WP} & Water irrigation systems collect information about the amount of water used by each farm\\
+		\autonum{WP} & Telangana's government collects information concerning short-term and long-term meteorological forecasts \cite{tsdps}.\\
+		\autonum{WP} & Water irrigation systems collect information about the amount of water used by each farm.\\
 		\autonum{WP} & Sensors collect information about the humidity of the soil at a given farm.\\
 		\autonum{WP} & An agronomist visits a farm.\\
-		\autonum{WP} & Farmer produces products on the farm.\\
-		\autonum{WP} & Farmer experiences issues on the farm.\\
-		\autonum{WP} & A user forgets password.\\
+		\autonum{WP} & A farmer produces crops on his farm.\\
+		\autonum{WP} & A farmer experiences issues on his farm.\\
+		\autonum{WP} & A user forgets his password.\\
 		\bottomrule
 	\end{tabular}
 \end{center}
@@ -62,33 +62,35 @@ The system attempts to address a highly difficult topic, which necessitates the 
 	\midrule
 	\autonum{SP} & A user logs in to the system. & World \\
 	\autonum{SP} & An unregistered user creates an account in the system. & World \\
-	\autonum{SP} & The system reads information about short-term and long-term meteorological forecasts provided by Telangana API. & Machine \\
-	\autonum{SP} & The system reads information about the amount of water used by each farm, provided by water irrigation systems API. & Machine \\
-	\autonum{SP} & The system reads the data collected by the sensors at a given farm. & Machine \\
-	\autonum{SP} & An agronomist saves information collected during a farm visit in the system. & World \\
-	\autonum{SP} & The system notifies an agronomist about a scheduled visit in a farm. & Machine \\
-	\autonum{SP} & Policy maker assesses farmer performance, giving him negative, neutral or positive note and saves it in the system. & World \\
+	\autonum{SP} & The system creates an instance of a farm during a registration process of a farmer. & Machine \\
+	\autonum{SP} & The system reads and stores information about short-term and long-term meteorological forecasts provided by the API of Telangana's government. & Machine \\
+	\autonum{SP} & The system reads and stores information about the amount of water used by each farm, provided by water irrigation systems API. & Machine \\
+	\autonum{SP} & The system reads and stores the data collected by the sensors at a given farm. & Machine \\
+	\autonum{SP} & An agronomist saves notes collected during a farm visit in the system. & World \\
+	\autonum{SP} & A policy maker assesses a farmer's performance, giving him a negative, neutral or positive note and saves it in the system. & World \\
 	\autonum{SP} & The system shows a list of farmers. & Machine \\
 	\autonum{SP} & The system shows farmer's summary. & Machine \\
-	\autonum{SP} & A policy maker understands whether activities performed by an agronomists and farmers helped a farmer with a negative note using data from the system. & World \\
+	\autonum{SP} & A policy maker understands whether activities performed by agronomists and farmers helped a farmer with a negative note based on the data from the system. & World \\
 	\autonum{SP} & The system shows farmer's relevant data. & Machine \\
 	\autonum{SP} & The system determines personalized suggestions concerning farmer. & Machine \\
-	\autonum{SP} & Farmer inserts production data to the system. & World \\
-	\autonum{SP} & Farmer request for help in the system. & World \\
-	\autonum{SP} & The system sends a request for help to well performing farmers and agronomists in a given region. [happens in two cases: when a policy maker gives a negative note and when a farmer requests help] & Machine \\
-	\autonum{SP} & Farmer creates a thread on the forum.  & World \\
-	\autonum{SP} & Farmer comments on a given thread. & World \\
-	\autonum{SP} & Agronomist inserts the area of responsibility into the system. & World \\
+	\autonum{SP} & A farmer inserts production data to the system. & World \\
+	\autonum{SP} & A farmer requests for help in the system. & World \\
+	\autonum{SP} & A farmer with a positive note responds to a request for help in the system. & World \\
+	\autonum{SP} & An agronomist responds to a request for help in the system. & World \\
+	\autonum{SP} & The system sends a request for help to well performing farmers and agronomists in a given region.  & Machine \\
+	\autonum{SP} & A farmer creates a thread on the forum.  & World \\
+	\autonum{SP} & A farmer comments on a given thread. & World \\
+	\autonum{SP} & An agronomist inserts the area of responsibility into the system. & World \\
 	\autonum{SP} & The system shows weather forecasts. & Machine \\
-	\autonum{SP} & The system visualizes data about farmers with positive note in the area of responsibility for agronomist. & Machine \\
+	\autonum{SP} & The system visualizes data about farmers in the agronomist's area of responsibility who obtained a positive note. & Machine \\
 	\autonum{SP} & The system shows the daily plan of an agronomist. & Machine \\
-	\autonum{SP} & Agronomist updates daily plan. & World \\
-	\autonum{SP} & Agronomist confirms the execution of daily plan at the end of each day. & World \\
-	\autonum{SP} & Agronomist rejects the execution of daily plan, while specifying deviations from the plan. & World \\
+	\autonum{SP} & An agronomist updates the daily plan. & World \\
+	\autonum{SP} & An agronomist submits the execution state of the daily plan at the end of each day. & World \\
 	\autonum{SP} & The system generates visits to a farm by an agronomist in a given area of responsibility. & Machine \\
 	\autonum{SP} & A user requests password reset. & World \\
-	\autonum{SP} & The system sends an email with passwords reset link. & Machine \\
+	\autonum{SP} & The system sends an email with password reset link. & Machine \\
 	\autonum{SP} & A user resets the password using a link obtained in an email. & World \\
+	\autonum{SP} & A registered user deletes an account. & World \\
 	\bottomrule
 \end{longtable}
 
@@ -111,9 +113,10 @@ The system attempts to address a highly difficult topic, which necessitates the 
         Mandal                  & A local government area in India.\\
         Dashboard               & The first screen that appears to the user after logging in to the system.\\
         Area of responsibility  & Set of mandals that an agronomist is responsible for.\\
-        Daily plan & A daily schedule for visiting farms in a certain area of responsibility.\\
-        Request for help        & An issue created by a farmer. It contains a topic and a description of a problem. The system automatically forwards it to farmers and agronomists in the same mandal.\\
+        Daily plan              & A daily schedule for visiting farms in a certain area of responsibility.\\
+        Request for help        & An issue created by a farmer. It contains a topic and a description of a problem. The system automatically forwards it to well-performing farmers and agronomists in the same mandal.\\
         Peak hours              & 6 a.m. to 9 a.m., and 5 p.m. to 8 p.m. in the GMT+5:30 time zone.\\
+        External systems        & Systems, which collects various data and are not a part of DREAM. Following external systems are used: Weather Forecast System, Water Irrigation System, Sensor System.
 	\end{tabular}
 \end{center}
 
@@ -129,17 +132,20 @@ The system attempts to address a highly difficult topic, which necessitates the 
 		G                   & Goal\\
 		WP                  & World Phenomena\\
 		SP                  & Shared Phenomena\\
+		API                 & Application Programming Interface\\
 		\bottomrule
 	\end{tabular}
 \end{center}
 
 \subsection{Abbreviations}
+
 \begin{center}
 	\begin{tabular}{@{}p{0.28\linewidth} p{0.68\linewidth}@{}}
 		\toprule
 		\textbf{Abbreviations}  & \textbf{Expression}\\
 		\midrule
-	    text & text\\
+	    a.m. & ante meridiem\\
+	    p.m. & post meridiem\\
 		\bottomrule
 	\end{tabular}
 \end{center}

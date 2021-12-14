@@ -7,17 +7,26 @@ actor "Unregistered user" as Unreg
 participant DREAM
 
 Unreg -> DREAM++: Create account
-DREAM -> Unreg--: Display registration form
+DREAM --> Unreg--: Display registration form
 
 Unreg -> DREAM++: Provide registration data
+
 DREAM -> DREAM++: Validate data
 deactivate DREAM
 
 alt data correct
+    Unreg -> DREAM++: Specify type of user
+    deactivate DREAM
     alt userType == Agronomist
+        Unreg -> DREAM++: Specify area of responsibility
+        deactivate DREAM
+
         DREAM -> DREAM++: Create new agronomist
         deactivate DREAM
     else userType == Farmer
+        Unreg -> DREAM++: Provide farm data
+        deactivate DREAM
+
         DREAM -> DREAM++: Create new farm
         deactivate DREAM
         DREAM -> DREAM++: Create new farmer
@@ -29,6 +38,7 @@ alt data correct
 
     alt operation successful
         DREAM --> Unreg : Display success message
+        DREAM --> Unreg : Display log in screen
     else operation failed
         DREAM --> Unreg : Display error message
     end
