@@ -32,6 +32,11 @@ class Farmer {
 class Farm {
     +id
     +name
+    +adressLine1
+    +adressLine2
+    +postalCode
+    +city
+    +createDate
 }
 class Mandal {
     +id
@@ -109,7 +114,7 @@ Farm "1" *-- "0..*" SensorSystemResponse : has >
 
 Mandal "1" *-- "0..*" WeatherSystemResponse : has >
 
-Agronomist "1..*" o-- "1..*" Mandal : belongs to >
+Agronomist "1..*" o-- "1..*" Mandal : is responsible for >
 Production "0..*" o-- "1" ProductionType : has a >
 
 Farm "1" --* "1" Farmer
