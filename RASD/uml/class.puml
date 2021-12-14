@@ -42,9 +42,15 @@ class Agronomist
 class Farmer {
     +note: Note
 }
+class FarmerNote {
+    +id
+    +note: Note
+    +date
+}
 class Farm {
     +id
-    +name
+    +waterIrrigationSystemID
+    +sensorSystemID
     +adressLine1
     +adressLine2
     +postalCode
@@ -98,7 +104,7 @@ class HelpResponse {
 }
 class Visit {
     +id
-    +comment
+    +note
     +date
     +state: VisitState
     +reason: VisitReason
@@ -106,15 +112,18 @@ class Visit {
 class ForumThread {
     +id
     +topic
-    +message
+    +description
     +createDateTime
 }
 class ForumComment {
     +id
-    +message
+    +content
     +createDateTime
 }
-'ForumComment?
+class Suggestions {
+    +id
+    +text
+}
 
 PolicyMaker <|-- User
 Agronomist <|-- User
@@ -132,6 +141,8 @@ Agronomist "1..*" o-- "1..*" Mandal : is responsible for >
 Production "0..*" o-- "1" ProductionType : has a >
 
 Farm "1" --* "1" Farmer
+Farmer "1" *-- "0..*" FarmerNote : receives >
+FarmerNote "0..*" o-- "1" Agronomist : gives <
 
 Farmer "1" *-- "0..*" HelpRequest : creates >
 Farmer "0..*" --o "0..*" HelpRequest : receives < 
@@ -149,5 +160,9 @@ Visit "0..*" o-- "1" Farm : refers to >
 ForumThread "1" *-- "0..*" ForumComment : has >
 ForumThread "0..*" o-- "1" Farmer : created by >
 ForumComment "0..*" o-- "1" Farmer : created by >
+
+
+Suggestions "0..*" -- "0..*" Mandal : concerns >
+Suggestions "0..*" -- "0..*" ProductionType : concerns > 
 
 @enduml
