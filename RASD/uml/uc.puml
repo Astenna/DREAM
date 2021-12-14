@@ -3,6 +3,9 @@ left to right direction
 skinparam packageStyle rectangle
 skinparam actorStyle awesome
 
+' skinparam linetype polyline
+' skinparam linetype ortho
+
 'Primary - should be on the left side
 actor :Unregistered user: as UnregUser
 
@@ -44,23 +47,30 @@ rectangle DREAM {
     (Visualize farm data) ..> (Get information about soil humidity) : <<include>>
     (Visualize farm data) ..> (Get information about water usage) : <<include>>
     (Visualize relevant data) ..> (Display personal suggestions) : <<include>>
-    Farmer -- (Update production data)
+    Farmer -- (Manage production data)
     Farmer -- (Request help)
     Farmer -- (View forum)
     (View forum) <.. (Create forum thread) : <<extend>>
     (View forum) <.. (View forum thread) : <<extend>>
+    (View forum thread) <.. (Delete forum comment) : <<extend>>
     (View forum thread) <.. (Add forum comment) : <<extend>>
-    Farmer -- (View requests)
+    Farmer -- (View list of requests)
+    Farmer -- (View list of my requests)
+    (View list of my requests) <.. (Create request) : <<extend>>
+    (View list of my requests) <.. (View my request) : <<extend>>
+    (View my request) <. (Delete request) : <<extend>>
 
     '''''''''''Agronomist'''''''''''
     Agronomist -- (View farmer's summary)
-    Agronomist -- (View requests)
-    (View requests) <.. (Answer to request) : <<extend>>
+    Agronomist -- (View list of requests)
+    (View list of requests) <.. (View request) : <<extend>>
+    (View request) <.. (Create response) : <<extend>>
+    (View request) <.. (Delete response) : <<extend>>
     (View farmer's summary) ..> (Visualize farm data) : <<include>>
     Agronomist -- (View daily plan)
-    (View daily plan) <.. (Update daily plan) : <<extend>>
+    (View daily plan) <.. (Manage daily plan) : <<extend>>
     (View daily plan) <.. (Set daily plan execution state) : <<extend>>
-    (View daily plan) <.. (Save comment regarding farm visit) : <<extend>>
+    (Set daily plan execution state) .> (Save comment regarding farm visit) : <<include>>
 
     '''''''''''Policy maker'''''''''''
     PolMaker -- (Assess farmer's performance)

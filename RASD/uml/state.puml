@@ -9,10 +9,11 @@ state Planned
 state Confirmed
 state Rejected
 
-
 [*] --> Planned : Plan a visit
-Planned --> Confirmed : Confirm the visit
-Planned --> Rejected : Specify deviations
+Planned --> Planned : Replan a visit
+Planned --> Confirmed : Confirm the visit\n[today >= visit->date]
+Planned --> Rejected : Reject the visit\n[today >= visit->date]
+Planned --> Rejected : Delete the visit\n[today < visit->date]
 
 Rejected --> [*]
 Confirmed --> [*]

@@ -1,9 +1,22 @@
 @startuml Class
 
+' skinparam linetype polyline
+' skinparam linetype ortho
+
 enum Note {
     Positive
     Neutral
     Negative
+}
+enum VisitReason {
+    NegativeNote
+    Casual
+    AgronomistDecision
+}
+class ProblemType {
+    +id
+    +name
+    +nAdditionalVisits
 }
 enum WeatherType {
     Sunny
@@ -83,6 +96,7 @@ class Visit {
     +comment
     +date
     +state: VisitState
+    +reason: VisitReason
 } 
 class ForumThread {
     +id
@@ -121,6 +135,8 @@ HelpRequest "1" *-- "0..*" HelpResponse : contains >
 HelpResponse "0..*" o-- "0..1" Farmer : created by >
 HelpResponse "0..*" o-- "0..1" Agronomist : created by >
 'XOR 
+
+ProblemType "1" -- "0..*" HelpRequest : has a <
 
 Agronomist "1" *-- "0..*" Visit : does >
 Visit "0..*" o-- "1" Farm : refers to >

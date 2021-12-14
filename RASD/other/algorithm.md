@@ -215,6 +215,8 @@ void updateVisit(Visit &originalVisit, Visit &newVisit) {
         }
         newVisit.farm.farmer.planVisits(1, newVisit.reason);
     }
+
+    newVisit.farm.farmer.planVisits(1, newVisit.reason);
 }
 
 void submitVisit(Visit &visit) {
