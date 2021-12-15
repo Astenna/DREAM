@@ -77,55 +77,51 @@ To perform any kind of operation using the system, a stable internet connection 
 % use cases and associated sequence/activity diagrams, 
 % and mapping on requirements
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5, keepaspectratio, origin=c]{diagrams/sequence/create_account}
-    \caption{Sequence diagram presenting the process of creating a new user account.}
-    \label{fig:sd_create_account}
-\end{figure}
+Given the great number of different use cases, the descriptions of only the most important ones are provided below.
 
-\begin{figure}[H]
+\begin{table}[H]
     \centering
-    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/create_forum_thread}
-    \caption{Sequence diagram presenting the process of creating a new forum thread.}
-    \label{fig:sd_create_forum_thread}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/add_forum_comment}
-    \caption{Sequence diagram presenting the addition of a comment in a forum thread.}
-    \label{fig:sd_add_forum_comment}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/request_help}
-    \caption{Sequence diagram presenting the creation of a help request.}
-    \label{fig:sd_request_help}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/answer_to_request}
-    \caption{Sequence diagram presenting the event of answering to a help request.}
-    \label{fig:sd_answer_to_request}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/view_daily_plan}
-    \caption{Sequence diagram presenting the action of displaying a daily plan.}
-    \label{fig:sd_view_daily_plan}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/assess_farmers_performance}
-    \caption{Sequence diagram presenting farmer's performance assessment.}
-    \label{fig:sd_assess_farmers_performance}
-\end{figure}
-
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+\toprule
+		\textbf{Name}               & Log in\\
+		\midrule
+		\textbf{Actors}             & Policy maker, Agronomist, Farmer\\
+		\midrule
+		\textbf{Goals}              & G1 \\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The user who wants to log in, is  on the welcome screen of the application.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The user clicks on \textit{Log in} button in the top bar.
+		    \item The application shows a pop-up with text fields for e-mail and password.
+		    \item The user enters an e-mail and password.
+		    \item The application verifies the credentials.
+		    \item The application shows the dashboard view.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & The user is successfully logged in. From now on, he can use role-specific functions of the DREAM application. \\
+		\midrule
+		
+		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The credentials entered in step 4 are not valid.
+		\end{itemize}
+		The application shows a message explaining the issue.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The user cancels the operation, clicking on a \textit{Cancel button} or a cross in the top right corner of the pop-up.
+		\end{itemize}
+		The application comes back to the welcome screen.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The application is not able to verify the credentials in step 4.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+		\\\bottomrule
+	\end{tabular}
+	\caption{Use case description: log in} 
+\end{table}
 
 \begin{table}[H]
 	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
@@ -134,7 +130,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		\textbf{Actors}             & Unregistered user \\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G1 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -178,54 +174,16 @@ To perform any kind of operation using the system, a stable internet connection 
 		The application shows a message indicating a possible cause of the error.
 	    \\\bottomrule
 	\end{tabular}
-	\caption{Use case description: create account} 
+	\caption{Use case description: create account}
 \end{table}
 
-
-\begin{table}[H]
+\begin{figure}[H]
     \centering
-	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
-\toprule
-		\textbf{Name}               & Log in\\
-		\midrule
-		\textbf{Actors}             & Policy maker, Agronomist, Farmer\\
-		\midrule
-		\textbf{Goals}              & TODO \\
-		\midrule
-		
-		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The user who wants to log in, is  on the welcome screen of the application.
-		\end{itemize}\\
-		\midrule
-		
-		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The user clicks on \textit{Log in} button in the top bar.
-		    \item The application shows a pop-up with text fields for e-mail and password.
-		    \item The user enters an e-mail and password.
-		    \item The application verifies the credentials.
-		    \item The application shows the dashboard view.
-		\end{enumerate}\\
-		\midrule
-		\textbf{Exit conditions}    & The user is successfully logged in. From now on, he can use role-specific functions of the DREAM application. \\
-		\midrule
-		
-		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		   \item The credentials entered in step 4 are not valid.
-		\end{itemize}
-		The application shows a message explaining the issue.
-	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item The user cancels the operation, clicking on a \textit{Cancel button} or a cross in the top right corner of the pop-up.
-		\end{itemize}
-		The application comes back to the welcome screen.
-	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item The application is not able to verify the credentials in step 4.
-		\end{itemize}
-		The application shows a message indicating a possible cause of the error.
-		\\\bottomrule
-	\end{tabular}
-	\caption{Use case description: log in} 
-\end{table}
-
+    \includegraphics[scale=0.5, keepaspectratio, origin=c]{diagrams/sequence/create_account}
+    \caption{Sequence diagram presenting the process of creating a new user account.}
+    \label{fig:sd_create_account}
+\end{figure}
+	\todo{should we specify what is \textit{farm data}?}
 
 \begin{table}[H]
     \centering
@@ -235,7 +193,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		\textbf{Actors}             & Policy maker, Agronomist, Farmer\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G1 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -288,7 +246,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		\textbf{Actors}             & Policy maker, Agronomist, Farmer\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G1 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -303,7 +261,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		    \item The user enter his e-mail.
 		    \item The application sends an e-mail with a password reset link.
 		    \item The user open his mailbox, goes to the email from DREAM app and clicks on a password reset link.
-		    \item The application opened in a given url shows two text fields to enter the new password twice.
+		    \item The application opened in a given URL shows two text fields to enter the new password twice.
 		    \item The user fills both text fields with a new password.
 		    \item The user clicks on a \textit{Save} button.
 		    \item The application verifies if both text fields contain the same passwords.
@@ -342,7 +300,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		\textbf{Actors}             & Policy maker\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G3 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -377,6 +335,13 @@ To perform any kind of operation using the system, a stable internet connection 
 	\caption{Use case description: assess farmer's performance} 
 \end{table}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/assess_farmers_performance}
+    \caption{Sequence diagram presenting farmer's performance assessment.}
+    \label{fig:sd_assess_farmers_performance}
+\end{figure}
+
 \begin{table}[H]
     \centering
 	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
@@ -385,7 +350,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		\textbf{Actors}             & Farmer\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G6 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -419,6 +384,13 @@ To perform any kind of operation using the system, a stable internet connection 
 	\caption{Use case description: create forum thread} 
 \end{table}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/create_forum_thread}
+    \caption{Sequence diagram presenting the process of creating a new forum thread.}
+    \label{fig:sd_create_forum_thread}
+\end{figure}
+\todo{Change 'topic and details' to 'topic and description'}
 
 \begin{table}[H]
     \centering
@@ -428,7 +400,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		\textbf{Actors}             & Farmer\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G6 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -460,6 +432,13 @@ To perform any kind of operation using the system, a stable internet connection 
 	\caption{Use case description: add forum comment} 
 \end{table}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/add_forum_comment}
+    \caption{Sequence diagram presenting the addition of a comment in a forum thread.}
+    \label{fig:sd_add_forum_comment}
+\end{figure}
+
 \begin{table}[H]
     \centering
 	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
@@ -468,7 +447,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		\textbf{Actors}             & Farmer\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G1 \todo{is this goal mapping OK?} \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -504,7 +483,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		\textbf{Actors}             & Farmer\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G1, G2 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -540,7 +519,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		\textbf{Actors}             & Farmer\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G6 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -575,7 +554,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		\textbf{Actors}             & Farmer\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G6 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -607,50 +586,11 @@ To perform any kind of operation using the system, a stable internet connection 
     \centering
 	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
 \toprule
-		\textbf{Name}               & Answer to request\\
-		\midrule
-		\textbf{Actors}             & Farmer\\
-		\midrule
-		\textbf{Goals}              & TODO \\
-		\midrule
-		
-		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The farmer or the agronomist is already logged in to the application.
-		    \item The farmer or the agronomist is in the \textit{Provide help} view.
-		\end{itemize}\\
-		\midrule
-		
-		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The farmer or the agronomist clicks on the requests he wants to reply. 
-		    \item The application shows a pop-up with textboxes to fill.
-		    \item The farmer or the agronomist enters the contents of the reply message.
-		    \item The farmer or the agronomist clicks the \textit{Send} button.
-		    \item The application sends an answer to the request to the farmer.
-		    \item The application shows a message indicating successful sending of the message.
-		\end{enumerate}\\
-		\midrule
-		\textbf{Exit conditions}    & The farmer can see the response by clicking on the request in the \textit{My help request tab}. \\
-		\midrule
-		
-		\textbf{Exceptions}         & 
-	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		   \item The application is not able to create an answer to a help request in step 5. 
-		\end{itemize}
-		The application shows a message indicating a possible cause of the error.
-		\\\bottomrule
-	\end{tabular}
-	\caption{Use case description: answer to request} 
-\end{table}
-
-\begin{table}[H]
-    \centering
-	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
-\toprule
 		\textbf{Name}               & Request help\\
 		\midrule
 		\textbf{Actors}             & Farmer\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G5, G6 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -665,7 +605,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		    \item The farmer enters topic and message describing of the problem.
 		    \item The farmer clicks on \textit{Send request} button.
 		    \item The application sends requests to the agronomists in the given area of responsibility and several farmers with positive note. 
-		    \item The application shows a message indicating successful sending of the help request.
+		    \item The application shows request created.
 		\end{enumerate}\\
 		\midrule
 		\textbf{Exit conditions}    & The request can be seen in the \textit{Provide help} view by the recipients selected in step 6. Additionaly, the farmer who created the request can see it in the \textit{My help requests} view. \\
@@ -684,15 +624,23 @@ To perform any kind of operation using the system, a stable internet connection 
 	\caption{Use case description: request help} 
 \end{table}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/request_help}
+    \caption{Sequence diagram presenting the creation of a help request.}
+    \label{fig:sd_request_help}
+\end{figure}\todo{Rename to 'request help'}
+\todo{Change 'Provide topic and details' to 'Provide topic and contents of the message'}
+
 \begin{table}[H]
     \centering
 	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
 \toprule
-		\textbf{Name}               & Answer to request\\
+		\textbf{Name}               & Create response\\
 		\midrule
 		\textbf{Actors}             & Agronomist, Farmer\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G5, G6 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -718,21 +666,31 @@ To perform any kind of operation using the system, a stable internet connection 
 		   \item The application is not able to create an answer to a help request in step 5. 
 		\end{itemize}
 		The application shows a message indicating a possible cause of the error.
+		\begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The user resigns from creating a response to the request by clicking on the cross in the top right corner or \textit{Cancel button}. 
+		\end{itemize}
+		The application comes back to \textit{Provide help} view.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: answer to request} 
+	\caption{Use case description: create response} 
 \end{table}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/answer_to_request}
+    \caption{Sequence diagram presenting the event of answering to a help request. }
+    \label{fig:sd_answer_to_request}
+\end{figure}\todo{rename Answer to help request to Create response}
 
 \begin{table}[H]
     \centering
 	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
-\toprule
-		\textbf{Name}               & View farmer's summary \todo{discuss UC changes}\\
+    \toprule
+		\textbf{Name}               & View farmer's summary\\
 		\midrule
 		\textbf{Actors}             & Agronomist, Policy maker\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G1, G2, G3 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -770,7 +728,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		\textbf{Actors}             & Agronomist\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G4 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -805,7 +763,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		\textbf{Actors}             & Agronomist\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G4 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -820,7 +778,7 @@ To perform any kind of operation using the system, a stable internet connection 
 		    \item The application shows a pop-up with a list of visits in a selected day.
 		    \item The agronomist marks each checkbox next to the visits he has done, leaving unmarked checkboxes next the visits he skipped.
 		    \item The application shows text fields below each visit with marked checkbox.
-		    \item The agronomist fills text fields shown in the previous step with notes he collected during the visits.
+		    \item The agronomist fills text fields shown in the previous step with comments he collected during the visits.
 		    \item The agronomist clicks on \textit{Submit} button to save the execution state.
 		    \item The application saves the execution state.
 		    \item The application plans new visits to farms that were visited in approximately in the next 6 months or less, depending on the performance of the farmer.
@@ -843,15 +801,22 @@ To perform any kind of operation using the system, a stable internet connection 
 	\caption{Use case description: set daily plan execution state} 
 \end{table}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/view_daily_plan}
+    \caption{Sequence diagram presenting the action of displaying a daily plan.}
+    \label{fig:sd_view_daily_plan}
+\end{figure}
+
 \begin{table}[H]
     \centering
 	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
         \toprule
-		\textbf{Name}               & Update daily plan \todo{define specific cases!}\\
+		\textbf{Name}               & Manage daily plan\\
 		\midrule
 		\textbf{Actors}             & Agronomist\\
 		\midrule
-		\textbf{Goals}              & TODO \\
+		\textbf{Goals}              & G4 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -862,8 +827,9 @@ To perform any kind of operation using the system, a stable internet connection 
 		
 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
 		    \item The agronomist clicks on the day in the calendar in which he wants to rearrange the visits.
-		    \item The application shows a pop-up with a list of visit in the selected day.
-		    \item The agronomist selects a visit he wants to rearrange from the list.
+		    \item The application shows a list of visit in the selected day.
+		    \item The agronomist clicks on an edit icon to change the date of the selected visit.
+		    \item The application shows a pop-up with a field to choose new date for the visit.
 		    \item The agronomist selects a new date for the visit selected in the previous step.
 		    \item The agronomist confirms his choice.
 		    \item The application saves changes made to the daily plan.
@@ -874,12 +840,12 @@ To perform any kind of operation using the system, a stable internet connection 
 		\midrule
 		
 		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		   \item An agronomist closes the popup shown in the step 2, 3 or 4.
+		   \item An agronomist closes the pop-up shown in the step 4.
 		\end{itemize}
 	    The system shows the daily plan tab view. \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item An agronomist wants to rearrange the visit to a farm, although it was not visited twice a year.
+		   \item An agronomist wants to delay a causal visit for more than 5 days \todo{add explanation what is causal visit}.
 		\end{itemize}
-		The application shows a warning.
+		The application shows a warning, not allowing to delay the visit too much.
 	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
 		   \item The application is not able to save updates to the daily plan in step 6. 
 		\end{itemize}

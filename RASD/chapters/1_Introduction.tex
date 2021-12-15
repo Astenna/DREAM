@@ -16,10 +16,12 @@ Telangana is India's 11th biggest state, having a land area of 122,077$km^2$ and
 
 \subsection{Goals} \label{subsec:goals}
 \begin{itemize}
-	\item [\textbf{G1.}] Acquire, combine, and visualize data from external systems and users.
-	\item [\textbf{G2.}] Facilitate performance assessment of the farmers.
-	\item [\textbf{G3.}] Ensure regular support of farmers by agronomists.
-	\item [\textbf{G4.}] Enable farmers to exchange their knowledge.
+	\item [\textbf{G1.}] Acquire, combine, and visualize data from users.
+	\item [\textbf{G2.}] Acquire, combine, and visualize data from external systems. 
+	\item [\textbf{G3.}] Facilitate performance assessment of the farmers.
+	\item [\textbf{G4.}] Promote regular farms' visits by agronomists.
+	\item [\textbf{G5.}] Enable agronomists to share their knowledge with farmers.
+	\item [\textbf{G6.}] Enable farmers to exchange their knowledge.
 \end{itemize}
 
 \section{Scope}
@@ -99,12 +101,19 @@ The system attempts to address a highly difficult topic, which necessitates the 
 \subsection{Definitions}
 
 \begin{center}
-	\begin{tabular}{@{}p{0.28\linewidth} p{0.68\linewidth}@{}}
+\begin{longtable}{@{}p{0.28\linewidth} p{0.68\linewidth}@{}}
 		\toprule
 		\textbf{Expression}     & \textbf{Definition}\\
 		\midrule
-		Water irrigation system & External device, which collects information about the amount of water used on a given farm. Collected data are available via an API. \\
+% 		Water irrigation system - system urzadzen na farmie
+% 		Sensor - urzadzenie na farmie
+% 		Sensor system - system urzadzen na farmie
+% 		Water irrigation system's ID - ID systemu urzadzen na farmie
+% 		Sensor system's ID - ID systemu urzadzen na farmie
+% 		External data providers
+		Water irrigation system & Collection of external devices, which collect information about the amount of water used on a given farm. Collected data are available via an API. \\
         Sensor                  & External device, which collects information about the humidity of soil on a given farm. Collected data are available via an API.\\
+        Sensor system           & System gathering all the sensors on a farm.\\
         Farmer's summary        & Information available to policy makers and agronomists, containing data about their production, help requests and responses, weather conditions, and information from water irrigation system and sensors.\\
         Farmer's note           & Evaluation note given by a governmental policy maker based on a farmer's performance. Can be negative, neutral, or positive.\\
         Personalized suggestion & Suggestion determined by the system. concerning specific crops to plant or specific fertilizers to use – based on farmers location and type of production.\\
@@ -116,8 +125,10 @@ The system attempts to address a highly difficult topic, which necessitates the 
         Daily plan              & A daily schedule for visiting farms in a certain area of responsibility.\\
         Request for help        & An issue created by a farmer. It contains a topic and a description of a problem. The system automatically forwards it to well-performing farmers and agronomists in the same mandal.\\
         Peak hours              & 6 a.m. to 9 a.m., and 5 p.m. to 8 p.m. in the GMT+5:30 time zone.\\
-        External systems        & Systems, which collects various data and are not a part of DREAM. Following external systems are used: Weather Forecast System, Water Irrigation System, Sensor System.
-	\end{tabular}
+        External systems        & Systems, that are not a part of DREAM, which collect various farm-specific data and share them via an \textit{API}. Following external systems are used: Weather Forecast System, Water Irrigation System, Sensor System.\\
+        Water irrigation system's ID    & Number, which uniquely identifies a water irrigation system. It is necessary for definition of the external system's API endpoint.  \\
+        Sensor system's ID              & Number, which uniquely identifies a sensor system. It is necessary for definition of the external system's API endpoint. \\
+	\end{longtable}
 \end{center}
 
 \subsection{Acronyms}
