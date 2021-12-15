@@ -39,9 +39,7 @@ abstract class User {
 }
 class PolicyMaker
 class Agronomist
-class Farmer {
-    +note: Note
-}
+class Farmer
 class FarmerNote {
     +id
     +note: Note

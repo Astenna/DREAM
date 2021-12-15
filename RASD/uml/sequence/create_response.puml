@@ -1,6 +1,6 @@
-@startuml Answer to a request
+@startuml Create response
 
-mainframe Answer to help request
+mainframe Create response
 autonumber
 
 actor Agronomist

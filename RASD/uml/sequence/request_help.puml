@@ -1,6 +1,6 @@
 @startuml Request help
 
-mainframe Create help request
+mainframe Request help
 autonumber
 
 actor Farmer
@@ -9,7 +9,7 @@ participant DREAM
 Farmer -> DREAM++: Request help
 DREAM --> Farmer--: Show help request creation form
 
-Farmer -> DREAM++: Provide topic and details
+Farmer -> DREAM++: Provide topic and contents of the message
 DREAM -> DREAM++: Create help request
 deactivate DREAM
 

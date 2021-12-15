@@ -12,7 +12,7 @@ DREAM --> Farmer--: Display a list of forum threads
 Farmer -> DREAM++: Create a new forum thread
 DREAM --> Farmer--: Display the forum thread creation form
 
-Farmer -> DREAM++: Provide topic and details
+Farmer -> DREAM++: Provide topic and description
 DREAM -> DREAM++: Create a new forum thread
 deactivate DREAM
 
