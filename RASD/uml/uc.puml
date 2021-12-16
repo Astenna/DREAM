@@ -40,25 +40,22 @@ rectangle DREAM {
 
     '''''''''''Farmer'''''''''''
     ' Farmer -- (Log in)
-    Farmer -- (Visualize relevant data)
-    'should providers be included? maybe a question to Tamburri
-    (Visualize relevant data) ..> (Visualize farm data) : <<include>>
-    (Visualize farm data) ..> (Get information about weather forecasts) : <<include>>
-    (Visualize farm data) ..> (Get information about soil humidity) : <<include>>
-    (Visualize farm data) ..> (Get information about water usage) : <<include>>
-    (Visualize relevant data) ..> (Display personal suggestions) : <<include>>
+    Farmer -- (View farmer's summary)
+    (View farmer's summary) ..> (Get information about weather forecasts) : <<include>>
+    (View farmer's summary) ..> (Get information about soil humidity) : <<include>>
+    (View farmer's summary) ..> (Get information about water usage) : <<include>>
+    Farmer -- (Display personal suggestions)
     Farmer -- (Manage production data)
-    Farmer -- (Request help)
     Farmer -- (View forum)
     (View forum) <.. (Create forum thread) : <<extend>>
     (View forum) <.. (View forum thread) : <<extend>>
     (View forum thread) <.. (Delete forum comment) : <<extend>>
     (View forum thread) <.. (Add forum comment) : <<extend>>
+    (View list of my requests) <.. (Request help) : <<extend>>
+    (View list of my requests) <.. (View my request) : <<extend>>
     Farmer -- (View list of requests)
     Farmer -- (View list of my requests)
-    (View list of my requests) <.. (Create request) : <<extend>>
-    (View list of my requests) <.. (View my request) : <<extend>>
-    (View my request) <. (Delete request) : <<extend>>
+    (View my request) <.. (Delete request) : <<extend>>
 
     '''''''''''Agronomist'''''''''''
     Agronomist -- (View farmer's summary)
@@ -66,7 +63,6 @@ rectangle DREAM {
     (View list of requests) <.. (View request) : <<extend>>
     (View request) <.. (Create response) : <<extend>>
     (View request) <.. (Delete response) : <<extend>>
-    (View farmer's summary) ..> (Visualize farm data) : <<include>>
     Agronomist -- (View daily plan)
     (View daily plan) <.. (Manage daily plan) : <<extend>>
     (View daily plan) <.. (Set daily plan execution state) : <<extend>>
