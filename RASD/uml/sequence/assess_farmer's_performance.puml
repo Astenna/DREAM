@@ -17,6 +17,18 @@ opt Assess farmer's performance
     DREAM -> DREAM++: Update the farmer's note
     deactivate DREAM
 
+    alt note == NEGATIVE
+        DREAM -> DREAM++: Issue a help request
+        deactivate DREAM
+        DREAM -> DREAM++: Create additional visits
+        deactivate DREAM
+    end
+
+    alt note != NEGATIVE && previousNote == NEGATIVE
+        DREAM -> DREAM++: Delete all additional visits created\ndue to obtaining a negative note
+        deactivate DREAM
+    end
+
     alt operation successful
         DREAM --> PolMaker : Display the farmer's summary
     else operation failed
