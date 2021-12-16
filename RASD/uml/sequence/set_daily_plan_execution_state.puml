@@ -1,6 +1,6 @@
-@startuml View daily plan
+@startuml Set daily plan execution state
 
-mainframe View daily plan
+mainframe Set daily plan execution state
 autonumber
 
 actor Agronomist
@@ -15,15 +15,29 @@ loop for each visit in daily plan
     alt deviations specified
         DREAM -> DREAM++: Mark visit as rejected
         deactivate DREAM
-        DREAM -> DREAM++: Create a new visit
+
+        DREAM -> DREAM++: Update visit
         deactivate DREAM
+
+        opt visit is casual
+            DREAM -> DREAM++: Create a new casual visit\nin approximately next 5 days
+            deactivate DREAM
+        end
+
     else no deviations specified
         DREAM -> DREAM++: Mark visit as confirmed
         deactivate DREAM
+
         Agronomist -> DREAM++: Add notes to a visit
         deactivate DREAM
-    DREAM -> DREAM++: Update visit
-    deactivate DREAM
+
+        DREAM -> DREAM++: Update visit
+        deactivate DREAM
+
+        opt visit is casual
+            DREAM -> DREAM++: Create a new casual visit\nin approximately half of a year
+            deactivate DREAM
+        end
     end
 end
 
