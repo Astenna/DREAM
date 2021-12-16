@@ -13,7 +13,7 @@ enum VisitReason {
     Casual
     AgronomistDecision
 }
-class ProblemType {
+class Problem {
     +id
     +name
     +nAdditionalVisits
@@ -150,7 +150,7 @@ HelpResponse "0..*" o-- "0..1" Farmer : created by >
 HelpResponse "0..*" o-- "0..1" Agronomist : created by >
 'XOR 
 
-ProblemType "1" -- "0..*" HelpRequest : has a <
+Problem "1" -- "0..*" HelpRequest : has a <
 
 Agronomist "1" *-- "0..*" Visit : does >
 Visit "0..*" o-- "1" Farm : refers to >
