@@ -5,7 +5,7 @@
 \subsection{User Interfaces}
 
 \subsection{Hardware Interfaces}
-DREAM is a web application, as such each user should own a device capable of installing a modern browser. Form factor of the device doesn't matter, as DREAM application is fully responsive.
+DREAM is a web application, as such each user should own a device capable of installing a modern browser. Form factor of the device does not matter, as DREAM application is fully responsive.
 
 \subsection{Software Interfaces}
 A modern browser is necessary to use the system. DREAM supports most major browsers. However, in order to ensure full functionality, below is a list of browsers that are fully supported.
@@ -20,7 +20,7 @@ A modern browser is necessary to use the system. DREAM supports most major brows
 User should always update their browser to keep up with security, compatibility and functionality.
 
 \subsection{Communication Interfaces}
-To perform any kind of operation using the system, a stable internet connection is required (WiFi or cellular).
+To perform any kind of operation using the system, a stable internet connection is required (Wi-Fi or cellular).
 
 \section{Functional Requirements}
 
@@ -28,40 +28,81 @@ To perform any kind of operation using the system, a stable internet connection 
 		\toprule
 		\textbf{ID}   & \textbf{Requirement}\\
 		\midrule
-		\autonum{R} & Each user is uniquely identified by his e-mail in the system. \\
-		\autonum{R} & Unregistered customer is able to create an account with a chosen role in the system. \\
-		\autonum{R} & The application requires from an agronomist  to choose the area of responsibility during the registration process. \\
-		\autonum{R} & The application requires a farmer to insert data regarding his farm during the registration process. \\
-		\autonum{R} & Registered user is able to log in to the application. \\
-		\autonum{R} & Registered user is able to reset his password. \\
-		\autonum{R} & A policy maker is able to assign a note to a farmer. \\
-		\autonum{R} & A policy maker is able to see a farmer's summary. \\
-		\autonum{R} & A farmer is able to see farmer's relevant data. \\
-		\autonum{R} & A farmer is able to update production data in a given month. \\
-		\autonum{R} & A farmer is able to create a request for help. \\
-		\autonum{R} & A farmer is able to see previous requests for help. \\
-		\autonum{R} & A farmer with a positive note is able to respond to a request for help. \\
-		\autonum{R} & A farmer is able to create a forum thread. \\
-		\autonum{R} & A farmer is able to see forum threads and their contents. \\
-		\autonum{R} & A farmer is able to create a comment in a forum thread. \\
-		\autonum{R} & An agronomist is able to respond to a request for help. \\
-		\autonum{R} & An agronomist is able to see previous requests for help. \\
-		\autonum{R} & An agronomist is able to see his daily plan. \\
-		\autonum{R} & An agronomist is able to save comments regarding a farm visit. \\
-		\autonum{R} & An agronomist is able to set his daily plan's execution state. \\
-		\autonum{R} & An agronomist is able to update the daily plan. \\
-		\autonum{R} & An agronomist is able to see farmer's summary. \\
-		\autonum{R} & The application has a predefined list of suggestions for the farmers. \\
-		\autonum{R} & The application creates requests for help for farmers that obtained a negative note. \\
-		\autonum{R} & The application selects recipients of requests for help based on agronomists' areas of responsibility and farmers' notes. \\
-		\autonum{R} & The application schedules farm visits after each creation of a new farm. \\
-		\autonum{R} & The application schedules new farm visits after each confirmation and rejection of a farm visit. \\
-		\autonum{R} & The application schedules a new farm visit as soon as possible after each rejection of a farm visit. \\
-		\autonum{R} & The application shows a warning if an agronomist wants to rearrange the visit to a farm, although it was not visited twice a year. \\
-		\autonum{R} & The application reads and updates  weather forecasts every day. \\
-		\autonum{R} & The application reads and stores  data from humidity sensors every day. \\
-		\autonum{R} & The application stores data from irrigation systems every day. \\
-		\autonum{R} & The registered user is able to delete his account. \\
+		
+		%Authentication
+		\textbf{R1.} & The system must uniquely identify each user by his e-mail. \\
+		\textbf{R2.} & The system must allow an unregistered user to create an account with a chosen role. \\
+		\textbf{R3.} & The system must ensure that an agronomist chooses the area of responsibility during the registration process. \\
+		\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
+		\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
+		\textbf{R6.} & The system must allow a registered user to log in to the application. \\
+		\textbf{R7.} & The system must allow a registered user to reset his password. \\
+		\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
+		\textbf{R9.} & The system must allow a registered to delete his account. \\
+		
+		%Policy maker
+		\textbf{R10.} & The system must allow a policy maker to assign a note to a farmer.\\
+		\textbf{R11.} & The system must have a list of predefined problem types.\\
+        \textbf{R12.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
+        \textbf{R13.} & The system must ensure that a farm is visited more often in the event of any problems.\\
+        \textbf{R14.} & The system must have a specified number of additional visits caused by each predefined problem type.\\
+        \textbf{R15.} & The system must ensure that in case of multiple problems, the number of additional visits is equal to the greatest number of additional visits per specified problem types.\\
+		\textbf{R16.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
+		\textbf{R17.} & The system must ensure that all the additional farm visits created due to obtaining a negative note are deleted after a farmer's negative note is updated with a positive or a neutral one.\\
+		\textbf{R18.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
+		\textbf{R19.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
+		\textbf{R20.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
+		\textbf{R21.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
+		\textbf{R22.} & The system must allow a policy maker to see a farmer's summary.\\
+		
+		%Farmer
+		\textbf{R23.} & The system must allow a farmer to see his own farmer's summary.\\
+		\textbf{R24.} & The system must have a predefined list of suggestions. \\
+		\textbf{R25.} & The system must enable an administrator to extend the list of predefined suggestions.\\
+		\textbf{R26.} & The system must allow a farmer to see personalized suggestions.\\
+		\textbf{R27.} & The system must allow a farmer to manage his monthly production data.\\
+		\textbf{R28.} & The system must allow a farmer to see a list of help requests created by him.\\
+		\textbf{R29.} & The system must allow a farmer to find a help request created by him by the topic.\\
+		\textbf{R30.} & The system must allow a farmer to see a specific help request created by him.\\
+		\textbf{R31.} & The system must allow a farmer to delete a specific help request created by him.\\
+		\textbf{R32.} & The system must allow a farmer to create a new help request.\\
+		\textbf{R33.} & The system must allow a farmer with a positive note to see a list of all help requests in his mandal.\\
+		\textbf{R34.} & The system must allow a farmer with a positive note to find a help request in his mandal by the topic.\\
+		\textbf{R35.} & The system must allow a farmer with a positive note to see a specific help request in his mandal.\\
+		\textbf{R36.} & The system must allow a farmer with a positive note to respond to a specific help request in his mandal.\\
+		\textbf{R37.} & The system must allow a farmer to see a list of all forum threads in Telangana.\\
+		\textbf{R38.} & The system must allow a farmer to find a forum thread by the topic.\\
+		\textbf{R39.} & The system must allow a farmer to see a specific forum thread with its comments.\\
+		\textbf{R40.} & The system must allow a farmer to create a comment in a forum thread.\\
+		\textbf{R41.} & The system must allow a farmer to delete a comment in a forum thread, only if it was created by him.\\
+		\textbf{R42.} & The system must allow a farmer to create a forum thread.\\
+		
+		%Agronomist
+		\textbf{R43.} & The system must allow an agronomist to manage his area of responsibility.\\
+		\textbf{R44.} & The system must allow an agronomist to see a list of all farmers in his area of responsibility.\\
+		\textbf{R45.} & The system must allow an agronomist to see a list of all farmers with a specific note in his area of responsibility.\\
+		\textbf{R46.} & The system must allow an agronomist to see a list of all farmers in a given mandal in his area of responsibility.\\
+		\textbf{R47.} & The system must allow an agronomist to find a summary of a farmer in his area of responsibility by his name and surname.\\
+		\textbf{R48.} & The system must allow an agronomist to see a summary of a farmer in his area of responsibility.\\
+		\textbf{R49.} & The system must allow an agronomist to see a list of all help requests in his area of responsibility.\\
+		\textbf{R50.} & The system must allow an agronomist to find a help request in his area of responsibility by the topic.\\
+		\textbf{R51.} & The system must allow an agronomist to see a specific help request in his area of responsibility.\\
+		\textbf{R52.} & The system must allow an agronomist to respond to a specific help request in his area of responsibility.\\
+		\textbf{R53.} & The system must allow an agronomist to see his daily plans.\\
+		\textbf{R54.} & The system must allow an agronomist to submit a daily plan's execution state, by rejecting or confirming each visit, only after the daily plan's date has passed.\\
+		\textbf{R55.} & The system must allow an agronomist to provide a comment for a visit he is confirming.\\
+		\textbf{R56.} & The system must ensure that after an agronomist submits his daily plan, for all the causal visits marked as confirmed, new ones are created in approximately half of a year.\\
+		\textbf{R57.} & The system must allow an agronomist to delete a visit before its date.\\
+		\textbf{R58.} & The system must ensure that a deleted visit is marked as rejected.\\
+		\textbf{R59.} & The system must ensure that in case of rejecting a casual visit, a new one is created in maximally 5 days.\\
+		\textbf{R60.} & The system must allow postponing any different visit than a casual one without any constraints.\\
+		
+% 		External systems
+		\textbf{R61.} & The system must read and update weather forecasts every day. \\
+		\textbf{R62.} & The system must read and store data from humidity sensors every day. \\
+		\textbf{R63.} & The system must read and store data from water irrigation systems every day. \\
+
+		
 	\bottomrule
 \end{longtable}
 
@@ -69,7 +110,7 @@ To perform any kind of operation using the system, a stable internet connection 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.92\textheight, keepaspectratio, origin=c, angle=90]{diagrams/use_case}
-    \caption{Use case diagram}
+    \caption{Use case diagram.}
     \label{fig:uc_diagram}
 \end{figure}
 
@@ -80,6 +121,67 @@ To perform any kind of operation using the system, a stable internet connection 
 Given the great number of different use cases, the descriptions of only the most important ones are provided below.
 
 \begin{table}[H]
+	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+		\toprule
+		\textbf{Name}               & Create account \\
+		\midrule
+		\textbf{Actors}             & Unregistered user \\
+		\midrule
+		\textbf{Goals}              & G1, G2, G3, G4, G5, G6, G7 \\
+		\midrule
+		
+		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The unregistered user, who wants to create an account, is  on the welcome screen of the application.
+		\end{itemize}\\
+		\midrule
+		
+		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The unregistered user clicks on \textit{Create account} button on top.
+		    \item The application shows a form with role-irrelevant data (email, name, surname and password) to fill and a dropdown to choose the role.
+		    \item The unregistered user fills the form and selects a role.
+		    \item If a role of a farmer was chosen, the application shows another part of the form with text fields related to farm data to be filled.
+		    \item If a role of an agronomist was chosen, the application shows another part of the form that asks to manage mandals in the agronomist's area of responsibility.
+		    \item The unregistered user fills role-related data if there is any.
+		    \item If a role of a farmer was chosen, the system creates a farm for a farmer and two casual visits, which will take place in the following year, starting from the current date.
+		    \item If a role of an agronomist was chosen, the system adds selected mandals to the agronomist's area of responsibility.
+		    \item The unregistered user clicks on \textit{Create account} button.
+		    \item The application creates a new user.
+		    \item The application shows a message indicating successful registration.
+		    \item The application shows the log in screen.
+		\end{enumerate}\\
+		\midrule
+		\textbf{Exit conditions}    & A new user is created in the system. From now on, the credentials entered during the registration process can be used to log in to the application. \\
+		\midrule
+		
+		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		   \item The unregistered user cancels the operation, clicking on a Cancel button or a cross in the top right corner of the pop-up.
+		\end{itemize}
+		The application shows the welcome screen.
+		\begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The user with the given email address already exists. 
+		\end{itemize}
+		The application shows a message explaining that the user with given email already exists.
+		\begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item Some part of the form was not filled or was filled incorrectly.
+		\end{itemize}
+		The application shows a message explaining the type of error made by the user.
+	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
+		   \item The application is not able to create a new user in step 10.
+		\end{itemize}
+		The application shows a message indicating a possible cause of the error.
+	    \\\bottomrule
+	\end{tabular}
+	\caption{Use case description: Create account.}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5, keepaspectratio, origin=c]{diagrams/sequence/create_account}
+    \caption{Sequence diagram presenting the process of creating a new user account.}
+    \label{fig:sd_create_account}
+\end{figure}
+
+\begin{table}[H]
     \centering
 	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
 \toprule
@@ -87,11 +189,11 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		\textbf{Actors}             & Policy maker, Agronomist, Farmer\\
 		\midrule
-		\textbf{Goals}              & G1 \\
+		\textbf{Goals}              & G1, G2, G3, G4, G5, G6, G7 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The user who wants to log in, is  on the welcome screen of the application.
+		    \item The user, who wants to log in, is  on the welcome screen of the application.
 		\end{itemize}\\
 		\midrule
 		
@@ -120,70 +222,8 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: log in} 
+	\caption{Use case description: Log in.} 
 \end{table}
-
-\begin{table}[H]
-	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
-		\toprule
-		\textbf{Name}               & Create account \\
-		\midrule
-		\textbf{Actors}             & Unregistered user \\
-		\midrule
-		\textbf{Goals}              & G1 \\
-		\midrule
-		
-		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The unregistered user, who wants to create an account, is  on the welcome screen of the application.
-		\end{itemize}\\
-		\midrule
-		
-		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The unregistered user clicks on \textit{Create account} button on top.
-		    \item The application shows a form with role-irrelevant data (email, name, surname and password) to fill and a dropdown to choose the role.
-		    \item The unregistered user fills the form and selects a role.
-		    \item If a role of a farmer was chosen, the application another part of the form with text fields related to farm data to be filled.
-		    \item If a role of an agronomist was chosen, the application another part of the form that asks to add the mandals to the agronomist's area of responsibility.
-		    \item The unregistered user fills role-related data if there is any.
-		    \item If a role of a farmer was chosen, the system creates a farm for a farmer.
-		    \item If a role of an agronomist was chosen, the system adds selected mandals to the agronomist's area of responsibility.
-		    \item The unregistered user clicks on \textit{Create account} button.
-		    \item The application creates a new user.
-		    \item The application shows a message indicating successful registration.
-		    \item The application shows the log in screen.
-		\end{enumerate}\\
-		\midrule
-		\textbf{Exit conditions}    & A new user is created in the system. From now on, the credentials entered during the registration process can be used to log in to the application. \\
-		\midrule
-		
-		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		   \item The unregistered user resigns from registration in the application by clicking the cross in the top right corner. 
-		\end{itemize}
-		The application shows the welcome screen.
-		\begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item The user with the given email adress already exists. 
-		\end{itemize}
-		The application shows a message explaining that the user with given email already exists.
-		\begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item Some part of the form was not filled or filled incorrectly.
-		\end{itemize}
-		The application shows a message explaining the type of error made by the user.
-	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item The application is not able to create a new user in step 10.
-		\end{itemize}
-		The application shows a message indicating a possible cause of the error.
-	    \\\bottomrule
-	\end{tabular}
-	\caption{Use case description: create account}
-\end{table}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5, keepaspectratio, origin=c]{diagrams/sequence/create_account}
-    \caption{Sequence diagram presenting the process of creating a new user account.}
-    \label{fig:sd_create_account}
-\end{figure}
-	\todo{should we specify what is \textit{farm data}?}
 
 \begin{table}[H]
     \centering
@@ -203,12 +243,11 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		
 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The user clicks on his name in the top bar.
 		    \item The user scrolls to the bottom of the page.
 		    \item The user clicks on the \textit{Delete account} button.
-		    \item The application shows a pop-up with a text field for an e-mail, password, and explanation of the consequences of the account deletion.
-		    \item The user fills out the text fields.
+		    \item The application shows a pop-up asking the user to confirm account deletion.
 		    \item The user clicks on the \textit{Delete account} button on the pop-up.
-		    \item The application verifies the correctness of e-mail and password entered in the previous step.
 		    \item The application deletes the account.
 		    \item The application shows a message indicating successful account deletion.
 		    \item The application shows the welcome screen.
@@ -220,22 +259,14 @@ Given the great number of different use cases, the descriptions of only the most
 		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
 		   \item The user cancels the operation by clicking on the \textit{Cancel} button or a cross in the top right corner of the pop-up in step 4.
 		\end{itemize}
-		The application show the welcome screen.
+		The pop-up is closed.
 	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item The verification of data entered by the user in step 4 does not succeed in step 6.
-		\end{itemize}
-		The application shows a message indicating the issue.
-	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item The application is not able to verify the credentials in step 6.
-		\end{itemize}
-		The application shows a message indicating a possible cause of the error.
-	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item The application is not able to delete the account in step 7.
+		   \item The application is not able to delete the account in step 6.
 		\end{itemize}
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: Delete account} 
+	\caption{Use case description: Delete account.} 
 \end{table}
 
 \begin{table}[H]
@@ -250,7 +281,7 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The user who wants to log in, is on the welcome screen of the application.
+		    \item The user, who wants to log in, is on the welcome screen of the application.
 		\end{itemize}\\
 		\midrule
 		
@@ -258,7 +289,7 @@ Given the great number of different use cases, the descriptions of only the most
 		    \item The user clicks on \textit{Log in} button in the top bar.
 		    \item The user clicks on \textit{Forgot password?} button.
 		    \item The application shows a pop-up with a text field to fill an e-mail.
-		    \item The user enter his e-mail.
+		    \item The user enters his e-mail.
 		    \item The application sends an e-mail with a password reset link.
 		    \item The user open his mailbox, goes to the email from DREAM app and clicks on a password reset link.
 		    \item The application opened in a given URL shows two text fields to enter the new password twice.
@@ -289,7 +320,7 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: Reset password} 
+	\caption{Use case description: Reset password.} 
 \end{table}
 
 \begin{table}[H]
@@ -305,21 +336,25 @@ Given the great number of different use cases, the descriptions of only the most
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
 		    \item The policy maker is already logged in to the application.
-		    \item The policy maker is in the list of farmers' view. 
 		\end{itemize}\\
 		\midrule
 		
 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		    \item The policy maker opens \textit{Farmers} view.
 		    \item The policy maker clicks on one of the farmers.
 		    \item The application shows the selected farmer's summary.
 		    \item The policy maker clicks on \textit{Change} button next to the current note of the farmer.
-		    \item The policy maker chooses a note from a dropdown.
+		    \item The policy maker chooses a note from a dropdown list.
+		    \item In case of the note being a negative note, the system displays a dropdown list of available problem types.
+		    \item The policy maker chooses a matching problem type.
 		    \item The policy maker clicks on \textit{Save} button.
+		    \item The system issues a help request followed by a creation of additional farm visits.
+		    \item In case of the note being neutral or positive, while the previous note was negative, the system deletes all the additional farm visits created due to obtaining a negative note.
 		    \item The application saves a new farmer's note.
 		    \item The application shows a message indicating successful assignment of the note.
 		\end{enumerate}\\
 		\midrule
-		\textbf{Exit conditions}    & The new note is saved in the system. In case of negative note assignment, it sends a help request to agronomists in the given area of responsibility and several well-performing farmers. \\
+		\textbf{Exit conditions}    & The new note is saved in the system, visits are adjusted and in case of a negative note, a new help request is created.  \\
 		\midrule
 		
 		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
@@ -327,12 +362,12 @@ Given the great number of different use cases, the descriptions of only the most
 		\end{itemize}
 	    The system shows the farmer's summary view with the previous note in the note field.
 	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item The application is not able to save note assigned in step 5.
+		   \item The application is not able to save the note assigned in step 5.
 		\end{itemize}
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: assess farmer's performance} 
+	\caption{Use case description: assess farmer's performance.} 
 \end{table}
 
 \begin{figure}[H]
@@ -365,10 +400,10 @@ Given the great number of different use cases, the descriptions of only the most
 		    \item The farmer enters the topic and description of the thread.
 		    \item The farmer clicks on \textit{Create} button.
 		    \item The application creates a new forum thread.
-		    \item The application shows a message indicating successful creation of the forum thread.
+		    \item The application displays the new thread.
 		\end{enumerate}\\
 		\midrule
-		\textbf{Exit conditions}    & The application successfully created a new forum thread. From now on, the new forum thread is visible to all other farmers. \\
+		\textbf{Exit conditions}    & The application successfully created a new forum thread. From now on, the new forum thread is visible to all other farmers. User sees the new thread. \\
 		\midrule
 		
 		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
@@ -381,7 +416,7 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
         \\\bottomrule
 	\end{tabular}
-	\caption{Use case description: create forum thread} 
+	\caption{Use case description: Create forum thread.} 
 \end{table}
 
 \begin{figure}[H]
@@ -390,7 +425,6 @@ Given the great number of different use cases, the descriptions of only the most
     \caption{Sequence diagram presenting the process of creating a new forum thread.}
     \label{fig:sd_create_forum_thread}
 \end{figure}
-\todo{Change 'topic and details' to 'topic and description'}
 
 \begin{table}[H]
     \centering
@@ -410,26 +444,25 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		
 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The farmer selects a forum thread, by clicking on the tread's topic in the list.
+		    \item The farmer selects a forum thread, by clicking on the thread's topic in the list.
 		    \item The application shows the contents of the selected forum thread.
 		    \item The farmer fills the textbox with the content of his comment.
 		    \item The farmer clicks on \textit{Send} button.
 		    \item The application adds a new forum comment.
-		    \item The application shows a message indicating successful addition of the forum comment.
+		    \item The application updates thread view, showing the new comment.
 		\end{enumerate}\\
 		\midrule
-		\textbf{Exit conditions} & The application saved the new comment in the thread. From now on, the new comment is visible to all farmers viewing the thread. \\
+		\textbf{Exit conditions} & The application saved the new comment in the thread. From now on, the new comment is visible to all farmers viewing the thread. Farmer can see new comment in thread view. \\
 		\midrule
 		
 		\textbf{Exceptions}         &
-	    The system comes back to the \textit{Forum} view.
 	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
 		   \item The application is not able to add a forum comment in step 5. 
 		\end{itemize}
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: add forum comment} 
+	\caption{Use case description: Add forum comment.} 
 \end{table}
 
 \begin{figure}[H]
@@ -447,7 +480,7 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		\textbf{Actors}             & Farmer\\
 		\midrule
-		\textbf{Goals}              & G1 \todo{is this goal mapping OK?} \\
+		\textbf{Goals}              & G7 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -457,7 +490,7 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		
 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The application shows personal suggestions on the top right part called \textit{Tips and suggestions}o f the dashboard.
+		    \item The application shows personal suggestions on the top right part called \textit{Tips and suggestions} of the dashboard.
 		    \item The farmer reads personal suggestions from the list.
 		\end{enumerate}\\
 		\midrule
@@ -471,44 +504,44 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: display personal suggestions} 
+	\caption{Use case description: Display personal suggestions.} 
 \end{table}
 
 
-\begin{table}[H]
-    \centering
-	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
-\toprule
-		\textbf{Name}               & Visualize relevant data \todo{discuss UC changes}\\
-		\midrule
-		\textbf{Actors}             & Farmer\\
-		\midrule
-		\textbf{Goals}              & G1, G2 \\
-		\midrule
+% \begin{table}[H]
+%     \centering
+% 	\begin{tabular}{@{}p{0.25\linewidth} p{0.72\linewidth}@{}}
+% \toprule
+% 		\textbf{Name}               & Visualize relevant data\\
+% 		\midrule
+% 		\textbf{Actors}             & Farmer\\
+% 		\midrule
+% 		\textbf{Goals}              & G1, G2 \\
+% 		\midrule
 		
-		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The farmer is already logged in to the application.
-		    \item The farmer is on the dashboard view.
-		\end{itemize}\\
-		\midrule
+% 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+% 		    \item The farmer is already logged in to the application.
+% 		    \item The farmer is on the dashboard view.
+% 		\end{itemize}\\
+% 		\midrule
 		
-		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The user clicks on \textit{Relevant data} in the sidebar.
-		    \item The application shows farmer's relevant data.
-		\end{enumerate}\\
-		\midrule
-		\textbf{Exit conditions}    & The farmers is able to see the contents of farmer's relevant data. \\
-		\midrule
+% 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+% 		    \item The user clicks on \textit{Relevant data} in the sidebar.
+% 		    \item The application shows farmer's relevant data.
+% 		\end{enumerate}\\
+% 		\midrule
+% 		\textbf{Exit conditions}    & The farmers is able to see the contents of farmer's relevant data. \\
+% 		\midrule
 		
-		\textbf{Exceptions}         & 
-	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
-		   \item The application is not able to load the farmer's relevant data.
-		\end{itemize}
-		The application shows a message indicating a possible cause of the error.
-		\\\bottomrule
-	\end{tabular}
-	\caption{Use case description: visualize relevant data} 
-\end{table}
+% 		\textbf{Exceptions}         & 
+% 	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+% 		   \item The application is not able to load the farmer's relevant data.
+% 		\end{itemize}
+% 		The application shows a message indicating a possible cause of the error.
+% 		\\\bottomrule
+% 	\end{tabular}
+% 	\caption{Use case description: visualize relevant data.} 
+% \end{table}
 
 
 \begin{table}[H]
@@ -533,7 +566,7 @@ Given the great number of different use cases, the descriptions of only the most
 		    \item The application shows the forum view with a list of already created forum threads.
 		\end{enumerate}\\
 		\midrule
-		\textbf{Exit conditions}    & The farmer is able to see the read of already created forum threads. \\
+		\textbf{Exit conditions}    & The farmer is able to see a list of already created forum threads. \\
 		\midrule
 		
 		\textbf{Exceptions}         & 
@@ -543,7 +576,7 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: view forum} 
+	\caption{Use case description: View forum.} 
 \end{table}
 
 \begin{table}[H]
@@ -579,7 +612,7 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: view forum} 
+	\caption{Use case description: View forum.} 
 \end{table}
 
 \begin{table}[H]
@@ -602,13 +635,13 @@ Given the great number of different use cases, the descriptions of only the most
 		    \item The farmer clicks on \textit{My help requests} view in the sidebar.
 		    \item The farmer clicks on \textit{Create help request} button.
 		    \item The application shows a pop-up with textboxes to fill.
-		    \item The farmer enters topic and message describing of the problem.
+		    \item The farmer enters a topic and message.
 		    \item The farmer clicks on \textit{Send request} button.
-		    \item The application sends requests to the agronomists in the given area of responsibility and several farmers with positive note. 
-		    \item The application shows request created.
+		    \item The application sends requests to the agronomists and several farmers with a positive note working in the given area. 
+		    \item The application shows the created request.
 		\end{enumerate}\\
 		\midrule
-		\textbf{Exit conditions}    & The request can be seen in the \textit{Provide help} view by the recipients selected in step 6. Additionaly, the farmer who created the request can see it in the \textit{My help requests} view. \\
+		\textbf{Exit conditions}    & The request can be seen in the \textit{Provide help} view by the recipients selected in step 6. Additionally, the farmer who created the request can see it in the \textit{My help requests} view. \\
 		\midrule
 		
 		\textbf{Exceptions}         & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
@@ -621,7 +654,7 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.\\
 		\bottomrule
 	\end{tabular}
-	\caption{Use case description: request help} 
+	\caption{Use case description: Request help.} 
 \end{table}
 
 \begin{figure}[H]
@@ -629,8 +662,7 @@ Given the great number of different use cases, the descriptions of only the most
     \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/request_help}
     \caption{Sequence diagram presenting the creation of a help request.}
     \label{fig:sd_request_help}
-\end{figure}\todo{Rename to 'request help'}
-\todo{Change 'Provide topic and details' to 'Provide topic and contents of the message'}
+\end{figure}
 
 \begin{table}[H]
     \centering
@@ -638,7 +670,7 @@ Given the great number of different use cases, the descriptions of only the most
 \toprule
 		\textbf{Name}               & Create response\\
 		\midrule
-		\textbf{Actors}             & Agronomist, Farmer\\
+		\textbf{Actors}             & Agronomist, Farmer (positive note)\\
 		\midrule
 		\textbf{Goals}              & G5, G6 \\
 		\midrule
@@ -650,11 +682,11 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		
 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The farmer or the agronomist clicks on the requests he wants to reply. 
+		    \item The farmer or the agronomist clicks on the requests he wants to reply to. 
 		    \item The application shows a pop-up with textboxes to fill.
 		    \item The farmer or the agronomist enters the contents of the reply message.
 		    \item The farmer or the agronomist clicks the \textit{Send} button.
-		    \item The application sends an answer to the request to the farmer.
+		    \item The application saves the answer to the request.
 		    \item The application shows a message indicating successful sending of the message.
 		\end{enumerate}\\
 		\midrule
@@ -666,21 +698,21 @@ Given the great number of different use cases, the descriptions of only the most
 		   \item The application is not able to create an answer to a help request in step 5. 
 		\end{itemize}
 		The application shows a message indicating a possible cause of the error.
-		\begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm}]
+		\begin{itemize}[leftmargin=.4cm,noitemsep,before=\vspace{-3mm}]
 		   \item The user resigns from creating a response to the request by clicking on the cross in the top right corner or \textit{Cancel button}. 
 		\end{itemize}
 		The application comes back to \textit{Provide help} view.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: create response} 
+	\caption{Use case description: Create response.} 
 \end{table}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/answer_to_request}
-    \caption{Sequence diagram presenting the event of answering to a help request. }
-    \label{fig:sd_answer_to_request}
-\end{figure}\todo{rename Answer to help request to Create response}
+    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/create_response}
+    \caption{Sequence diagram presenting the event of answering to a help request.}
+    \label{fig:sd_create_response}
+\end{figure}
 
 \begin{table}[H]
     \centering
@@ -688,7 +720,7 @@ Given the great number of different use cases, the descriptions of only the most
     \toprule
 		\textbf{Name}               & View farmer's summary\\
 		\midrule
-		\textbf{Actors}             & Agronomist, Policy maker\\
+		\textbf{Actors}             & Agronomist, Farmer, Policy maker\\
 		\midrule
 		\textbf{Goals}              & G1, G2, G3 \\
 		\midrule
@@ -700,14 +732,21 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		
 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The user clicks on \textit{Farmers} in the sidebar.
-		    \item The application shows a list of farmers.
-		    \item The user finds in a list a farmer whose summary he wants to see.
-		    \item The user clicks on an eye icon.
-		    \item The application shows a farmer's summary page of a given farmer.
+		    \item If the user is Agronomist or Policy Maker
+		    \begin{enumerate}[noitemsep]
+		        \item The user clicks on \textit{Farmers} in the sidebar.
+		        \item The application shows a list of farmers.
+		        \item The user finds in a list a farmer whose summary he wants to see.
+		        \item The user clicks on an eye icon.
+		    \end{enumerate}
+		    \item If the user is Farmer
+		    \begin{enumerate}[noitemsep]
+		        \item The user clicks on \textit{Summary} in the sidebar.
+		    \end{enumerate}
+		    \item The application shows a farmer's summary page.
 		\end{enumerate}\\
 		\midrule
-		\textbf{Exit conditions}    & The user is able to see the contents of farmer's summary of the selected farmer. \\
+		\textbf{Exit conditions}    & The user is able to see the contents of farmer's summary. \\
 		\midrule
 		
 		\textbf{Exceptions}         & 
@@ -717,7 +756,7 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: view farmer's summary} 
+	\caption{Use case description: view farmer's summary.} 
 \end{table}
 
 \begin{table}[H]
@@ -739,10 +778,10 @@ Given the great number of different use cases, the descriptions of only the most
 		
 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
 		    \item The agronomist clicks on \textit{Daily plan} in the sidebar.
-		    \item The application shows daily plan view.
+		    \item The application shows daily plan view for the current day.
 		\end{enumerate}\\
 		\midrule
-		\textbf{Exit conditions}    & The agronomist can choose different days from the calendar on the left to see the daily plan for selected days. \\
+		\textbf{Exit conditions}    & The agronomist can see daily plan for the current day. The agronomist can choose another day from the calendar on the left side of the view. \\
 		\midrule
 		
 		\textbf{Exceptions}         & 
@@ -752,7 +791,7 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: view daily plan} 
+	\caption{Use case description: view daily plan.} 
 \end{table}
 
 \begin{table}[H]
@@ -767,8 +806,8 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		    \item The farmer or the agronomist is already logged in to the application.
-		    \item The farmer or the agronomist is in the \textit{Daily plan} view.
+		    \item The agronomist is already logged in to the application.
+		    \item The agronomist is in the \textit{Daily plan} view.
 		\end{itemize}\\
 		\midrule
 		
@@ -776,13 +815,13 @@ Given the great number of different use cases, the descriptions of only the most
 		    \item The agronomist clicks on a day in the calendar for which execution state is to be set.
 		    \item The agronomist clicks on \textit{Submit execution state} button.
 		    \item The application shows a pop-up with a list of visits in a selected day.
-		    \item The agronomist marks each checkbox next to the visits he has done, leaving unmarked checkboxes next the visits he skipped.
+		    \item The agronomist marks each checkbox next to the visits he has done, leaving unmarked checkboxes next to the visits he skipped.
 		    \item The application shows text fields below each visit with marked checkbox.
 		    \item The agronomist fills text fields shown in the previous step with comments he collected during the visits.
 		    \item The agronomist clicks on \textit{Submit} button to save the execution state.
 		    \item The application saves the execution state.
-		    \item The application plans new visits to farms that were visited in approximately in the next 6 months or less, depending on the performance of the farmer.
-		    \item The application plans new visits to the farms that were not visited in the next approximately 5 days.
+		    \item The application plans new visits to farms that were visited in terms of a casual visit in approximately half of a year.
+		    \item The application plans new visits to the farms that were not visited, but should be visited in terms of a casual visit, in approximately the next 5 days.
 		\end{enumerate}\\
 		\midrule
 		\textbf{Exit conditions}    & The state of visits for the given date is saved in the system. New visits are planned in dates depending on the state of the last visit (if it was \textit{confirmed} or \textit{rejected}). \\
@@ -798,14 +837,14 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
 	    \\\bottomrule
 	\end{tabular}
-	\caption{Use case description: set daily plan execution state} 
+	\caption{Use case description: set daily plan execution state.} 
 \end{table}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.6, keepaspectratio, origin=c]{diagrams/sequence/view_daily_plan}
+    \includegraphics[scale=0.6, keepaspectratio, height=0.98\textheight, origin=c]{diagrams/sequence/set_daily_plan_execution_state}
     \caption{Sequence diagram presenting the action of displaying a daily plan.}
-    \label{fig:sd_view_daily_plan}
+    \label{fig:sd_set_daily_plan_execution_state}
 \end{figure}
 
 \begin{table}[H]
@@ -827,9 +866,9 @@ Given the great number of different use cases, the descriptions of only the most
 		
 		\textbf{Flow of events}     & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
 		    \item The agronomist clicks on the day in the calendar in which he wants to rearrange the visits.
-		    \item The application shows a list of visit in the selected day.
+		    \item The application shows a list of visits in the selected day.
 		    \item The agronomist clicks on an edit icon to change the date of the selected visit.
-		    \item The application shows a pop-up with a field to choose new date for the visit.
+		    \item The application shows a pop-up with a field to choose a new date for the visit.
 		    \item The agronomist selects a new date for the visit selected in the previous step.
 		    \item The agronomist confirms his choice.
 		    \item The application saves changes made to the daily plan.
@@ -843,16 +882,16 @@ Given the great number of different use cases, the descriptions of only the most
 		   \item An agronomist closes the pop-up shown in the step 4.
 		\end{itemize}
 	    The system shows the daily plan tab view. \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
-		   \item An agronomist wants to delay a causal visit for more than 5 days \todo{add explanation what is causal visit}.
+		   \item An agronomist wants to delay a casual visit for more than 5 days.
 		\end{itemize}
-		The application shows a warning, not allowing to delay the visit too much.
+		The application shows an error, not allowing to delay the visit too much.
 	    \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt]
 		   \item The application is not able to save updates to the daily plan in step 6. 
 		\end{itemize}
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: update daily plan} 
+	\caption{Use case description: update daily plan.} 
 \end{table}
 
 
@@ -873,30 +912,19 @@ Given the great number of different use cases, the descriptions of only the most
 \begin{table}[H]
     \centering
     \begin{tabularx}{\linewidth}{lX} \toprule
-         \textbf{G1} & Acquire, combine, and visualize data both from external systems and users. \\ \midrule
-         \textbf{A1} & Each farmer possess exactly one farm. \\
-         \textbf{A2} & Each farm belongs to exactly one farmer. \\
-         \textbf{A3} & Each farm has at least one humidity sensor. \\
-         \textbf{A4} & Each farm has an irrigation system. \\
-         \textbf{A5} & Each farm is inside exactly one mandal. \\
-         \textbf{A6} & Each farmer updates his production data each month. \\
-         \textbf{A7} & Weather is consistent in a given mandal.\\
-         \textbf{A10} & Each registered user can be only one of the actors: an agronomist, a farmer, or a policy maker. \\
-         \textbf{A11} & The information provided by a user during registration process is valid. \\
-         \textbf{A14} & Based on farmer's summary, a policy maker is able to understand whether the help given by farmers and agronomists produces significant results.\\ 
-         \midrule
-         \textbf{R1} & Each user is uniquely identified by his e-mail in the system. \\
-         \textbf{R2} & Unregistered customer is able to create an account with a chosen role in the system. \\
-         \textbf{R4} &  The application requires a farmer to insert data regarding his farm during the registration process. \\
-         \textbf{R5} & Registered user is able to log in to the application. \\
-		 \textbf{R6} & Registered user is able to reset his password. \\
-         \textbf{R9} & A farmer is able to see farmer's relevant data. \\
-         \textbf{R10} & A farmer is able to update production data in a given month. \\
-          \textbf{R24} & The application has a predefined list of suggestions for the farmers. \\
-          \textbf{R31} & The application reads and updates  weather forecasts every day. \\
-          \textbf{R32} & The application reads and stores  data from humidity sensors every day.  \\
-          \textbf{R33} & The application stores data from irrigation systems every day. \\
-         \bottomrule
+        \textbf{G1} & Acquire, combine, and visualize data from agronomists, farmers, and policy makers. \\ 
+        \midrule
+        \textbf{A1.} & Each farmer possess exactly one farm.\\
+        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
+        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+        \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
+        \textbf{A9.} & Agronomist's area of responsibility contains at least one mandal.\\ 
+        \textbf{A10.} & Each registered user can be only one of the actors: an agronomist, a farmer, or a policy maker.\\ 
+        \textbf{A11.} & The information provided by a user during registration process is valid.\\ 
+        \textbf{A13.} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\ 
+        \midrule
+        \textbf{Req.} & Req.\\
+        \bottomrule
     \end{tabularx}
     \caption{G1 mapping on assumptions and requirements.}
 \end{table}
@@ -904,21 +932,19 @@ Given the great number of different use cases, the descriptions of only the most
 \begin{table}[H]
     \centering
     \begin{tabularx}{\linewidth}{lX} \toprule
-         \textbf{G2} & Facilitate performance assessment of the farmers. \\ \midrule
-         \textbf{A1} & Each farmer possess exactly one farm. \\ 
-         \textbf{A2} & Each farm belongs to exactly one farmer. \\
-         \textbf{A3} & Each farm has at least one humidity sensor.\\
-         \textbf{A4} & Each farm has an irrigation system.\\
-         \textbf{A5} & Each farm is inside exactly one mandal. \\
-         \textbf{A6} & Each farmer updates his production data each month. \\
-         \textbf{A7} & Weather is consistent in a given mandal.\\
-         \textbf{A8} & Initially, each farmer has a neutral note.\\
-         \textbf{A14} & Based on farmer's summary, a policy maker is able to understand whether the help given by farmers and agronomists produces significant results.\\ 
-         \midrule
-         \textbf{R7} & A policy maker is able to assign a note to a farmer. \\
-		\textbf{R8} & A policy maker is able to see farmer's summary. \\
-		\textbf{R10} & A farmer is able to update production data in a given month.\\
-		\bottomrule
+        \textbf{G2} & Acquire, combine, and visualize data from external systems. \\ 
+        \midrule
+        \textbf{A1.} & Each farmer possess exactly one farm.\\
+        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
+        \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
+        \textbf{A4.} & Each farm has a water irrigation system.\\ 
+        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+        \textbf{A7.} & Weather is consistent in a given mandal.\\ 
+        \textbf{A17.} & External systems are reliable and highly available.\\
+        \textbf{A18.} & Every sensor system has a unique ID assigned by the sensor system provider. \\
+        \textbf{A19.} & Every water irrigation system has a unique ID assigned by the water irrigation system provider. \\
+        \midrule
+        \bottomrule
     \end{tabularx}
     \caption{G2 mapping on assumptions and requirements.}
 \end{table}
@@ -926,58 +952,122 @@ Given the great number of different use cases, the descriptions of only the most
 \begin{table}[H]
 \centering
     \begin{tabularx}{\linewidth}{lX} \toprule
-         \textbf{G3} & Ensure regular support of farmers by agronomists. \\ \midrule
-         \textbf{A1} & Each farmer possess exactly one farm. \\
-         \textbf{A2} & Each farm belongs to exactly one farmer. \\
-         \textbf{A3} & Each farm has at least one humidity sensor. \\
-         \textbf{A4} & Each farm has an irrigation system. \\
-         \textbf{A5} & Each farm is inside exactly one mandal. \\
-         \textbf{A7} & Weather is consistent in a given mandal.\\
-         \textbf{A9} & Agronomist's area of responsibility contains at least one mandal.\\
-         \textbf{A12} & Well-performing farmers and agronomists are eager to help farmers with negative notes. \\
-         \textbf{A13} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\
-         \textbf{A16} & Farmers and agronomists create meaningful and not offensive help requests and responses.\\
-         \midrule
-         \textbf{R3} & The application requires from an agronomist  to choose the area of responsibility during the registration process. \\
-         \textbf{R10} & A farmer is able to update production data in a given month.\\
-          \textbf{R11} &  A farmer is able to create a request for help. \\
-         \textbf{R} & An agronomist is able to respond to a request for help. \\
-         \textbf{R17} & An agronomist is able to see previous requests for help. \\
-         \textbf{R18} & An agronomist is able to see his daily plan. \\
-         \textbf{R19} & An agronomist is able to save comments regarding a farm visit. \\
-         \textbf{R20} & An agronomist is able to set his daily plan's execution state. \\
-         \textbf{R21} & An agronomist is able to update the daily plan. \\
-         \textbf{R22} & An agronomist is able to see farmer's summary. \\
-          \textbf{R25} & The application creates requests for help for farmers that obtained a negative note. \\
-          \textbf{R26} &  The application selects recipients of requests for help based on agronomists' areas of responsibility and farmers' notes. \\
-          \textbf{R27} &  The application schedules farm visits after each creation of a new farm. \\
-          \textbf{R28} &  Aplication schedules new farm visits after each confirmation of a farm visit. \\
-          \textbf{R29} &  The application schedules new farm visits after each confirmation and rejection of a farm visit. \\
-          \textbf{R30} &  The application shows a warning if an agronomist wants to rearrange the visit to a farm, although it was not visited twice a year. \\
-         \bottomrule
+        \textbf{G3} & Facilitate performance assessment of the farmers. \\ 
+        \midrule
+        \textbf{A1.} & Each farmer possess exactly one farm.\\
+        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
+        \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
+        \textbf{A4.} & Each farm has a water irrigation system.\\ 
+        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+        \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
+        \textbf{A7.} & Weather is consistent in a given mandal.\\ 
+        \textbf{A8.} & Initially, each farmer has a neutral note.\\ 
+        \textbf{A9.} & Agronomist's area of responsibility contains at least one mandal.\\ 
+        \textbf{A10.} & Each registered user can be only one of the actors: an agronomist, a farmer, or a policy maker.\\ 
+        \textbf{A11.} & The information provided by a user during registration process is valid.\\ 
+        \textbf{A13.} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\ 
+        \textbf{A14.} & Based on the farmer's summary, a policy maker is able to understand whether the help given by farmers and agronomists produces significant results.\\ 
+        \textbf{A17.} & External systems are reliable and highly available.\\
+        \midrule
+        \textbf{Req.} & Req.\\
+        \bottomrule
     \end{tabularx}
-    \caption{G3 mapping on assumptions and requirements}
+    \caption{G3 mapping on assumptions and requirements.}
 \end{table}
 
 \begin{table}[H]
     \centering
     \begin{tabularx}{\linewidth}{lX} \toprule
-         \textbf{G4} & Enable farmers to exchange their knowledge. \\ \midrule
-         \textbf{A12} &  Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
-         \textbf{A15} & Farmers create meaningful and not offensive threads and comments on the forum.\\
-         \textbf{A16} & Farmers and agronomists create meaningful and not offensive help requests and responses. \\
-         \midrule
-          \textbf{R11} &  A farmer is able to create a request for help. \\
-          \textbf{R12} & A farmer is able to see previous requests for help. \\
-          \textbf{R13} & A farmer with a positive note is able to respond to a request for help. \\
-          \textbf{R14} & A farmer is able to create a forum thread. \\
-		 \textbf{R15} & A farmer is able to see forum threads and their contents. \\
-		 \textbf{R16} & A farmer is able to create a comment in a forum thread. \\ 
-          \textbf{R25} & The application creates requests for help for farmers that obtained a negative note. \\
-          \textbf{R26} &  The application selects recipients of requests for help based on agronomists' areas of responsibility and farmers' notes. \\
-         \bottomrule
+        \textbf{G4} & Promote regular farms’ visits by agronomists. \\ 
+        \midrule
+        \textbf{A1.} & Each farmer possess exactly one farm.\\
+        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
+        \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
+        \textbf{A4.} & Each farm has a water irrigation system.\\ 
+        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+        \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
+        \textbf{A7.} & Weather is consistent in a given mandal.\\ 
+        \textbf{A8.} & Initially, each farmer has a neutral note.\\ 
+        \textbf{A9.} & Agronomist's area of responsibility contains at least one mandal.\\ 
+        \textbf{A10.} & Each registered user can be only one of the actors: an agronomist, a farmer, or a policy maker.\\ 
+        \textbf{A11.} & The information provided by a user during registration process is valid.\\ 
+        \textbf{A12.} & Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
+        \textbf{A13.} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\ 
+        \textbf{A17.} & External systems are reliable and highly available.\\
+        \midrule
+        \textbf{Req.} & Req.\\
+        \bottomrule
     \end{tabularx}
-    \caption{G4 mapping on assumptions and requirements}
+    \caption{G4 mapping on assumptions and requirements.}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\linewidth}{lX} \toprule
+        \textbf{G5} & Enable agronomists to share their knowledge with farmers. \\ 
+        \midrule
+        \textbf{A1.} & Each farmer possess exactly one farm.\\
+        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
+        \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
+        \textbf{A4.} & Each farm has a water irrigation system.\\ 
+        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+        \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
+        \textbf{A8.} & Initially, each farmer has a neutral note.\\ 
+        \textbf{A12.} & Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
+        \textbf{A13.} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\ 
+        \textbf{A16.} & Farmers and agronomists create meaningful and not offensive help requests and responses. \\
+        \textbf{A17.} & External systems are reliable and highly available.\\
+        \midrule
+        \textbf{R11} &  Req. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{G5 mapping on assumptions and requirements.}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\linewidth}{lX} \toprule
+        \textbf{G6} & Enable farmers to exchange their knowledge. \\ 
+        \midrule
+        \textbf{A1.} & Each farmer possess exactly one farm.\\
+        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
+        \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
+        \textbf{A4.} & Each farm has a water irrigation system.\\ 
+        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+        \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
+        \textbf{A7.} & Weather is consistent in a given mandal.\\ 
+        \textbf{A8.} & Initially, each farmer has a neutral note.\\ 
+        \textbf{A12.} & Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
+        \textbf{A15.} & Farmers create meaningful and not offensive threads and comments on the forum.\\ 
+        \textbf{A17.} & External systems are reliable and highly available.\\
+        \midrule
+        \textbf{R11} &  Req. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{G6 mapping on assumptions and requirements.}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\linewidth}{lX} \toprule
+        \textbf{G7} & Improve farmers performance by providing them with personalized suggestions. \\ 
+        \midrule
+        \textbf{A1.} & Each farmer possess exactly one farm.\\
+        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
+        \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
+        \textbf{A4.} & Each farm has a water irrigation system.\\ 
+        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+        \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
+        \textbf{A7.} & Weather is consistent in a given mandal.\\ 
+        \textbf{A11.} & The information provided by a user during registration process is valid.\\ 
+        \textbf{A17.} & External systems are reliable and highly available.\\
+        \textbf{A18.} & Every sensor system has a unique ID assigned by the sensor system provider. \\
+        \textbf{A19.} & Every water irrigation system has a unique ID assigned by the water irrigation system provider. \\
+        \midrule
+        \textbf{R11} &  Req. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{G7 mapping on assumptions and requirements.}
 \end{table}
 
 \section{Performance Requirements} \label{sec:performance_requirements}

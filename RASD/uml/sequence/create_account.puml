@@ -31,6 +31,8 @@ alt data correct
         deactivate DREAM
         DREAM -> DREAM++: Create new farmer
         deactivate DREAM
+        DREAM -> DREAM++: Create two casual visits on the new farm
+        deactivate DREAM
     else userType == PolicyMaker
         DREAM -> DREAM++: Create new policy maker
         deactivate DREAM

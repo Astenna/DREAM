@@ -16,12 +16,13 @@ Telangana is India's 11th biggest state, having a land area of 122,077$km^2$ and
 
 \subsection{Goals} \label{subsec:goals}
 \begin{itemize}
-	\item [\textbf{G1.}] Acquire, combine, and visualize data from users.
+	\item [\textbf{G1.}] Acquire, combine, and visualize data from agronomists, farmers, and policy makers.
 	\item [\textbf{G2.}] Acquire, combine, and visualize data from external systems. 
 	\item [\textbf{G3.}] Facilitate performance assessment of the farmers.
 	\item [\textbf{G4.}] Promote regular farms' visits by agronomists.
 	\item [\textbf{G5.}] Enable agronomists to share their knowledge with farmers.
 	\item [\textbf{G6.}] Enable farmers to exchange their knowledge.
+	\item [\textbf{G7.}] Improve farmers performance by providing them with personalized suggestions.
 \end{itemize}
 
 \section{Scope}
@@ -62,37 +63,37 @@ The system attempts to address a highly difficult topic, which necessitates the 
 	\toprule
 	\textbf{ID}  & \textbf{Content} & \textbf{Controlled by}\\
 	\midrule
-	\autonum{SP} & A user logs in to the system. & World \\
-	\autonum{SP} & An unregistered user creates an account in the system. & World \\
-	\autonum{SP} & The system creates an instance of a farm during a registration process of a farmer. & Machine \\
-	\autonum{SP} & The system reads and stores information about short-term and long-term meteorological forecasts provided by the API of Telangana's government. & Machine \\
-	\autonum{SP} & The system reads and stores information about the amount of water used by each farm, provided by water irrigation systems API. & Machine \\
-	\autonum{SP} & The system reads and stores the data collected by the sensors at a given farm. & Machine \\
-	\autonum{SP} & An agronomist saves notes collected during a farm visit in the system. & World \\
-	\autonum{SP} & A policy maker assesses a farmer's performance, giving him a negative, neutral or positive note and saves it in the system. & World \\
-	\autonum{SP} & The system shows a list of farmers. & Machine \\
-	\autonum{SP} & The system shows farmer's summary. & Machine \\
-	\autonum{SP} & A policy maker understands whether activities performed by agronomists and farmers helped a farmer with a negative note based on the data from the system. & World \\
-	\autonum{SP} & The system shows farmer's relevant data. & Machine \\
-	\autonum{SP} & The system determines personalized suggestions concerning farmer. & Machine \\
-	\autonum{SP} & A farmer inserts production data to the system. & World \\
-	\autonum{SP} & A farmer requests for help in the system. & World \\
-	\autonum{SP} & A farmer with a positive note responds to a request for help in the system. & World \\
-	\autonum{SP} & An agronomist responds to a request for help in the system. & World \\
-	\autonum{SP} & The system sends a request for help to well performing farmers and agronomists in a given region.  & Machine \\
-	\autonum{SP} & A farmer creates a thread on the forum.  & World \\
-	\autonum{SP} & A farmer comments on a given thread. & World \\
-	\autonum{SP} & An agronomist inserts the area of responsibility into the system. & World \\
-	\autonum{SP} & The system shows weather forecasts. & Machine \\
-	\autonum{SP} & The system visualizes data about farmers in the agronomist's area of responsibility who obtained a positive note. & Machine \\
-	\autonum{SP} & The system shows the daily plan of an agronomist. & Machine \\
-	\autonum{SP} & An agronomist updates the daily plan. & World \\
-	\autonum{SP} & An agronomist submits the execution state of the daily plan at the end of each day. & World \\
-	\autonum{SP} & The system generates visits to a farm by an agronomist in a given area of responsibility. & Machine \\
-	\autonum{SP} & A user requests password reset. & World \\
-	\autonum{SP} & The system sends an email with password reset link. & Machine \\
-	\autonum{SP} & A user resets the password using a link obtained in an email. & World \\
-	\autonum{SP} & A registered user deletes an account. & World \\
+    \textbf{SP1.} & A user logs in to the system. & World \\
+    \textbf{SP2.} & An unregistered user creates an account in the system. & World \\
+    \textbf{SP3.} & The system creates an instance of a farm during a registration process of a farmer. & Machine \\
+    \textbf{SP4.} & The system reads and stores information about short-term and long-term meteorological forecasts provided by the API of Telangana's government. & Machine \\
+    \textbf{SP5.} & The system reads and stores information about the amount of water used by each farm, provided by water irrigation systems API. & Machine \\
+    \textbf{SP6.} & The system reads and stores the data collected by the sensors at a given farm, provided by sensor systems API. & Machine \\
+    \textbf{SP7.} & An agronomist saves notes collected during a farm visit in the system. & World \\
+    \textbf{SP8.} & A policy maker assesses a farmer's performance, giving him a negative, neutral or positive note and saves it in the system. & World \\
+    \textbf{SP9.} & The system shows a list of farmers. & Machine \\
+    \textbf{SP10.} & The system shows farmer's summary. & Machine \\
+    \textbf{SP11.} & A policy maker understands whether activities performed by agronomists and farmers helped a farmer with a negative note based on the data from the system. & World \\
+    \textbf{SP12.} & The system shows farmer's relevant data. & Machine \\
+    \textbf{SP13.} & The system determines personalized suggestions concerning farmer. & Machine \\
+    \textbf{SP14.} & A farmer inserts his production data into the system. & World \\
+    \textbf{SP15.} & A farmer requests for help in the system. & World \\
+    \textbf{SP16.} & A farmer with a positive note responds to a request for help in the system. & World \\
+    \textbf{SP17.} & An agronomist responds to a request for help in the system. & World \\
+    \textbf{SP18.} & The system sends a request for help to well performing farmers and agronomists in a given region.  & Machine \\
+    \textbf{SP19.} & A farmer creates a thread on the forum.  & World \\
+    \textbf{SP20.} & A farmer comments in a given thread. & World \\
+    \textbf{SP21.} & An agronomist inserts the area of responsibility into the system. & World \\
+    \textbf{SP22.} & The system shows weather forecasts. & Machine \\
+    \textbf{SP23.} & The system visualizes data about farmers with a specific note in the agronomist's area of responsibility. & Machine \\
+    \textbf{SP24.} & The system shows the daily plan of an agronomist. & Machine \\
+    \textbf{SP25.} & An agronomist updates the daily plan. & World \\
+    \textbf{SP26.} & An agronomist submits the execution state of the daily plan at the end of each day. & World \\
+    \textbf{SP27.} & The system generates visits to a farm by an agronomist in a given area of responsibility. & Machine \\
+    \textbf{SP28.} & A user requests password reset. & World \\
+    \textbf{SP29.} & The system sends an email with password reset link. & Machine \\
+    \textbf{SP30.} & A user resets the password using a link obtained in an email. & World \\
+    \textbf{SP31.} & A registered user deletes an account. & World \\
 	\bottomrule
 \end{longtable}
 
@@ -111,23 +112,24 @@ The system attempts to address a highly difficult topic, which necessitates the 
 % 		Water irrigation system's ID - ID systemu urzadzen na farmie
 % 		Sensor system's ID - ID systemu urzadzen na farmie
 % 		External data providers
-		Water irrigation system & Collection of external devices, which collect information about the amount of water used on a given farm. Collected data are available via an API. \\
-        Sensor                  & External device, which collects information about the humidity of soil on a given farm. Collected data are available via an API.\\
-        Sensor system           & System gathering all the sensors on a farm.\\
-        Farmer's summary        & Information available to policy makers and agronomists, containing data about their production, help requests and responses, weather conditions, and information from water irrigation system and sensors.\\
+		Water irrigation system & Collection of external devices which gather information about the amount of water used on a given farm. Collected data are available via an API. \\
+        Sensor/Humidity sensor & External device which collects information about the humidity of soil on a given farm.\\
+        Sensor system           & Collection of all the sensors on a farm. Collected data are available via an API.\\
+        Farmer's summary        & Information about specific farmer. Contains: information about farmer and his farm, note history, production data, farm visits, weather forecast history, soil humidity data, water usage, and help requests.\\
         Farmer's note           & Evaluation note given by a governmental policy maker based on a farmer's performance. Can be negative, neutral, or positive.\\
-        Personalized suggestion & Suggestion determined by the system. concerning specific crops to plant or specific fertilizers to use – based on farmers location and type of production.\\
-        Farmer's relevant data  & Previously entered production data, weather predictions, individualized recommendations on which crops to plant or which fertilizers to use – all depending on their location and kind of production.\\
+        Farm data               & Data concerning a farm, inserted by a farmer during account creation. Consist of water irrigation system’s ID, sensor system’s ID and address (address line 1, address line 2, postal code, city and mandal).\\
+        Personalized suggestion & Suggestion proposed to farmer. Concerning specific crops to plant or specific fertilizers to use – based on farm's mandal and type of production. Suggestions are predefined.\\
         Production data         & Information provided by a farmer about his production. It lists product categories and quantities generated per product.\\
         Mandal                  & A local government area in India.\\
         Dashboard               & The first screen that appears to the user after logging in to the system.\\
         Area of responsibility  & Set of mandals that an agronomist is responsible for.\\
         Daily plan              & A daily schedule for visiting farms in a certain area of responsibility.\\
-        Request for help        & An issue created by a farmer. It contains a topic and a description of a problem. The system automatically forwards it to well-performing farmers and agronomists in the same mandal.\\
+        Casual visit            & A visit automatically arranged by the system. There are two casual visits to each farm every year.\\
+        Request for help, Help request & An issue created by a farmer. It contains a topic, description and a problem. The system automatically forwards it to well-performing farmers and agronomists in the same mandal.\\
         Peak hours              & 6 a.m. to 9 a.m., and 5 p.m. to 8 p.m. in the GMT+5:30 time zone.\\
-        External systems        & Systems, that are not a part of DREAM, which collect various farm-specific data and share them via an \textit{API}. Following external systems are used: Weather Forecast System, Water Irrigation System, Sensor System.\\
-        Water irrigation system's ID    & Number, which uniquely identifies a water irrigation system. It is necessary for definition of the external system's API endpoint.  \\
-        Sensor system's ID              & Number, which uniquely identifies a sensor system. It is necessary for definition of the external system's API endpoint. \\
+        External systems        & Systems that are not a part of DREAM and collect various farm-specific data and share them via an \textit{API}. Following external systems are used: Weather Forecast System, Water Irrigation System, Sensor System.\\
+        Water irrigation system's ID    & Number which uniquely identifies a water irrigation system. It is necessary for definition of the external system's API endpoint. The number is provided during installation of the water irrigation system.  \\
+        Sensor system's ID              & Number which uniquely identifies a sensor system. It is necessary for definition of the external system's API endpoint. The number is provided during installation of the sensor system. \\
 	\end{longtable}
 \end{center}
 
@@ -157,6 +159,7 @@ The system attempts to address a highly difficult topic, which necessitates the 
 		\midrule
 	    a.m. & ante meridiem\\
 	    p.m. & post meridiem\\
+	    e.g. & exempli gratia\\
 		\bottomrule
 	\end{tabular}
 \end{center}

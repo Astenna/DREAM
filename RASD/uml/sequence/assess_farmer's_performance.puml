@@ -14,6 +14,23 @@ DREAM --> PolMaker--: Display the farmer's summary
 
 opt Assess farmer's performance
     PolMaker -> DREAM++: Assign a new note
+
+    opt note == NEGATIVE
+        DREAM --> PolMaker--: Display list of available problem types
+        PolMaker -> DREAM++: Select a problem type
+
+        DREAM -> DREAM++: Issue a help request
+        deactivate DREAM
+
+        DREAM -> DREAM++: Create additional visits
+        deactivate DREAM
+    end
+
+    opt note != NEGATIVE && previousNote == NEGATIVE
+        DREAM -> DREAM++: Delete all additional visits created\ndue to obtaining a negative note
+        deactivate DREAM
+    end
+
     DREAM -> DREAM++: Update the farmer's note
     deactivate DREAM
 
