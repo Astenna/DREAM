@@ -70,6 +70,7 @@ rectangle DREAM {
 
     '''''''''''Policy maker'''''''''''
     PolMaker -- (Assess farmer's performance)
+    ' PolMaker -- (View list of requests)
     (Assess farmer's performance) ..> (View farmer's summary) : <<include>>
 }
 
