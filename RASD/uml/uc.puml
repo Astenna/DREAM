@@ -64,6 +64,7 @@ rectangle DREAM {
     (View list of requests) <.. (View request) : <<extend>>
     (View request) <.. (Create response) : <<extend>>
     (View request) <.. (Delete response) : <<extend>>
+    (View request) <.. (View farmer's summary) : <<extend>>
     Agronomist -- (View daily plan)
     (View daily plan) <.. (Manage daily plan) : <<extend>>
     (View daily plan) <.. (Set daily plan execution state) : <<extend>>

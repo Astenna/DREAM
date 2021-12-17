@@ -38,70 +38,75 @@ To perform any kind of operation using the system, a stable internet connection 
 		\textbf{R6.} & The system must allow a registered user to log in to the application. \\
 		\textbf{R7.} & The system must allow a registered user to reset his password. \\
 		\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
-		\textbf{R9.} & The system must allow a registered to delete his account. \\
+		\textbf{R9.} & The system must allow a registered user to delete his account. \\
 		
 		%Policy maker
 		\textbf{R10.} & The system must allow a policy maker to assign a note to a farmer.\\
-		\textbf{R11.} & The system must have a list of predefined problem types.\\
-        \textbf{R12.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
-        \textbf{R13.} & The system must ensure that a farm is visited more often in the event of any problems.\\
-        \textbf{R14.} & The system must have a specified number of additional visits caused by each predefined problem type.\\
-        \textbf{R15.} & The system must ensure that in case of multiple problems, the number of additional visits is equal to the greatest number of additional visits per specified problem types.\\
-		\textbf{R16.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
-		\textbf{R17.} & The system must ensure that all the additional farm visits created due to obtaining a negative note are deleted after a farmer's negative note is updated with a positive or a neutral one.\\
-		\textbf{R18.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
-		\textbf{R19.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
-		\textbf{R20.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
-		\textbf{R21.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
-		\textbf{R22.} & The system must allow a policy maker to see a farmer's summary.\\
+		\textbf{R11.} & The system must ensure that every farmer initially has a neutral note.\\
+		\textbf{R12.} & The system must have a list of predefined farmer's problem types.\\
+        \textbf{R13.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
+        \textbf{R14.} & The system must ensure that a farm is visited more often in the event of any problems.\\
+        \textbf{R15.} & The system must have a specified number of additional visits caused by each predefined problem type.\\
+        \textbf{R16.} & The system must ensure that only the most recently specified problem type is taken into account when determining the number of visits.\\
+		\textbf{R17.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
+		\textbf{R18.} & The system must ensure that all the additional farm visits created due to obtaining a negative note are deleted after a farmer's negative note is updated with a positive or a neutral one.\\
+		\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
+		\textbf{R20.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
+		\textbf{R21.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
+		\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
+		\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
 		
 		%Farmer
-		\textbf{R23.} & The system must allow a farmer to see his own farmer's summary.\\
-		\textbf{R24.} & The system must have a predefined list of suggestions. \\
-		\textbf{R25.} & The system must enable an administrator to extend the list of predefined suggestions.\\
-		\textbf{R26.} & The system must allow a farmer to see personalized suggestions.\\
-		\textbf{R27.} & The system must allow a farmer to manage his monthly production data.\\
-		\textbf{R28.} & The system must allow a farmer to see a list of help requests created by him.\\
-		\textbf{R29.} & The system must allow a farmer to find a help request created by him by the topic.\\
-		\textbf{R30.} & The system must allow a farmer to see a specific help request created by him.\\
-		\textbf{R31.} & The system must allow a farmer to delete a specific help request created by him.\\
-		\textbf{R32.} & The system must allow a farmer to create a new help request.\\
-		\textbf{R33.} & The system must allow a farmer with a positive note to see a list of all help requests in his mandal.\\
-		\textbf{R34.} & The system must allow a farmer with a positive note to find a help request in his mandal by the topic.\\
-		\textbf{R35.} & The system must allow a farmer with a positive note to see a specific help request in his mandal.\\
-		\textbf{R36.} & The system must allow a farmer with a positive note to respond to a specific help request in his mandal.\\
-		\textbf{R37.} & The system must allow a farmer to see a list of all forum threads in Telangana.\\
-		\textbf{R38.} & The system must allow a farmer to find a forum thread by the topic.\\
-		\textbf{R39.} & The system must allow a farmer to see a specific forum thread with its comments.\\
-		\textbf{R40.} & The system must allow a farmer to create a comment in a forum thread.\\
-		\textbf{R41.} & The system must allow a farmer to delete a comment in a forum thread, only if it was created by him.\\
-		\textbf{R42.} & The system must allow a farmer to create a forum thread.\\
+		\textbf{R24.} & The system must allow a farmer to see his own farmer's summary.\\
+		\textbf{R25.} & The system must allow a farmer to see personalized suggestions.\\
+		\textbf{R26.} & The system must allow a farmer to manage his monthly production data.\\
+		\textbf{R27.} & The system must allow a farmer to see a list of help requests created by him.\\
+		\textbf{R28.} & The system must allow a farmer to find a help request created by him by the topic.\\
+		\textbf{R29.} & The system must allow a farmer to see a specific help request created by him.\\
+		\textbf{R30.} & The system must allow a farmer to delete a specific help request created by him.\\
+		\textbf{R31.} & The system must allow a farmer to create a new help request.\\
+		\textbf{R32.} & The system must allow a farmer with a positive note to see a list of all help requests in his mandal.\\
+		\textbf{R33.} & The system must allow a farmer with a positive note to find a help request in his mandal by the topic.\\
+		\textbf{R34.} & The system must allow a farmer with a positive note to see a specific help request in his mandal.\\
+		\textbf{R35.} & The system must allow a farmer with a positive note to respond to a specific help request in his mandal.\\
+		\textbf{R36.} & The system must allow a farmer with a positive note to delete a help response, only if it was created by him.\\
+		\textbf{R37.} & The farmer is able to see farmer's summary of a farmer with a negative note whose help request he received. \\
+		\textbf{R38.} & The system must allow a farmer to see a list of all forum threads in Telangana.\\
+		\textbf{R39.} & The system must allow a farmer to find a forum thread by the topic.\\
+		\textbf{R40.} & The system must allow a farmer to see a specific forum thread with its comments.\\
+		\textbf{R41.} & The system must allow a farmer to create a comment in a forum thread.\\
+		\textbf{R42.} & The system must allow a farmer to delete a comment in a forum thread, only if it was created by him.\\
+		\textbf{R43.} & The system must allow a farmer to create a forum thread.\\
 		
 		%Agronomist
-		\textbf{R43.} & The system must allow an agronomist to manage his area of responsibility.\\
-		\textbf{R44.} & The system must allow an agronomist to see a list of all farmers in his area of responsibility.\\
-		\textbf{R45.} & The system must allow an agronomist to see a list of all farmers with a specific note in his area of responsibility.\\
-		\textbf{R46.} & The system must allow an agronomist to see a list of all farmers in a given mandal in his area of responsibility.\\
-		\textbf{R47.} & The system must allow an agronomist to find a summary of a farmer in his area of responsibility by his name and surname.\\
-		\textbf{R48.} & The system must allow an agronomist to see a summary of a farmer in his area of responsibility.\\
-		\textbf{R49.} & The system must allow an agronomist to see a list of all help requests in his area of responsibility.\\
-		\textbf{R50.} & The system must allow an agronomist to find a help request in his area of responsibility by the topic.\\
-		\textbf{R51.} & The system must allow an agronomist to see a specific help request in his area of responsibility.\\
-		\textbf{R52.} & The system must allow an agronomist to respond to a specific help request in his area of responsibility.\\
-		\textbf{R53.} & The system must allow an agronomist to see his daily plans.\\
-		\textbf{R54.} & The system must allow an agronomist to submit a daily plan's execution state, by rejecting or confirming each visit, only after the daily plan's date has passed.\\
-		\textbf{R55.} & The system must allow an agronomist to provide a comment for a visit he is confirming.\\
-		\textbf{R56.} & The system must ensure that after an agronomist submits his daily plan, for all the causal visits marked as confirmed, new ones are created in approximately half of a year.\\
-		\textbf{R57.} & The system must allow an agronomist to delete a visit before its date.\\
-		\textbf{R58.} & The system must ensure that a deleted visit is marked as rejected.\\
-		\textbf{R59.} & The system must ensure that in case of rejecting a casual visit, a new one is created in maximally 5 days.\\
-		\textbf{R60.} & The system must allow postponing any different visit than a casual one without any constraints.\\
+		\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
+		\textbf{R45.} & The system must allow an agronomist to see the list of suggestions for mandals in his area of responsibility.\\
+		\textbf{R46.} & The system must allow an agronomist to manage the list of suggestions for mandals in his area of responsibility.\\
+		\textbf{R47.} & The system must allow an agronomist to see a list of all farmers in his area of responsibility.\\
+		\textbf{R48.} & The system must allow an agronomist to see a list of all farmers with a specific note in his area of responsibility.\\
+		\textbf{R49.} & The system must allow an agronomist to see a list of all farmers in a given mandal in his area of responsibility.\\
+		\textbf{R50.} & The system must allow an agronomist to find a farmer's summary in his area of responsibility by his name and surname.\\
+		\textbf{R51.} & The system must allow an agronomist to see a farmer's summary in his area of responsibility.\\
+		\textbf{R52.} & The system must allow an agronomist to see a list of all help requests in his area of responsibility.\\
+		\textbf{R53.} & The system must allow an agronomist to find a help request in his area of responsibility by the topic.\\
+		\textbf{R54.} & The system must allow an agronomist to see a specific help request in his area of responsibility.\\
+		\textbf{R55.} & The system must allow an agronomist to respond to a specific help request in his area of responsibility.\\
+		\textbf{R56.} & The system must allow an agronomist to delete a help response, only if it was created by him.\\
+		\textbf{R57.} & The system must allow an agronomist to see his daily plans.\\
+		\textbf{R58.} & The system must allow an agronomist to submit a daily plan's execution state, by rejecting or confirming each visit, on the same date or after the daily plan's date has passed. \\
+		\textbf{R59.} & The system must allow an agronomist to provide a comment for a visit he is confirming.\\
+		\textbf{R60.} & The system must ensure that after an agronomist submits his daily plan, for all the causal visits marked as confirmed, new ones are created in approximately half of a year.\\
+		\textbf{R61.} & The system must allow an agronomist to delete a visit before its date.\\
+		\textbf{R62.} & The system must ensure that a deleted visit is marked as rejected.\\
+		\textbf{R63.} & The system must ensure that in case of rejecting a casual visit, a new one is created in maximally 5 days.\\
+		\textbf{R64.} & The system must allow replanning any different visit than a casual one without any constraints.\\
 		
 % 		External systems
-		\textbf{R61.} & The system must read and update weather forecasts every day. \\
-		\textbf{R62.} & The system must read and store data from humidity sensors every day. \\
-		\textbf{R63.} & The system must read and store data from water irrigation systems every day. \\
+		\textbf{R65.} & The system must read and update weather forecasts every day. \\
+		\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
+		\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
 
+        
 		
 	\bottomrule
 \end{longtable}
@@ -127,7 +132,7 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		\textbf{Actors}             & Unregistered user \\
 		\midrule
-		\textbf{Goals}              & G1, G2, G3, G4, G5, G6, G7 \\
+		\textbf{Goals}              & G1, G2, G3, G4, G5, G6 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -189,7 +194,7 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		\textbf{Actors}             & Policy maker, Agronomist, Farmer\\
 		\midrule
-		\textbf{Goals}              & G1, G2, G3, G4, G5, G6, G7 \\
+		\textbf{Goals}              & G1, G2, G3, G4, G5, G6 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -233,7 +238,7 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		\textbf{Actors}             & Policy maker, Agronomist, Farmer\\
 		\midrule
-		\textbf{Goals}              & G1 \\
+		\textbf{Goals}              & G1, G2, G3, G4, G5, G6 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -277,7 +282,7 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		\textbf{Actors}             & Policy maker, Agronomist, Farmer\\
 		\midrule
-		\textbf{Goals}              & G1 \\
+		\textbf{Goals}              & G1, G2, G3, G4, G5, G6 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -480,7 +485,7 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		\textbf{Actors}             & Farmer\\
 		\midrule
-		\textbf{Goals}              & G7 \\
+		\textbf{Goals}              & G1 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -722,7 +727,7 @@ Given the great number of different use cases, the descriptions of only the most
 		\midrule
 		\textbf{Actors}             & Agronomist, Farmer, Policy maker\\
 		\midrule
-		\textbf{Goals}              & G1, G2, G3 \\
+		\textbf{Goals}              & G2, G3, G5, G6 \\
 		\midrule
 		
 		\textbf{Entry conditions}   & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
@@ -756,7 +761,7 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: view farmer's summary.} 
+	\caption{Use case description: View farmer's summary.} 
 \end{table}
 
 \begin{table}[H]
@@ -791,7 +796,7 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: view daily plan.} 
+	\caption{Use case description: View daily plan.} 
 \end{table}
 
 \begin{table}[H]
@@ -837,7 +842,7 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
 	    \\\bottomrule
 	\end{tabular}
-	\caption{Use case description: set daily plan execution state.} 
+	\caption{Use case description: Set daily plan execution state.} 
 \end{table}
 
 \begin{figure}[H]
@@ -891,184 +896,368 @@ Given the great number of different use cases, the descriptions of only the most
 		The application shows a message indicating a possible cause of the error.
 		\\\bottomrule
 	\end{tabular}
-	\caption{Use case description: update daily plan.} 
+	\caption{Use case description: Update daily plan.} 
 \end{table}
 
 
 \subsection{Mapping on requirements}
-% \begin{center}
-% 	\begin{tabular}{@{}p{0.06\linewidth} p{0.44\linewidth} p{0.44\linewidth}@{}}
-% 		\toprule
-% 		\textbf{Goal}   & \textbf{Domain assumption} & \textbf{Requirement} \\
-% 		\midrule
-% 		\autonum{G} & A1, A2, A3, A4, A5, A6, A7, A10, A11, A14 & \\
-% 		\autonum{G} & A1, A2, A3, A4, A6, A7, A8  & \\
-% 		\autonum{G} & A1, A2, A3, A4, A5, A7, A9, A12, A13, A16  & \\
-% 		\autonum{G} & A12, A15, A16  & \\
-% 		\bottomrule
-% 	\end{tabular}
-% \end{center}
 
-\begin{table}[H]
-    \centering
-    \begin{tabularx}{\linewidth}{lX} \toprule
-        \textbf{G1} & Acquire, combine, and visualize data from agronomists, farmers, and policy makers. \\ 
-        \midrule
-        \textbf{A1.} & Each farmer possess exactly one farm.\\
-        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
-        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
-        \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
-        \textbf{A9.} & Agronomist's area of responsibility contains at least one mandal.\\ 
-        \textbf{A10.} & Each registered user can be only one of the actors: an agronomist, a farmer, or a policy maker.\\ 
-        \textbf{A11.} & The information provided by a user during registration process is valid.\\ 
-        \textbf{A13.} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\ 
-        \midrule
-        \textbf{Req.} & Req.\\
-        \bottomrule
-    \end{tabularx}
+\begin{longtable}{p{0.07\linewidth} p{0.88\linewidth}} 
+    \toprule
+    \textbf{G1} & Improve farmers performance by providing them with personalized suggestions. \\ 
+    \midrule
+    \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+    \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
+    \textbf{A8.} & Agronomist's area of responsibility contains at least one mandal.\\ 
+    \textbf{A10.} & The information provided by a user during registration process is valid.\\ 
+    \textbf{A11.} & Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
+    \textbf{A12.} & Suggestions created by agronomists are relevant and helpful for the farmers. \\
+    \textbf{A13.} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\ 
+     
+    %Requirements :C
+    \midrule		
+    %Authentication
+	\textbf{R1.} & The system must uniquely identify each user by his e-mail. \\
+	\textbf{R2.} & The system must allow an unregistered user to create an account with a chosen role. \\
+	\textbf{R3.} & The system must ensure that an agronomist chooses the area of responsibility during the registration process. \\
+	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
+	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
+	\textbf{R7.} & The system must allow a registered user to reset his password. \\
+	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
+	\textbf{R9.} & The system must allow a registered user to delete his account. \\
+	
+	%Farmer
+	\textbf{R25.} & The system must allow a farmer to see personalized suggestions.\\
+	\textbf{R26.} & The system must allow a farmer to manage his monthly production data.\\
+	
+	%Agronomist
+	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
+	\textbf{R45.} & The system must allow an agronomist to see the list of suggestions for mandals in his area of responsibility.\\
+	\textbf{R46.} & The system must allow an agronomist to manage the list of suggestions for mandals in his area of responsibility.\\
+	
+    \bottomrule
     \caption{G1 mapping on assumptions and requirements.}
-\end{table}
+\end{longtable}
 
-\begin{table}[H]
-    \centering
-    \begin{tabularx}{\linewidth}{lX} \toprule
-        \textbf{G2} & Acquire, combine, and visualize data from external systems. \\ 
-        \midrule
-        \textbf{A1.} & Each farmer possess exactly one farm.\\
-        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
-        \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
-        \textbf{A4.} & Each farm has a water irrigation system.\\ 
-        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
-        \textbf{A7.} & Weather is consistent in a given mandal.\\ 
-        \textbf{A17.} & External systems are reliable and highly available.\\
-        \textbf{A18.} & Every sensor system has a unique ID assigned by the sensor system provider. \\
-        \textbf{A19.} & Every water irrigation system has a unique ID assigned by the water irrigation system provider. \\
-        \midrule
-        \bottomrule
-    \end{tabularx}
+\begin{longtable}{p{0.07\linewidth} p{0.88\linewidth}} 
+    \toprule
+    \textbf{G2} & Acquire, combine, and visualize data from external systems. \\ 
+    \midrule
+    \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
+    \textbf{A4.} & Each farm has a water irrigation system.\\ 
+    \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+    \textbf{A7.} & Weather is consistent in a given mandal.\\ 
+    \textbf{A10.} & The information provided by a user during registration process is valid.\\ 
+    \textbf{A17.} & External systems are reliable and highly available.\\
+    \textbf{A18.} & Every sensor system has a unique ID assigned by the sensor system provider. \\
+    \textbf{A19.} & Every water irrigation system has a unique ID assigned by the water irrigation system provider. \\
+    
+    \midrule
+    %Authentication
+	\textbf{R1.} & The system must uniquely identify each user by his e-mail. \\
+	\textbf{R2.} & The system must allow an unregistered user to create an account with a chosen role. \\
+	\textbf{R3.} & The system must ensure that an agronomist chooses the area of responsibility during the registration process. \\
+	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
+	\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
+	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
+	\textbf{R7.} & The system must allow a registered user to reset his password. \\
+	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
+	\textbf{R9.} & The system must allow a registered user to delete his account. \\
+	
+	%Policy maker
+	\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
+	\textbf{R20.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
+	\textbf{R21.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
+	\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
+	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
+	
+	%Farmer
+	\textbf{R24.} & The system must allow a farmer to see his own farmer's summary.\\
+	\textbf{R32.} & The system must allow a farmer with a positive  to see a list of all help requests in his mandal.\\
+	\textbf{R33.} & The system must allow a farmer with a positive note to find a help request in his mandal by the topic.\\
+	\textbf{R34.} & The system must allow a farmer with a positive note to see a specific help request in his mandal.\\
+	\textbf{R35.} & The system must allow a farmer with a positive note to respond to a specific help request in his mandal.\\
+	\textbf{R37.} & The farmer is able to see farmer's summary of a farmer with a negative note whose help request he received. \\
+
+	%Agronomist
+	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
+	\textbf{R47.} & The system must allow an agronomist to see a list of all farmers in his area of responsibility.\\
+	\textbf{R48.} & The system must allow an agronomist to see a list of all farmers with a specific note in his area of responsibility.\\
+	\textbf{R49.} & The system must allow an agronomist to see a list of all farmers in a given mandal in his area of responsibility.\\
+	\textbf{R50.} & The system must allow an agronomist to find a farmer's summary in his area of responsibility by his name and surname.\\
+	\textbf{R51.} & The system must allow an agronomist to see a farmer's summary in his area of responsibility.\\
+
+% 		External systems
+	\textbf{R65.} & The system must read and update weather forecasts every day. \\
+	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
+	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
+    \bottomrule
     \caption{G2 mapping on assumptions and requirements.}
-\end{table}
+\end{longtable}
 
-\begin{table}[H]
-\centering
-    \begin{tabularx}{\linewidth}{lX} \toprule
-        \textbf{G3} & Facilitate performance assessment of the farmers. \\ 
-        \midrule
-        \textbf{A1.} & Each farmer possess exactly one farm.\\
-        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
-        \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
-        \textbf{A4.} & Each farm has a water irrigation system.\\ 
-        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
-        \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
-        \textbf{A7.} & Weather is consistent in a given mandal.\\ 
-        \textbf{A8.} & Initially, each farmer has a neutral note.\\ 
-        \textbf{A9.} & Agronomist's area of responsibility contains at least one mandal.\\ 
-        \textbf{A10.} & Each registered user can be only one of the actors: an agronomist, a farmer, or a policy maker.\\ 
-        \textbf{A11.} & The information provided by a user during registration process is valid.\\ 
-        \textbf{A13.} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\ 
-        \textbf{A14.} & Based on the farmer's summary, a policy maker is able to understand whether the help given by farmers and agronomists produces significant results.\\ 
-        \textbf{A17.} & External systems are reliable and highly available.\\
-        \midrule
-        \textbf{Req.} & Req.\\
-        \bottomrule
-    \end{tabularx}
-    \caption{G3 mapping on assumptions and requirements.}
-\end{table}
+\begin{longtable}{p{0.07\linewidth} p{0.88\linewidth}} 
+    \toprule
+    \textbf{G3} & Facilitate performance assessment of the farmers. \\ 
+    \midrule
+    \textbf{A1.} & Each farmer possess exactly one farm.\\
+    \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
+    \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
+    \textbf{A4.} & Each farm has a water irrigation system.\\ 
+    \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+    \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
+    \textbf{A7.} & Weather is consistent in a given mandal.\\     
+    \textbf{A9.} & Each registered user can be only one of the actors: an agronomist, a farmer, or a policy maker.\\ 
+    \textbf{A14.} & Based on the farmer's summary, a policy maker is able to understand whether the help given by farmers and agronomists produces significant results.\\ 
+    \textbf{A17.} & External systems are reliable and highly available.\\
+    \midrule
+    
+    %Authentication
+	\textbf{R1.} & The system must uniquely identify each user by his e-mail. \\
+	\textbf{R2.} & The system must allow an unregistered user to create an account with a chosen role. \\
+	\textbf{R3.} & The system must ensure that an agronomist chooses the area of responsibility during the registration process. \\
+	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
+	\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
+	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
+	\textbf{R7.} & The system must allow a registered user to reset his password. \\
+	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
+	\textbf{R9.} & The system must allow a registered user to delete his account. \\
+	
+	%Policy maker
+	\textbf{R10.} & The system must allow a policy maker to assign a note to a farmer.\\
+	\textbf{R11.} & The system must ensure that every farmer initially has a neutral note.\\
+	\textbf{R12.} & The system must have a list of predefined farmer's problem types.\\
+    \textbf{R13.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
+	\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
+	\textbf{R20.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
+	\textbf{R21.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
+	\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
+	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
+	
+	%Farmer
+	\textbf{R26.} & The system must allow a farmer to manage his monthly production data.\\
+	\textbf{R31.} & The system must allow a farmer to create a new help request.\\
+	
+	%Agronomist
+	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
+	\textbf{R56.} & The system must allow an agronomist to see his daily plans.\\
+	\textbf{R58.} & The system must allow an agronomist to submit a daily plan's execution state, by rejecting or confirming each visit, on the same date or after the daily plan's date has passed. \\
+	\textbf{R59.} & The system must allow an agronomist to provide a comment for a visit he is confirming.\\
+	
+% 		External systems
+	\textbf{R65.} & The system must read and update weather forecasts every day. \\
+	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
+	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
+    \bottomrule
+\caption{G3 mapping on assumptions and requirements.}
+\end{longtable}
 
-\begin{table}[H]
-    \centering
-    \begin{tabularx}{\linewidth}{lX} \toprule
-        \textbf{G4} & Promote regular farms’ visits by agronomists. \\ 
-        \midrule
-        \textbf{A1.} & Each farmer possess exactly one farm.\\
-        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
-        \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
-        \textbf{A4.} & Each farm has a water irrigation system.\\ 
-        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
-        \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
-        \textbf{A7.} & Weather is consistent in a given mandal.\\ 
-        \textbf{A8.} & Initially, each farmer has a neutral note.\\ 
-        \textbf{A9.} & Agronomist's area of responsibility contains at least one mandal.\\ 
-        \textbf{A10.} & Each registered user can be only one of the actors: an agronomist, a farmer, or a policy maker.\\ 
-        \textbf{A11.} & The information provided by a user during registration process is valid.\\ 
-        \textbf{A12.} & Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
-        \textbf{A13.} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\ 
-        \textbf{A17.} & External systems are reliable and highly available.\\
-        \midrule
-        \textbf{Req.} & Req.\\
-        \bottomrule
-    \end{tabularx}
+
+\begin{longtable}{p{0.07\linewidth} p{0.88\linewidth}} 
+    \toprule
+    \textbf{G4} & Promote regular farms’ visits by agronomists. \\ 
+    \midrule
+    \textbf{A1.} & Each farmer possess exactly one farm.\\
+    \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
+    \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+    \textbf{A8.} & Agronomist's area of responsibility contains at least one mandal.\\ 
+    \textbf{A10.} & The information provided by a user during registration process is valid.\\ 
+    \textbf{A11.} & Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
+    \textbf{A13.} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\ 
+    \midrule
+    
+    %Authentication
+	\textbf{R1.} & The system must uniquely identify each user by his e-mail. \\
+	\textbf{R2.} & The system must allow an unregistered user to create an account with a chosen role. \\
+	\textbf{R3.} & The system must ensure that an agronomist chooses the area of responsibility during the registration process. \\
+	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
+	\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
+	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
+	\textbf{R7.} & The system must allow a registered user to reset his password. \\
+	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
+	\textbf{R9.} & The system must allow a registered user to delete his account. \\
+	
+	%Policy maker
+	\textbf{R10.} & The system must allow a policy maker to assign a note to a farmer.\\
+	\textbf{R11.} & The system must ensure that every farmer initially has a neutral note.\\
+	\textbf{R12.} & The system must have a list of predefined farmer's problem types.\\
+    \textbf{R13.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
+    \textbf{R14.} & The system must ensure that a farm is visited more often in the event of any problems.\\
+    \textbf{R15.} & The system must have a specified number of additional visits caused by each predefined problem type.\\
+    \textbf{R16.} & The system must ensure that only the most recently specified problem type is taken into account when determining the number of visits.\\
+	\textbf{R17.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
+	\textbf{R18.} & The system must ensure that all the additional farm visits created due to obtaining a negative note are deleted after a farmer's negative note is updated with a positive or a neutral one.\\
+	\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
+	\textbf{R20.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
+	\textbf{R21.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
+	\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
+	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
+	
+	%Farmer
+	\textbf{R24.} & The system must allow a farmer to see his own farmer's summary.\\
+	\textbf{R26.} & The system must allow a farmer to manage his monthly production data.\\
+	\textbf{R30.} & The system must allow a farmer to delete a specific help request created by him.\\
+	\textbf{R31.} & The system must allow a farmer to create a new help request.\\
+	
+	%Agronomist
+	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
+	\textbf{R47.} & The system must allow an agronomist to see a list of all farmers in his area of responsibility.\\
+	\textbf{R48.} & The system must allow an agronomist to see a list of all farmers with a specific note in his area of responsibility.\\
+	\textbf{R49.} & The system must allow an agronomist to see a list of all farmers in a given mandal in his area of responsibility.\\
+	\textbf{R50.} & The system must allow an agronomist to find a farmer's summary in his area of responsibility by his name and surname.\\
+	\textbf{R51.} & The system must allow an agronomist to see a farmer's summary in his area of responsibility.\\
+	\textbf{R57.} & The system must allow an agronomist to see his daily plans.\\
+	\textbf{R58.} & The system must allow an agronomist to submit a daily plan's execution state, by rejecting or confirming each visit, on the same date or after the daily plan's date has passed. \\
+	\textbf{R59.} & The system must allow an agronomist to provide a comment for a visit he is confirming.\\
+	\textbf{R60.} & The system must ensure that after an agronomist submits his daily plan, for all the causal visits marked as confirmed, new ones are created in approximately half of a year.\\
+	\textbf{R61.} & The system must allow an agronomist to delete a visit before its date.\\
+	\textbf{R62.} & The system must ensure that a deleted visit is marked as rejected.\\
+	\textbf{R63.} & The system must ensure that in case of rejecting a casual visit, a new one is created in maximally 5 days.\\
+	\textbf{R64.} & The system must allow replanning any different visit than a casual one without any constraints.\\
+	
+% 		External systems
+	\textbf{R65.} & The system must read and update weather forecasts every day. \\
+	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
+	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
+    
+    \bottomrule
     \caption{G4 mapping on assumptions and requirements.}
-\end{table}
+\end{longtable}
+    
 
-\begin{table}[H]
-    \centering
-    \begin{tabularx}{\linewidth}{lX} \toprule
-        \textbf{G5} & Enable agronomists to share their knowledge with farmers. \\ 
-        \midrule
-        \textbf{A1.} & Each farmer possess exactly one farm.\\
-        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
-        \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
-        \textbf{A4.} & Each farm has a water irrigation system.\\ 
-        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
-        \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
-        \textbf{A8.} & Initially, each farmer has a neutral note.\\ 
-        \textbf{A12.} & Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
-        \textbf{A13.} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\ 
-        \textbf{A16.} & Farmers and agronomists create meaningful and not offensive help requests and responses. \\
-        \textbf{A17.} & External systems are reliable and highly available.\\
-        \midrule
-        \textbf{R11} &  Req. \\
-        \bottomrule
-    \end{tabularx}
+\begin{longtable}{p{0.07\linewidth} p{0.88\linewidth}} 
+    \toprule
+    \textbf{G5} & Enable agronomists to exchange information with farmers. \\ 
+    \midrule
+    \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+    \textbf{A8.} & Agronomist's area of responsibility contains at least one mandal.\\ 
+    \textbf{A10.} & The information provided by a user during registration process is valid.\\ 
+    \textbf{A11.} & Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
+    \textbf{A13.} & Each mandal has at least one agronomist who is responsible for the farms inside that area.\\ 
+    \textbf{A16.} & Farmers and agronomists create meaningful and not offensive help requests and responses. \\
+    \midrule
+    
+	%Authentication
+	\textbf{R1.} & The system must uniquely identify each user by his e-mail. \\
+	\textbf{R2.} & The system must allow an unregistered user to create an account with a chosen role. \\
+	\textbf{R3.} & The system must ensure that an agronomist chooses the area of responsibility during the registration process. \\
+	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
+	\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
+	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
+	\textbf{R7.} & The system must allow a registered user to reset his password. \\
+	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
+	\textbf{R9.} & The system must allow a registered user to delete his account. \\
+	
+	%Policy maker
+	\textbf{R10.} & The system must allow a policy maker to assign a note to a farmer.\\
+	\textbf{R11.} & The system must ensure that every farmer initially has a neutral note.\\
+	\textbf{R12.} & The system must have a list of predefined farmer's problem types.\\
+    \textbf{R13.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
+    \textbf{R17.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
+	\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
+	\textbf{R20.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
+	\textbf{R21.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
+	\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
+	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
+	
+	%Farmer
+	\textbf{R26.} & The system must allow a farmer to manage his monthly production data.\\
+	\textbf{R27.} & The system must allow a farmer to see a list of help requests created by him.\\
+	\textbf{R28.} & The system must allow a farmer to find a help request created by him by the topic.\\
+	\textbf{R29.} & The system must allow a farmer to see a specific help request created by him.\\
+	\textbf{R30.} & The system must allow a farmer to delete a specific help request created by him.\\
+	\textbf{R31.} & The system must allow a farmer to create a new help request.\\
+	
+	%Agronomist
+	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
+	\textbf{R47.} & The system must allow an agronomist to see a list of all farmers in his area of responsibility.\\
+	\textbf{R48.} & The system must allow an agronomist to see a list of all farmers with a specific note in his area of responsibility.\\
+	\textbf{R49.} & The system must allow an agronomist to see a list of all farmers in a given mandal in his area of responsibility.\\
+	\textbf{R50.} & The system must allow an agronomist to find a farmer's summary in his area of responsibility by his name and surname.\\
+	\textbf{R51.} & The system must allow an agronomist to see a farmer's summary in his area of responsibility.\\
+	\textbf{R52.} & The system must allow an agronomist to see a list of all help requests in his area of responsibility.\\
+	\textbf{R53.} & The system must allow an agronomist to find a help request in his area of responsibility by the topic.\\
+	\textbf{R54.} & The system must allow an agronomist to see a specific help request in his area of responsibility.\\
+	\textbf{R55.} & The system must allow an agronomist to respond to a specific help request in his area of responsibility.\\
+	\textbf{R56.} & The system must allow an agronomist to delete a help response, only if it was created by him.\\
+	\textbf{R57.} & The system must allow an agronomist to see his daily plans.\\
+	\textbf{R58.} & The system must allow an agronomist to submit a daily plan's execution state, by rejecting or confirming each visit, on the same date or after the daily plan's date has passed. \\
+	\textbf{R59.} & The system must allow an agronomist to provide a comment for a visit he is confirming.\\
+
+% 		External systems
+	\textbf{R65.} & The system must read and update weather forecasts every day. \\
+	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
+	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
+    \bottomrule
     \caption{G5 mapping on assumptions and requirements.}
-\end{table}
+\end{longtable}
 
-\begin{table}[H]
-    \centering
-    \begin{tabularx}{\linewidth}{lX} \toprule
-        \textbf{G6} & Enable farmers to exchange their knowledge. \\ 
-        \midrule
-        \textbf{A1.} & Each farmer possess exactly one farm.\\
-        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
-        \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
-        \textbf{A4.} & Each farm has a water irrigation system.\\ 
-        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
-        \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
-        \textbf{A7.} & Weather is consistent in a given mandal.\\ 
-        \textbf{A8.} & Initially, each farmer has a neutral note.\\ 
-        \textbf{A12.} & Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
-        \textbf{A15.} & Farmers create meaningful and not offensive threads and comments on the forum.\\ 
-        \textbf{A17.} & External systems are reliable and highly available.\\
-        \midrule
-        \textbf{R11} &  Req. \\
-        \bottomrule
-    \end{tabularx}
+\begin{longtable}{p{0.07\linewidth} p{0.88\linewidth}} 
+    \toprule
+    \textbf{G6} & Enable farmers to exchange their knowledge. \\ 
+    \midrule
+    \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
+    \textbf{A10.} & The information provided by a user during registration process is valid.\\ 
+    \textbf{A11.} & Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
+    \textbf{A15.} & Farmers create meaningful and not offensive threads and comments on the forum.\\ 
+    \textbf{A16.} & Farmers and agronomists create meaningful and not offensive help requests and responses. \\
+    \midrule
+    
+    %Authentication
+	\textbf{R1.} & The system must uniquely identify each user by his e-mail. \\
+	\textbf{R2.} & The system must allow an unregistered user to create an account with a chosen role. \\
+	\textbf{R3.} & The system must ensure that an agronomist chooses the area of responsibility during the registration process. \\
+	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
+	\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
+	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
+	\textbf{R7.} & The system must allow a registered user to reset his password. \\
+	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
+	\textbf{R9.} & The system must allow a registered user to delete his account. \\
+	
+	%Policy maker
+	\textbf{R10.} & The system must allow a policy maker to assign a note to a farmer.\\
+	\textbf{R11.} & The system must ensure that every farmer initially has a neutral note.\\
+	\textbf{R12.} & The system must have a list of predefined farmer's problem types.\\
+    \textbf{R13.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
+    \textbf{R17.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
+	\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
+	\textbf{R20.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
+	\textbf{R21.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
+	\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
+	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
+	
+	%Farmer
+	\textbf{R26.} & The system must allow a farmer to manage his monthly production data.\\
+	\textbf{R27.} & The system must allow a farmer to see a list of help requests created by him.\\
+	\textbf{R28.} & The system must allow a farmer to find a help request created by him by the topic.\\
+	\textbf{R29.} & The system must allow a farmer to see a specific help request created by him.\\
+	\textbf{R30.} & The system must allow a farmer to delete a specific help request created by him.\\
+	\textbf{R31.} & The system must allow a farmer to create a new help request.\\
+	\textbf{R32.} & The system must allow a farmer with a positive note to see a list of all help requests in his mandal.\\
+	\textbf{R33.} & The system must allow a farmer with a positive note to find a help request in his mandal by the topic.\\
+	\textbf{R34.} & The system must allow a farmer with a positive note to see a specific help request in his mandal.\\
+	\textbf{R35.} & The system must allow a farmer with a positive note to respond to a specific help request in his mandal.\\
+	\textbf{R36.} & The system must allow a farmer with a positive note to delete a help response, only if it was created by him.\\
+	\textbf{R37.} & The farmer is able to see farmer's summary of a farmer with a negative note whose help request he received. \\
+	\textbf{R38.} & The system must allow a farmer to see a list of all forum threads in Telangana.\\
+	\textbf{R39.} & The system must allow a farmer to find a forum thread by the topic.\\
+	\textbf{R40.} & The system must allow a farmer to see a specific forum thread with its comments.\\
+	\textbf{R41.} & The system must allow a farmer to create a comment in a forum thread.\\
+	\textbf{R42.} & The system must allow a farmer to delete a comment in a forum thread, only if it was created by him.\\
+	\textbf{R43.} & The system must allow a farmer to create a forum thread.\\
+	
+	%Agronomist
+	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
+	\textbf{R57.} & The system must allow an agronomist to see his daily plans.\\
+	\textbf{R58.} & The system must allow an agronomist to submit a daily plan's execution state, by rejecting or confirming each visit, on the same date or after the daily plan's date has passed. \\
+	\textbf{R59.} & The system must allow an agronomist to provide a comment for a visit he is confirming.\\
+	
+% 		External systems
+	\textbf{R65.} & The system must read and update weather forecasts every day. \\
+	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
+	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
+    \bottomrule
     \caption{G6 mapping on assumptions and requirements.}
-\end{table}
-
-\begin{table}[H]
-    \centering
-    \begin{tabularx}{\linewidth}{lX} \toprule
-        \textbf{G7} & Improve farmers performance by providing them with personalized suggestions. \\ 
-        \midrule
-        \textbf{A1.} & Each farmer possess exactly one farm.\\
-        \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
-        \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
-        \textbf{A4.} & Each farm has a water irrigation system.\\ 
-        \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
-        \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
-        \textbf{A7.} & Weather is consistent in a given mandal.\\ 
-        \textbf{A11.} & The information provided by a user during registration process is valid.\\ 
-        \textbf{A17.} & External systems are reliable and highly available.\\
-        \textbf{A18.} & Every sensor system has a unique ID assigned by the sensor system provider. \\
-        \textbf{A19.} & Every water irrigation system has a unique ID assigned by the water irrigation system provider. \\
-        \midrule
-        \textbf{R11} &  Req. \\
-        \bottomrule
-    \end{tabularx}
-    \caption{G7 mapping on assumptions and requirements.}
-\end{table}
+\end{longtable}
 
 \section{Performance Requirements} \label{sec:performance_requirements}
 
