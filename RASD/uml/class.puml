@@ -140,7 +140,7 @@ Production "0..*" o-- "1" ProductionType : has a >
 
 Farm "1" --* "1" Farmer
 Farmer "1" *-- "0..*" FarmerNote : receives >
-FarmerNote "0..*" o-- "1" Agronomist : gives <
+FarmerNote "0..*" o-- "1" PolicyMaker : gives <
 
 Farmer "1" *-- "0..*" HelpRequest : creates >
 Farmer "0..*" --o "0..*" HelpRequest : receives < 
@@ -150,7 +150,7 @@ HelpResponse "0..*" o-- "0..1" Farmer : created by >
 HelpResponse "0..*" o-- "0..1" Agronomist : created by >
 'XOR 
 
-ProblemType "1" -- "0..*" HelpRequest : has a <
+ProblemType "1" -- "0..*" FarmerNote : has a <
 
 Agronomist "1" *-- "0..*" Visit : does >
 Visit "0..*" o-- "1" Farm : refers to >

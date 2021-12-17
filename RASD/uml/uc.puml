@@ -60,6 +60,7 @@ rectangle DREAM {
     '''''''''''Agronomist'''''''''''
     Agronomist -- (View farmer's summary)
     Agronomist -- (View list of requests)
+    Agronomist -- (Manage suggestions)
     (View list of requests) <.. (View request) : <<extend>>
     (View request) <.. (Create response) : <<extend>>
     (View request) <.. (Delete response) : <<extend>>
