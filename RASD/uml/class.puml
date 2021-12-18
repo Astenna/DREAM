@@ -118,7 +118,7 @@ class ForumComment {
     +content
     +createDateTime
 }
-class Suggestions {
+class Suggestion {
     +id
     +text
 }
@@ -160,7 +160,7 @@ ForumThread "0..*" o-- "1" Farmer : created by >
 ForumComment "0..*" o-- "1" Farmer : created by >
 
 
-Suggestions "0..*" -- "0..*" Mandal : concerns >
-Suggestions "0..*" -- "0..*" ProductionType : concerns > 
+Suggestion "0..*" -- "0..*" Mandal : concerns >
+Suggestion "0..*" -- "0..*" ProductionType : concerns > 
 
 @enduml
