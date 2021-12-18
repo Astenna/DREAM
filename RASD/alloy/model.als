@@ -124,7 +124,7 @@ fact NoWeatherSystemResponseWithoutAMandal {
 }
 
 assert VerifyNoWeatherSystemResponseWithoutAMandal {
-    no res : WeatherSystemResponse | all m:Mandal | res not in m.weatherSystemResponses
+    no res : WeatherSystemResponse | all m : Mandal | res not in m.weatherSystemResponses
 }
 check VerifyNoWeatherSystemResponseWithoutAMandal
 
@@ -140,7 +140,7 @@ sig HelpResponse {
 } { author in helpRequest.recipients }
 
 assert NoFarmerIsARecipientofHisHelpRequest {
-    no f:Farmer | f = HelpRequest.author && f in HelpRequest.recipients
+    no f : Farmer | f = HelpRequest.author && f in HelpRequest.recipients
 }
 check NoFarmerIsARecipientofHisHelpRequest
 
@@ -174,6 +174,15 @@ sig ForumComment {
     author: one Farmer
 }
 
+fact NoForumCommentWithoutAForumThread {
+    all fc : ForumComment | one ft : ForumThread | fc in ft.comments
+}
+
+assert VerifyNoForumCommentWithoutAForumThread {
+    no fc : ForumComment | all ft : ForumThread | fc not in ft.comments
+}
+check VerifyNoForumCommentWithoutAForumThread
+
 sig Suggestion {
     productionTypes: some ProductionType, // M: changed to some
     mandals: some Mandal // M: changed to some
@@ -183,15 +192,15 @@ pred show {
     #WaterIrrigationSystemResponse = 1
     #SensorSystemResponse = 1
     #WeatherSystemResponse = 1
-    #ForumThread = 1
-    #ForumComment = 1
+    #ForumThread = 2
+    #ForumComment = 5
     #HelpRequest = 2
     #HelpResponse >= 4
     #Visit = 2
-    #Farmer <= 3
-    #PolicyMaker <=3
+    #Farmer >= 2
+    #PolicyMaker <= 3
     #Agronomist <= 3
     #FarmerNote <= 2
 }
 
-run show for 5 but 1 ProblemType
+run show for 5 but 1 FarmerNote
