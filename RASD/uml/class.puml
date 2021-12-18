@@ -150,7 +150,7 @@ HelpResponse "0..*" o-- "0..1" Farmer : created by >
 HelpResponse "0..*" o-- "0..1" Agronomist : created by >
 'XOR 
 
-ProblemType "1" -- "0..*" FarmerNote : has a <
+ProblemType "0..1" -- "0..*" FarmerNote : has a <
 
 Agronomist "1" *-- "0..*" Visit : does >
 Visit "0..*" o-- "1" Farm : refers to >
@@ -160,7 +160,7 @@ ForumThread "0..*" o-- "1" Farmer : created by >
 ForumComment "0..*" o-- "1" Farmer : created by >
 
 
-Suggestion "0..*" -- "0..*" Mandal : concerns >
-Suggestion "0..*" -- "0..*" ProductionType : concerns > 
+Suggestion "0..*" -- "1..*" Mandal : concerns >
+Suggestion "0..*" -- "1..*" ProductionType : concerns > 
 
 @enduml
