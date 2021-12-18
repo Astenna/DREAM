@@ -52,10 +52,15 @@ sig FarmerNote {
 pred isLatestFarmerNote [farmerNote: one FarmerNote, farmerNotes: set FarmerNote] {
     no f: (farmerNotes - farmerNote) | f.date.order > farmerNote.date.order
 } 
-
-fun latestFarmerNote [farmer1: Farmer]: lone FarmerNote {
-	{farmerNote:  ~farmerRel[farmer1] | isLatestFarmerNote[farmerNote, ~farmerRel[farmer1]]}
+pred latestFarmerNoteIsEq [farmer1: Farmer, note1: Note] {
+	one farmerNote:  ~farmerRel[farmer1] | 
+		(isLatestFarmerNote[farmerNote, ~farmerRel[farmer1]] && farmerNote.note = note1)
+		||
+		(note1 = Neutral && no ~farmerRel[farmer1])
 }
+fact {
+	all h: HelpRequest | all r: h.recipients | (r in Agronomist) || (r in Farmer && latestFarmerNoteIsEq[r, Positive])
+} 
 
 
 
@@ -85,9 +90,9 @@ sig HelpRequest {
     author: one Farmer
 } { author not in recipients } 
 
-fact {
-	all h: HelpRequest | all r: h.recipients | (r in Agronomist) || (r in Farmer && latestFarmerNote[r].note = Positive)
-} 
+//fact {
+//	all h: HelpRequest | all r: h.recipients | (r in Agronomist) || (r in Farmer && latestFarmerNote[r].note = Positive)
+//} 
 
 sig HelpResponse {
     author: one (Agronomist + Farmer),
@@ -118,11 +123,24 @@ sig Suggestion {
 
 //check NoFarmerIsARecipientofHisHelpRequest
 
-assert NoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest {
-	no hp: HelpRequest | one r: hp.recipients | r in Farmer && latestFarmerNote[r].note != Positive
-}
+//assert NoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest {
+//	no hp: HelpRequest | one r: hp.recipients | r in Farmer && latestFarmerNote[r].note != Positive
+//}
+//
+//check NoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest
 
-check NoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest
+// assert VerifyNoSensorSystemResponseWithoutAFarm {
+//     no ssr : SensorSystemResponse | no ~sensorSystemResponses[ssr]
+// }
+//
+//check VerifyNoSensorSystemResponseWithoutAFarm
+
+
+//assert NoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest {
+//	no hp: HelpRequest | one r: hp.recipients | r in Farmer && (latestFarmerNoteIsEq[r, Neutral] || latestFarmerNoteIsEq[r, Negative])
+//}
+//
+//check NoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest
 
 pred show {
     #WaterIrrigationSystemResponse = 0
