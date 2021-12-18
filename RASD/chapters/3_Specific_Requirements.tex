@@ -902,7 +902,7 @@ Given the great number of different use cases, the descriptions of only the most
 
 \subsection{Mapping on requirements}
 
-\begin{longtable}{p{0.07\linewidth} p{0.88\linewidth}} 
+\begin{longtable}{p{0.06\linewidth} p{0.88\linewidth}} 
     \toprule
     \textbf{G1} & Improve farmers performance by providing them with personalized suggestions. \\ 
     \midrule
@@ -939,7 +939,7 @@ Given the great number of different use cases, the descriptions of only the most
     \caption{G1 mapping on assumptions and requirements.}
 \end{longtable}
 
-\begin{longtable}{p{0.07\linewidth} p{0.88\linewidth}} 
+\begin{longtable}{p{0.06\linewidth} p{0.88\linewidth}} 
     \toprule
     \textbf{G2} & Acquire, combine, and visualize data from external systems. \\ 
     \midrule
@@ -965,29 +965,16 @@ Given the great number of different use cases, the descriptions of only the most
 	\textbf{R9.} & The system must allow a registered user to delete his account. \\
 	
 	%Policy maker
-	\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
-	\textbf{R20.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
-	\textbf{R21.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
-	\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
 	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
 	
 	%Farmer
 	\textbf{R24.} & The system must allow a farmer to see his own farmer's summary.\\
-	\textbf{R32.} & The system must allow a farmer with a positive  to see a list of all help requests in his mandal.\\
-	\textbf{R33.} & The system must allow a farmer with a positive note to find a help request in his mandal by the topic.\\
-	\textbf{R34.} & The system must allow a farmer with a positive note to see a specific help request in his mandal.\\
-	\textbf{R35.} & The system must allow a farmer with a positive note to respond to a specific help request in his mandal.\\
 	\textbf{R37.} & The farmer is able to see farmer's summary of a farmer with a negative note whose help request he received. \\
 
 	%Agronomist
-	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
-	\textbf{R47.} & The system must allow an agronomist to see a list of all farmers in his area of responsibility.\\
-	\textbf{R48.} & The system must allow an agronomist to see a list of all farmers with a specific note in his area of responsibility.\\
-	\textbf{R49.} & The system must allow an agronomist to see a list of all farmers in a given mandal in his area of responsibility.\\
-	\textbf{R50.} & The system must allow an agronomist to find a farmer's summary in his area of responsibility by his name and surname.\\
 	\textbf{R51.} & The system must allow an agronomist to see a farmer's summary in his area of responsibility.\\
 
-% 		External systems
+    %External systems
 	\textbf{R65.} & The system must read and update weather forecasts every day. \\
 	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
 	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
@@ -995,7 +982,7 @@ Given the great number of different use cases, the descriptions of only the most
     \caption{G2 mapping on assumptions and requirements.}
 \end{longtable}
 
-\begin{longtable}{p{0.07\linewidth} p{0.88\linewidth}} 
+\begin{longtable}{p{0.06\linewidth} p{0.88\linewidth}} 
     \toprule
     \textbf{G3} & Facilitate performance assessment of the farmers. \\ 
     \midrule
@@ -1003,10 +990,10 @@ Given the great number of different use cases, the descriptions of only the most
     \textbf{A2.} & Each farm belongs to exactly one farmer.\\ 
     \textbf{A3.} & Each farm has at least one humidity sensor.\\ 
     \textbf{A4.} & Each farm has a water irrigation system.\\ 
-    \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
     \textbf{A6.} & Each farmer reliably updates his production data each month.\\ 
     \textbf{A7.} & Weather is consistent in a given mandal.\\     
     \textbf{A9.} & Each registered user can be only one of the actors: an agronomist, a farmer, or a policy maker.\\ 
+    \textbf{A10.} & The information provided by a user during registration process is valid.\\ 
     \textbf{A14.} & Based on the farmer's summary, a policy maker is able to understand whether the help given by farmers and agronomists produces significant results.\\ 
     \textbf{A17.} & External systems are reliable and highly available.\\
     \midrule
@@ -1033,26 +1020,12 @@ Given the great number of different use cases, the descriptions of only the most
 	\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
 	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
 	
-	%Farmer
-	\textbf{R26.} & The system must allow a farmer to manage his monthly production data.\\
-	\textbf{R31.} & The system must allow a farmer to create a new help request.\\
-	
-	%Agronomist
-	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
-	\textbf{R56.} & The system must allow an agronomist to see his daily plans.\\
-	\textbf{R58.} & The system must allow an agronomist to submit a daily plan's execution state, by rejecting or confirming each visit, on the same date or after the daily plan's date has passed. \\
-	\textbf{R59.} & The system must allow an agronomist to provide a comment for a visit he is confirming.\\
-	
-% 		External systems
-	\textbf{R65.} & The system must read and update weather forecasts every day. \\
-	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
-	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
     \bottomrule
 \caption{G3 mapping on assumptions and requirements.}
 \end{longtable}
 
 
-\begin{longtable}{p{0.07\linewidth} p{0.88\linewidth}} 
+\begin{longtable}{p{0.06\linewidth} p{0.88\linewidth}} 
     \toprule
     \textbf{G4} & Promote regular farms’ visits by agronomists. \\ 
     \midrule
@@ -1086,25 +1059,9 @@ Given the great number of different use cases, the descriptions of only the most
     \textbf{R16.} & The system must ensure that only the most recently specified problem type is taken into account when determining the number of visits.\\
 	\textbf{R17.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
 	\textbf{R18.} & The system must ensure that all the additional farm visits created due to obtaining a negative note are deleted after a farmer's negative note is updated with a positive or a neutral one.\\
-	\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
-	\textbf{R20.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
-	\textbf{R21.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
-	\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
-	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
-	
-	%Farmer
-	\textbf{R24.} & The system must allow a farmer to see his own farmer's summary.\\
-	\textbf{R26.} & The system must allow a farmer to manage his monthly production data.\\
-	\textbf{R30.} & The system must allow a farmer to delete a specific help request created by him.\\
-	\textbf{R31.} & The system must allow a farmer to create a new help request.\\
 	
 	%Agronomist
 	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
-	\textbf{R47.} & The system must allow an agronomist to see a list of all farmers in his area of responsibility.\\
-	\textbf{R48.} & The system must allow an agronomist to see a list of all farmers with a specific note in his area of responsibility.\\
-	\textbf{R49.} & The system must allow an agronomist to see a list of all farmers in a given mandal in his area of responsibility.\\
-	\textbf{R50.} & The system must allow an agronomist to find a farmer's summary in his area of responsibility by his name and surname.\\
-	\textbf{R51.} & The system must allow an agronomist to see a farmer's summary in his area of responsibility.\\
 	\textbf{R57.} & The system must allow an agronomist to see his daily plans.\\
 	\textbf{R58.} & The system must allow an agronomist to submit a daily plan's execution state, by rejecting or confirming each visit, on the same date or after the daily plan's date has passed. \\
 	\textbf{R59.} & The system must allow an agronomist to provide a comment for a visit he is confirming.\\
@@ -1113,18 +1070,13 @@ Given the great number of different use cases, the descriptions of only the most
 	\textbf{R62.} & The system must ensure that a deleted visit is marked as rejected.\\
 	\textbf{R63.} & The system must ensure that in case of rejecting a casual visit, a new one is created in maximally 5 days.\\
 	\textbf{R64.} & The system must allow replanning any different visit than a casual one without any constraints.\\
-	
-% 		External systems
-	\textbf{R65.} & The system must read and update weather forecasts every day. \\
-	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
-	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
     
     \bottomrule
     \caption{G4 mapping on assumptions and requirements.}
 \end{longtable}
     
 
-\begin{longtable}{p{0.07\linewidth} p{0.88\linewidth}} 
+\begin{longtable}{p{0.06\linewidth} p{0.88\linewidth}} 
     \toprule
     \textbf{G5} & Enable agronomists to exchange information with farmers. \\ 
     \midrule
@@ -1148,19 +1100,9 @@ Given the great number of different use cases, the descriptions of only the most
 	\textbf{R9.} & The system must allow a registered user to delete his account. \\
 	
 	%Policy maker
-	\textbf{R10.} & The system must allow a policy maker to assign a note to a farmer.\\
-	\textbf{R11.} & The system must ensure that every farmer initially has a neutral note.\\
-	\textbf{R12.} & The system must have a list of predefined farmer's problem types.\\
-    \textbf{R13.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
     \textbf{R17.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
-	\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
-	\textbf{R20.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
-	\textbf{R21.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
-	\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
-	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
 	
 	%Farmer
-	\textbf{R26.} & The system must allow a farmer to manage his monthly production data.\\
 	\textbf{R27.} & The system must allow a farmer to see a list of help requests created by him.\\
 	\textbf{R28.} & The system must allow a farmer to find a help request created by him by the topic.\\
 	\textbf{R29.} & The system must allow a farmer to see a specific help request created by him.\\
@@ -1179,23 +1121,15 @@ Given the great number of different use cases, the descriptions of only the most
 	\textbf{R54.} & The system must allow an agronomist to see a specific help request in his area of responsibility.\\
 	\textbf{R55.} & The system must allow an agronomist to respond to a specific help request in his area of responsibility.\\
 	\textbf{R56.} & The system must allow an agronomist to delete a help response, only if it was created by him.\\
-	\textbf{R57.} & The system must allow an agronomist to see his daily plans.\\
-	\textbf{R58.} & The system must allow an agronomist to submit a daily plan's execution state, by rejecting or confirming each visit, on the same date or after the daily plan's date has passed. \\
-	\textbf{R59.} & The system must allow an agronomist to provide a comment for a visit he is confirming.\\
 
-% 		External systems
-	\textbf{R65.} & The system must read and update weather forecasts every day. \\
-	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
-	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
     \bottomrule
     \caption{G5 mapping on assumptions and requirements.}
 \end{longtable}
 
-\begin{longtable}{p{0.07\linewidth} p{0.88\linewidth}} 
+\begin{longtable}{p{0.06\linewidth} p{0.88\linewidth}} 
     \toprule
     \textbf{G6} & Enable farmers to exchange their knowledge. \\ 
     \midrule
-    \textbf{A5.} & Each farm is inside exactly one mandal.\\ 
     \textbf{A10.} & The information provided by a user during registration process is valid.\\ 
     \textbf{A11.} & Well-performing farmers and agronomists are eager to help farmers with negative notes.\\ 
     \textbf{A15.} & Farmers create meaningful and not offensive threads and comments on the forum.\\ 
@@ -1214,19 +1148,9 @@ Given the great number of different use cases, the descriptions of only the most
 	\textbf{R9.} & The system must allow a registered user to delete his account. \\
 	
 	%Policy maker
-	\textbf{R10.} & The system must allow a policy maker to assign a note to a farmer.\\
-	\textbf{R11.} & The system must ensure that every farmer initially has a neutral note.\\
-	\textbf{R12.} & The system must have a list of predefined farmer's problem types.\\
-    \textbf{R13.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
     \textbf{R17.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
-	\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
-	\textbf{R20.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
-	\textbf{R21.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
-	\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
-	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
 	
 	%Farmer
-	\textbf{R26.} & The system must allow a farmer to manage his monthly production data.\\
 	\textbf{R27.} & The system must allow a farmer to see a list of help requests created by him.\\
 	\textbf{R28.} & The system must allow a farmer to find a help request created by him by the topic.\\
 	\textbf{R29.} & The system must allow a farmer to see a specific help request created by him.\\
@@ -1245,16 +1169,6 @@ Given the great number of different use cases, the descriptions of only the most
 	\textbf{R42.} & The system must allow a farmer to delete a comment in a forum thread, only if it was created by him.\\
 	\textbf{R43.} & The system must allow a farmer to create a forum thread.\\
 	
-	%Agronomist
-	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
-	\textbf{R57.} & The system must allow an agronomist to see his daily plans.\\
-	\textbf{R58.} & The system must allow an agronomist to submit a daily plan's execution state, by rejecting or confirming each visit, on the same date or after the daily plan's date has passed. \\
-	\textbf{R59.} & The system must allow an agronomist to provide a comment for a visit he is confirming.\\
-	
-% 		External systems
-	\textbf{R65.} & The system must read and update weather forecasts every day. \\
-	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
-	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
     \bottomrule
     \caption{G6 mapping on assumptions and requirements.}
 \end{longtable}
