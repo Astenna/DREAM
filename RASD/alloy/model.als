@@ -24,8 +24,9 @@ enum VisitState {
     Confirmed,
     Rejected
 }
-sig ProblemType {}
 
+// Signatures
+sig ProblemType {}
 
 abstract sig User {}
 sig PolicyMaker extends User {}
@@ -33,12 +34,11 @@ sig Agronomist extends User {
     areaOfResponsibility: some Mandal,
     visits: disj set Visit
 }
-
-
 sig Farmer extends User {
     farm: disj one Farm,
     farmerNotes: disj set FarmerNote
 }
+
 sig FarmerNote {
     note: one Note,
     problemType: lone ProblemType,
@@ -49,10 +49,68 @@ sig FarmerNote {
     note != Negative => no problemType
     note = Negative => one problemType
 }
+
+sig Farm {
+    mandal: one Mandal,
+    sensorSystemResponses: disj set SensorSystemResponse,
+    waterIrrigationSystemResponses: disj set WaterIrrigationSystemResponse,
+    productions: disj set Production
+}
+
+sig Mandal {
+    weatherSystemResponses: disj set WeatherSystemResponse
+}
+
+sig Production {
+    productionType: one ProductionType
+}
+
+sig WaterIrrigationSystemResponse {}
+
+sig SensorSystemResponse {}
+
+sig WeatherSystemResponse {
+    type: one WeatherType
+}
+
+sig ProductionType {}
+
+sig HelpRequest {
+    recipients: some (Agronomist + Farmer),
+    author: one Farmer
+} { author not in recipients } 
+
+sig HelpResponse {
+    author: one (Agronomist + Farmer),
+    helpRequest: one HelpRequest
+} { author in helpRequest.recipients }
+
+sig Visit {
+    reason: one VisitReason,
+    state: one VisitState,
+    farm: one Farm,
+    date: one Date
+}
+
+sig ForumThread {
+    author: one Farmer,
+    comments: disj set ForumComment
+}
+
+sig ForumComment {
+    author: one Farmer
+}
+
+sig Suggestion {
+    productionTypes: some ProductionType,
+    mandals: some Mandal
+}
+
+// FACTS
+// FarmerNotes
 fact {
     ~owner = farmerNotes
 }
-
 
 pred isLatestFarmerNote [farmerNote: one FarmerNote, farmerNotes: set FarmerNote] {
     no f: (farmerNotes - farmerNote) | f.date > farmerNote.date
@@ -65,7 +123,7 @@ pred latestFarmerNoteIsEq [f: Farmer, n: Note] {
 		(n = Neutral && no farmerNotes[f])
 }
 
-fact {
+fact OnlyAgronomistOrAFarmerWithPositiveNoteCanBeARecipientOfAHelpRequest{
 	all h: HelpRequest | all r: h.recipients | (r in Agronomist) || (r in Farmer && latestFarmerNoteIsEq[r, Positive])
 }
 
@@ -76,19 +134,7 @@ assert VerifyOnlyNegativeNoteHasAProblemType {
 }
 check VerifyOnlyNegativeNoteHasAProblemType
 
-
-sig Farm {
-    mandal: one Mandal,
-    sensorSystemResponses: disj set SensorSystemResponse,
-    waterIrrigationSystemResponses: disj set WaterIrrigationSystemResponse,
-    productions: disj set Production
-}
-
-
-sig Mandal {
-    weatherSystemResponses: disj set WeatherSystemResponse
-}
-
+// Mandals
 fact NoMandalWithoutAnAgronomist {
     all m: Mandal | one a: Agronomist | m in a.areaOfResponsibility
 }
@@ -97,11 +143,7 @@ assert NoMandalWithoutAnAgronomist {
 }
 check NoMandalWithoutAnAgronomist
 
-
-sig Production {
-    productionType: one ProductionType
-}
-
+// Farms
 fact NoWaterIrrigationSystemResponseWithoutAFarm {
     all p: Production | one f: Farm | p in f.productions
 }
@@ -111,8 +153,6 @@ assert NoProductionWithoutAFarm {
 }
 check NoProductionWithoutAFarm
 
-
-sig WaterIrrigationSystemResponse {}
 fact NoWaterIrrigationSystemResponseWithoutAFarm {
     all res: WaterIrrigationSystemResponse | one f: Farm | res in f.waterIrrigationSystemResponses
 }
@@ -122,46 +162,7 @@ assert VerifyNoWaterIrrigationSystemResponseWithoutAFarm {
 }
 check VerifyNoWaterIrrigationSystemResponseWithoutAFarm
 
-
-sig SensorSystemResponse {}
-
-fact NoSensorSystemResponseWithoutAFarm {
-    all res: SensorSystemResponse | one f: Farm | res in f.sensorSystemResponses
-}
-
-assert VerifyNoSensorSystemResponseWithoutAFarm {
-    no res: SensorSystemResponse | all f: Farm | res not in f.sensorSystemResponses
-}
-check VerifyNoSensorSystemResponseWithoutAFarm
-
-
-sig WeatherSystemResponse {
-    type: one WeatherType
-}
-
-fact NoWeatherSystemResponseWithoutAMandal {
-    all res: WeatherSystemResponse | one m: Mandal | res in m.weatherSystemResponses
-}
-
-assert VerifyNoWeatherSystemResponseWithoutAMandal {
-    no res: WeatherSystemResponse | all m: Mandal | res not in m.weatherSystemResponses
-}
-check VerifyNoWeatherSystemResponseWithoutAMandal
-
-
-sig ProductionType {}
-
-
-sig HelpRequest {
-    recipients: some (Agronomist + Farmer),
-    author: one Farmer
-} { author not in recipients } 
-
-sig HelpResponse {
-    author: one (Agronomist + Farmer),
-    helpRequest: one HelpRequest
-} { author in helpRequest.recipients }
-
+// HelpRequests
 fact NoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest {
     no h: HelpRequest | one r: h.recipients | r in Farmer && (latestFarmerNoteIsEq[r, Neutral] || latestFarmerNoteIsEq[r, Negative])
 }
@@ -176,14 +177,27 @@ assert VerifyNoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest {
 }
 check VerifyNoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest
 
-
-sig Visit {
-    reason: one VisitReason,
-    state: one VisitState,
-    farm: one Farm,
-    date: one Date
+// SensorSystem
+fact NoSensorSystemResponseWithoutAFarm {
+    all res: SensorSystemResponse | one f: Farm | res in f.sensorSystemResponses
 }
 
+assert VerifyNoSensorSystemResponseWithoutAFarm {
+    no res: SensorSystemResponse | all f: Farm | res not in f.sensorSystemResponses
+}
+check VerifyNoSensorSystemResponseWithoutAFarm
+
+// WeatherSystem
+fact NoWeatherSystemResponseWithoutAMandal {
+    all res: WeatherSystemResponse | one m: Mandal | res in m.weatherSystemResponses
+}
+
+assert VerifyNoWeatherSystemResponseWithoutAMandal {
+    no res: WeatherSystemResponse | all m: Mandal | res not in m.weatherSystemResponses
+}
+check VerifyNoWeatherSystemResponseWithoutAMandal
+
+// Visits
 fact CasualVisitMustBePlannedIfItWasRejectedOrConfirmed {
     all disj v1, v2: Visit | (v1.state = Rejected || v1.state = Confirmed) && v1.reason = Casual 
         implies v2.reason = Casual && v1.date < v2.date && v2.state = Planned
@@ -216,7 +230,7 @@ fact NoVisitDueToNegativeNoteIsPlannedBeforeTheDateOfTheLastNegativeNote {
                 && fn.note = Negative && fn.date <= v.date )
 }
 
-fact NoMultipleVisitsDueToNegativeNoteOnTheSameDay {
+fact NoMultipleVisitsDueToNegativeNoteOnTheSameDayToTheSameFarm {
     no disj v1, v2: Visit | 
         v1.reason = NegativeNote
         && v1.state = Planned
@@ -226,7 +240,7 @@ fact NoMultipleVisitsDueToNegativeNoteOnTheSameDay {
         && v1.farm = v2.farm
 }
 
-fact NoMultipleCasualVisitsOnTheSameDay {
+fact NoMultipleCasualVisitsOnTheSameDayToTheSameFarm {
     no disj v1, v2: Visit | 
         v1.reason = Casual
         && v1.state = Planned
@@ -236,16 +250,7 @@ fact NoMultipleCasualVisitsOnTheSameDay {
         && v1.farm = v2.farm
 }
 
-sig ForumThread {
-    author: one Farmer,
-    comments: disj set ForumComment
-}
-
-
-sig ForumComment {
-    author: one Farmer
-}
-
+// ForumComment
 fact NoForumCommentWithoutAForumThread {
     all fc: ForumComment | one ft: ForumThread | fc in ft.comments
 }
@@ -254,13 +259,6 @@ assert VerifyNoForumCommentWithoutAForumThread {
     no fc: ForumComment | all ft: ForumThread | fc not in ft.comments
 }
 check VerifyNoForumCommentWithoutAForumThread
-
-
-sig Suggestion {
-    productionTypes: some ProductionType,
-    mandals: some Mandal
-}
-
 
 // World for testing correctness of help requests. 
 // There should be a farmer recipient, with multiple notes, being a recipient.
