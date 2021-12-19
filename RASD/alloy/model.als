@@ -51,7 +51,6 @@ sig FarmerNote {
 }
 
 sig Farm {
-    farmer: one Farmer,
     mandal: one Mandal,
     sensorSystemResponses: disj set SensorSystemResponse,
     waterIrrigationSystemResponses: disj set WaterIrrigationSystemResponse,
@@ -149,9 +148,15 @@ assert NoMandalWithoutAnAgronomist {
 check NoMandalWithoutAnAgronomist
 
 // Farms
-fact NoFarmWithoutFarmWithoutFarmer {
-    ~farmer = farm
+fact NoFarmWithoutFarmer {
+    all f: Farm | one frm: Farmer | frm.farm = f
 }
+
+assert VerifyNoFarmWithoutFarmer {
+    no f: Farm | all frm: Farmer | frm.farm != f
+}
+
+check VerifyNoFarmWithoutFarmer
 
 fact NoWaterIrrigationSystemResponseWithoutAFarm {
     all p: Production | one f: Farm | p in f.productions
@@ -186,6 +191,11 @@ assert VerifyNoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest {
 }
 check VerifyNoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest
 
+fact AgronomistIsARecipientOfAHelpRequestBasedOnAreaOfResponsibility {
+    all h: HelpRequest | some r: h.recipients | 
+        r in Agronomist && h.author.farm.mandal in r.areaOfResponsibility
+}
+
 // SensorSystem
 fact NoSensorSystemResponseWithoutAFarm {
     all res: SensorSystemResponse | one f: Farm | res in f.sensorSystemResponses
@@ -207,6 +217,10 @@ assert VerifyNoWeatherSystemResponseWithoutAMandal {
 check VerifyNoWeatherSystemResponseWithoutAMandal
 
 // Visits
+fact NoVisitsWithoutAgronomist {
+    all v: Visit | one a: Agronomist | v in a.visits
+}
+
 fact CasualVisitMustBePlannedIfItWasRejectedOrConfirmed {
     all disj v1, v2: Visit | (v1.state = Rejected || v1.state = Confirmed) && v1.reason = Casual 
         implies v2.reason = Casual && v1.date < v2.date && v2.state = Planned
@@ -291,12 +305,11 @@ pred showForHelpRequestsForFarmersWithPositiveNote {
     #PolicyMaker <=3
 	#recipients >= 1
 
-	all a: Agronomist | no ~recipients[a]
 	some f: Farmer | some ~recipients[f] && #farmerNotes[f] = 4
 }
 run showForHelpRequestsForFarmersWithPositiveNote for 8
 
-pred showWorldWithoutVisitsDueToAgronomistDecision {
+pred showWorldWithPlannedVisitDueToNegativeNote {
     #ForumThread = 0
     #ForumComment = 0
     #HelpResponse = 0
@@ -314,9 +327,31 @@ pred showWorldWithoutVisitsDueToAgronomistDecision {
     #Agronomist = 1
     #FarmerNote >= 2
     
-    all v: Visit | v.reason != AgronomistDecision
+	some v: Visit | v.state = Planned && v.reason = NegativeNote
 }
-run showWorldWithoutVisitsDueToAgronomistDecision for 8
+run showWorldWithPlannedVisitDueToNegativeNote for 8
+
+pred showWorldWithRejectedCasualVisit {
+    #ForumThread = 0
+    #ForumComment = 0
+    #HelpResponse = 0
+    #WaterIrrigationSystemResponse = 0
+    #SensorSystemResponse = 0
+    #WeatherSystemResponse = 0
+    #Production = 0
+    #Suggestion = 0
+    #HelpRequest = 0
+
+    #Mandal <= 3
+    #Visit >= 3
+    #Farmer >= 1
+    #PolicyMaker <= 1
+    #Agronomist = 1
+    #FarmerNote >= 2
+    
+	some v: Visit | v.state = Rejected && v.reason = Casual
+}
+run showWorldWithRejectedCasualVisit for 8
 
 pred showWorldWithoutFocusedOnForum {
     #ForumThread >= 2
@@ -344,13 +379,13 @@ pred show {
     #WeatherSystemResponse = 1
     #ForumThread = 2
     #ForumComment = 5
-    #HelpRequest = 2
-    #HelpResponse >= 4
-    #Visit = 2
+    #HelpRequest >= 0
+    #HelpResponse >= 0
+    #Visit >= 0
     #Farmer >= 2
     #PolicyMaker <= 3
     #Agronomist <= 3
     #FarmerNote <= 2
 }
 
-run show for 5 but 1 FarmerNote
+run show for 8
