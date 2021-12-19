@@ -106,7 +106,7 @@ sig Suggestion {
     mandals: some Mandal
 }
 
-// FACTS
+// FACTS, predicates, assertions
 // FarmerNotes
 fact {
     ~owner = farmerNotes
@@ -142,54 +142,54 @@ fact NoTwoNotesForTheSameDayAndFarmer {
 fact NoMandalWithoutAnAgronomist {
     all m: Mandal | one a: Agronomist | m in a.areaOfResponsibility
 }
-assert NoMandalWithoutAnAgronomist {
+assert VerifyEachMandalIsInsideAgronomistAreaOfResponsibility {
     no m: Mandal | all a: Agronomist | m not in a.areaOfResponsibility
 }
-check NoMandalWithoutAnAgronomist
+check VerifyEachMandalIsInsideAgronomistAreaOfResponsibility
 
 // Farms
 fact NoFarmWithoutFarmer {
     all f: Farm | one frm: Farmer | frm.farm = f
 }
-
 assert VerifyNoFarmWithoutFarmer {
     no f: Farm | all frm: Farmer | frm.farm != f
 }
-
 check VerifyNoFarmWithoutFarmer
 
 fact NoWaterIrrigationSystemResponseWithoutAFarm {
     all p: Production | one f: Farm | p in f.productions
 }
-
-assert NoProductionWithoutAFarm {
+assert VerifyNoProductionWithoutAFarm {
     no p: Production | all f: Farm | p not in f.productions
 }
-check NoProductionWithoutAFarm
+check VerifyNoProductionWithoutAFarm
 
 fact NoWaterIrrigationSystemResponseWithoutAFarm {
     all res: WaterIrrigationSystemResponse | one f: Farm | res in f.waterIrrigationSystemResponses
 }
-
 assert VerifyNoWaterIrrigationSystemResponseWithoutAFarm {
     no res: WaterIrrigationSystemResponse | all f: Farm | res not in f.waterIrrigationSystemResponses
 }
 check VerifyNoWaterIrrigationSystemResponseWithoutAFarm
 
 // HelpRequests
-fact NoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest {
+fact NoFarmerWithoutPositiveNoteIsARecipientOfAHelpRequest {
     no h: HelpRequest | one r: h.recipients | r in Farmer && (latestFarmerNoteIsEq[r, Neutral] || latestFarmerNoteIsEq[r, Negative])
 }
-
-assert NoFarmerIsARecipientofHisHelpRequest {
+assert VerifyNoFarmerIsARecipientofHisHelpRequest {
     no f: Farmer | f = HelpRequest.author && f in HelpRequest.recipients
 }
-check NoFarmerIsARecipientofHisHelpRequest
+check VerifyNoFarmerIsARecipientofHisHelpRequest
 
-assert VerifyNoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest {
+assert VerifyNoFarmerWithoutPositiveNoteIsARecipientOfAHelpRequest {
 	no h: HelpRequest | one r: h.recipients | r in Farmer && (latestFarmerNoteIsEq[r, Neutral] || latestFarmerNoteIsEq[r, Negative])
 }
-check VerifyNoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest
+check VerifyNoFarmerWithoutPositiveNoteIsARecipientOfAHelpRequest
+
+assert VerifyAuthorOfHelpReponseMustBeInsideRequestRecipients {
+    all hr: HelpResponse | one rec: hr.helpRequest.recipients | hr.author in rec
+}
+check VerifyAuthorOfHelpReponseMustBeInsideRequestRecipients
 
 fact AgronomistIsARecipientOfAHelpRequestBasedOnAreaOfResponsibility {
     all h: HelpRequest | some r: h.recipients | 
@@ -227,23 +227,21 @@ fact CasualVisitMustBePlannedIfItWasRejectedOrConfirmed {
 }
 
 fact NoVisitIsConfirmedBeforeItsDate {
-    no v : Visit | v.state = Confirmed && v.date < currentDate
+    no v : Visit | v.state = Confirmed && v.date > currentDate
 }
 
 fact NoVisitIsPlannedAfterItsDate {
-    no v : Visit | v.state = Planned && v.date >= currentDate
+    no v : Visit | v.state = Planned && v.date <= currentDate
 }
 
 fact NoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative {
     all v: Visit | v.reason = NegativeNote && v.state = Planned  
         implies latestFarmerNoteIsEq[~farm[v.farm], Negative]
 }
-
 assert VerifyNoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative {
     no v: Visit | v.reason = NegativeNote && v.state = Planned 
         && not latestFarmerNoteIsEq[~farm[v.farm], Negative]
 }
-
 check VerifyNoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative
 
 fact NoVisitDueToNegativeNoteIsPlannedBeforeTheDateOfTheLastNegativeNote {
@@ -277,16 +275,17 @@ fact NoMultipleCasualVisitsOnTheSameDayToTheSameFarm {
 fact NoForumCommentWithoutAForumThread {
     all fc: ForumComment | one ft: ForumThread | fc in ft.comments
 }
-
 assert VerifyNoForumCommentWithoutAForumThread {
     no fc: ForumComment | all ft: ForumThread | fc not in ft.comments
 }
 check VerifyNoForumCommentWithoutAForumThread
 
+// Worlds
+
 // World for testing correctness of help requests. 
 // There should be a farmer recipient, with multiple notes, being a recipient.
 // His latest note should be positive.
-pred showForHelpRequestsForFarmersWithPositiveNote {
+pred showHelpRequestsForFarmersWithPositiveNote {
     #WaterIrrigationSystemResponse = 0
     #SensorSystemResponse = 0
     #WeatherSystemResponse = 0
@@ -294,7 +293,7 @@ pred showForHelpRequestsForFarmersWithPositiveNote {
     #ForumComment = 0
 	#ProductionType = 0
     #Visit = 0
-    #HelpResponse > 1
+    #HelpResponse > 2
 	#Suggestion = 0
 	#Production = 0
     #Mandal = 1
@@ -305,9 +304,9 @@ pred showForHelpRequestsForFarmersWithPositiveNote {
     #PolicyMaker <=3
 	#recipients >= 1
 
-	some f: Farmer | some ~recipients[f] && #farmerNotes[f] = 4
+	some f: Farmer | some ~recipients[f] && #farmerNotes[f] = 3
 }
-run showForHelpRequestsForFarmersWithPositiveNote for 8
+run showHelpRequestsForFarmersWithPositiveNote for 8
 
 pred showWorldWithPlannedVisitDueToNegativeNote {
     #ForumThread = 0
@@ -327,6 +326,7 @@ pred showWorldWithPlannedVisitDueToNegativeNote {
     #Agronomist = 1
     #FarmerNote >= 2
     
+	some v: Visit | v.state = Confirmed
 	some v: Visit | v.state = Planned && v.reason = NegativeNote
 }
 run showWorldWithPlannedVisitDueToNegativeNote for 8
@@ -353,7 +353,7 @@ pred showWorldWithRejectedCasualVisit {
 }
 run showWorldWithRejectedCasualVisit for 8
 
-pred showWorldWithoutFocusedOnForum {
+pred showWorldFocusedOnForum {
     #ForumThread >= 2
     #ForumComment >= 5
     #HelpResponse = 0
@@ -371,7 +371,7 @@ pred showWorldWithoutFocusedOnForum {
     #Agronomist = 1
     #FarmerNote <= 2
 }
-run showWorldWithoutFocusedOnForum for 8
+run showWorldFocusedOnForum for 8
 
 pred show {
     #WaterIrrigationSystemResponse = 1
