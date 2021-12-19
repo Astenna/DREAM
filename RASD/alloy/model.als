@@ -134,6 +134,10 @@ assert VerifyOnlyNegativeNoteHasAProblemType {
 }
 check VerifyOnlyNegativeNoteHasAProblemType
 
+fact NoTwoNotesForTheSameDayAndFarmer {
+    no disj n1, n2: FarmerNote | n1.date = n2.date && n1.owner = n2.owner
+}
+
 // Mandals
 fact NoMandalWithoutAnAgronomist {
     all m: Mandal | one a: Agronomist | m in a.areaOfResponsibility
@@ -271,7 +275,7 @@ pred showForHelpRequestsForFarmersWithPositiveNote {
     #ForumComment = 0
 	#ProductionType = 0
     #Visit = 0
-    #HelpResponse = 0
+    #HelpResponse = 1
 	#Suggestion = 0
 	#Production = 0
     #Mandal = 1
@@ -279,12 +283,11 @@ pred showForHelpRequestsForFarmersWithPositiveNote {
     #Agronomist = 1
     #Farmer = 2
     #HelpRequest = 1
-    #FarmerNote >= 3
     #PolicyMaker <=3
 	#recipients >= 1
 
 	all a: Agronomist | no ~recipients[a]
-	some f: Farmer | some ~recipients[f] && #farmerNotes[f] >= 5
+	some f: Farmer | some ~recipients[f] && #farmerNotes[f] >= 4
 }
 run showForHelpRequestsForFarmersWithPositiveNote for 8
 
@@ -296,18 +299,20 @@ pred showWorldWithoutVisitsDueToAgronomistDecision {
     #WaterIrrigationSystemResponse = 0
     #SensorSystemResponse = 0
     #WeatherSystemResponse = 0
+    #Production = 0
+    #Suggestion = 0
+    #HelpRequest = 0
 
-    #Suggestion = 1
-    #HelpRequest = 2
-    #Visit > 1
-    #Farmer = 1
+    #Mandal <= 3
+    #Visit >= 3
+    #Farmer >= 1
     #PolicyMaker <= 1
-    #Agronomist = 3
+    #Agronomist = 1
     #FarmerNote >= 2
     
-    some v: Visit | v.reason = NegativeNote && v.state = Planned
+    all v: Visit | v.reason != AgronomistDecision
 }
-run showWorldWithoutVisitsDueToAgronomistDecision for 10
+run showWorldWithoutVisitsDueToAgronomistDecision for 8
 
 
 pred show {
