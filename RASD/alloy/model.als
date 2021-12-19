@@ -51,6 +51,7 @@ sig FarmerNote {
 }
 
 sig Farm {
+    farmer: one Farmer,
     mandal: one Mandal,
     sensorSystemResponses: disj set SensorSystemResponse,
     waterIrrigationSystemResponses: disj set WaterIrrigationSystemResponse,
@@ -148,6 +149,10 @@ assert NoMandalWithoutAnAgronomist {
 check NoMandalWithoutAnAgronomist
 
 // Farms
+fact NoFarmWithoutFarmWithoutFarmer {
+    ~farmer = farm
+}
+
 fact NoWaterIrrigationSystemResponseWithoutAFarm {
     all p: Production | one f: Farm | p in f.productions
 }
@@ -275,22 +280,21 @@ pred showForHelpRequestsForFarmersWithPositiveNote {
     #ForumComment = 0
 	#ProductionType = 0
     #Visit = 0
-    #HelpResponse = 1
+    #HelpResponse > 1
 	#Suggestion = 0
 	#Production = 0
     #Mandal = 1
     
     #Agronomist = 1
     #Farmer = 2
-    #HelpRequest = 1
+    #HelpRequest > 1
     #PolicyMaker <=3
 	#recipients >= 1
 
 	all a: Agronomist | no ~recipients[a]
-	some f: Farmer | some ~recipients[f] && #farmerNotes[f] >= 4
+	some f: Farmer | some ~recipients[f] && #farmerNotes[f] = 4
 }
 run showForHelpRequestsForFarmersWithPositiveNote for 8
-
 
 pred showWorldWithoutVisitsDueToAgronomistDecision {
     #ForumThread = 0
@@ -314,6 +318,25 @@ pred showWorldWithoutVisitsDueToAgronomistDecision {
 }
 run showWorldWithoutVisitsDueToAgronomistDecision for 8
 
+pred showWorldWithoutFocusedOnForum {
+    #ForumThread >= 2
+    #ForumComment >= 5
+    #HelpResponse = 0
+    #WaterIrrigationSystemResponse = 0
+    #SensorSystemResponse = 0
+    #WeatherSystemResponse = 0
+    #Production = 0
+    #Suggestion = 0
+    #HelpRequest = 0
+
+    #Mandal <= 3
+    #Visit <= 2
+    #Farmer >= 5
+    #PolicyMaker <= 1
+    #Agronomist = 1
+    #FarmerNote <= 2
+}
+run showWorldWithoutFocusedOnForum for 8
 
 pred show {
     #WaterIrrigationSystemResponse = 1
