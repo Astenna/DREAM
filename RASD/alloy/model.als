@@ -30,7 +30,7 @@ sig ProblemType {}
 abstract sig User {}
 sig PolicyMaker extends User {}
 sig Agronomist extends User {
-    mandals: some Mandal,
+    areaOfResponsibility: some Mandal,
     visits: disj set Visit
 }
 
@@ -81,6 +81,15 @@ sig Farm {
 sig Mandal {
     weatherSystemResponses: disj set WeatherSystemResponse
 }
+
+fact NoMandalWithoutAnAgronomist {
+    all m : Mandal | one a : Agronomist | m in a.areaOfResponsibility
+}
+assert NoMandalWithoutAnAgronomist {
+    no m : Mandal | all a : Agronomist | m not in a.areaOfResponsibility
+}
+check NoMandalWithoutAnAgronomist
+
 sig Production {
     productionType: one ProductionType
 }
