@@ -130,37 +130,36 @@ Farmer <|-- User
 
 Farm "0..*" o-- "1" Mandal : belongs to >
 Farm "1" *-- "0..*" Production : produces >
-Farm "1" *-- "0..*" WaterIrrigationSystemResponse : has >
+Farm "1" *-u- "0..*" WaterIrrigationSystemResponse : has >
 Farm "1" *-- "0..*" SensorSystemResponse : has >
 
-Mandal "1" *-- "0..*" WeatherSystemResponse : has >
+Mandal "1" *-l- "0..*" WeatherSystemResponse : has >
 
 Agronomist "1..*" o-- "1..*" Mandal : is responsible for >
-Production "0..*" o-- "1" ProductionType : has a >
+Production "0..*" o-- "1" ProductionType : has >
 
-Farm "1" --* "1" Farmer
+Farm "1" -r-* "1" Farmer : has <
 Farmer "1" *-- "0..*" FarmerNote : receives >
 FarmerNote "0..*" o-- "1" PolicyMaker : gives <
 
 Farmer "1" *-- "0..*" HelpRequest : creates >
-Farmer "0..*" --o "0..*" HelpRequest : receives < 
-Agronomist "0..*" --o "0..*" HelpRequest : receives < 
-HelpRequest "1" *-- "0..*" HelpResponse : contains >
-HelpResponse "0..*" o-- "0..1" Farmer : created by >
-HelpResponse "0..*" o-- "0..1" Agronomist : created by >
+Farmer "0..*" --o "0..*" HelpRequest : receives > 
+Agronomist "1..*" --o "0..*" HelpRequest : receives > 
+HelpRequest "1" *-r- "0..*" HelpResponse : contains >
+HelpResponse "0..*" o-- "0..1" Farmer : creates <
+HelpResponse "0..*" o-- "0..1" Agronomist : creates <
 'XOR 
 
-ProblemType "0..1" -- "0..*" FarmerNote : has a <
+ProblemType "0..1" - "0..*" FarmerNote : has <
 
 Agronomist "1" *-- "0..*" Visit : does >
 Visit "0..*" o-- "1" Farm : refers to >
 
 ForumThread "1" *-- "0..*" ForumComment : has >
-ForumThread "0..*" o-- "1" Farmer : created by >
-ForumComment "0..*" o-- "1" Farmer : created by >
+ForumThread "0..*" o-- "1" Farmer : creates <
+ForumComment "0..*" o-- "1" Farmer : creates <
 
-
-Suggestion "0..*" -- "1..*" Mandal : concerns >
-Suggestion "0..*" -- "1..*" ProductionType : concerns > 
+Suggestion "0..*" o-- "1..*" Mandal : concerns >
+Suggestion "0..*" o-- "1..*" ProductionType : concerns > 
 
 @enduml
