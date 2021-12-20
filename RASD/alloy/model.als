@@ -1,7 +1,5 @@
-sig Date {
-    order: Int
-} {order > 0}
-let currentDate = Date.order = 1
+sig Date in Int {} {this > 0}
+let currentDate = 5
 
 // Enums
 enum Note {
@@ -28,38 +26,43 @@ enum VisitState {
 }
 sig ProblemType {}
 
-// Users
+
 abstract sig User {}
 sig PolicyMaker extends User {}
 sig Agronomist extends User {
     areaOfResponsibility: some Mandal,
     visits: disj set Visit
 }
+
+
 sig Farmer extends User {
-    farm: disj one Farm
+    farm: disj one Farm,
+    farmerNotes: disj set FarmerNote
 }
-
-
 sig FarmerNote {
     note: one Note,
     problemType: lone ProblemType,
     policyMaker: one PolicyMaker,
-    farmer: one Farmer,
+    owner: one Farmer,
     date: one Date
 } {
     note != Negative => no problemType
     note = Negative => one problemType
 }
+fact {
+    ~owner = farmerNotes
+}
+
 
 pred isLatestFarmerNote [farmerNote: one FarmerNote, farmerNotes: set FarmerNote] {
-    no f: (farmerNotes - farmerNote) | f.date.order > farmerNote.date.order
+    no f: (farmerNotes - farmerNote) | f.date > farmerNote.date
 }
 
 pred latestFarmerNoteIsEq [f: Farmer, n: Note] {
-	one farmerNote: ~farmer[f] | 
-		(isLatestFarmerNote[farmerNote, ~farmer[f]] && farmerNote.note = n)
+	one farmerNote: farmerNotes[f] | 
+		(isLatestFarmerNote[farmerNote, farmerNotes[f]] && farmerNote.note = n)
 		||
-		(n = Neutral && no ~farmer[f])
+		(n = Neutral && no farmerNotes[f])
 }
 
 fact {
@@ -72,7 +75,6 @@ assert VerifyOnlyNegativeNoteHasAProblemType {
     all farmerNote: FarmerNote | farmerNote.note = Negative implies one farmerNote.problemType
 }
 check VerifyOnlyNegativeNoteHasAProblemType
-
 
 
 sig Farm {
@@ -182,6 +184,57 @@ sig Visit {
     date: one Date
 }
 
+fact CasualVisitMustBePlannedIfItWasRejectedOrConfirmed {
+    all disj v1, v2: Visit | (v1.state = Rejected || v1.state = Confirmed) && v1.reason = Casual 
+        implies v2.reason = Casual && v1.date < v2.date && v2.state = Planned
+}
+
+fact NoVisitIsConfirmedBeforeItsDate {
+    no v : Visit | v.state = Confirmed && v.date < currentDate
+}
+
+fact NoVisitIsPlannedAfterItsDate {
+    no v : Visit | v.state = Planned && v.date >= currentDate
+}
+
+fact NoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative {
+    all v: Visit | v.reason = NegativeNote && v.state = Planned  
+        implies latestFarmerNoteIsEq[~farm[v.farm], Negative]
+}
+
+assert VerifyNoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative {
+    no v: Visit | v.reason = NegativeNote && v.state = Planned 
+        && not latestFarmerNoteIsEq[~farm[v.farm], Negative]
+}
+
+check VerifyNoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative
+
+fact NoVisitDueToNegativeNoteIsPlannedBeforeTheDateOfTheLastNegativeNote {
+    all v: Visit | v.reason = NegativeNote && v.state = Planned 
+        implies (one fn: farmerNotes[~farm[v.farm]] | 
+            isLatestFarmerNote[fn, farmerNotes[~farm[v.farm]]] 
+                && fn.note = Negative && fn.date <= v.date )
+}
+
+fact NoMultipleVisitsDueToNegativeNoteOnTheSameDay {
+    no disj v1, v2: Visit | 
+        v1.reason = NegativeNote
+        && v1.state = Planned
+        && v2.reason = NegativeNote
+        && v2.state = Planned
+        && v1.date = v2.date
+        && v1.farm = v2.farm
+}
+
+fact NoMultipleCasualVisitsOnTheSameDay {
+    no disj v1, v2: Visit | 
+        v1.reason = Casual
+        && v1.state = Planned
+        && v2.reason = Casual
+        && v2.state = Planned
+        && v1.date = v2.date
+        && v1.farm = v2.farm
+}
 
 sig ForumThread {
     author: one Farmer,
@@ -212,7 +265,7 @@ sig Suggestion {
 // World for testing correctness of help requests. 
 // There should be a farmer recipient, with multiple notes, being a recipient.
 // His latest note should be positive.
-pred showForHelpRequests {
+pred showForHelpRequestsForFarmersWithPositiveNote {
     #WaterIrrigationSystemResponse = 0
     #SensorSystemResponse = 0
     #WeatherSystemResponse = 0
@@ -223,19 +276,41 @@ pred showForHelpRequests {
     #HelpResponse = 0
 	#Suggestion = 0
 	#Production = 0
-
+    #Mandal = 1
+    
     #Agronomist = 1
     #Farmer = 2
-	all a: Agronomist | no ~recipients[a]
-	some f: Farmer | some ~recipients[f] && #~farmer[f] >= 5
-
     #HelpRequest = 1
-    #FarmerNote >= 5
+    #FarmerNote >= 3
     #PolicyMaker <=3
 	#recipients >= 1
-}
 
-run showForHelpRequests for 8
+	all a: Agronomist | no ~recipients[a]
+	some f: Farmer | some ~recipients[f] && #farmerNotes[f] >= 5
+}
+run showForHelpRequestsForFarmersWithPositiveNote for 8
+
+
+pred showWorldWithoutVisitsDueToAgronomistDecision {
+    #ForumThread = 0
+    #ForumComment = 0
+    #HelpResponse = 0
+    #WaterIrrigationSystemResponse = 0
+    #SensorSystemResponse = 0
+    #WeatherSystemResponse = 0
+
+    #Suggestion = 1
+    #HelpRequest = 2
+    #Visit > 1
+    #Farmer = 1
+    #PolicyMaker <= 1
+    #Agronomist = 3
+    #FarmerNote >= 2
+    
+    some v: Visit | v.reason = NegativeNote && v.state = Planned
+}
+run showWorldWithoutVisitsDueToAgronomistDecision for 10
+
 
 pred show {
     #WaterIrrigationSystemResponse = 1

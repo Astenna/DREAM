@@ -1,1 +1,49 @@
 \chapter{Formal Analysis using Alloy}
+This chapter presents formal analysis of the model using Alloy. The goal is to describe and correctness proof of only the most important parts of the system. 
+
+%TODO 
+\todo{Upload latest version of alloy script and describe it}
+\section{Alloy model}
+\begin{figure}[h]
+\lstinputlisting[language=alloy,firstnumber=1, linerange={1-26}]{alloy/model.als}
+\caption{Service 1}
+\end{figure}
+
+
+\section{Generated worlds}
+% TODO - describe importants facts
+\todo{describe what each figure presents}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio, origin=c]{alloy/world_instances/showWorldWithRejectedCasualVisit2.png}
+    \caption{World instance focused on visits - rejected, causal visit}
+    \label{fig:rejected_causal}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio, origin=c]{alloy/world_instances/showWorldWithPlannedVisitDueToNegativeNote2.png}
+    \caption{World instance focused on visits - planned, due to negative note visit}
+    \label{fig:planned_negative_note}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio, origin=c]{alloy/world_instances/showWorldFocusedOnForum2.png}
+    \caption{World instance focused on farmer's forum}
+    \label{fig:forum}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio, origin=c]{alloy/world_instances/showHelpRequestsForFarmersWithPositiveNote2.png}
+    \caption{World instance focused on help requests}
+    \label{fig:help_requests}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio, origin=c]{alloy/world_instances/General2.png}
+    \caption{World instance without visits (focus shifted to other atoms)}
+    \label{fig:general_world}
+\end{figure}

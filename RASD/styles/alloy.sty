@@ -3,11 +3,21 @@
 {
   % list of keywords
     morekeywords={
-        assert, pred, all, no, lone, one, some, check, run,
-            but, let, implies, not, iff, in, and, or, set, sig, Int, int,
+        assert, this, pred, all, no, lone, one, some, check, run,
+            but, let, implies, not, iff, in, and, or, set, sig, enum, Int, int,
             if, then, else, exactly, disj, fact, fun, module, abstract,
             extends, open, none, univ, iden, seq,
   },
+  % Types
+    emph=[1]{
+        Date, Int, Note, VisitReason, WeatherType, VisitState, ProblemType, User, PolicyMaker, Agronomist, Farmer, FarmerNote, Farm, Mandal, Production, WaterIrrigationSystemResponse, SensorSystemResponse, WeatherSystemResponse, ProductionType, HelpRequest, HelpResponse, Visit, ForumThread, ForumComment, Suggestion},
+        emphstyle=[1]{\color{brown}
+    },
+    % Functions
+    emph=[2]{
+        isLatestFarmerNote, latestFarmerNoteIsEq, OnlyAgronomistOrAFarmerWithPositiveNoteCanBeARecipientOfAHelpRequest, VerifyOnlyNegativeNoteHasAProblemType, NoTwoNotesForTheSameDayAndFarmer, NoMandalWithoutAnAgronomist, VerifyNoMandalWithoutAnAgronomist, NoFarmWithoutFarmer, VerifyNoFarmWithoutFarmer, NoWaterIrrigationSystemResponseWithoutAFarm, VerifyNoWaterIrrigationSystemResponseWithoutAFarm, NoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest, NoFarmerIsARecipientofHisHelpRequest, VerifyNoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest, AgronomistIsARecipientOfAHelpRequestBasedOnAreaOfResponsibility, NoSensorSystemResponseWithoutAFarm, VerifyNoSensorSystemResponseWithoutAFarm, NoWeatherSystemResponseWithoutAMandal, VerifyNoWeatherSystemResponseWithoutAMandal, NoVisitsWithoutAgronomist, CasualVisitMustBePlannedIfItWasRejectedOrConfirmed, NoVisitIsConfirmedBeforeItsDate, NoVisitIsPlannedAfterItsDate, NoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative, VerifyNoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative, NoVisitDueToNegativeNoteIsPlannedBeforeTheDateOfTheLastNegativeNote, NoMultipleVisitsDueToNegativeNoteOnTheSameDayToTheSameFarm, NoMultipleCasualVisitsOnTheSameDayToTheSameFarm, NoForumCommentWithoutAForumThread, VerifyNoForumCommentWithoutAForumThread, showForHelpRequestsForFarmersWithPositiveNote, showWorldWithPlannedVisitDueToNegativeNote, showWorldWithRejectedCasualVisit, showWorldWithoutFocusedOnForum
+    },
+    emphstyle=[2]{\color{glaucous}}
 %  literate=%
 %    {:}{$\colon$}1
 %    {|}{$\bullet$}1
