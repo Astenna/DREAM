@@ -17,7 +17,7 @@
     emph=[2]{
         isLatestFarmerNote, latestFarmerNoteIsEq, OnlyAgronomistOrAFarmerWithPositiveNoteCanBeARecipientOfAHelpRequest, VerifyOnlyNegativeNoteHasAProblemType, NoTwoNotesForTheSameDayAndFarmer, NoMandalWithoutAnAgronomist, VerifyNoMandalWithoutAnAgronomist, NoFarmWithoutFarmer, VerifyNoFarmWithoutFarmer, NoWaterIrrigationSystemResponseWithoutAFarm, VerifyNoWaterIrrigationSystemResponseWithoutAFarm, NoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest, NoFarmerIsARecipientofHisHelpRequest, VerifyNoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest, AgronomistIsARecipientOfAHelpRequestBasedOnAreaOfResponsibility, NoSensorSystemResponseWithoutAFarm, VerifyNoSensorSystemResponseWithoutAFarm, NoWeatherSystemResponseWithoutAMandal, VerifyNoWeatherSystemResponseWithoutAMandal, NoVisitsWithoutAgronomist, CasualVisitMustBePlannedIfItWasRejectedOrConfirmed, NoVisitIsConfirmedBeforeItsDate, NoVisitIsPlannedAfterItsDate, NoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative, VerifyNoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative, NoVisitDueToNegativeNoteIsPlannedBeforeTheDateOfTheLastNegativeNote, NoMultipleVisitsDueToNegativeNoteOnTheSameDayToTheSameFarm, NoMultipleCasualVisitsOnTheSameDayToTheSameFarm, NoForumCommentWithoutAForumThread, VerifyNoForumCommentWithoutAForumThread, showForHelpRequestsForFarmersWithPositiveNote, showWorldWithPlannedVisitDueToNegativeNote, showWorldWithRejectedCasualVisit, showWorldWithoutFocusedOnForum
     },
-    emphstyle=[2]{\color{glaucous}}
+    emphstyle=[2]{\color{blue}},
 %  literate=%
 %    {:}{$\colon$}1
 %    {|}{$\bullet$}1
@@ -33,12 +33,12 @@
 %    {!in}{$\not\in$}1
 %    {\\in}{$\in$}1
 %    {=>}{$\implies$}2
-%    ,
     sensitive=true, % keywords are not case-sensitive
     morecomment=[l]{//}, % l is for line comment
     morecomment=[s]{/*}{*/}, % s is for start and end delimiter
     morecomment=[l]{--},
-    morestring=[b]" % defines that strings are enclosed in double quotes
+    morestring=[b]", % defines that strings are enclosed in double quotes
+    %literate={\-}{}{0\discretionary{-}{\\}{}}
 }
 
 % Define Colors
@@ -67,3 +67,4 @@
     keywordstyle=\color{eclipsePurple}, % style of keywords
     stringstyle=\color{eclipseBlue}, % style of strings
 }
+

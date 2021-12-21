@@ -176,15 +176,6 @@ check VerifyNoWaterIrrigationSystemResponseWithoutAFarm
 fact NoFarmerWithoutPositiveNoteIsARecipientOfAHelpRequest {
     no h: HelpRequest | one r: h.recipients | r in Farmer && (latestFarmerNoteIsEq[r, Neutral] || latestFarmerNoteIsEq[r, Negative])
 }
-assert VerifyNoFarmerIsARecipientofHisHelpRequest {
-    no f: Farmer | f = HelpRequest.author && f in HelpRequest.recipients
-}
-check VerifyNoFarmerIsARecipientofHisHelpRequest
-
-assert VerifyNoFarmerWithoutPositiveNoteIsARecipientOfAHelpRequest {
-	no h: HelpRequest | one r: h.recipients | r in Farmer && (latestFarmerNoteIsEq[r, Neutral] || latestFarmerNoteIsEq[r, Negative])
-}
-check VerifyNoFarmerWithoutPositiveNoteIsARecipientOfAHelpRequest
 
 assert VerifyAuthorOfHelpReponseMustBeInsideRequestRecipients {
     all hr: HelpResponse | one rec: hr.helpRequest.recipients | hr.author in rec
