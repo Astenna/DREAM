@@ -117,14 +117,14 @@ pred isLatestFarmerNote [farmerNote: one FarmerNote, farmerNotes: set FarmerNote
 }
 
 pred latestFarmerNoteIsEq [f: Farmer, n: Note] {
-	one farmerNote: farmerNotes[f] | 
-		(isLatestFarmerNote[farmerNote, farmerNotes[f]] && farmerNote.note = n)
-		||
-		(n = Neutral && no farmerNotes[f])
+    one farmerNote: farmerNotes[f] | 
+	    (isLatestFarmerNote[farmerNote, farmerNotes[f]] && farmerNote.note = n)
+	    ||
+	    (n = Neutral && no farmerNotes[f])
 }
 
 fact OnlyAgronomistOrAFarmerWithPositiveNoteCanBeARecipientOfAHelpRequest{
-	all h: HelpRequest | all r: h.recipients | (r in Agronomist) || (r in Farmer && latestFarmerNoteIsEq[r, Positive])
+    all h: HelpRequest | all r: h.recipients | (r in Agronomist) || (r in Farmer && latestFarmerNoteIsEq[r, Positive])
 }
 
 assert VerifyOnlyNegativeNoteHasAProblemType {
@@ -177,10 +177,10 @@ fact NoFarmerWithoutPositiveNoteIsARecipientOfAHelpRequest {
     no h: HelpRequest | one r: h.recipients | r in Farmer && (latestFarmerNoteIsEq[r, Neutral] || latestFarmerNoteIsEq[r, Negative])
 }
 
-assert VerifyAuthorOfHelpReponseMustBeInsideRequestRecipients {
+assert VerifyAuthorOfHelpResponseMustBeInsideRequestRecipients {
     all hr: HelpResponse | one rec: hr.helpRequest.recipients | hr.author in rec
 }
-check VerifyAuthorOfHelpReponseMustBeInsideRequestRecipients
+check VerifyAuthorOfHelpResponseMustBeInsideRequestRecipients
 
 fact AgronomistIsARecipientOfAHelpRequestBasedOnAreaOfResponsibility {
     all h: HelpRequest | some r: h.recipients | 
@@ -218,11 +218,11 @@ fact CasualVisitMustBePlannedIfItWasRejectedOrConfirmed {
 }
 
 fact NoVisitIsConfirmedBeforeItsDate {
-    no v : Visit | v.state = Confirmed && v.date > currentDate
+    no v: Visit | v.state = Confirmed && v.date > currentDate
 }
 
 fact NoVisitIsPlannedAfterItsDate {
-    no v : Visit | v.state = Planned && v.date <= currentDate
+    no v: Visit | v.state = Planned && v.date <= currentDate
 }
 
 fact NoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative {
@@ -282,20 +282,20 @@ pred showHelpRequestsForFarmersWithPositiveNote {
     #WeatherSystemResponse = 0
     #ForumThread = 0
     #ForumComment = 0
-	#ProductionType = 0
+    #ProductionType = 0
     #Visit = 0
     #HelpResponse > 2
-	#Suggestion = 0
-	#Production = 0
+    #Suggestion = 0
+    #Production = 0
     #Mandal = 1
     
     #Agronomist = 1
     #Farmer = 2
     #HelpRequest > 1
-    #PolicyMaker <=3
-	#recipients >= 1
+    #PolicyMaker <= 3
+    #recipients >= 1
 
-	some f: Farmer | some ~recipients[f] && #farmerNotes[f] = 3
+    some f: Farmer | some ~recipients[f] && #farmerNotes[f] = 3
 }
 run showHelpRequestsForFarmersWithPositiveNote for 8
 
@@ -317,8 +317,8 @@ pred showWorldWithPlannedVisitDueToNegativeNote {
     #Agronomist = 1
     #FarmerNote >= 2
     
-	some v: Visit | v.state = Confirmed
-	some v: Visit | v.state = Planned && v.reason = NegativeNote
+    some v: Visit | v.state = Confirmed
+    some v: Visit | v.state = Planned && v.reason = NegativeNote
 }
 run showWorldWithPlannedVisitDueToNegativeNote for 8
 
@@ -340,7 +340,7 @@ pred showWorldWithRejectedCasualVisit {
     #Agronomist = 1
     #FarmerNote >= 2
     
-	some v: Visit | v.state = Rejected && v.reason = Casual
+    some v: Visit | v.state = Rejected && v.reason = Casual
 }
 run showWorldWithRejectedCasualVisit for 8
 

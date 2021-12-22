@@ -6,16 +6,17 @@
         assert, this, pred, all, no, lone, one, some, check, run,
             but, let, implies, not, iff, in, and, or, set, sig, enum, Int, int,
             if, then, else, exactly, disj, fact, fun, module, abstract,
-            extends, open, none, univ, iden, seq,
+            extends, open, none, univ, iden, seq, for
   },
   % Types
     emph=[1]{
-        Date, Int, Note, VisitReason, WeatherType, VisitState, ProblemType, User, PolicyMaker, Agronomist, Farmer, FarmerNote, Farm, Mandal, Production, WaterIrrigationSystemResponse, SensorSystemResponse, WeatherSystemResponse, ProductionType, HelpRequest, HelpResponse, Visit, ForumThread, ForumComment, Suggestion},
+        Date, Int, Note, VisitReason, WeatherType, VisitState, ProblemType, User, PolicyMaker, Agronomist, Farmer, FarmerNote, Farm, Mandal, Production, WaterIrrigationSystemResponse, SensorSystemResponse, WeatherSystemResponse, ProductionType, HelpRequest, HelpResponse, Visit, ForumThread, ForumComment, Suggestion
+    },
         emphstyle=[1]{\color{brown}
     },
     % Functions
     emph=[2]{
-        isLatestFarmerNote, latestFarmerNoteIsEq, OnlyAgronomistOrAFarmerWithPositiveNoteCanBeARecipientOfAHelpRequest, VerifyOnlyNegativeNoteHasAProblemType, NoTwoNotesForTheSameDayAndFarmer, NoMandalWithoutAnAgronomist, VerifyNoMandalWithoutAnAgronomist, NoFarmWithoutFarmer, VerifyNoFarmWithoutFarmer, NoWaterIrrigationSystemResponseWithoutAFarm, VerifyNoWaterIrrigationSystemResponseWithoutAFarm, NoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest, NoFarmerIsARecipientofHisHelpRequest, VerifyNoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest, AgronomistIsARecipientOfAHelpRequestBasedOnAreaOfResponsibility, NoSensorSystemResponseWithoutAFarm, VerifyNoSensorSystemResponseWithoutAFarm, NoWeatherSystemResponseWithoutAMandal, VerifyNoWeatherSystemResponseWithoutAMandal, NoVisitsWithoutAgronomist, CasualVisitMustBePlannedIfItWasRejectedOrConfirmed, NoVisitIsConfirmedBeforeItsDate, NoVisitIsPlannedAfterItsDate, NoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative, VerifyNoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative, NoVisitDueToNegativeNoteIsPlannedBeforeTheDateOfTheLastNegativeNote, NoMultipleVisitsDueToNegativeNoteOnTheSameDayToTheSameFarm, NoMultipleCasualVisitsOnTheSameDayToTheSameFarm, NoForumCommentWithoutAForumThread, VerifyNoForumCommentWithoutAForumThread, showForHelpRequestsForFarmersWithPositiveNote, showWorldWithPlannedVisitDueToNegativeNote, showWorldWithRejectedCasualVisit, showWorldWithoutFocusedOnForum
+        isLatestFarmerNote, latestFarmerNoteIsEq, OnlyAgronomistOrAFarmerWithPositiveNoteCanBeARecipientOfAHelpRequest, VerifyOnlyNegativeNoteHasAProblemType, NoTwoNotesForTheSameDayAndFarmer, NoMandalWithoutAnAgronomist, VerifyNoMandalWithoutAnAgronomist, NoFarmWithoutFarmer, VerifyNoFarmWithoutFarmer, NoWaterIrrigationSystemResponseWithoutAFarm, VerifyNoWaterIrrigationSystemResponseWithoutAFarm, NoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest, NoFarmerIsARecipientofHisHelpRequest, VerifyNoFarmerWithNotPositiveNoteIsARecipientOfAHelpRequest, AgronomistIsARecipientOfAHelpRequestBasedOnAreaOfResponsibility, NoSensorSystemResponseWithoutAFarm, VerifyNoSensorSystemResponseWithoutAFarm, NoWeatherSystemResponseWithoutAMandal, VerifyNoWeatherSystemResponseWithoutAMandal, NoVisitsWithoutAgronomist, CasualVisitMustBePlannedIfItWasRejectedOrConfirmed, NoVisitIsConfirmedBeforeItsDate, NoVisitIsPlannedAfterItsDate, NoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative, VerifyNoPlannedVisitCausedByNegativeNoteIfFarmerNoteIsNotNegative, NoVisitDueToNegativeNoteIsPlannedBeforeTheDateOfTheLastNegativeNote, NoMultipleVisitsDueToNegativeNoteOnTheSameDayToTheSameFarm, NoMultipleCasualVisitsOnTheSameDayToTheSameFarm, NoForumCommentWithoutAForumThread, VerifyNoForumCommentWithoutAForumThread, showForHelpRequestsForFarmersWithPositiveNote, showWorldWithPlannedVisitDueToNegativeNote, showWorldWithRejectedCasualVisit, showWorldWithoutFocusedOnForum, showWorldFocusedOnForum, show, VerifyAuthorOfHelpResponseMustBeInsideRequestRecipients, VerifyNoProductionWithoutAFarm, VerifyEachMandalIsInsideAgronomistAreaOfResponsibility, showHelpRequestsForFarmersWithPositiveNote, NoFarmerWithoutPositiveNoteIsARecipientOfAHelpRequest
     },
     emphstyle=[2]{\color{blue}},
 %  literate=%
@@ -50,10 +51,10 @@
 % Set Language
 \lstset{
     language={alloy},
-    basicstyle=\small\ttfamily, % Global Code Style
+    basicstyle=\footnotesize\ttfamily, % Global Code Style
     captionpos=b, % Position of the Caption (t for top, b for bottom)
     extendedchars=true, % Allows 256 instead of 128 ASCII characters
-    tabsize=2, % number of spaces indented when discovering a tab 
+    tabsize=4, % number of spaces indented when discovering a tab 
     columns=fixed, % make all characters equal width
     keepspaces=true, % does not ignore spaces to fit width, convert tabs to spaces
     showstringspaces=false, % lets spaces in strings appear as real spaces
