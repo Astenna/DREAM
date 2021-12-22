@@ -1,0 +1,21 @@
+\documentclass[a4paper, 11pt, oneside, openright, english]{memoir}
+
+\usepackage{styles/preamble}
+
+\begin{document}
+	\include{title_page/title_page}
+	
+	\pagenumbering{Roman}
+	
+	\tableofcontents
+	
+	\pagenumbering{arabic}
+
+	\include{chapters/1_Introduction}
+	\include{chapters/2_Architectural_Design}
+	\include{chapters/3_User_Interface_Design}
+	\include{chapters/4_Requirements_Traceability}
+	\include{chapters/5_Implementation_Integration_and_Testing_Plan.tex}
+	\include{chapters/6_Effort_Spent}
+    \include{chapters/7_References}
+\end{document}
