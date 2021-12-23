@@ -2,9 +2,25 @@
 
 \section{Purpose}
 
-RASD \cite{rasd}.
+The goal of this document is to offer broad advice to the architectural design of the software product hence it is primarily directed to the development team, which includes both developers and testers.
+
+More specifically, this document provides an overview of the high-level architecture (identifying the key components and their interactions) as well as further information on the application's runtime behavior and user interface. Additionally, it comprises a strategy for implementation, integration, and testing.
+
+This document, together with RASD \cite{rasd}, is intended to aid developers in the implementation of the DREAM project.
 
 \section{Scope}
+
+Data dRiven PrEdictive FArMing (DREAM) is a project that aims to restructure the food production process in Telangana in order to build more resilient agricultural systems needed to fulfill the region's expanding food demand \cite{reference_doc}. To handle such a large issue, it is necessary to bring together people from many professions and backgrounds; hence, participation from groups such as stakeholders, policymakers, farmers, analysts, and agronomists is sought.
+
+Data collection and analysis can be considered as the first possible step in achieving the goal. Farmers, specialized sensors planted on the ground that monitor soil humidity, and government agronomists who visit farms on a regular basis might all provide this information.
+
+The system's objective is to support policymakers to identify farmers who perform well, particularly in harsh weather circumstances, farmers who perform poorly and require support, and to determine if agronomist-led steering efforts provide significant results. This will be accomplished by continual evaluation based on data visualizations.
+
+Farmers would profit from the system as well, because it would allow them to share best practices between each other and request assistance when required. All of this will be augmented with data visualizations, such as suggestions and weather forecasts.
+
+The initiative also promises to make agronomists' jobs easier by generating a daily schedule for field visits, providing data on farmers' performance, and telling them about incoming support requests.
+
+The system aims to solve a very challenging problem, which involves the collaboration of many professionals. All of these characteristics necessitate that the system is straightforward to use, intuitive, and plain so that everyone may benefit from it.
 
 \section{Definitions, Acronyms, Abbreviations}
 
@@ -14,6 +30,25 @@ RASD \cite{rasd}.
     \begin{longtable}{@{}p{0.28\linewidth} p{0.68\linewidth}@{}}
 		\toprule
 		\textbf{Expression}     & \textbf{Definition}\\
+		Mockup					& A static wireframe that adds additional aesthetic and visual user interface aspects to provide a realistic depiction of what the final page will look like.\\
+		Water irrigation system & Collection of external devices which gather information about the amount of water used on a given farm. Collected data are available via an API. \\
+        Sensor/Humidity sensor 	& External device which collects information about the humidity of soil on a given farm.\\
+        Sensor system           & Collection of all the sensors on a farm. Collected data are available via an API.\\
+        Farmer's summary        & Summary of farmer and farm data. Contains: information about farmer and his farm, note history, short-term weather forecasts, production data, farm visits, weather forecast history, soil humidity data, water usage, and help requests.\\
+        Farmer's note           & Evaluation note given by a governmental policy maker based on a farmer's performance. Can include a type of problem, that the farmer is facing. Can be negative, neutral, or positive.\\
+        Farm data               & Data concerning a farm, inserted by a farmer during account creation. Consist of water irrigation system's ID, sensor system's ID and farm's address (address line 1, address line 2, postal code, city and mandal).\\
+        Personalized suggestion & Suggestions proposed to the farmers, based on a mandal and types of production of a given farm. Suggestions are inserted into the system by agronomists.\\
+        Production type         & Kind of plants being produced on Telangana's farms.\\
+        Production data         & Information provided by a farmer about his production. It lists production types and quantities (in kg) generated per type.\\
+        Mandal                  & A local government area in India. Part of a district, which in turn is a part of a state.\\
+        Dashboard               & The first screen that appears to the user after logging in to the system.\\
+        Area of responsibility  & Set of mandals that an agronomist is responsible for.\\
+        Daily plan              & A daily schedule for visiting farms in a certain area of responsibility.\\
+        Casual visit            & A visit automatically arranged by the system. There are two casual visits to each farm every year.\\
+        Request for help, Help request & An issue created by a farmer. It contains a topic, description and a problem. The system automatically forwards it to well-performing farmers and agronomists in the same mandal.\\
+        External systems        & Systems that are not a part of DREAM and collect various farm-specific data and share them via an API. Following external systems are used: Weather Forecast System, Water Irrigation System, Sensor System.\\
+        Water irrigation system's ID    & Number which uniquely identifies a water irrigation system. It is necessary for definition of the external system's API endpoint. The number is provided during installation of the water irrigation system.  \\
+        Sensor system's ID              & Number which uniquely identifies a sensor system. It is necessary for definition of the external system's API endpoint. The number is provided during installation of the sensor system. \\
 		\midrule
 
 	\end{longtable}
@@ -27,9 +62,18 @@ RASD \cite{rasd}.
 		\textbf{Acronyms}   & \textbf{Expression}\\
 		\endfirsthead
 		\midrule
+		A                   & Domain assumption\\
+		API                 & Application Programming Interface\\
 		DD                  & Design Document\\
 		DREAM               & Data-dRiven PrEdictive FArMing in Telangana\\
+		G					& Goal\\
+		HMACSHA1            & Hash-based Message Authentication Code (HMAC) using the SHA1 hash function \\
+		M					& Mockup\\
+		PBKDF2              & Password-Based Key Derivation Function 2 \\ 
+		R                   & Requirement\\
 		RASD                & Requirements Analysis and Specifications Document\\
+		REST				& Representational State Transfer\\
+		UI				  	& User Interface\\
 		\bottomrule
 	\end{longtable}
 \end{center}
@@ -41,8 +85,6 @@ RASD \cite{rasd}.
 		\toprule
 		\textbf{Abbreviations}  & \textbf{Expression}\\
 		\midrule
-	    a.m. & ante meridiem\\
-	    p.m. & post meridiem\\
 	    e.g. & exempli gratia\\
 		\bottomrule
 	\end{longtable}
@@ -69,10 +111,11 @@ RASD \cite{rasd}.
 \section{Document Structure}
 
 \begin{enumerate}
-    \item \textbf{Introduction}:
-    \item \textbf{Overall Description}:
-    \item \textbf{Specific Requirements}:
-    \item \textbf{Formal Analysis using Alloy}:
-    \item \textbf{Effort Spent}:
+    \item \textbf{Introduction}: outlines the document's overall purpose as well as its scope. It also establishes particular definitions, acronyms, and abbreviations that are used throughout the text.
+    \item \textbf{Architectural Design}: provides a high-level overview of how the system is organized into components and identifies interactions between them, as well as component, deployment, and runtime views. This section also focuses on the key architectural styles and patterns used in the system's design.
+    \item \textbf{User Interface Design}: gives an overview of how the system's user interface would appear and defines the system's functionality from the user's point of view.
+    \item \textbf{Requirements Traceability}: describes how the requirements specified in the RASD translate to the design components defined in this document.
+    \item \textbf{Implementation, Integration and Test Plan}: specifies the order in which the system's subcomponents are to be implemented and then integrated. Further it provides a plan to follow in order to properly test the integration of system components.
+    \item \textbf{Effort Spent}: provides details on each group member's contribution to the project.
     \item \textbf{References}
 \end{enumerate}
