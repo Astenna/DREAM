@@ -1,1 +1,85 @@
 \chapter{Requirements Traceability} \label{ch:requirements_traceability}
+
+{
+    \newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+    \newcommand*{\cb}{\CheckmarkBold}
+    \footnotesize
+
+    \begin{longtable}{|*{23}{@{}C{7mm}@{}|}}
+        \toprule
+        & \textbf{M1} & \textbf{M2} & \textbf{M3} & \textbf{M4} & \textbf{M5} & \textbf{M6} & \textbf{M7} & \textbf{M8} & \textbf{M9} & \textbf{M10} & \textbf{M11} & \textbf{M12} & \textbf{M13} & \textbf{M14} & \textbf{M15} & \textbf{M16} & \textbf{M17} & \textbf{M18} & \textbf{M19} & \textbf{M20} & \textbf{M21} & \textbf{M22} \\
+        \midrule
+                  %  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 &10 &11 &12 &13 &14 &15 &16 &17 &18 &19 &20 &21 &22\\
+        \textbf{R1}  &\cb&\cb&\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R2}  &\cb&\cb&\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R3}  &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R4}  &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R5}  &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R6}  &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R7}  &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R8}  &   &   &   &\cb&\cb&\cb&\cb&\cb&\cb&\cb&\cb&\cb&\cb&\cb&\cb&\cb&\cb&\cb&\cb&\cb&\cb& \\
+        \textbf{R9}  &   &   &   &\cb&   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &\cb&   & \\
+        \textbf{R10} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&\cb\\
+        \textbf{R11} &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\\
+        \textbf{R12} &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R13} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb\\
+        \textbf{R14} &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R15} &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R16} &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R17} &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R18} &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R19} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   & \\
+        \textbf{R20} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &\cb& \\
+        \textbf{R21} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   & \\
+        \textbf{R22} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   & \\
+        \textbf{R23} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb\\
+        \textbf{R24} &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R25} &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R26} &   &   &   &   &\cb&\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R27} &   &   &   &   &   &\cb&\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R28} &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R29} &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R30} &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R31} &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R32} &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R33} &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R34} &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R35} &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R36} &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R37} &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R38} &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R39} &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R40} &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   & \\
+                  %  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 &10 &11 &12 &13 &14 &15 &16 &17 &18 &19 &20 &21 &22\\
+        \textbf{R41} &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   & \\
+        \textbf{R42} &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   & \\
+        \textbf{R43} &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R44} &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   & \\
+        \textbf{R45} &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R46} &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R47} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   & \\
+        \textbf{R48} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   & \\
+        \textbf{R49} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   & \\
+        \textbf{R50} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   & \\
+        \textbf{R51} &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R52} &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &\cb&   &   &   & \\
+        \textbf{R53} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   & \\
+        \textbf{R54} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   & \\
+        \textbf{R55} &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &\cb&   &   &   & \\
+        \textbf{R56} &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R57} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   &   & \\
+        \textbf{R58} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&\cb&   &   &   &   & \\
+        \textbf{R59} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   & \\
+        \textbf{R60} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   & \\
+        \textbf{R61} &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R62} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &\cb&   &   &   &   & \\
+        \textbf{R63} &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R64} &NAN&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R65} &   &   &   &\cb&\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R66} &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R67} &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \textbf{R68} &   &   &   &   &   &   &   &\cb&   &   &   &   &   &   &   &   &   &   &   &   &   & \\
+        \bottomrule
+        \caption{Mockups mapping on requirements.}
+    \end{longtable}
+}
