@@ -1,0 +1,50 @@
+\definecolor{antiquefuchsia}{rgb}{0.57, 0.36, 0.51}
+\definecolor{britishracinggreen}{rgb}{0.0, 0.26, 0.15}
+\definecolor{eclipseGreen}{RGB}{63,127,95}
+\definecolor{glaucous}{rgb}{0.38, 0.51, 0.71}
+\definecolor{red}{rgb}{0.6,0,0} 
+
+
+\lstdefinelanguage{Cpp}{
+    language=C++,
+    basicstyle=\footnotesize\ttfamily,
+    numbers=left,
+    numberstyle=\tiny,
+    numbersep=5pt,
+    tabsize=2,
+    extendedchars=true,
+    breaklines=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    % frame=b,
+    stringstyle=\color{britishracinggreen}\ttfamily,
+    showspaces=false,
+    showtabs=false,
+    xleftmargin=17pt,
+    framexleftmargin=17pt,
+    framexrightmargin=5pt,
+    framexbottommargin=4pt,
+    commentstyle=\color{eclipseGreen},
+    morecomment=[l]{//}, %use comment-line-style!
+    morecomment=[s]{/*}{*/}, %for multiline comments
+    showstringspaces=false,
+    columns=fullflexible,
+    keywordstyle=\color{antiquefuchsia},
+    % identifierstyle=\color{red},
+    % backgroundcolor=\color{gray!10},
+	belowskip=.5\baselineskip,
+	morekeywords={ 
+      nullptr  
+    },
+    moredelim=[is][\color{gray}]{!*}{*!},
+	% Types
+    emph=[1]{
+        vector, Visit, ProblemType, VisitState, DateTime, Farm, Agronomist, Farmer, VisitReason, VisitDataAccess, Note
+    },% Insert here the types you are using
+        emphstyle=[1]{\color{brown}
+    },
+    % Functions
+    emph=[2]{
+        calculateVisitsToAdd, getFutureVisitsOnFarm, now, getOptimalVisitDate, createVisitOnTheMostQuietDayCloseToDate, createAdditionalVisit, planVisits, getDateTimeOfMostFutureVisit, updateVisit, submitVisit, deleteVisitsCreatedDueToNegativeNote, remove_if, erase, begin, end, setNote, updateVisitData, createVisit, getVisits
+    },
+    emphstyle=[2]{\color{glaucous}}
+}

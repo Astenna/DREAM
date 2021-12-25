@@ -15,3 +15,66 @@
 REST \cite{rest}.
 
 \section{Other Design Decisions}
+
+\subsection{Visit Scheduling Algorithm}
+
+One of the most important features of the system is the ability to schedule agronomist's visits to a farm. Requirement \textbf{R5} (all the requirements are described in RASD) states that all farms must be visited at least twice a year, whereas \textbf{R14} extends it further by adding a constraint that under-performing farmer's, meaning farmers with a negative note, should be visited more often, depending on the problem they are facing.
+
+The system must be therefore able to schedule visits to a farm in a way that satisfies both requirements. This section presents an overview of the algorithm employed to tackle this problem.
+
+\subsubsection*{General approach}
+
+When planning a new visit it is necessary to take the following factors into consideration:
+\begin{itemize}
+    \item dates and number of already planned visits to the farm,
+    \item number of visits planned for an agronomist on a given day,
+    \item type of the problem the farmer is facing.
+\end{itemize}
+
+Function \textit{calculateVisitsToAdd} presented in the listing \ref{lst:CalculateVisitsToAdd} calculates the number of visits to add to the farm, given the number of already planned visits to the farm, the number of visits planned for an agronomist on a given day and the type of the problem the farmer is facing. In case there are already more visits to the farm planned than the number of casual visits (2) and the number of visits to add, then no new visit is necessary and the function returns 0. Such situation may happen when there are many visits planned to one farm due to the agronomist's decision.
+
+\lstinputlisting[language=Cpp, caption={Function calculating the number of visits to add due to a problem.}, label={lst:CalculateVisitsToAdd}]{algorithms/visit_scheduling/CalculateVisitsToAdd.cpp}
+
+Another function, presented in the listing \ref{lst:GetOptimalVisitDate} is \textit{getOptimalVisitDate}. It finds the greatest gap between two consecutive visits to the farm and inserts a new visit in between. It also considers a time slot in exactly one year from the current date so that in case of completing a casual visit, a new one is created in approximately half of a year.
+
+\lstinputlisting[language=Cpp, caption={Function responsible for picking the optimal date of a new visit.}, label={lst:GetOptimalVisitDate}]{algorithms/visit_scheduling/GetOptimalVisitDate.cpp}
+
+\subsubsection*{Planning additional visits}
+
+This section presents the process of scheduling a new visit to a farm. Function \textit{createVisitOnTheMostQuietDayCloseToDate} is presented in the listing \ref{lst:CreateVisitOnTheMostQuietDayCloseToDate}. It is responsible for creating a new visit to the farm on the most quiet day close to the date specified in the function's argument. It goes through up to 5 days before the proposed date and searches for an agronomist, who has not reached the maximum number of visits to the farm on a given day, otherwise, the visit is scheduled for the agronomist with the least visits planned in the specified window.
+
+\lstinputlisting[language=Cpp, caption={Function creating a new visit on the most quiet day that is close to the specified date.}, label={lst:CreateVisitOnTheMostQuietDayCloseToDate}]{algorithms/visit_scheduling/CreateVisitOnTheMostQuietDayCloseToDate.cpp}
+
+Function \textit{createAdditionalVisits}, presented in the listing \ref{lst:CreateAdditionalVisit}, is the main function responsible for scheduling additional visits to the farm.
+
+\lstinputlisting[language=Cpp, caption={Function creating additional visits.}, label={lst:CreateAdditionalVisit}]{algorithms/visit_scheduling/CreateAdditionalVisit.cpp}
+
+Due to the abovementioned requirements, the system must be able to schedule different types of visits to the farm. These types are identified by the visit's reason. The following listing \ref{lst:PlanVisits} presents the function meant to handle this problem.
+
+\lstinputlisting[language=Cpp, caption={Function responsible for planning new visits.}, label={lst:PlanVisits}]{algorithms/visit_scheduling/PlanVisits.cpp}
+
+\subsubsection*{Farmer registration}
+
+Listing \ref{lst:CreateFarmer} presents the process of creating a farmer. Each time a new farmer is created, the system must plan two casual visits to his farm.
+
+\lstinputlisting[language=Cpp, caption={Function responsible for creating a new farmer.}, label={lst:CreateFarmer}]{algorithms/visit_scheduling/CreateFarmer.cpp}
+
+\subsubsection*{Daily plan submission}
+
+Function \textit{updateVisit} (listing \ref{lst:UpdateVisit}) is responsible for changing the date of a visit. It is only possible to do so only if the new date is greater or equal than the current one. In case an agronomist wants to reschedule a visit that is casual, the system allows him to do so but the date can be postponed only by a maximum of 5 days. Otherwise, the systems rejects the request and throws a warning.
+
+\lstinputlisting[language=Cpp, caption={Function responsible for updating a visit.}, label={lst:UpdateVisit}]{algorithms/visit_scheduling/UpdateVisit.cpp}
+
+The process of submitting a visit is described in the listing \ref{lst:SubmitVisit}. In case the date of a visit is greater than the current date, the visit is submitted. In case the date is less than the current date a warning is thrown. A casual visit is a cyclic one, therefore a new one is scheduled every time its status becomes confirmed or rejected. In case of rejecting a casual visit a new one is scheduled in the maximum of next 5 days following the process shown in the listing \ref{lst:PlanVisits}.
+
+\lstinputlisting[language=Cpp, caption={Function responsible for submitting a visit.}, label={lst:SubmitVisit}]{algorithms/visit_scheduling/SubmitVisit.cpp}
+
+\subsubsection*{Obtaining a negative note}
+
+Every time a farmer's note changes from negative to neutral or positive, the system deletes all the visits to the farm that were planned due to the negative note. The function \textit{DeleteVisitsCreatedDueToNegativeNote} (listing \ref{lst:DeleteVisitsCreatedDueToNegativeNote}) handles that.
+
+\lstinputlisting[language=Cpp, caption={Function that deletes visits created due to a negative note.}, label={lst:DeleteVisitsCreatedDueToNegativeNote}]{algorithms/visit_scheduling/DeleteVisitsCreatedDueToNegativeNote.cpp}
+
+Function presented in the listing \ref{lst:SetNote} assures that every time a farmer receives a negative note, there are additional visits to his farm planned. The number of these visits depends on the type of the problem the farmer faces, which is priorly specified by a policy maker when assigning the note.
+
+\lstinputlisting[language=Cpp, caption={Function responsible for setting the farmer's note.}, label={lst:SetNote}]{algorithms/visit_scheduling/SetNote.cpp}

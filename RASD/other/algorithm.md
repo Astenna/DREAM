@@ -54,13 +54,16 @@ When planning a visit it is necessary to take the following factors into conside
         int agr_dec_visits = 0;
         vector<Visit> visits = getFutureVisitsOnFarm(farmer.farm);
 
+        if (visits.length >= DEFAULT_NUM_OF_CASUAL_VISITS + problemType.nAdditionalVisits) {
+            return 0;
+        }
+
         for (const auto &visit : visits) {
             if (visit.reason == VisitReason.AGRONOMIST_DECISION) {
                 agr_dec_visits++;
             }
         }
-        int neg_note_visits = ADDITIONAL_VISITS[problemType];
-        int nVisitsToAdd = neg_note_visits - agr_dec_visits;
+        int nVisitsToAdd = problemType.nAdditionalVisits - agr_dec_visits;
 
         return nVisitsToAdd;
     }
@@ -69,27 +72,27 @@ When planning a visit it is necessary to take the following factors into conside
 4. Pick the optimal date between already planned visits.
 
     ```cpp
-    DateTime getOptimalDateTime(Farm &farm) {
+    DateTime getOptimalVisitDate(Farm &farm) {
         // Make sure that the visits are in ascending ordered
         vector<Visit> visits = getFutureVisitsOnFarm(farm);
-        // Recursively find two consecutive visits that are the furthest from each other
+        // Find two consecutive visits that are the furthest from each other
         // and insert a new visit in the middle. Consider also a timeslot in exactly 1 year from now.
         DateTime greatestGap = 0;
-        DateTime optimalDateTime;
+        DateTime optimalVisitDate;
 
         for (int i = 0; i < visits.length - 1; i++) {
             if ((visits[i + 1].date - visits[i].date) > greatestGap) {
                 greatestGap = visits[i + 1].date - visits[i].date;
-                optimalDateTime = visits[i].date + greatestGap / 2;
+                optimalVisitDate = visits[i].date + greatestGap / 2;
             }
         }
 
         if ((DateTime.now() + DateTime(year=1) - visits[visits.length - 1].date) > greatestGap) {
             greatestGap = DateTime.now() + DateTime(year=1) - visits[visits.length - 1].date;
-            optimalDateTime = visits[visits.length - 1].date + greatestGap / 2;
+            optimalVisitDate = visits[visits.length - 1].date + greatestGap / 2;
         }
 
-        return optimalDateTime;
+        return optimalVisitDate;
     }
     
     ```
@@ -138,10 +141,10 @@ When planning a visit it is necessary to take the following factors into conside
         return newVisit;
     }
 
-    Visit getAdditionalVisit() {
+    Visit createAdditionalVisit() {
         Visit newVisit;
-        DateTime optimalDateTime = getOptimalDateTime(farmer.farm);
-        newVisit = createVisitOnTheMostQuietDayCloseToDate(optimalDateTime);
+        DateTime optimalVisitDate = getOptimalVisitDate(farmer.farm);
+        newVisit = createVisitOnTheMostQuietDayCloseToDate(optimalVisitDate);
 
         return newVisit;
     }
@@ -171,7 +174,7 @@ When planning a visit it is necessary to take the following factors into conside
             }
         } else if (reason == VisitReason.NEGATIVE_NOTE) {
             for (int i = 0; i < n_visits; i++) {
-                Visit visit = getAdditionalVisit();
+                Visit visit = createAdditionalVisit();
                 visit.reason = reason;
                 VisitDataAccess.createVisit(visit);
             }
