@@ -1,6 +1,19 @@
-\chapter{Architectural Design}
+\chapter{Architectural Design} \label{ch:architectural_design}
+
 
 \section{Overview}
+ At the high level, the system employs a client-server architecture. The client part consists of the web application running in a web browser on a user's machine, whereas the server part is composed of a web server, a Dream server, a mail server and a SQL server. The high-level architecture is presented in the figure \ref{fig:high-level-architecture}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm, height=6cm]
+    %[scale=0.45, origin=c]
+    {figures/Overview.png}
+    \caption{High-level architecture diagram}
+    \label{fig:high-level-architecture}
+\end{figure}
+
+The server part uses a database hosted on a SQL Server to store data collected from the users as well as external systems, and the Mail Server used to send the emails required for password reset. Moreover, the web server works as a middleware between the user interface and the database, utilizing HTTP protocol to receive and respond to requests from the web application running on a client's web browser. Finally, the \textit{Dream server} hosts the application server (\textit{backend} part) with the majority of the application business logic. 
 
 \section{Component View}
 
@@ -11,7 +24,12 @@
 \section{Component Interfaces}
 
 \section{Selected Architectural Styles and Patterns}
-
+\begin{itemize}
+    \item REST
+    \item N-tier application
+    \item Client-Server
+    \item SPA (?)
+\end{itemize}
 REST \cite{rest}.
 
 \section{Other Design Decisions}
