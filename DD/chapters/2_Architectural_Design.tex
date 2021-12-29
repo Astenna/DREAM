@@ -25,12 +25,12 @@ The server part uses a database hosted on a SQL Server to store data collected f
 
 \section{Selected Architectural Styles and Patterns}
 \begin{itemize}
-    \item REST
-    \item N-tier application
+    \item \textbf{REST} (\textit{Representational State Transfer}) – the API hosted on a Dream server should be prepared using the REST API design rules \cite{rest} \cite{rest-microsoft}. Firstly, it should not bind the client application to any specific implementation by utilizing HTTP as the communication protocol. Furthermore, as presented in the \todo{add backend comopnent diagram ref} additional layers will be introduced to the server side application to avoid direct dependencies of the API on the database model. Additionally, the interface should be resources-oriented and the HTTP verbs should reflect the operations done on the resources. All this aims at improving the maintainability, reusability, and readability of the server application.
+    \item \textbf{N-tier application} – the server side application was divided into 3 layers: Api, Business Logic, Data Access. This architecture was adopted following of the types of common web application architectures described in Microsoft documentation \cite{ntier}. However, the \textit{User Interface} layer was replaced by \textit{Api} layer to better present its meaning. The choice was motivated by the simplicity of the architecture compared to other architectures like \textit{Clean architecture} or microservices architecture. 
+    \item \textbf{Dependency Injection} - a dependency inversion technique that focuses on providing the implementation of required interfaces instead of creating them by the dependant objects. The main reason for introduction of this principle is the need to address the difficulty of testing the business logic layer \cites{ntier} \cite{di}. \todo{move it to the implementation chapter?}
     \item Client-Server
     \item SPA (?)
 \end{itemize}
-REST \cite{rest}.
 
 \section{Other Design Decisions}
 
