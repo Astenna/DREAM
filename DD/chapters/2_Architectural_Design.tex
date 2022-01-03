@@ -21,7 +21,7 @@ The server part uses a database hosted on a SQL Server to store data collected f
 \todo{add high level diagram}
 
 \subsection{Dream server}\label{subsec:backend-components}
-Detailed component diagram of the Dream Server is presented on the figure \ref{fig:backend-components}. The server application was broken down into 3 layers using N-tiers architecture pattern described in section \ref{sec:patterns}. The communication between layers is established by implementation of interfaces presented on the diagram. In accordance to the N-tier pattern, the communication runs only in one direction – starting from the Api layer down to the Data Access layer. 
+Detailed component diagram of the Dream Server is presented on the figure \ref{fig:backend-components}. The server application was broken down into 3 layers using N-tiers architecture pattern described in section \ref{sec:patterns}. The communication between layers is established by implementation of interfaces presented on the diagram. In accordance to the N-tier pattern, the communication runs only in one direction – starting from the API layer down to the Data Access layer. 
 
 \begin{figure}[H]
     \centering
@@ -31,7 +31,7 @@ Detailed component diagram of the Dream Server is presented on the figure \ref{f
     \label{fig:backend-components}
 \end{figure}
 
-The first layer, the Api layer, is composed by a set of controllers that describe available REST endpoints. Then, the middle layer, Business Logic layer contains services and other classes that provide logic necessary for handling requests from the client application and cooperation with external systems. In detail, the Business logic layer contains:
+The first layer, the API layer, is composed by a set of controllers that describe available REST endpoints. Then, the middle layer, Business Logic layer contains services and other classes that provide logic necessary for handling requests from the client application and cooperation with external systems. In detail, the Business logic layer contains:
 \begin{itemize}
     \item \textbf{RequestService} - handles creating, editing, deleting and accessing requests together with logic required for automatic selection of requests' recipients.
     \item \textbf{AccountService} - handles accounts registration and deletion, password reset and authentication logic.
@@ -53,7 +53,7 @@ Finally, the Data Access layer contains database entities and classes required t
     \caption{Deployment diagram}
     \label{fig:deployment}
 \end{figure}
-The system is divided into 5 parts: 3 main tiers (Application Server, Web Server, Database Server), Client Device with Web Browser and Email Server.
+The system is divided into 5 parts: 3 main tiers \todo{inne słowo} (Application Server, Web Server, Database Server), Client Device with Web Browser and Email Server.
 \begin{itemize}
     \item \textbf{Application Server} - Dream backend server, it handles application logic and provides a REST API. It runs using Kestrel Web Server, which is loaded by Common Language Runtime (CLR), the virtual machine component of Microsoft .NET Framework
     \item \textbf{Web Server} - Dream frontend server, it provides the user interface layer. It hosts the static version of the website using Nginx. The website communicates with the Application Server tier via REST API using HTTP requests.
@@ -67,14 +67,12 @@ The system is divided into 5 parts: 3 main tiers (Application Server, Web Server
 
 \section{Component Interfaces}
 
-\todo{czy nie powinniśmy liczyć pozostałuych elementów deployment diagramu jako tiers?}
-
 \section{Selected Architectural Styles and Patterns}\label{sec:patterns}
 \begin{itemize}
+    \item \textbf{Client Server} - a pattern, which enforces the principle of separation of concerns, by separating the service requesters (clients) from the providers of a resource or service (servers). Clients and servers communicate over a network and can be hosted on separate hardware.
     \item \textbf{REST} (\textit{Representational State Transfer}) – the API hosted on a Dream server should be prepared using the REST API design rules \cite{rest} \cite{rest-microsoft}. Firstly, it should not bind the client application to any specific implementation by utilizing HTTP as the communication protocol. Furthermore, as it was presented in the Dream server components diagram in subsection \ref{subsec:backend-components}, additional layers will be introduced to the server side application to avoid direct dependencies of the API on the database model. Additionally, the interface should be resources-oriented and the HTTP verbs should reflect the operations done on the resources. All this aims at improving the maintainability, reusability, and readability of the server application.
     \item \textbf{N-tier application} – the server side application was divided into 3 layers: API, Business Logic, Data Access. This architecture was adopted following of the types of common web application architectures described in Microsoft documentation \cite{ntier}. However, the \textit{User Interface} layer was replaced by \textit{API} layer to better present its meaning. The choice was motivated by the simplicity of the architecture compared to other architectures like \textit{Clean architecture} or microservices architecture. 
     \item \textbf{Dependency Injection} - a dependency inversion technique that focuses on providing the implementation of required interfaces instead of creating them explicitly by the dependent objects. The main reason for introduction of this principle is the need to address the difficulty of testing the business logic layer \cites{ntier} \cite{di}. \todo{move it to the implementation chapter?}
-    \item \textbf{Client Server} - a pattern, which enforces the principle of separation of concerns, by separating the service requesters (clients) from the providers of a resource or service (servers). Clients and servers communicate over a network and can be hosted on separate hardware. \todo{it is a REST priniciple, maybe unnecessary?}
 \end{itemize}
 
 \section{Other Design Decisions}
