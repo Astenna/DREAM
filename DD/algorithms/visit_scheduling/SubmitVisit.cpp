@@ -19,7 +19,4 @@ void submitVisit(Visit &visit) {
             visit.farm.farmer.planVisits(1, visit.reason);
         }
     } 
-    // else { // visit.state == VisitState.PLANNED
-        // Cannot update a visit after its date
-    // }
 }

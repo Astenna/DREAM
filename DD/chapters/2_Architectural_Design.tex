@@ -33,12 +33,12 @@ Detailed component diagram of the Dream Server is presented on the figure \ref{f
 
 The first layer, the API layer, is composed by a set of controllers that describe available REST endpoints. Then, the middle layer, Business Logic layer contains services and other classes that provide logic necessary for handling requests from the client application and cooperation with external systems. In detail, the Business logic layer contains:
 \begin{itemize}
-    \item \textbf{RequestService} - handles creating, editing, deleting and accessing requests together with logic required for automatic selection of requests' recipients.
+    \item \textbf{RequestService} - handles creating, editing, deleting and accessing help requests together with logic required for automatic selection of requests' recipients.
     \item \textbf{AccountService} - handles accounts registration and deletion, password reset and authentication logic.
     \item \textbf{AgronomistService} - handles area of responsibility and daily plan management, setting execution state of visits. It calls VisistsPlanner about the necessities to plan new visits after each submission of daily plan execution state or rejection of planned visit.
     \item \textbf{FarmerService} - handles notes assignment and providing data required for building farmer's summary (access to notes and requests history).
     \item \textbf{FarmService} - handles management of farmers' production data, providing data required for building farmer's summary (farm's external systems and  production data).  
-    \item \textbf{ForumService} - handles accessing and creating forum threads; accessing, creating and deleting and comments.
+    \item \textbf{ForumService} - handles accessing and creating forum threads; accessing, creating and deleting comments.
     \item \textbf{EmailSender} - handles logic required for e-mail sending during password reset process.
     \item \textbf{VisitsPlanner} - handles implementation of \textit{visits scheduling algorithm} described in subsection \ref{subsec:visits-alg}.
     \item \textbf{ExternalSystemsReader} - handles logic required for execution of daily jobs that read and store in the database data obtained from IWeatherForecastsProvider, ISensorSystemProvider and IIrigationSystemProvider interfaces. The implementation of those interfaces is provided by the external systems' API. 
@@ -139,3 +139,25 @@ Every time a farmer's note changes from negative to neutral or positive, the sys
 Function presented in the listing \ref{lst:SetNote} assures that every time a farmer receives a negative note, there are additional visits to his farm planned. The number of these visits depends on the type of the problem the farmer faces, which is priorly specified by a policy maker when assigning the note.
 
 \lstinputlisting[language=Cpp, caption={Function responsible for setting the farmer's note.}, label={lst:SetNote}]{algorithms/visit_scheduling/SetNote.cpp}
+
+\subsection{Database model}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics
+    [width=\textwidth]
+    %[scale=0.45, origin=c]
+    {figures/db-diagram.png}
+    \caption{Database model}
+    \label{fig:db-model}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics
+    [height = 0.9\textheight]
+    %[scale=0.45, origin=c]
+    {diagrams/database-model.png}
+    \caption{Database model}
+    \label{fig:db-model}
+\end{figure}
