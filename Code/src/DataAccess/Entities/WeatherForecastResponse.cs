@@ -12,5 +12,9 @@ namespace DataAccess.Entities.Farms
         public DateTime Date { get; set; }
 
         public WeatherType WeatherType { get; set; }
+
+        public int MandalId { get; set; }
+
+        public Mandal Mandal { get; set; }
     }
 }

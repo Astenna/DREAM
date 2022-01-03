@@ -21,8 +21,6 @@ namespace DataAccess.Entites.Farms
 
         public List<FarmProduction>? Production { get; set; }
 
-        public int? FarmerId { get; set; }
-
         public Farmer? Farmer { get; set; }
 
         public SensorSystemResponse? SensorSystem { get; set; }

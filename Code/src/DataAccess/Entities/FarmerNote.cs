@@ -14,6 +14,10 @@ namespace DataAccess.Entities
 
         public DateTime Date { get; set; }
 
+        public int FarmerId { get; set; }
+
+        public Farmer Farmer { get; set; }
+
         public int PolicyMakerId { get; set; }
 
         public PolicyMaker PolicyMaker { get; set; }

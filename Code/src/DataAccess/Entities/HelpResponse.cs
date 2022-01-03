@@ -14,6 +14,12 @@ namespace DataAccess.Entities
 
         public HelpRequest? HelpRequest { get; set; }
 
-        public User? CreatedBy { get; set; }
+        public Agronomist? CreatedByAgronomist { get; set; }
+
+        public int? CreatedByAgronomistId { get; set; }
+
+        public Farmer? CreatedByFarmer { get; set; }
+
+        public int? CreatedByFarmerId { get; set; }
     }
 }

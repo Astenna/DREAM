@@ -1,4 +1,5 @@
-﻿using DataAccess.Entites.Actors;
+﻿using DataAccess.Configuration;
+using DataAccess.Entites.Actors;
 using DataAccess.Entites.DiscussionForum;
 using DataAccess.Entites.Farms;
 using DataAccess.Entites.Visists;
@@ -51,6 +52,9 @@ namespace DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder
+                .ApplyConfiguration(new FarmerConfiguration());
         }
     }
 }
