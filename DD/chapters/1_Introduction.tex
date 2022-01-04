@@ -2,7 +2,7 @@
 
 \section{Purpose}
 
-The goal of this document is to offer broad advice to the architectural design of the software product hence it is primarily directed to the development team, which includes both developers and testers.
+The goal of this document is to offer broad advice to the architectural design of the software product, hence it is primarily directed to the development team, which includes both developers and testers.
 
 More specifically, this document provides an overview of the high-level architecture (identifying the key components and their interactions) as well as further information on the application's runtime behavior and user interface. Additionally, it comprises a strategy for implementation, integration, and testing.
 
@@ -45,7 +45,7 @@ The system aims to solve a very challenging problem, which involves the collabor
         Sensor/Humidity sensor 	& External device which collects information about the humidity of soil on a given farm.\\
         Sensor system           & Collection of all the sensors on a farm. Collected data are available via an API.\\
         Farmer's summary        & Summary of farmer and farm data. Contains: information about farmer and his farm, note history, short-term weather forecasts, production data, farm visits, weather forecast history, soil humidity data, water usage, and help requests.\\
-        Farmer's note           & Evaluation note given by a governmental policy maker based on a farmer's performance. Can include a type of problem, that the farmer is facing. Can be negative, neutral, or positive.\\
+        Farmer's note           & Evaluation note given by a governmental policy maker based on a farmer's performance. It can include a type of problem, that the farmer is facing. Can be negative, neutral, or positive.\\
         Farm data               & Data concerning a farm, inserted by a farmer during account creation. Consist of water irrigation system's ID, sensor system's ID and farm's address (address line 1, address line 2, postal code, city and mandal).\\
         Personalized suggestion & Suggestions proposed to the farmers, based on a mandal and types of production of a given farm. Suggestions are inserted into the system by agronomists.\\
         Production type         & Kind of plants being produced on Telangana's farms.\\
@@ -78,11 +78,13 @@ The system aims to solve a very challenging problem, which involves the collabor
 		DREAM               & Data-dRiven PrEdictive FArMing in Telangana\\
 		G					& Goal\\
 		HMACSHA1            & Hash-based Message Authentication Code (HMAC) using the SHA1 hash function \\
+		HTTP                & Hypertext Transfer Protocol\\
 		M					& Mockup\\
 		PBKDF2              & Password-Based Key Derivation Function 2 \\ 
 		R                   & Requirement\\
 		RASD                & Requirements Analysis and Specifications Document\\
 		REST				& Representational State Transfer\\
+		SQL                 & Structured Query Language\\
 		UI				  	& User Interface\\
 		\bottomrule
 	\end{longtable}
@@ -125,7 +127,7 @@ The system aims to solve a very challenging problem, which involves the collabor
     \item \textbf{Architectural Design}: provides a high-level overview of how the system is organized into components and identifies interactions between them, as well as component, deployment, and runtime views. This section also focuses on the key architectural styles and patterns used in the system's design.
     \item \textbf{User Interface Design}: gives an overview of how the system's user interface would appear and defines the system's functionality from the user's point of view.
     \item \textbf{Requirements Traceability}: describes how the requirements specified in the RASD translate to the design components defined in this document.
-    \item \textbf{Implementation, Integration and Test Plan}: specifies the order in which the system's subcomponents are to be implemented and then integrated. Further it provides a plan to follow in order to properly test the integration of system components.
+    \item \textbf{Implementation, Integration and Test Plan}: specifies the order in which the system's subcomponents are to be implemented and then integrated. Further, it provides a plan to follow in order to properly test the integration of system components.
     \item \textbf{Effort Spent}: provides details on each group member's contribution to the project.
     \item \textbf{References}
 \end{enumerate}
