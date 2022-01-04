@@ -1,5 +1,4 @@
-﻿using System;
-namespace DataAccess.Entities.Farms
+﻿namespace DataAccess.Entities.Farms
 {
     public class WeatherForecastResponse
     {

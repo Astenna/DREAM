@@ -19,7 +19,7 @@ namespace DataAccess
 
         public DbSet<PolicyMaker> PolicyMakers { get; set; }
 
-        public DbSet<ForumThread> ForumThreads{ get; set; }
+        public DbSet<ForumThread> ForumThreads { get; set; }
 
         public DbSet<ForumComment> ForumComments { get; set; }
 

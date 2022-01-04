@@ -1,5 +1,4 @@
-﻿using DataAccess.Entites;
-using DataAccess.Entities.Farms;
+﻿using DataAccess.Entities.Farms;
 
 namespace DataAccess.Entities
 {

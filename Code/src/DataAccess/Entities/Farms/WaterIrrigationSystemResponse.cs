@@ -1,6 +1,6 @@
 ﻿namespace DataAccess.Entites.Farms
 {
-    public class WaterIrrigationSystemResponse 
+    public class WaterIrrigationSystemResponse
     {
         public int Id { get; set; }
 

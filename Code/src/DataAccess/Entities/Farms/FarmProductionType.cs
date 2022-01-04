@@ -1,6 +1,6 @@
 ﻿namespace DataAccess.Entities.Farms
 {
-    public class FarmProductionType 
+    public class FarmProductionType
     {
         public int Id { get; set; }
 

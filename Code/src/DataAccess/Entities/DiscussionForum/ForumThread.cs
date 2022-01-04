@@ -4,7 +4,7 @@ namespace DataAccess.Entites.DiscussionForum
 {
     public class ForumThread
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
 
         public string? Topic { get; set; }
 

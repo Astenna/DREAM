@@ -1,5 +1,4 @@
-﻿using DataAccess.Entities;
-using DataAccess.Entites;
+﻿using DataAccess.Entites;
 using DataAccess.Entites.Actors;
 
 namespace DataAccess.Entities
