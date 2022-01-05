@@ -320,3 +320,7 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+# Visual Paradigm
+*.lck
+*.bak_*
