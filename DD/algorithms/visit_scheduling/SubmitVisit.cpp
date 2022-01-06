@@ -1,5 +1,4 @@
 void submitVisit(Visit &visit) {
-    // visit contains data obtained from the UI
     if (visit.date < DateTime.now()) {
         return;
     }
@@ -7,7 +6,6 @@ void submitVisit(Visit &visit) {
     if (visit.state == VisitState.CONFIRMED) {
         if (visit.reason == VisitReason.CASUAL) {
             VisitDataAccess.updateVisitData(visit); // update record inside the database
-            // just an example of retrieving the farmer from the visit
             visit.farm.farmer.planVisits(1, VisitReason.CASUAL); 
         }
     } else if (visit.state == VisitState.REJECTED) {

@@ -1,8 +1,6 @@
 DateTime getOptimalVisitDate(Farm &farm) {
     // Make sure that the visits are in ascending ordered
     vector<Visit> visits = getFutureVisitsOnFarm(farm);
-    // Find two consecutive visits that are the furthest from each other
-    // and insert a new visit in the middle. Consider also a timeslot in exactly 1 year from now.
     DateTime greatestGap = 0;
     DateTime optimalVisitDate;
 
