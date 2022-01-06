@@ -8,9 +8,10 @@ This chapter provides pictures of all the  mockups, that will be later used for 
 
 User's registration screen, allowing user to provide all data necessary for account creation. The user can navigate to this screen via \textit{Create account} option, available in the horizontal navigation bar on the top of the page. After correctly filling the form, the user is redirected back to the home page and receives a notification informing him about the success of the account creation process.
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.75\textwidth]{mockups/Unreg. user_Create account.png}
-\caption{\textbf{M1.} User registration.}
+    \centering
+    \includegraphics[width=0.75\textwidth]{mockups/Unreg. user_Create account.png}
+    \caption{\textbf{M1.} User registration.}
+    \label{fig:user-create-account}
 \end{figure}
 
 User's registration screen, after choosing \textit{Famer} role. Additional fields appear, specific to the Farmer role, namely Sensor system's ID, Water irrigation system's ID, Address line 1, Address line 2, Postal code, City, and Mandal.
@@ -18,6 +19,7 @@ User's registration screen, after choosing \textit{Famer} role. Additional field
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Unreg. user_Create account_Farmer.png}
     \caption{\textbf{M2.} Farmer registration.}
+    \label{fig:farmer-create-account}
 \end{figure}
 
 User's registration screen, after choosing \textit{Agronomist} role. Additional fields appear, allowing to choose the area of responsibility.
@@ -25,6 +27,7 @@ User's registration screen, after choosing \textit{Agronomist} role. Additional 
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Unreg. user_Create account_Agronomist.png}
     \caption{\textbf{M3.} Agronomist registration.}
+    \label{fig:agronomist-create-account}
 \end{figure}
 
 User's log in screen, allowing user to provide all data necessary for logging into the application, namely e-mail and password. The user can navigate to this screen via \textit{Log in} option, available in the horizontal navigation bar on the top of the page. User can also choose an option to remind a password, via a button in the lower part of the modal dialog.
@@ -32,13 +35,15 @@ User's log in screen, allowing user to provide all data necessary for logging in
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Unreg. user_Log in.png}
     \caption{\textbf{M4.} Log in view.}
+    \label{fig:user-log-in}
 \end{figure}
 
-User's remind password screen. The user can provide his e-mail address and click \textit{Remind} button, which sends a message to the provided address, containing a link, which allows resetting the password. If the user provides an e-mail address, that isn't in the database, the e-mail won't be sent. \todo{To powinno być w requirements :/}
+User's remind password screen. The user can provide his e-mail address and click \textit{Remind} button, which sends a message to the provided address, containing a link, which allows resetting the password. If the user provides an e-mail address, that isn't in the database, the e-mail won't be sent.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Unreg. user_Remind password.png}
     \caption{\textbf{M5.} Remind password.}
+    \label{fig:user-remind-password}
 \end{figure}
 
 
@@ -70,48 +75,58 @@ The farmer can manage his production data, by choosing the option \textit{Produc
     \caption{\textbf{M8.} Farmer's production data.}
 \end{figure}
 
+The farmer can see all his help requests, by clicking on \textit{My help requests} option in the left navigation bar. Help requests are visualized in the form of a table, with entries containing a short summary of given help requests. User can view detailed information by clicking on given entry or create a new help requests, by clicking on \textit{Create help request} button. The farmer can also search for a help requests by topic, using a search bar in the upper part of the content card.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Farmer_Dashboard_My help requests.png}
     \caption{\textbf{M9.} Help requests created by farmer.}
 \end{figure}
 
+After clicking on a given entry in the help request table, the user is redirected to a view, containing all detailed information about the help requests, as well as advices provided by other farmers and agronomists.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Farmer_Dashboard_My help requests_VIew request.png}
     \caption{\textbf{M10.} Specific help request created by farmer.}
 \end{figure}
 
+After clicking on the \textit{Create help request} button in the help requests view, a modal dialog appears, allowing the farmer to create a new help request, by filling topic and message.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Farmer_Dashboard_My help requests_Create help request.png}
     \caption{\textbf{M11.} Creating help request.}
 \end{figure}
 
+The farmer with positive note can see all received help requests, by clicking on \textit{Provide help} option in the left navigation bar. Help requests are visualized in the form of a table, with entries containing a short summary of given help requests. User can view detailed information by clicking on a given entry. The farmer can search for a help requests by topic, using a search bar in the upper part of the content card.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Farmer_Dashboard_Provide help.png}
     \caption{\textbf{M12.} Help requests received by farmer with positive note.}
+    \label{fig:farmer-provide-help}
 \end{figure}
 
+
+After clicking on a given entry in the help request table, the user is redirected to a view, containing all detailed information about the help requests and allowing the farmer to create a new advice, by filling a short form on the bottom of the page. This view is also accessible for agronomists, by clicking on the \textit{Provide help} button in agronomist's left navigation bar.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Farmer_Dashboard_Provide help_Request.png}
     \caption{\textbf{M13.} Specific help request received by farmer with positive note (applicable also for the agronomist).}
 \end{figure}
 
+The farmer can access the forum using \textit{Forum} button in the left navigation bar. The forum is built similarly to the help requests view – it consists of a table, with entries showing a short summary of a given thread. The user can search for a thread by name using the search bar, located in the upper part of the content card, display a detailed thread view, by clicking on the entry or create a new forum thread, using the \textit{Create forum thread} button in the lower part of the content card.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Farmer_Dashboard_Forum.png}
     \caption{\textbf{M14.} Forum view.}
 \end{figure}
 
+After clicking on a given entry in the forum thread table, the farmer is redirected to a detailed thread view. The user can create a comment, by filling a short form in the lower part of the content card.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Farmer_Dashboard_Forum_Thread.png}
     \caption{\textbf{M15.} Specific forum thread.}
 \end{figure}
 
+After clicking on the \textit{Create forum thread} button in the help requests view, a modal dialog appears, allowing the farmer to create a new forum thread, by filling topic and message.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Farmer_Dashboard_Forum_Create thread.png}
@@ -121,28 +136,34 @@ The farmer can manage his production data, by choosing the option \textit{Produc
 
 \subsubsection{Agronomist}
 
+The agronomist can open his account summary, by clicking on the button in the top navigation bar, containing his name and surname. In the user view, he can view his account details, manage his area of responsibility and delete his account.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Agronomist_User.png}
     \caption{\textbf{M17.} Agronomist's user view.}
 \end{figure}
 
+Directly after logging in, an agronomist is redirected to the dashboard view, which contains a summary of the most important information, such as a short list of farmer in his area of responsibility, today’s visits and last help requests received. He can navigate to other views using the left and top navigation bar or detailed button in the lower part of the content cards.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Agronomist_Dashboard.png}
     \caption{\textbf{M18.} Agronomist's dashboard.}
 \end{figure}
 
+The agronomist can display a list of farmers in his area of responsibility, using the \textit{Farmer} option in the left navigation bar. The list consists of a table with entries, presenting the most important information about a farmer, as well as a filter bar, allowing the user to search by farmer's name, mandal or note. By clicking on an entry, the user can view a farmer summary analogical to the one available for farmer.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Agronomist_Dashboard_Farmers.png}
     \caption{\textbf{M19.} List of farmers (applicable also for the policy maker).}
 \end{figure}
 
+By clicking on the \textit{Daily plan} button, the agronomist can display his visit calendar and plan for the chosen day. The agronomist can see if he has submitted execution state for the given day: if the day has a green dot on the calendar, it means that the agronomist has realized all his planned visits. A red dot means, that the plan has been submitted, but not all visits were realized. No dot means, that the plan hasn't been submitted yet. The user can manage future visits according to the requirements, using edit and delete buttons next to the given visit. The user can also plan future visits, by clicking on the add button in the upper part of the daily plan.
+
+The described functionality is presented on two following mock-ups: first one shows today/a day in the past, and the next one a day in the future.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Agronomist_Dashboard_Visit plan.png}
-    \caption{\textbf{M20.} Calendar of daily plans.}
+    \caption{\textbf{M20.} Calendar of daily plans – view of today or day in the past.}
 \end{figure}
 
 \begin{figure}[H]
@@ -151,17 +172,20 @@ The farmer can manage his production data, by choosing the option \textit{Produc
     \caption{\textbf{M21.} Calendar of daily plans – view of future day.}
 \end{figure}
 
+After clicking on the \textit{Submit execution state} button on the daily plan of today/past day, a modal dialog appears, allowing the agronomist to select, which farm he has visited and provide comments for farms he hasn't visited.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Agronomist_Dashboard_Visit plan_Submit.png}
     \caption{\textbf{M22.} Submitting executions state of a daily plan.}
 \end{figure}
 
+The agronomist can view all received help request, by clicking on the \textit{Provide help} button in the left navigation bar. This view works exactly the same as the view available for farmers with positive note, presented in figure \ref{fig:farmer-provide-help}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{mockups/Agronomist_Dashboard_Provide help.png}
     \caption{\textbf{M23.} Help requests received by agronomist.}
 \end{figure}
+
 
 \begin{figure}[H]
     \centering

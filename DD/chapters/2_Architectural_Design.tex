@@ -14,7 +14,7 @@
 
 The DREAM server part uses a database hosted on a SQL Server to store data collected from the users as well as external systems, and the Mail Server used to send the emails required for password reset. Moreover, the web server works as a middleware between the user interface and the database, utilizing HTTP protocol to receive and respond to requests from the web application running on a client's web browser. Finally, the \textit{DREAM server} hosts the application server (\textit{backend} part) with the majority of the application business logic. 
 
-\section{Component View}
+\section{Component View} \label{sec:component-view}
 
 \subsection{High level}
 The following diagram presents a high level overview of the whole DREAM system. It describes both structure of the system and high level interaction within him. The description of the system components, as well as the low level diagram of the application server, are presented below.
@@ -78,31 +78,48 @@ The system is divided into 5 parts: 3 main tiers \todo{inne słowo w miejsce tie
     \item \textbf{Email Server} - Email server, allowing to send messages via SMTP protocol.
 \end{itemize}
 
-
 \section{Runtime View}
 
-\begin{figure}[H]
+The sequence diagrams presented in this chapter illustrate the application's runtime perspective. They define how components (introduced in the section \ref{sec:component-view}) interact with one another to realize the DREAM's most essential use cases in a more detailed way than it was depicted in RASD. The diagrams assume that requests sent to \textit{DbContext} are always handled correctly (which cannot be guaranteed), so that their complexity does not expand dramatically.
+
+\subsection*{Create account}
+
+The ability to create a user account is the most essential functionality provided by the system. As already mentioned in RASD, DREAM provides three types of actors: agronomists, farmers, and policy makers. The registration data varies depending on the chosen role, i.e. every agronomist must specify his area of responsibility, whereas every farmer needs to provide data regarding his farm. All of this is handled via the \textit{WebApplication} component. Subsequently, \textit{AccountController} forwards the request to \textit{AccountService}, which interacts directly with \textit{DbContext}. Moreover, when a farmer creates his account, \textit{AccountService} ensures that both a farm and two casual visits are created instantly, thus satisfying the requirement \textbf{R5}. The whole process is presented in the figure \ref{fig:sd_create_account}.
+
+\begin{figure}
     \centering
     \includegraphics[height=\textheight, width=\textwidth, keepaspectratio, origin=c]{diagrams/sequence/create_account}
     \caption{Sequence diagram presenting the process of creating a new user account.}
     \label{fig:sd_create_account}
 \end{figure}
 
-\begin{figure}[H]
+\subsection*{Request help}
+
+The sequence diagram displayed in the figure \ref{fig:sd_request_help} shows the process of creating a help request by the farmer. After specifying its topic and contents, \textit{WebApplication} forwards that data to \textit{RequestController}, which then interacts with \textit{DbContext} via \textit{RequestService}. Correctly created help request is displayed to the farmer afterwards.
+
+\begin{figure}
     \centering
     \includegraphics[height=\textheight, width=\textwidth, keepaspectratio, origin=c]{diagrams/sequence/request_help}
     \caption{Sequence diagram presenting the creation of a help request.}
     \label{fig:sd_request_help}
 \end{figure}
 
-\begin{figure}[H]
+\subsection*{Assess farmer's performance}
+
+Giving policy makers the possibility to assess farmers' performance is one of the most important functionalities of DREAM. It takes a coordination of the following components to fulfill this use case: \textit{WebApplication}, \textit{FarmerController}, \textit{FarmerService}, \textit{RequestController}, \textit{RequestService}, \textit{VisitsPlanner}, and \textit{DbContext}. Furthermore, supplementary collaboration of \textit{FarmService}, \textit{WeatherForecastController}, and \textit{WeatherForecastService} is required in order to construct the farmer's summary. The diagram presented in the figure \ref{fig:sd_assess_farmers_performance} provides a thorough description of this process. It leverages the visit scheduling algorithm (see section \ref{subsec:visits-alg}) to satisfy the requirements \textbf{R17} and \textbf{R18}.
+
+\begin{figure}
     \centering
     \includegraphics[height=\textheight, width=\textwidth, keepaspectratio, origin=c]{diagrams/sequence/assess_farmers_performance}
     \caption{Sequence diagram presenting farmer's performance assessment.}
     \label{fig:sd_assess_farmers_performance}
 \end{figure}
 
-\begin{figure}[H]
+\subsection*{Set execution state of a daily plan}
+
+In the agricultural field, an agronomist acts as a liaison between farmers and policymakers. He provides advice on soil management and productivity to farmers. In the Telangana region, government agronomists visit farms in their areas of responsibility on a regular basis to gather information about farmers' performance. Thus, a possibility to organize all the appointments inside one interactive schedule is a vastly desired feature. It is realized via several components including \textit{WebApplication}, \textit{AgronomistController}, \textit{AgronomistService}, \textit{VisitsPlanner}, and \textit{DbContext}. The interactions between them are depicted in the figure \ref{fig:sd_set_daily_plan_execution_state}.
+
+\begin{figure}
     \centering
     \includegraphics[height=\textheight, width=\textwidth, keepaspectratio, origin=c]{diagrams/sequence/set_daily_plan_execution_state}
     \caption{Sequence diagram presenting the action of displaying a daily plan.}
@@ -146,7 +163,7 @@ The second figure (\ref{fig:business-logic-interfaces}) presents interfaces that
     \label{fig:data-access-interfaces}
 \end{figure}
 
-The last figure \ref{fig:data-access-interfaces} shows the classes of the Data Access layer. The details of classes presented in the figure are not shown to preserve readability. Those classes (apart from DreamDbContext class) do not contain any methods, since they serve for object-relational mapping \cite{ef}.  Hence, each of them corresponds to at least one table in the database diagram (more than one in case of many-to-many relationships). Similarly, the fields of those classes correspond to the tables' columns. Detailed database diagram is presented in the following sections, in the figure \ref{fig:db-model}. The only class that contains logic in this figure is the DreamDbContext. It acts as a bridge between the database and the C\# code – it contains fields that represent the tables of the database \cite{ef-dbcontext}.
+The last figure \ref{fig:data-access-interfaces} shows the classes of the Data Access layer. However, the details of classes presented in the figure are not shown to preserve readability. Those classes (apart from DreamDbContext class) do not contain any methods, since they serve for object-relational mapping \cite{ef}.  Hence, each of them corresponds to at least one table in the database diagram (more than one in case of many-to-many relationships). Similarly, the fields of those classes correspond to the tables' columns. Detailed database diagram is presented in the following sections, in the figure \ref{fig:db-model}. The only class that contains logic in this figure is the DreamDbContext. It acts as a bridge between the database and the C\# code – it contains fields that represent the tables of the database \cite{ef-dbcontext}.
 
 
 \section{Selected Architectural Styles and Patterns}\label{sec:patterns}
@@ -163,7 +180,7 @@ The last figure \ref{fig:data-access-interfaces} shows the classes of the Data A
 
 One of the most important features of the system is the ability to schedule agronomist's visits to a farm. Requirement \textbf{R5} (all the requirements are described in RASD) states that all farms must be visited at least twice a year, whereas \textbf{R14} extends it further by adding a constraint that under-performing farmer's, meaning farmers with a negative note, should be visited more often, depending on the problem they are facing.
 
-The system must be therefore able to schedule visits to a farm in a way that satisfies both requirements. This section presents an overview of the algorithm employed to tackle this problem.
+The system must be therefore able to schedule visits to a farm in a way that satisfies both requirements. This section presents an overview of the algorithm employed to tackle this problem. All the listings provided include pseudocode that is intended to demonstrate only the high-level notion.
 
 \subsubsection*{General approach}
 
@@ -224,7 +241,7 @@ Function presented in the listing \ref{lst:SetNote} assures that every time a fa
 
 \subsection{Database model}
 
-This section presents a database model devised for the DREAM application. One of the design decisions included in this figure (\ref{fig:db-model}) is to use one table per type configuration \cite{ef-Inheritance} when modelling the class \textit{User}, which is the base of \textit{PolicyMaker}, \textit{Agronomist} and \textit{Farmer} classes. The decision was motivated by the great number of relationships that each of those derived classes has. With three separate classes for each role, these relationships will be easier to manage and maintain since creation of one, huge \textit{User} class is avoided. The major drawback of this decision is the need to perform additional queries to determine the role of a user during the log in process. To tackle this issue, a column \textit{Role} was introduced to the \textit{User} table. However, such column may introduce consistency issues since one need to be sure that \textit{Role} saved in a row correspond the user in an appropriate table (\textit{PolicyMaker}, \textit{Agronomist} or \textit{Farmer}) with foreign key \textit{UserId} that points to that row. This consistency issue is addressed by the implementation of the DREAM server application.
+This section presents a database model devised for the DREAM application. One of the design decisions included in the figure (\ref{fig:db-model}) is to use one table per type configuration \cite{ef-Inheritance}. The configuration is used when modelling the class \textit{User}, which is the base of \textit{PolicyMaker}, \textit{Agronomist} and \textit{Farmer} classes. The decision was motivated by the great number of relationships that each of those derived classes has. With three separate classes for each role, these relationships will be easier to manage and maintain since creation of one, huge \textit{User} class is avoided. The major drawback of this decision is the need to perform additional queries to determine the role of a user during the log in process. To tackle this issue, a column \textit{Role} was introduced to the \textit{User} table. However, such column may introduce consistency issues because the \textit{Role} saved in a given row of User's table must correspond a foreign key \textit{UserId} in an appropriate table (\textit{PolicyMaker}, \textit{Agronomist} or \textit{Farmer}). This consistency issue is addressed by the implementation of the DREAM server application.
 
 %\begin{figure}[H]
     %\centering

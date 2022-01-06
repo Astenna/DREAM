@@ -7,6 +7,9 @@ actor PolicyMaker
 participant "WebApplication" as WebApp
 participant "FarmerController" as FC
 participant "FarmerService" as FS
+participant FarmService
+participant "WeatherForecastController" as WFC
+participant "WeatherForecastService" as WFS
 participant "RequestController" as RC
 participant "RequestService" as RS
 participant "VisitsPlanner" as VP
@@ -24,10 +27,34 @@ WebApp --> PolicyMaker-- : Display list of farmers
 PolicyMaker -> WebApp++ : Click on a specific farmer
 WebApp -> FC++ : GetFarmerByIdAsync(farmerID)
 FC -> FS++ : GetFarmerByIdAsync(farmerID)
-FS -> DB++ : Get farmer given his id
+FS -> DB++ : Get farmer given his ID
 DB --> FS-- : Return farmer
 FS --> FC-- : Return farmer
-FC --> WebApp-- : Return farmer
+
+FC -> FarmService++ : GetProductionDataAsync(farmer.farmID, query)
+FarmService -> DB++ : Get production data for the given farmer
+DB --> FarmService-- : Production data
+FarmService --> FC-- : Production data
+
+FC -> FarmService++ : GetSensorSystemDataAsync(farmer.farmID, query)
+FarmService -> DB++ : Get sensor system data for the given farmer
+DB --> FarmService-- : Sensor system data
+FarmService --> FC-- : Sensor system data
+
+FC -> FarmService++ : GetIrrigationSystemDataAsync(farmer.farmID, query)
+FarmService -> DB++ : Get irrigation system data for the given farmer
+DB --> FarmService-- : Irrigation system data
+FarmService --> FC-- : Irrigation system data
+
+FC --> WebApp-- : Farm specific data
+
+WebApp -> WFC++ : GetWeatherForecastAsync(query)
+WFC -> WFS++ : GetWeatherForecastAsync(query)
+WFS -> DB++ : Get weather forecast for the given query
+DB --> WFS-- : Weather forecast
+WFS --> WFC-- : Weather forecast
+WFC --> WebApp-- : Weather forecast
+
 WebApp --> PolicyMaker-- : Display selected //Farmer's summary//
 
 PolicyMaker -> WebApp++ : Press on //Change// next to farmer's note
@@ -73,10 +100,10 @@ opt note == Negative
         deactivate VP
         VP -> VP++ : CreateVisitOnTheMostQuietDayCloseToDate(date)
         deactivate VP
-        deactivate VP
         
         VP --> DB++ : Create visits
         DB --> VP-- : Success message
+        deactivate VP
         VP --> WebApp-- : Success message
     end
 end
