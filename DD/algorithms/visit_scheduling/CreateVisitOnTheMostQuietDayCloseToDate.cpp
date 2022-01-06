@@ -12,12 +12,11 @@ Visit createVisitOnTheMostQuietDayCloseToDate(DateTime dateTime, bool isCasualVi
         return newVisit;
     }
 
-    int date_shift = isCasualVisitRejected ? MAX_REPLANNED_CASUAL_VISIT_DATE_SHIFT 
+    int dateShift = isCasualVisitRejected ? MAX_REPLANNED_CASUAL_VISIT_DATE_SHIFT 
                     : MAX_VISIT_DATE_SHIFT;
 
     for (const auto &agronomist : agronomists) {
-        for (int i = 1; i < MAX_VISIT_DATE_SHIFT; i++) {
-            // Subtraction ensures that the new visit will not be later than specified dateTime
+        for (int i = 1; i < dateShift; i++) {
             DateTime proposedDateTime = dateTime - DateTime(days=i);
             vector<Visit> visits = agronomist.getVisits(proposedDateTime);
 
@@ -33,8 +32,5 @@ Visit createVisitOnTheMostQuietDayCloseToDate(DateTime dateTime, bool isCasualVi
         }
     }
 
-    // It is possible to have a greater number of visits than MAX_DAILY_VISITS_PER_AGRONOMIST
-    // This function ensures, however, that in such case, the visit will be scheduled for the
-    // agronomist with the least visits.
     return newVisit;
 }

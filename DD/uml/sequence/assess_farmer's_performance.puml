@@ -1,0 +1,86 @@
+@startuml Assess farmer's performance
+
+mainframe Assess farmer's performance
+autonumber
+
+actor PolicyMaker
+participant "WebApplication" as WebApp
+participant "FarmerController" as FC
+participant "FarmerService" as FS
+participant "RequestController" as RC
+participant "RequestService" as RS
+participant "VisitsPlanner" as VP
+participant "DbContext" as DB
+
+PolicyMaker -> WebApp++ : Click on //Farmers// button
+WebApp -> FC : GetFarmersAsync(query)
+FC -> FS++ : GetFarmersAsync(query)
+FS -> DB++ : Get list of farmers given the query
+DB --> FS-- : Return list of farmers
+FS --> FC-- : Return list of farmers
+FC --> WebApp-- : Return list of farmers
+WebApp --> PolicyMaker-- : Display list of farmers
+
+PolicyMaker -> WebApp++ : Click on a specific farmer
+WebApp -> FC++ : GetFarmerByIdAsync(farmerID)
+FC -> FS++ : GetFarmerByIdAsync(farmerID)
+FS -> DB++ : Get farmer given his id
+DB --> FS-- : Return farmer
+FS --> FC-- : Return farmer
+FC --> WebApp-- : Return farmer
+WebApp --> PolicyMaker-- : Display selected //Farmer's summary//
+
+PolicyMaker -> WebApp++ : Press on //Change// next to farmer's note
+WebApp --> PolicyMaker-- : Display //Change note// form
+PolicyMaker -> WebApp++ : Select a note
+
+opt note == Negative
+    WebApp --> PolicyMaker : Display //ProblemType// field
+    PolicyMaker -> WebApp : Select a problem type
+end
+
+WebApp -> FC++ : PostFarmerNoteAsync(farmerID, note)
+FC -> FS++ : AddNoteToFarmerAsync(note)
+FS -> DB++ : Add note to farmer
+DB --> FS-- : Success message
+
+FS --> FC-- : Success message
+FC --> WebApp-- : Success message
+
+opt note != Negative && previousNote == Negative
+    WebApp -> VP++ : RemoveVisitsDueToNegativeNote(farmerID)
+    VP --> DB++ : Remove visits due to negative note
+    DB --> VP-- : Success message
+    VP --> WebApp-- : Success message
+end
+
+opt note == Negative
+    WebApp -> RC++ : PostRequestAsync(request)
+    RC -> RS++ : CreateRequestAsync(request)
+    RS -> DB++ : Create request
+    DB --> RS-- : Success message
+    RS --> RC-- : Success message
+    RC --> WebApp-- : Success message
+
+    
+    WebApp -> VP++ : CalculateNumberOfVisitsToAdd(problemType)
+
+    alt nAdditionalVisits == 0
+        VP --> WebApp : Success message
+    else nAdditionalVisits > 0
+        VP -> VP++ : PlanVisits(nAdditionalVisits, NEGATIVE_NOTE)
+        VP -> VP++ : GetOptimalVisitDate(farmer.farm)
+        deactivate VP
+        VP -> VP++ : CreateVisitOnTheMostQuietDayCloseToDate(date)
+        deactivate VP
+        deactivate VP
+        
+        VP --> DB++ : Create visits
+        DB --> VP-- : Success message
+        VP --> WebApp-- : Success message
+    end
+end
+
+WebApp --> PolicyMaker-- : Display //Farmer's summary// with new note
+
+@enduml

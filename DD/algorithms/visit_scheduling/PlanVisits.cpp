@@ -1,9 +1,6 @@
 void Farmer::planVisits(int n_visits, VisitReason reason, previousDate = nullptr) {
     if (reason == VisitReason.CASUAL) {
         for (int i = 0; i < n_visits; i++) {
-            // we look for the date of a CASUAL visit planned most in the future
-            // getDateTimeOfMostFutureVisit should querry the database
-
             DateTime dateTime;
             Visit newVisit;
 
@@ -12,7 +9,6 @@ void Farmer::planVisits(int n_visits, VisitReason reason, previousDate = nullptr
                 newVisit = createVisitOnTheMostQuietDayCloseToDate(dateTime, True);
             } else {
                 DateTime mostFuture = getDateTimeOfMostFutureVisit(VisitReason.CASUAL);
-                // we create a visit approximately 6 months after that date
                 dateTime = mostFuture + DateTime(months=6);
                 newVisit = createVisitOnTheMostQuietDayCloseToDate(dateTime);
             }

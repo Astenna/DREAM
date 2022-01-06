@@ -1,8 +1,6 @@
 \chapter{Requirements Traceability} \label{ch:requirements_traceability}
 
-This chapter presents all the requirements defined in RASD together with their mappings to the system's components defined in the chapter \ref{ch:architectural_design}. Additionally, a traceability matrix between the requirements and the previously defined mockups is provided.
-
-\todo{Decide on what this chapter should contain}
+This chapter presents all the requirements defined in RASD together with their mappings onto the system's components defined in the chapter \ref{ch:architectural_design}. Additionally, a traceability matrix between the requirements and the previously defined mockups is provided.
 
 \section{Functional Requirements}
 
@@ -111,14 +109,14 @@ This chapter presents all the requirements defined in RASD together with their m
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R7.} & The system must allow a registered user to reset his password. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{EmailSender}, \textbf{DataAccess})\\
-	\textbf{R8.} & The system must allow a logged-in user to sign out of the application.\\
+	\textbf{R8.} & The system must allow a logged-in user to sign out of the application.\todo{stateless}\\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R9.} & The system must allow a registered user to delete his account. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	
 	%Farmer
 	\textbf{R25.} & The system must allow a farmer to see personalized suggestions.\\
-	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
+	& (\textbf{SuggestionController}, \textbf{SuggestionService}, \textbf{DataAccess})\\
 	\textbf{R26.} & The system must allow a farmer to manage his monthly production data.\\
 	& (\textbf{FarmerController}, \textbf{FarmService}, \textbf{DataAccess})\\
 	
@@ -126,12 +124,12 @@ This chapter presents all the requirements defined in RASD together with their m
 	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
 	& (\textbf{AgronomistController}, \textbf{AgronomistService}, \textbf{DataAccess})\\
 	\textbf{R45.} & The system must allow an agronomist to see the list of suggestions for mandals in his area of responsibility.\\
-	& (\textbf{AgronomistController}, \textbf{AgronomistService}, \textbf{DataAccess})\\
-	\textbf{R46.} & The system must allow an agronomist to manage the list of suggestions for mandals in his area of responsibility.\\
+	& (\textbf{SuggestionController}, \textbf{SuggestionService}, \textbf{DataAccess})\\
+	\textbf{R46.} & The system must allow an agronomist to manage the list of suggestions for mandals in his area of responsibility. \todo{change to Suggestions like in the prev. R}\\
 	& (\textbf{AgronomistController}, \textbf{AgronomistService}, \textbf{DataAccess})\\
 	
     \bottomrule
-    \caption{G1 mapping on components and requirements.}
+    \caption{G1 mapping onto components and requirements.}
 \end{longtable}
 
 \begin{longtable}{p{0.06\linewidth} p{0.88\linewidth}} 
@@ -148,40 +146,49 @@ This chapter presents all the requirements defined in RASD together with their m
 	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
-	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
+	& (\textbf{AccountController}, \textbf{AccountService}\todo{Added VisitsPlanner}, \textbf{VisitsPlanner}, \textbf{DataAccess})\\
 	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R7.} & The system must allow a registered user to reset his password. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{EmailSender}, \textbf{DataAccess})\\
 	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
-	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
+	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess}\todo{stateless?})\\
 	\textbf{R9.} & The system must allow a registered user to delete his account. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	
 	%Policy maker
 	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
-	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
+	& (\textbf{FarmerController}, \textbf{FarmerService},
+	\textbf{FarmService} \todo{Added FarmService},
+	\textbf{DataAccess})\\
 	
 	%Farmer
 	\textbf{R24.} & The system must allow a farmer to see his own farmer's summary.\\
-	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
+	& (\textbf{FarmerController}, \textbf{FarmerService},
+	\textbf{FarmService} \todo{Added FarmService} \textbf{DataAccess})\\
 	\textbf{R37.} & The farmer is able to see farmer's summary of a farmer with a negative note whose help request he received. \\
-	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
+	& (\textbf{FarmerController}, \textbf{FarmerService},
+	\textbf{FarmService} \todo{Added FarmService} \textbf{DataAccess})\\
 
 	%Agronomist
 	\textbf{R51.} & The system must allow an agronomist to see a farmer's summary in his area of responsibility.\\
-	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
+	& (\textbf{FarmerController}, \textbf{FarmerService},
+	\textbf{FarmService} \todo{Added FarmService} \textbf{DataAccess})\\
 
     %External systems
 	\textbf{R65.} & The system must read and update weather forecasts every day. \\
-	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{FarmService}, \textbf{ExternalSystemsReader})\\
+	& (\textbf{WeatherForecastController}, \textbf{IWeatherForecastService}, \textbf{ExternalSystemsReader}),
+	\textbf{DataAccess}) \todo{changed to \textbf{DataAccess})}\\
 	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
-	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{FarmService}, \textbf{ExternalSystemsReader})\\
+	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{FarmService}, \textbf{ExternalSystemsReader}),
+	\todo{Added DataAccess}
+	\textbf{DataAccess})\\
 	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
-	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{FarmService}, \textbf{ExternalSystemsReader})\\
+	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{FarmService}, \textbf{ExternalSystemsReader}),
+	\textbf{DataAccess})\\
 	
     \bottomrule
-    \caption{G2 mapping on components and requirements.}
+    \caption{G2 mapping onto components and requirements.}
 \end{longtable}
 
 \begin{longtable}{p{0.06\linewidth} p{0.88\linewidth}} 
@@ -199,12 +206,12 @@ This chapter presents all the requirements defined in RASD together with their m
 	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
-	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
+	& (\textbf{AccountController}, \textbf{AccountService}\todo{Added VisitsPlanner}, \textbf{VisitsPlanner}, \textbf{DataAccess})\\
 	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R7.} & The system must allow a registered user to reset his password. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{EmailSender}, \textbf{DataAccess})\\
-	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
+	\textbf{R8.} & The system must allow a logged-in user to sign out of the application.\todo{stateless?}\\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R9.} & The system must allow a registered user to delete his account. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
@@ -212,9 +219,9 @@ This chapter presents all the requirements defined in RASD together with their m
 	%Policy maker
 	\textbf{R10.} & The system must allow a policy maker to assign a note to a farmer.\\
 	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
-	\textbf{R11.} & The system must ensure that every farmer initially has a neutral note.\\	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
+	\textbf{R11.} & The system must ensure that every farmer initially has a neutral note.\\	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess}) \todo{changed from farmer- to account-}\\
 	\textbf{R12.} & The system must have a list of predefined farmer's problem types.\\
-	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
+	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess}) \\
     \textbf{R13.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
     & (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
 	\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
@@ -226,10 +233,10 @@ This chapter presents all the requirements defined in RASD together with their m
 	\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
 	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
 	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
-	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
+	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{FarmService}, \textbf{DataAccess})\\
     
     \bottomrule
-\caption{G3 mapping on components and requirements.}
+\caption{G3 mapping onto components and requirements.}
 \end{longtable}
 
 
@@ -247,13 +254,13 @@ This chapter presents all the requirements defined in RASD together with their m
 	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
-	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
+	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{VisitsPlanner}, \textbf{DataAccess})\\
 	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R7.} & The system must allow a registered user to reset his password. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{EmailSender}, \textbf{DataAccess})\\
 	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
-	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
+	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess}) \todo{stateless?}\\
 	\textbf{R9.} & The system must allow a registered user to delete his account. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	
@@ -261,7 +268,7 @@ This chapter presents all the requirements defined in RASD together with their m
 	\textbf{R10.} & The system must allow a policy maker to assign a note to a farmer.\\
 	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
 	\textbf{R11.} & The system must ensure that every farmer initially has a neutral note.\\
-	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
+	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R12.} & The system must have a list of predefined farmer's problem types.\\
 	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
     \textbf{R13.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
@@ -273,7 +280,7 @@ This chapter presents all the requirements defined in RASD together with their m
     \textbf{R16.} & The system must ensure that only the most recently specified problem type is taken into account when determining the number of visits.\\
     & (\textbf{AgronomistController}, \textbf{AgronomistService}, \textbf{VisitsPlanner}, \textbf{DataAccess})\\
 	\textbf{R17.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
-	& (\textbf{RequestController}, \textbf{RequestService}, \textbf{DataAccess})\\
+	& (\textbf{RequestController}, \textbf{RequestService}, \textbf{VisitsPlanner}, \textbf{DataAccess})\\
 	\textbf{R18.} & The system must ensure that all the additional farm visits created due to obtaining a negative note are deleted after a farmer's negative note is updated with a positive or a neutral one.\\
 	& (\textbf{AgronomistController}, \textbf{AgronomistService}, \textbf{VisitsPlanner}, \textbf{DataAccess})\\
 	
@@ -299,7 +306,7 @@ This chapter presents all the requirements defined in RASD together with their m
 	& (\textbf{AgronomistController}, \textbf{AgronomistService}, \textbf{VisitsPlanner}, \textbf{DataAccess})\\
     
     \bottomrule
-    \caption{G4 mapping on components and requirements.}
+    \caption{G4 mapping onto components and requirements.}
 \end{longtable}
     
 
@@ -318,19 +325,20 @@ This chapter presents all the requirements defined in RASD together with their m
 	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
-	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
+	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{VisitsPlanner},
+	\textbf{DataAccess})\\
 	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R7.} & The system must allow a registered user to reset his password. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{EmailSender}, \textbf{DataAccess})\\
 	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
-	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
+	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess}) \todo{stateless?}\\
 	\textbf{R9.} & The system must allow a registered user to delete his account. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	
 	%Policy maker
     \textbf{R17.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
-    & (\textbf{RequestController}, \textbf{RequestService}, \textbf{DataAccess})\\
+    & (\textbf{RequestController}, \textbf{RequestService}, \textbf{VisitsPlanner}, \textbf{DataAccess})\\
 	
 	%Farmer
 	\textbf{R27.} & The system must allow a farmer to see a list of help requests created by him.\\
@@ -339,7 +347,7 @@ This chapter presents all the requirements defined in RASD together with their m
 	& (\textbf{RequestController}, \textbf{RequestService}, \textbf{DataAccess})\\
 	\textbf{R29.} & The system must allow a farmer to see a specific help request created by him.\\
 	& (\textbf{RequestController}, \textbf{RequestService}, \textbf{DataAccess})\\
-	\textbf{R30.} & The system must allow a farmer to delete a specific help request created by him.\\
+	\textbf{R30.} & The system must allow a farmer to delete a specific help request created by him. \\
 	& (\textbf{RequestController}, \textbf{RequestService}, \textbf{DataAccess})\\
 	\textbf{R31.} & The system must allow a farmer to create a new help request.\\
 	& (\textbf{RequestController}, \textbf{RequestService}, \textbf{DataAccess})\\
@@ -348,15 +356,15 @@ This chapter presents all the requirements defined in RASD together with their m
 	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
 	& (\textbf{AgronomistController}, \textbf{AgronomistService}, \textbf{DataAccess})\\
 	\textbf{R47.} & The system must allow an agronomist to see a list of all farmers in his area of responsibility.\\
-	& (\textbf{AgronomistController}, \textbf{AgronomistService}, \textbf{DataAccess})\\
-	\textbf{R48.} & The system must allow an agronomist to see a list of all farmers with a specific note in his area of responsibility.\\
-	& (\textbf{AgronomistController}, \textbf{AgronomistService}, \textbf{DataAccess})\\
-	\textbf{R49.} & The system must allow an agronomist to see a list of all farmers in a given mandal in his area of responsibility.\\
-	& (\textbf{AgronomistController}, \textbf{AgronomistService}, \textbf{DataAccess})\\
-	\textbf{R50.} & The system must allow an agronomist to find a farmer's summary in his area of responsibility by his name and surname.\\
-	& (\textbf{AgronomistController}, \textbf{AgronomistService}, \textbf{DataAccess})\\
-	\textbf{R51.} & The system must allow an agronomist to see a farmer's summary in his area of responsibility.\\
 	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
+	\textbf{R48.} & The system must allow an agronomist to see a list of all farmers with a specific note in his area of responsibility.\\
+	& (\textbf{FarmerController}, \textbf{FarmertService}, \textbf{DataAccess})\\
+	\textbf{R49.} & The system must allow an agronomist to see a list of all farmers in a given mandal in his area of responsibility.\\
+	& (\textbf{FarmerController}, \textbf{FarmertService}, \textbf{DataAccess})\\
+	\textbf{R50.} & The system must allow an agronomist to find a farmer's summary in his area of responsibility by his name and surname.\\
+	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{FarmService}, \textbf{DataAccess})\\
+	\textbf{R51.} & The system must allow an agronomist to see a farmer's summary in his area of responsibility.\\
+	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{FarmService}, \textbf{DataAccess})\\
 	\textbf{R52.} & The system must allow an agronomist to see a list of all help requests in his area of responsibility.\\
 	& (\textbf{RequestController}, \textbf{RequestService}, \textbf{DataAccess})\\
 	\textbf{R53.} & The system must allow an agronomist to find a help request in his area of responsibility by the topic.\\
@@ -369,7 +377,7 @@ This chapter presents all the requirements defined in RASD together with their m
 	& (\textbf{RequestController}, \textbf{RequestService}, \textbf{DataAccess})\\
 
     \bottomrule
-    \caption{G5 mapping on components and requirements.}
+    \caption{G5 mapping onto components and requirements.}
 \end{longtable}
 
 \begin{longtable}{p{0.06\linewidth} p{0.88\linewidth}} 
@@ -387,19 +395,22 @@ This chapter presents all the requirements defined in RASD together with their m
 	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
-	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
+	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{VisitsPlanner}, \todo{what about rejected?}
+	\textbf{DataAccess})\\
 	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	\textbf{R7.} & The system must allow a registered user to reset his password. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{EmailSender}, \textbf{DataAccess})\\
 	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
-	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
+	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess}) \todo{stateless?}\\
 	\textbf{R9.} & The system must allow a registered user to delete his account. \\
 	& (\textbf{AccountController}, \textbf{AccountService}, \textbf{DataAccess})\\
 	
 	%Policy maker
     \textbf{R17.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
-    & (\textbf{RequestController}, \textbf{RequestService}, \textbf{DataAccess})\\
+    & (\textbf{RequestController}, \textbf{RequestService},
+    \textbf{VisitsPlanner},
+    \textbf{DataAccess})\\
 	
 	%Farmer
 	\textbf{R27.} & The system must allow a farmer to see a list of help requests created by him.\\
@@ -423,7 +434,7 @@ This chapter presents all the requirements defined in RASD together with their m
 	\textbf{R36.} & The system must allow a farmer with a positive note to delete a help response, only if it was created by him.\\
 	& (\textbf{RequestController}, \textbf{RequestService}, \textbf{DataAccess})\\
 	\textbf{R37.} & The farmer is able to see farmer's summary of a farmer with a negative note whose help request he received. \\
-	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{DataAccess})\\
+	& (\textbf{FarmerController}, \textbf{FarmerService}, \textbf{FarmService}, \textbf{DataAccess})\\
 	\textbf{R38.} & The system must allow a farmer to see a list of all forum threads in Telangana.\\
 	& (\textbf{ForumController}, \textbf{ForumService}, \textbf{DataAccess})\\
 	\textbf{R39.} & The system must allow a farmer to find a forum thread by the topic.\\
@@ -440,7 +451,7 @@ This chapter presents all the requirements defined in RASD together with their m
 	& (\textbf{ForumController}, \textbf{ForumService}, \textbf{DataAccess})\\
 	
     \bottomrule
-    \caption{G6 mapping on components and requirements.}
+    \caption{G6 mapping onto components and requirements.}
 \end{longtable}
 
 
@@ -454,7 +465,7 @@ This chapter presents all the requirements defined in RASD together with their m
 
 \section{Mapping between functional requirements and mockups}
 
-% \todo{Comment that it is frontend mapping on requirements}
+Table \ref{tab:mockups_onto_requirements} depicts a mapping of system mockups onto the functional requirements. Not all the requirements could be mapped, since some of them are handled by the backend server and are not visible on the frontend side.
 
 {
     \newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
@@ -465,6 +476,8 @@ This chapter presents all the requirements defined in RASD together with their m
         \toprule
         & \textbf{M1} & \textbf{M2} & \textbf{M3} & \textbf{M4} & \textbf{M5} & \textbf{M6} & \textbf{M7} & \textbf{M8} & \textbf{M9} & \textbf{M10} & \textbf{M11} & \textbf{M12} & \textbf{M13} & \textbf{M14} & \textbf{M15} & \textbf{M16} & \textbf{M17} & \textbf{M18} & \textbf{M19} & \textbf{M20} & \textbf{M21} & \textbf{M22} & \textbf{M23} & \textbf{M24} & \textbf{M25} & \textbf{M26} & \textbf{M27} & \textbf{M28} \\
         \midrule
+        \endhead
+
                   %  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 &10 &11 &12 &13 &14 &15 &16 &17 &18 &19 &20 &21 &22\\
         \textbf{R1}  &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   \\
         \textbf{R2}  &\cb&\cb&\cb&   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   \\
@@ -535,7 +548,8 @@ This chapter presents all the requirements defined in RASD together with their m
         \textbf{R67} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   \\
         \textbf{R68} &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   &   \\
         \bottomrule
-        \caption{Mockups mapping on functional requirements.}
+        \caption{Mockups mapping onto functional requirements.}
+        \label{tab:mockups_onto_requirements}
     \end{longtable}
 }
 

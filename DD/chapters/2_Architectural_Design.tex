@@ -17,7 +17,22 @@ The DREAM server part uses a database hosted on a SQL Server to store data colle
 \section{Component View}
 
 \subsection{High level}
-\todo{add high level diagram}
+The following diagram presents a high level overview of the whole DREAM system. It describes both structure of the system and high level interaction within him. The description of the system components, as well as the low level diagram of the application server, are presented below.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{diagrams/component/High Level Overview.png}
+    \caption{DREAM Application high level component diagram}
+    \label{fig:high-level-components}
+\end{figure}
+
+The system consists of the following components:
+\begin{itemize}
+    \item \textbf{WebServer} - frontend part of the application, reachable via any modern browser, regardless of the form factor of the device.
+    \item \textbf{DreamServer} - backend part of the application, handling main application login. It provides a REST API \cite{rest} interface, which is consumed by the WebServer. This component is described in detail in further parts of the document.
+    \item \textbf{DatabaseServer} - part of the application responsible for data storage and management. Communicates with DreamServer via a DB Driver.
+    \item \textbf{EmailServer} - additional service, allowing system to send a password reminder e-mail using SMTP.
+\end{itemize}
 
 \subsection{DREAM server}\label{subsec:backend-components}
 Detailed component diagram of the DREAM Server is presented in the figure \ref{fig:backend-components}. The server application was broken down into 3 layers using N-tiers architecture pattern described in section \ref{sec:patterns}. The communication between layers is established by implementation of interfaces presented in the diagram. In accordance with the N-tier pattern, the communication runs only in one direction – starting from the API layer down to the Data Access layer. 
@@ -30,20 +45,22 @@ Detailed component diagram of the DREAM Server is presented in the figure \ref{f
     \label{fig:backend-components}
 \end{figure}
 
-The first layer, the API layer, is composed by a set of controllers that describe available REST endpoints. Then, the middle layer, Business Logic layer contains services and other classes that provide logic necessary for handling requests \todo{Do you mean help requests or requests? It is unclear given the following context} from the client application and cooperation with external systems. In detail, the Business logic layer contains:
+The first layer, the API layer, is composed by a set of controllers that describe available REST endpoints. Then, the middle layer, Business Logic layer contains services and other classes that provide logic necessary for handling HTTP requests  from the client application and cooperation with external systems. In detail, the Business logic layer contains:
 \begin{itemize}
     \item \textbf{RequestService} - handles creating, editing, deleting and accessing help requests together with logic required for automatic selection of requests' recipients.
     \item \textbf{AccountService} - handles account registration and deletion, password reset and authentication logic.
     \item \textbf{AgronomistService} - handles area of responsibility and daily plan management, setting execution state of visits. It calls VisistsPlanner about the necessities to plan new visits after each submission of daily plan execution state or rejection of planned visit.
-    \item \textbf{FarmerService} - handles notes assignment and providing data required for building farmer's summary (access to notes history). Moreover, retrieves personalized suggestions for the farmer based on his farm's location and production type.
+    \item \textbf{FarmerService} - handles notes assignment and providing data required for building farmer's summary (access to notes history). In addition, it allows searching for specified farmer using different query filters. 
     \item \textbf{FarmService} - handles management of farmers' production data, providing data required for building farmer's summary (farm's external systems and  production data).  
     \item \textbf{ForumService} - handles accessing and creating forum threads; accessing, creating and deleting comments.
+    \item \textbf{SuggestionService} - handles creating, deleting and reading suggestions by agronomists. Moreover, retrieves personalized suggestions for the farmer based on his farm's location and production type.
+    \item \textbf{WeatherForecastService} - handles retrieving different weather forecasts data based on provided query parameters.
     \item \textbf{EmailSender} - handles logic required for e-mail sending during password reset process.
     \item \textbf{VisitsPlanner} - handles implementation of \textit{visits scheduling algorithm} described in subsection \ref{subsec:visits-alg}.
     \item \textbf{ExternalSystemsReader} - handles logic required for execution of daily jobs that read and store in the database data obtained from IWeatherForecastsProvider, ISensorSystemProvider and IIrigationSystemProvider interfaces. The implementation of these interfaces is provided by the external systems' API. 
 \end{itemize}
 
-Finally, the Data Access layer contains entities and classes required to efficiently communicate with the database. The components of this layer were not presented in detail, as the communication with the database will leverage object relational mapping described in \todo{Implementation chapter, entity framework}.
+Finally, the Data Access layer contains entities and classes required to efficiently communicate with the database. The components of this layer were not presented in detail, as the communication with the database will leverage object relational mapping, described in more detailed way in the component interfaces section \ref{fig:data-access-interfaces}.
 
 \section{Deployment View}
 \begin{figure}[H]
@@ -52,9 +69,9 @@ Finally, the Data Access layer contains entities and classes required to efficie
     \caption{Deployment diagram}
     \label{fig:deployment}
 \end{figure}
-The system is divided into 5 parts: 3 main tiers \todo{inne słowo} (Application Server, Web Server, Database Server), Client Device with Web Browser and Email Server.
+The system is divided into 5 parts: 3 main tiers \todo{inne słowo w miejsce tiers} (Application Server, Web Server, Database Server), Client Device with Web Browser and Email Server.
 \begin{itemize}
-    \item \textbf{Application Server} - DREAM backend server, it handles application logic and provides a REST API \cite{rest}. It runs using Kestrel Web Server, which is loaded by Common Language Runtime (CLR), the virtual machine component of Microsoft .NET Framework \todo{Missing references}
+    \item \textbf{Application Server} - DREAM backend server, it handles application logic and provides a REST API. It runs using Kestrel Web Server, which is loaded by Common Language Runtime (CLR), the virtual machine component of Microsoft .NET Framework \todo{Missing references}
     \item \textbf{Web Server} - DREAM frontend server, it provides the user interface layer. It hosts the static version of the website using Nginx \cite{nginx}. The website communicates with the Application Server tier via REST API using HTTP requests.
     \item \textbf{Database Server} - Database storage system, using PostgreSQL \cite{postgresql}. It allows data access using DB driver. 
     \item \textbf{Client Device} - Device used by clients to access the website hosted in Web Server tier using HTTP requests. It can be any type of device, capable of running a modern web browser
@@ -64,14 +81,80 @@ The system is divided into 5 parts: 3 main tiers \todo{inne słowo} (Application
 
 \section{Runtime View}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=\textheight, width=\textwidth, keepaspectratio, origin=c]{diagrams/sequence/create_account}
+    \caption{Sequence diagram presenting the process of creating a new user account.}
+    \label{fig:sd_create_account}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=\textheight, width=\textwidth, keepaspectratio, origin=c]{diagrams/sequence/request_help}
+    \caption{Sequence diagram presenting the creation of a help request.}
+    \label{fig:sd_request_help}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=\textheight, width=\textwidth, keepaspectratio, origin=c]{diagrams/sequence/assess_farmers_performance}
+    \caption{Sequence diagram presenting farmer's performance assessment.}
+    \label{fig:sd_assess_farmers_performance}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=\textheight, width=\textwidth, keepaspectratio, origin=c]{diagrams/sequence/set_daily_plan_execution_state}
+    \caption{Sequence diagram presenting the action of displaying a daily plan.}
+    \label{fig:sd_set_daily_plan_execution_state}
+\end{figure}
+
 \section{Component Interfaces}
+The figures in this chapter depict methods implemented by the components of the DREAM server application presented previously in the figure \ref{fig:backend-components}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics
+    [width=\textwidth]
+    %[scale=0.75, origin=c]
+    {diagrams/component/API-interfaces.png}
+    \caption{API components' interfaces}
+    \label{fig:api-interfaces}
+\end{figure}
+
+The first figure (\ref{fig:api-interfaces}) represents controllers provided by the API layer to define HTTP endpoints exposed by the DREAM application server. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics
+    [width=\textwidth]
+    %[scale=0.75, origin=c]
+    {diagrams/component/BusinessLogic-interfaces.png}
+    \caption{Business Logic components' interfaces}
+    \label{fig:business-logic-interfaces}
+\end{figure}
+
+The second figure (\ref{fig:business-logic-interfaces}) presents interfaces that the components of the business logic layer implement. Specifically, the interfaces contain methods responsible for areas described in section (\ref{subsec:backend-components}) where DREAM server application components are presented. One of the implementation conventions that can be spotted here and in the previous figure is the use of \textit{async} suffix for naming asynchronous methods in C\#. It is an asynchronous design pattern recommended by Microsoft \cite{async}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics
+    [width=\textwidth]
+    %[scale=0.75, origin=c]
+    {diagrams/component/DataAccess-interfaces.png}
+    \caption{Data Access components' interfaces}
+    \label{fig:data-access-interfaces}
+\end{figure}
+
+The last figure \ref{fig:data-access-interfaces} shows the classes of the Data Access layer. The details of classes presented in the figure are not shown to preserve readability. Those classes (apart from DreamDbContext class) do not contain any methods, since they serve for object-relational mapping \cite{ef}.  Hence, each of them corresponds to at least one table in the database diagram (more than one in case of many-to-many relationships). Similarly, the fields of those classes correspond to the tables' columns. Detailed database diagram is presented in the following sections, in the figure \ref{fig:db-model}. The only class that contains logic in this figure is the DreamDbContext. It acts as a bridge between the database and the C\# code – it contains fields that represent the tables of the database \cite{ef-dbcontext}.
+
 
 \section{Selected Architectural Styles and Patterns}\label{sec:patterns}
 \begin{itemize}
     \item \textbf{Client Server} - a pattern, which enforces the principle of separation of concerns, by separating the service requesters (clients) from the providers of a resource or service (servers). Clients and servers communicate over a network and can be hosted on separate hardware.
-    \item \textbf{REST} (\textit{Representational State Transfer}) – the API hosted on a DREAM server should be prepared using the REST API design rules \cite{rest} \cite{rest-microsoft}. Firstly, it should not bind the client application to any specific implementation by utilizing HTTP as the communication protocol. Furthermore, as it was presented in the DREAM server components diagram in subsection \ref{subsec:backend-components}, additional layers will be introduced to the server side application to avoid direct dependencies of the API on the database model. Additionally, the interface should be resource-oriented and the HTTP verbs \todo{czym są HTTP verbs?} should reflect the operations done on the resources. All this aims at improving the maintainability, reusability, and readability of the server application.
+    \item \textbf{REST} (\textit{Representational State Transfer}) – the API hosted on a DREAM server should be prepared using the REST API design rules \cite{rest} \cite{rest-microsoft}. Firstly, it should not bind the client application to any specific implementation by utilizing HTTP as the communication protocol. Furthermore, as it was presented in the DREAM server components diagram in subsection \ref{subsec:backend-components}, additional layers will be introduced to the server side application to avoid direct dependencies of the API on the database model. Additionally, the interface should be resource-oriented and the HTTP methods \cite{rfc1945} should reflect the operations done on the resources. All this aims at improving the maintainability, reusability, and readability of the server application.
     \item \textbf{N-tier application} – the server side application was divided into 3 layers: API, Business Logic, and Data Access. This architecture was adopted following the types of common web application architectures described in Microsoft's documentation \cite{ntier}. However, the \textit{User Interface} layer was replaced by \textit{API} layer to better present its meaning. The choice was motivated by the simplicity of the architecture compared to other architectures like \textit{Clean architecture} or microservices architecture. 
-    \item \textbf{Dependency Injection} - a dependency inversion technique that focuses on providing the implementation of required interfaces instead of creating them explicitly by the dependent objects. The main reason for introduction of this principle is the need to address the difficulty of testing the business logic layer \cites{ntier} \cite{di}. \todo{move it to the implementation chapter?}
+    \item \textbf{Dependency Injection} - a dependency inversion technique that focuses on providing the implementation of required interfaces instead of creating them explicitly by the dependent objects \cite{di}. The main reason for introduction of this principle is the need to address the difficulty of testing the business logic layer \cites{ntier}. \todo{move it to the implementation chapter?}
 \end{itemize}
 
 \section{Other Design Decisions}
@@ -141,23 +224,22 @@ Function presented in the listing \ref{lst:SetNote} assures that every time a fa
 
 \subsection{Database model}
 
-\todo{Add a short description}
+This section presents a database model devised for the DREAM application. One of the design decisions included in this figure (\ref{fig:db-model}) is to use one table per type configuration \cite{ef-Inheritance} when modelling the class \textit{User}, which is the base of \textit{PolicyMaker}, \textit{Agronomist} and \textit{Farmer} classes. The decision was motivated by the great number of relationships that each of those derived classes has. With three separate classes for each role, these relationships will be easier to manage and maintain since creation of one, huge \textit{User} class is avoided. The major drawback of this decision is the need to perform additional queries to determine the role of a user during the log in process. To tackle this issue, a column \textit{Role} was introduced to the \textit{User} table. However, such column may introduce consistency issues since one need to be sure that \textit{Role} saved in a row correspond the user in an appropriate table (\textit{PolicyMaker}, \textit{Agronomist} or \textit{Farmer}) with foreign key \textit{UserId} that points to that row. This consistency issue is addressed by the implementation of the DREAM server application.
+
+%\begin{figure}[H]
+    %\centering
+    %\includegraphics
+    %[width=\textwidth]
+    %[scale=0.45, origin=c]
+   % {figures/db-diagram.png}
+  %  \caption{Database model}
+ %   \label{fig:db-model}
+%\end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics
-    [width=\textwidth]
-    %[scale=0.45, origin=c]
-    {figures/db-diagram.png}
-    \caption{Database model}
-    \label{fig:db-model}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics
-    [height = 0.9\textheight]
-    %[scale=0.45, origin=c]
+    [width=\textwidth, height=0.95\textheight, keepaspectratio]
     {diagrams/database-model.png}
     \caption{Database model}
     \label{fig:db-model}

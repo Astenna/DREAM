@@ -1,0 +1,87 @@
+@startuml Set daily plan execution state
+
+mainframe Set daily plan execution state
+autonumber
+
+actor Agronomist
+participant "WebApplication" as WebApp
+participant "AgronomistController" as AgC
+participant "AgronomistService" as AgS
+participant "VisitsPlanner" as VP
+participant "DbContext" as DB
+
+Agronomist -> WebApp++ : Click on //Daily plan// tab
+WebApp --> Agronomist-- : Display //Calendar of daily plans//
+
+Agronomist -> WebApp++ : Click on a particular day
+WebApp -> AgC++ : GetVisitsAsync(query)
+AgC -> AgS++ : GetVisitsAsync(query)
+AgS -> DB++ : Get visits given a query
+DB --> AgS-- : List of visits
+AgS --> AgC-- : List of Visits
+AgC --> WebApp-- : List of visits
+WebApp --> Agronomist-- : Display //Daily plan// of chosen day
+
+Agronomist -> WebApp++ : Click on //Submit execution state// button
+WebApp --> Agronomist-- : Display //Plan execution// view
+
+Agronomist -> WebApp++ : Mark execution state\nand add comments to each visit
+
+alt cancel submission
+    WebApp --> Agronomist : Display //Daily plan// of chosen day
+else submit execution state
+    Agronomist -> WebApp : Click on //Submit// button
+    alt today < visit[0].date
+        WebApp --> Agronomist : Display error message
+    else today >= visit[0].date
+        WebApp -> AgC++ : PutDailyPlanExecutionStateAsync(visits)
+        AgC -> AgS++ : SetDailyPlanExecutionStateAsync(visits)
+
+        loop for each visit in daily plan
+            alt not marked as executed
+                AgS -> DB++ : Update rejected visit
+                DB -> AgS-- : Success message
+                opt visit.reason == CASUAL 
+                    AgS -> VP++ : PlanVisits(1, CASUAL, visit.date)
+                    VP -> VP++ : CreateVisitOnTheMostQuietDayCloseToDate(date, true)
+                    deactivate VP
+                    VP -> DB++ : Create new visit
+                    DB -> VP-- : Success message
+                    VP -> AgS-- : Success message
+                end
+            else marked as executed
+                AgS -> DB++ : Update completed visit
+                DB -> AgS-- : Success message
+                opt visit.reason == CASUAL 
+                    AgS -> VP++ : PlanVisits(1, CASUAL)
+                    VP -> VP++ : CreateVisitOnTheMostQuietDayCloseToDate(date)
+                    deactivate VP
+                    VP -> DB++ : Create new visit
+                    DB -> VP-- : Success message
+                    VP -> AgS-- : Success message
+                end
+            end
+        end
+
+        AgS --> AgC-- : Success message
+        AgC --> WebApp-- : Success message
+        WebApp --> Agronomist-- : Display //Calendar of daily plans//
+    end
+end
+
+
+' loop for each visit in daily plan
+'     alt deviations specified
+'         DREAM -> DREAM++: Mark visit as rejected
+'         deactivate DREAM
+
+'         DREAM -> DREAM++: Update visit
+'         deactivate DREAM
+
+'         opt visit is casual
+'             DREAM -> DREAM++: Create a new casual visit\nin approximately next 5 days
+'             deactivate DREAM
+'         end
+' end
+
+@enduml

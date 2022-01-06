@@ -1,0 +1,85 @@
+@startuml Create Account 
+
+mainframe Create account
+autonumber
+
+actor "Unregistered user" as Unreg
+participant "WebApplication" as WebApp
+participant "AccountController" as AC
+participant "AccountService" as AcS
+participant "VisitsPlanner" as VP
+participant "DbContext" as DB
+
+Unreg -> WebApp++ : Click on //Register// button
+WebApp --> Unreg-- : Display //User registration// view
+Unreg -> WebApp++ : Provide role irrelevant data
+
+alt role == Agronomist
+    WebApp --> Unreg-- : Ask to provide role relevant data
+    Unreg -> WebApp++ : Provide area of responsibility
+
+    WebApp -> AC++ : PostAgronomistAccountAsync(agronomistData)
+    AC -> AcS++ : RegisterAgronomistAsync(agronomistData)
+    AcS -> AcS++ : Validate data
+    deactivate AcS
+
+    alt data correct
+        AcS -> DB++ : Create Agronomist account
+        DB --> AcS-- : Success message
+        AcS --> AC : Success message
+        AC --> WebApp : Success message
+        WebApp --> Unreg : Redirect to //login page//
+    else data incorrect
+        AcS --> AC : Error message
+        AC --> WebApp : Error message
+        WebApp --> Unreg : Display error message
+    end
+else role == Farmer
+    WebApp --> Unreg : Ask to provide role relevant data
+    Unreg -> WebApp : Provide farm data
+
+    WebApp -> AC : PostFarmerAccountAsync(farmerData)
+    AC -> AcS : RegisterFarmerAsync(farmerData)
+    
+    AcS -> AcS++ : Validate data
+    deactivate AcS
+
+    alt data correct
+        AcS -> DB++ : Create Farm entry
+        DB --> AcS-- : Success message
+        AcS -> DB++ : Create Farmer account
+        DB --> AcS-- : Success message
+
+        AcS -> VP++ : PlanVisits(2, CASUAL)
+        VP -> DB++ : Create visits
+        DB --> VP-- : Success message
+        VP -> AcS-- : Success message
+
+        AcS --> AC : Success message
+        AC --> WebApp : Success message
+        WebApp --> Unreg : Redirect to login page
+    else data incorrect
+        AcS --> AC : Error message
+        AC --> WebApp : Error message
+        WebApp --> Unreg : Display error message
+    end
+else role == PolicyMaker
+    WebApp -> AC : PostPolicyMakerAccountAsync(policyMakerData)
+    AC -> AcS : RegisterPolicyMakerAsync(policyMakerData)
+    AcS -> AcS++ : Validate data
+    deactivate AcS
+
+    alt data correct
+        AcS -> DB++ : Create PolicyMaker account
+        DB --> AcS-- : Success message
+        AcS --> AC : Success message
+        AC --> WebApp : Success message
+        WebApp --> Unreg : Redirect to login page
+    else data incorrect
+        AcS --> AC-- : Error message
+        AC --> WebApp-- : Error message
+        WebApp --> Unreg-- : Display error message
+    end
+end
+
+@enduml

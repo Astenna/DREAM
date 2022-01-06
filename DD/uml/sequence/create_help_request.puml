@@ -1,0 +1,36 @@
+@startuml Request help
+
+mainframe Request help
+autonumber
+
+actor Farmer
+participant "WebApplication" as WebApp
+participant "RequestController" as RC
+participant "RequestService" as RS
+participant "DbContext" as DB
+
+Farmer -> WebApp++ : Click on //My help requests// button
+WebApp --> Farmer-- : Display //My help requests// view
+Farmer -> WebApp++ : Click on //Create help request// button
+WebApp --> Farmer-- : Display //Create help request// view
+Farmer -> WebApp++ : Fill in the help form
+
+WebApp -> RC++ : PostRequestAsync(requestData)
+RC -> RS++ : CreateRequestAsync(requestData)
+
+RS -> RS++ : Validate request data
+deactivate RS
+
+alt data correct
+    RS -> DB++ : Create new help request
+    DB --> RS-- : Success message
+    RS --> RC : Success message
+    RC --> WebApp : Success message
+    WebApp --> Farmer : Display created help request
+else data incorrect
+    RS --> RC-- : Error message
+    RC --> WebApp-- : Error message
+    WebApp --> Farmer-- : Display error message
+end
+
+@enduml
