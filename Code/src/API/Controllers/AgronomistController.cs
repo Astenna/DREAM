@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Dtos.Agronomist;
+using BusinessLogic.Queries;
 using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,12 @@ namespace API.Controllers
 
         [HttpPut("{id}/execution-state")]
         public async Task<IActionResult> PutDailyPlanExecutionStateAsync([FromRoute] int agronomistId, List<VisitDto> visits)
+        {
+            return Ok();
+        }
+
+        [HttpGet("{id}/visits")]
+        public async Task<IActionResult> GetVisitsAsync([FromRoute] VisitsQuery query)
         {
             return Ok();
         }

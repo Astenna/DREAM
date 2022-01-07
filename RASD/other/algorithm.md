@@ -154,7 +154,7 @@ When planning a visit it is necessary to take the following factors into conside
         if (reason == VisitReason.CASUAL) {
             for (int i = 0; i < n_visits; i++) {
                 // we look for the date of a CASUAL visit planned most in the future
-                // getDateTimeOfMostFutureVisit should querry the database
+                // getDateTimeOfMostFutureVisit should query the database
 
                 DateTime dateTime;
                 Visit newVisit;
