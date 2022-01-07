@@ -1,0 +1,19 @@
+\documentclass[a4paper, 11pt, oneside, openright, english]{memoir}
+
+\usepackage{styles/preamble}
+
+\begin{document}
+	\include{title_page/title_page}
+	
+	\pagenumbering{Roman}
+	
+	\tableofcontents
+	
+	\pagenumbering{arabic}
+
+	\include{chapters/1_Analyzed_Project}
+	\include{chapters/2_Installation_Setup}
+	\include{chapters/3_Acceptance_Testing}
+	\include{chapters/4_Comments_and_Remarks}
+	\include{chapters/5_Effort_Spent}
+\end{document}
