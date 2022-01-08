@@ -171,7 +171,6 @@ The last figure \ref{fig:data-access-interfaces} shows the classes of the Data A
     \item \textbf{Client Server} - a pattern, which enforces the principle of separation of concerns, by separating the service requesters (clients) from the providers of a resource or service (servers). Clients and servers communicate over a network and can be hosted on separate hardware.
     \item \textbf{REST} (\textit{Representational State Transfer}) – the API hosted on a DREAM server should be prepared using the REST API design rules \cite{rest} \cite{rest-microsoft}. Firstly, it should not bind the client application to any specific implementation by utilizing HTTP as the communication protocol. Furthermore, as it was presented in the DREAM server components diagram in subsection \ref{subsec:backend-components}, additional layers will be introduced to the server side application to avoid direct dependencies of the API on the database model. Additionally, the interface should be resource-oriented and the HTTP methods \cite{rfc1945} should reflect the operations done on the resources. All this aims at improving the maintainability, reusability, and readability of the server application.
     \item \textbf{N-tier application} – the server side application was divided into 3 layers: API, Business Logic, and Data Access. This architecture was adopted following the types of common web application architectures described in Microsoft's documentation \cite{ntier}. However, the \textit{User Interface} layer was replaced by \textit{API} layer to better present its meaning. The choice was motivated by the simplicity of the architecture compared to other architectures like \textit{Clean architecture} or microservices architecture. 
-    \item \textbf{Dependency Injection} - a dependency inversion technique that focuses on providing the implementation of required interfaces instead of creating them explicitly by the dependent objects \cite{di}. The main reason for introduction of this principle is the need to address the difficulty of testing the business logic layer \cites{ntier}. \todo{move it to the implementation chapter?}
 \end{itemize}
 
 \section{Other Design Decisions}
@@ -261,3 +260,18 @@ This section presents a database model devised for the DREAM application. One of
     \caption{Database model}
     \label{fig:db-model}
 \end{figure}
+
+\subsection{Authentication and authorization method}
+The DREAM system will use JSON Web Tokens (JWT) \cite{jwt} for authentication and authorization. JWT is a standard that defines a way for transmitting information. Each token is digitally signed, allowing the consumer to verify if the token is correct and has not been forged. JWTs are stateless by design, which works well with the statelessness of HTTP protocol. 
+
+Using JSON Web Tokens affects the system in several ways. They come in two types: the access token and the refresh token. The refresh token is obtained using an API call, containing the user's e-mail and password. Each of the tokens has a lifetime – when the access token is no longer valid, we use the refresh token to obtain a new one. When the refresh token loses its validity, the user is automatically signed out.
+
+The tokens have to be provided in a header of every API call, apart from sign-up, sign-on and remind password requests. They are stored in a local storage of user's browser. JWT can not be invalidated, so sign-out results in clearing the local storage and redirecting the user back to the home page.
+
+\subsection{WebApplication static content generation}
+The WebApplicaion tier consist of a Nginx server, hosting the production build of the website. The production build has to be generated from the code using a separate NodeJS environment during build phase and then passed to the Nginx process using a shared volume.
+
+The application can be also hosted directly using NodeJS, although it is not suited for production use and has limited scalability.
+
+\subsection{Dependency Injection}
+Dependency injection, also known as dependency inversion technique, focuses on providing implementations of required interfaces instead of creating them explicitly by the dependent objects \cite{di}. The implementation of DREAM Web Application will leverage it to address the difficulty of testing the business logic layer \cites{ntier}.
