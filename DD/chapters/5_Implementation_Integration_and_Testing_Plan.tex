@@ -15,7 +15,7 @@ In order to break down the implementation into iterative phases, a list of depen
     \autonum{D} &  The implementation of \textit{FarmerController} and \textit{FarmerService} requires prior implementation of \textit{VisitsPlanner} to provide the implementation of Visit Scheduling Algorithm (\ref{subsec:visits-alg}) that ensures each farm is visited more frequently if a farmer has obtained a negative note.\\
     
     \autonum{D} &  Optional:  The implementation of \textit{FarmerController} and \textit{FarmService} as well as 
-    \textit{WeatherForecastController} and \textit{WeatherForecastrService}
+    \textit{WeatherForecastController} and \textit{WeatherForecastService}
     requires prior implementation of \textit{ExternalSystemsReader} to ensure that database contains data from external systems to be read by dependent components. However, this dependency can be relaxed either by accepting empty values returned by the API or by providing some static data.\\
 \end{longtable}
 
@@ -23,7 +23,7 @@ All components not mentioned above can be built in any sequence. However, a spec
 
 The implementation of the Web Application views presented in the chapter \ref{chap:ui} is achieved in an iterative way, by the creation of the views corresponding to the DREAM Server Application functionalities developed in the given iteration. However, the views can be developed independently since the communication with the DREAM Server Application can be mocked. 
 
-The first development phase will focus on the Data Access Layer of the DREAM Server Application as well ass the components required for users' registration and log in to address the dependencies \textbf{D1}, \textbf{D2}, and \textbf{D3}. The components built in this step are presented in the figure \ref{fig:step1}. In case of any issues, the first phase can be further broken down into two phases, with the first part containing only the Data Access components.
+The first development phase will focus on the Data Access Layer of the DREAM Server Application as well as the components required for users' registration and log in to address the dependencies \textbf{D1}, \textbf{D2}, and \textbf{D3}. The components built in this step are presented in the figure \ref{fig:step1}. In case of any issues, the first phase can be further broken down into two phases, with the first part containing only the Data Access components.
 
 \begin{figure}[H]
     \centering
@@ -57,7 +57,6 @@ In addition, the integration with the external systems is started by implementin
     \label{fig:step3}
 \end{figure}
 
-\todo{Do not understand the first sentence}
 Step four concentrates on the integration with the external systems' data by introducing the \textit{WeatherForecastController} as well as the \textit{FarmerController}. The former provides information about short and long-term weather forecasts, and the latter delivers data from the farms' irrigation and sensor systems. The information from the external systems will be available in the database thanks to the \textit{ExternalSystemsReader} built in the previous step (\textbf{D6} resolved). The components developed in this phase are presented in the figure \ref{fig:step4}. The implementation of the \textit{FarmerController} can be done since the dependency \textbf{D5} has been resolved in the step 2. Moreover, the farmers may add their production data to the system and agronomists are able to assess the performance of a given farmer.
 
 \begin{figure}[H]
@@ -79,3 +78,15 @@ In the last development phase, the suggestions' functionality is delivered. From
 \end{figure}
 
 \section{Integration and test plan}
+A comprehensive testing approach must accompany the application's implementation. The code must use abstractions, which makes it possible to use dependency injection and stub individual functionalities and classes, as described in section \ref{di-section}.
+
+During the development process, individual functions should be tested via means of unit testing. Each finished component requires a set of unit tests, to make sure that it works correctly by itself. A specific emphasis should be placed on components that incorporate custom algorithms, like \textit{VisitsPlanner}. 
+
+The system is being released in iterations, as described in the previous section. Each iteration introduces a new group of components, that often need to cooperate to deliver certain functionalities. Those component groups should be tested via means of integration testing to ensure that they work properly together as well as in combination with previously introduced components.
+
+The product released during intermediate phases is a functional system by itself and should be tested as a whole. This is realized via means of system testing. Tests are conducted from the perspective of the end user, and the use cases that are defined in RASD are used to ensure that the scenarios can be implemented and that the system meets the imposed requirements. These tests are performed both manually and automatically, and are executed on the system version most similar to the production build. The released product is also reviewed by the customers itself, who check that the system behaves correctly, applying the use cases as test cases. 
+
+During the last phase, a final version of the product is delivered. This version should be tested via the same means as the versions released during intermediate phases.
+
+
+ 
