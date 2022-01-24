@@ -324,3 +324,5 @@ msbuild.wrn
 # Visual Paradigm
 *.lck
 *.bak_*
+venv/
+*.exe
