@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DataAccess.DreamDbContext">
+    <Position X="0.5" Y="0.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AgQQgQAAAAAAAARAAACAAAAAEAABAEAACgAAAFACAEA=</HashCode>
+      <FileName>DreamDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entites.Farms.Farm" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACBAAAAIAAAARIIAAAAAQAAAAAAAAAACABAAAQAAA=</HashCode>
+      <FileName>Entities\Farms\Farm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entites.Farms.FarmProduction" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAAAAAAAASAAAAAAAABAgAAAAAAACA=</HashCode>
+      <FileName>Entities\Farms\Production.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entites.Farms.SensorSystemResponse" Collapsed="true">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAAAAACAAQAAAAAAAABCAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Farms\SensorSystemResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entites.Farms.WaterIrrigationSystemResponse" Collapsed="true">
+    <Position X="6.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAIgAAAAAAAAAQAAAAAAAABCAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Farms\WaterIrrigationSystemResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entities.Farms.FarmProductionType" Collapsed="true">
+    <Position X="4.75" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Farms\FarmProductionType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entities.Farms.WeatherForecastResponse" Collapsed="true">
+    <Position X="8.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAQAgAAAAAAAAAAAAAAIAAAAADAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\WeatherForecastResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entites.Visists.Visit" Collapsed="true">
+    <Position X="4.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAMAAEAwAAAAAAAAAQAAAAIAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Visits\Visit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entites.Actors.Agronomist" Collapsed="true">
+    <Position X="8.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAADAQAAAAAAAAYAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Actors\Agronomist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entites.Actors.Farmer" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAADAAAAAAAAgAICAAAAAAwAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Entities\Actors\Farmer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entites.Actors.PolicyMaker" Collapsed="true">
+    <Position X="4.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Actors\PolicyMaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entites.Actors.User" Collapsed="true">
+    <Position X="6.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAEAAAAAQABAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Actors\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entites.DiscussionForum.ForumComment" Collapsed="true">
+    <Position X="4.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAASAAAAAgAAAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAE=</HashCode>
+      <FileName>Entities\DiscussionForum\Comment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entites.DiscussionForum.ForumThread" Collapsed="true">
+    <Position X="6.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAAAAAAAAAAAAgAAACAAIAE=</HashCode>
+      <FileName>Entities\DiscussionForum\ForumThread.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entities.FarmerNote" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAAAAAAAAAAAAAAAABAAAAAABASAAABEAAAA=</HashCode>
+      <FileName>Entities\FarmerNote.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entities.HelpRequest" Collapsed="true">
+    <Position X="8.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAQAAACAAAAAAAAAAAAAAAAACgAAAAAAAIAAAAAE=</HashCode>
+      <FileName>Entities\HelpRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entities.HelpResponse" Collapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAAAAQAAAAAAAAAAEAAAAACAAAAAAAAIBAAAEI=</HashCode>
+      <FileName>Entities\HelpResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entities.Mandal" Collapsed="true">
+    <Position X="4.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Entities\Mandal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entities.ProblemType" Collapsed="true">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\ProblemType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccess.Entities.Suggestion" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAQAAAAAAAAAAAAAAAAAAAAAAAAgAACAAAACA=</HashCode>
+      <FileName>Entities\Suggestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="DataAccess.Entites.Visists.VisitReason" Collapsed="true">
+    <Position X="6.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQCAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Visits\VisitReason.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DataAccess.Entites.Visists.VisitState" Collapsed="true">
+    <Position X="8.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAQAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Entities\Visits\VisitState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DataAccess.Entities.Actors.Role" Collapsed="true">
+    <Position X="4.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAACA=</HashCode>
+      <FileName>Entities\Actors\Role.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DataAccess.Entities.WeatherType" Collapsed="true">
+    <Position X="6.75" Y="5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQQAAAAAAAAQAACAQAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Entities\WeatherType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DataAccess.Entites.Note" Collapsed="true">
+    <Position X="8.5" Y="5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAACAAAA=</HashCode>
+      <FileName>Entities\Note.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
