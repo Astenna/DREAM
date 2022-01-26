@@ -27,6 +27,7 @@ const RowBlock = (props: RowProps) =>
   <Row {...props} style={{...props.style, width: "100%"}}>{props.children}</Row>
 
 const Homepage = () => {
+
   return (
     <DefaultLayout style={{minWidth: "350px"}}>
       <Header style={{backgroundColor: colors.HOMEPAGE.GRAY, padding: "0 10px"}}>
@@ -102,7 +103,7 @@ const Homepage = () => {
                   padding: '30px 50px 30px 30px'
                 }}
               >
-                <h1 style={{fontWeight: "600", fontSize: "30px"}}>
+                <h1 id="homepage-farm-goal-label" style={{fontWeight: "600", fontSize: "30px"}}>
                   {strings.DREAM_GOAL_LABEL}
                 </h1>
                 <p style={{textAlign: "justify"}}>
