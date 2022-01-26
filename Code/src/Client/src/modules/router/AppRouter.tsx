@@ -1,12 +1,13 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Dashboard from '../../dashboard/dashboard/Dashboard';
+import Dashboard from '../dashboard/Dashboard';
+import Homepage from '../homepage/Homepage';
 
 const AppRouter = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<div>It works.</div>}/>
+                <Route path="/" element={<Homepage/>}/>
                 <Route path="/dashboard" element={<Dashboard/>}/>
                 <Route path="/login" element={<></>}/>
                 <Route path="/about" element={<></>}/>

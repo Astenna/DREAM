@@ -1,0 +1,55 @@
+import React, {CSSProperties} from 'react';
+import {Button, Col, Dropdown, Menu, Row} from 'antd';
+import {Link, useNavigate} from 'react-router-dom';
+import {UnorderedListOutlined} from '@ant-design/icons';
+import './vertical-navbar.less'
+import Logo from '../Logo';
+
+type Key = string
+
+interface HorizontalNavbarProps {
+  menuItems: {
+    key: Key
+    node: React.ReactNode;
+    link: string;
+  }[],
+  menuBarProperties?: CSSProperties
+}
+
+const HorizontalNavbar = (props: HorizontalNavbarProps) => {
+  const navigate = useNavigate();
+
+  function handleClick(key: Key) {
+    let link = props.menuItems.find(item => item.key === key)?.link
+    navigate(link ? link : "/")
+  }
+
+  const menuItems = props.menuItems.map((item) =>
+    <Menu.Item key={item.key}>{item.node}</Menu.Item>)
+
+  const dropDownMenu =
+    <Menu mode={"vertical"} onClick={k => handleClick(k.key)}>{menuItems}</Menu>
+
+  const horizontalMenu =
+    <Menu className={"h-navbar-h-menu"} style={props.menuBarProperties} mode={"horizontal"} onClick={k => handleClick(k.key)}>{menuItems}</Menu>
+
+  return (
+    <>
+      <Dropdown className={"h-navbar-dropdown"} overlay={dropDownMenu} placement="bottomRight" arrow>
+        <Button className={"h-navbar-dropdown-button"} shape="circle" icon={<UnorderedListOutlined/>} size="large"/>
+      </Dropdown>
+      <Row className={"h-navbar-header-container"}>
+        <Col className={"flex-center"}>
+          <Link className={"flex-center"} to={"/"}>
+            <Logo/>
+          </Link>
+        </Col>
+        <Col className={"h-navbar-h-menu-col"}>
+          {horizontalMenu}
+        </Col>
+      </Row>
+    </>
+  );
+};
+
+export default HorizontalNavbar;

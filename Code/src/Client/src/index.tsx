@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.less';
-import App from './modules/app/app/App';
+import App from './modules/app/App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

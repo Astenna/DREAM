@@ -4,8 +4,9 @@ import "./Dashboard.less"
 import {Link} from 'react-router-dom';
 import Sider from 'antd/es/layout/Sider';
 import {DesktopOutlined, PieChartOutlined, UserOutlined,} from '@ant-design/icons';
+import DefaultLayout from '../common/layout/DefaultLayout';
 
-const {SubMenu} = Menu;
+// const {SubMenu} = Menu;
 const {Header, Content, Footer} = Layout;
 
 
@@ -63,7 +64,7 @@ const Dashboard = () => {
     const [collapsed, setCollapsed] = useState(false)
 
     return (
-        <Layout style={{minHeight: '100vh'}}>
+        <DefaultLayout>
             <Sider collapsible collapsed={collapsed} onCollapse={(collapsed) => setCollapsed(collapsed)}>
                 <div className="logo"/>
                 <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
@@ -204,7 +205,7 @@ const Dashboard = () => {
                 </Content>
                 <Footer style={{textAlign: 'center'}}>DREAM ©2022</Footer>
             </Layout>
-        </Layout>
+        </DefaultLayout>
         // <Layout className="dashboard-layout">
         //     {/*<Header className={"dashboard-header"}>*/}
         //     {/*    <NavBar/>*/}
