@@ -43,7 +43,6 @@ jobs:
       - name: Install DataAccess dependencies
         run: dotnet restore
         working-directory: ./Code/Server/DataAccess
-        working-directory: ./Code/Server/DataAccess
       - name: Build DataAccess
         run: dotnet build --configuration Release --no-restore
         working-directory: ./Code/Server/DataAccess
