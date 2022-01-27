@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  system-tests:
+  client-build-and-test:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -18,11 +18,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Node.js
+      - name: Node.js 16
         uses: actions/setup-node@v2
         with:
           node-version: '16'
           cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
       - name: Install dependencies
         run: npm install
       - name: Run tests
