@@ -2,16 +2,27 @@ import React, {useState} from 'react';
 import {AutoComplete, Form, Input, Modal, Select} from 'antd';
 import strings from '../../values/strings';
 import {mandals as allMandals} from '../../values/mandals';
+import {Rule} from 'antd/lib/form';
 
 const {Option} = Select;
 
+/**
+ * Type defining possible roles.
+ */
 type Role = "farmer" | "policy_maker" | undefined;
 
+/**
+ * Incoming properties managing visibility of current modal dialog.
+ */
 interface CreateAccountModalProps {
   isVisible: boolean,
   setVisible: (value: boolean) => void
 }
 
+/**
+ * Modal dialog responsible for account creation process.
+ * Renders fields based on chosen role.
+ */
 const CreateAccountModal = (props: CreateAccountModalProps) => {
   const [form] = Form.useForm();
   const [mandals, setMandals] = useState(allMandals);
@@ -28,17 +39,9 @@ const CreateAccountModal = (props: CreateAccountModalProps) => {
       sm: {span: 16},
     },
   };
-  const tableLayout = {
-    labelCol: {
-      xs: {span: 24},
-      sm: {span: 24},
-    },
-    wrapperCol: {
-      xs: {span: 24},
-      sm: {span: 24},
-    },
-  };
-  const requiredCheck = {
+
+  // Rule responsible for checking if required field is filled.
+  const requiredCheck: Rule = {
     required: true,
     message: strings.FORM.ERROR.REQUIRED,
   }
@@ -52,15 +55,12 @@ const CreateAccountModal = (props: CreateAccountModalProps) => {
   }
 
 
-  const changeRole = (role: Role) => {
-    setRole(role)
-    setMandals([])
-  }
+  // Mandal search for Farmer
   const onMandalSearch = (searchText: string) => {
     setMandals(!searchText ? [] : allMandals.filter(m => m.startsWith(searchText)).sort().slice(0, 5))
   }
 
-
+  // Object defining specifics of roles - key, role name and (!) additional form items.
   const roles = {
     "farmer": {
       key: "farmer",
@@ -120,35 +120,7 @@ const CreateAccountModal = (props: CreateAccountModalProps) => {
     "policy_maker": {
       key: "policy_maker",
       value: strings.ROLE.POLICY_MAKER,
-      additional_fields: [
-        <Form.Item
-          key="mandals" name="mandals" label={strings.FORM.LABEL.MANDALS}
-          rules={[requiredCheck]}
-        >
-          <Select
-            mode="multiple"
-            allowClear
-            style={{ width: '100%' }}
-          >
-            {allMandals.map(value => <Option key={value}>{value}</Option>)}
-          </Select>
-        </Form.Item>
-        // <Form.Item
-        //   {...tableLayout} name="mandals"
-        //   rules={[
-        //     () => ({
-        //       validator(_, value) {
-        //         if (!value || !(value.length > 0)) {
-        //           return Promise.reject(new Error('You have to select one mandal.'));
-        //         }
-        //         return Promise.resolve();
-        //       },
-        //     })
-        //   ]}
-        // >
-        //   <MandalTable/>
-        // </Form.Item>
-      ]
+      additional_fields: []
     },
   }
 
@@ -231,7 +203,7 @@ const CreateAccountModal = (props: CreateAccountModalProps) => {
             </Select>
           </Form.Item>
 
-          {/** Insert role dependent form components.*/}
+          {/* Insert role dependent form components here.*/}
           {
             role !== undefined && roles[role]?.additional_fields
           }
