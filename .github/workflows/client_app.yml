@@ -12,6 +12,9 @@ on:
 jobs:
   system-tests:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Code/Client
 
     steps:
       - uses: actions/checkout@v2
