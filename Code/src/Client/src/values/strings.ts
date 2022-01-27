@@ -1,3 +1,7 @@
+/**
+ * This files contains all the strings and texts used in the project.
+ * Texts were extracted for easier translation and management.
+ */
 const strings = {
   LOG_IN: "Log in",
   CREATE_ACCOUNT: "Create account",
@@ -8,6 +12,7 @@ const strings = {
   DREAM_GOAL: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque elementum dictum sagittis. Aliquam tristique quam a ligula pretium, nec ornare sem facilisis. Duis tempus bibendum suscipit. Duis at nisi porta, ultrices nisl at, tristique lorem. Pellentesque nec vulputate metus. Nullam nec eleifend libero, ac placerat sapien. Integer gravida lorem lectus, sagittis convallis dui ultrices tempus. Phasellus sed augue fringilla, rhoncus leo tristique, scelerisque nibh. Mauris pellentesque arcu augue, quis hendrerit neque elementum et. Quisque viverra, ligula at blandit bibendum, orci nibh fringilla purus, eget mattis odio purus eu massa. Sed bibendum tortor at risus tempor porta. Ut consequat tortor non dolor congue efficitur eget id dolor. Phasellus pharetra dolor nisi, vitae porta lorem interdum sed. Pellentesque malesuada nec est eu rutrum.",
   DREAM_GOAL_LABEL: "Our goal",
   SUBMIT: "Submit",
+  ADD: "Add",
   REMIND_PASSWORD: "Remind password",
   ROLE: {
     FARMER: "Farmer",
@@ -28,6 +33,8 @@ const strings = {
       POSTAL_CODE: "Postal code",
       CITY: "City",
       MANDAL: "Mandal",
+      MANDALS: "Mandals",
+      ADD_MANDALS: "Add mandals",
       REMIND_PASSWORD: "Please enter the e-mail address associated with your account.",
     },
     ERROR: {
