@@ -1,0 +1,87 @@
+import React, {useState} from 'react';
+import {Col, Form, Input, Modal, Row} from 'antd';
+import strings from '../../values/strings';
+
+import RemindPasswordModal from './RemindPasswordModal';
+import {LockOutlined, MailOutlined} from '@ant-design/icons';
+import {Link} from 'react-router-dom';
+
+interface LogInModalProps {
+  isVisible: boolean,
+  setVisible: (value: boolean) => void
+}
+
+const LogInModal = (props: LogInModalProps) => {
+  const [form] = Form.useForm();
+  const [isRemindPasswordVisible, setRemindPasswordVisible] = useState(false);
+
+  const sendLogInForm = (v: any) => {
+    console.log(v)
+    props.setVisible(false)
+  }
+  const cancelLogInForm = () => {
+    props.setVisible(false)
+  }
+  const openRemindPasswordModal = () => {
+    props.setVisible(false);
+    setRemindPasswordVisible(true);
+  }
+
+  return (
+    <>
+      <RemindPasswordModal isVisible={isRemindPasswordVisible} setVisible={setRemindPasswordVisible}/>
+      <Modal
+        title={strings.LOG_IN}
+        visible={props.isVisible}
+        onOk={form.submit}
+        onCancel={cancelLogInForm}
+        okText={strings.SUBMIT}
+      >
+        <Form form={form} layout={"vertical"} onFinish={sendLogInForm}>
+          <Form.Item
+            name="email"
+            rules={[
+              {
+                type: "email",
+                required: true,
+                message: strings.FORM.ERROR.EMAIL_INCORRECT_FORMAT,
+              },
+            ]}
+          >
+            <Input
+              type={"email"}
+              placeholder={strings.FORM.LABEL.EMAIL}
+              prefix={<MailOutlined/>}
+              size={"large"}
+            />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: strings.FORM.ERROR.REQUIRED,
+              },
+            ]}
+          >
+            <Input.Password
+              placeholder={strings.FORM.LABEL.PASSWORD}
+              prefix={<LockOutlined/>}
+              size={"large"}
+            />
+          </Form.Item>
+        </Form>
+        <Row>
+          <Col span={24} style={{display: 'flex', justifyContent: 'flex-end'}}>
+            <Link to={"#"} onClick={openRemindPasswordModal}>
+              Forgot password?
+            </Link>
+          </Col>
+        </Row>
+
+      </Modal>
+    </>
+  );
+};
+
+export default LogInModal;

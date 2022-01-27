@@ -1,35 +1,41 @@
-import React from 'react';
+import React, {useState} from 'react';
 import DefaultLayout from '../common/layout/DefaultLayout';
 import {Content, Header} from 'antd/es/layout/layout';
 import {Button, Col, Row, RowProps} from 'antd';
 import '../../stylesheets/common.less'
 import HorizontalNavbar from '../common/navbar/HorizontalNavbar';
 import strings from '../../values/strings'
-import links from '../../values/links';
 import colors from '../../values/colors';
 import farmPicture from '../../assets/farm.jpg';
 import './homepage.less';
+import LogInModal from './LogInModal';
+import CreateAccountModal from './CreateAccountModal';
 
-const menuItems = [
-  {
-    key: "1",
-    node: strings.LOG_IN,
-    link: links.LOG_IN
-  },
-  {
-    key: "2",
-    node: strings.CREATE_ACCOUNT,
-    link: links.CREATE_ACCOUNT
-  }
-]
-
-const RowBlock = (props: RowProps) =>
-  <Row {...props} style={{...props.style, width: "100%"}}>{props.children}</Row>
-
+/**
+ * Homepage of the DREAM app. Can invoke modal dialogs responsible for
+ * log in, sign up and password reminding.
+ */
 const Homepage = () => {
+  const [isCreateAccountFormVisible, setCreateAccountFormVisible] = useState(false);
+  const [isLogInFormVisible, setLogInFormVisible] = useState(false);
+
+  const menuItems = [
+    {
+      key: "1",
+      node: strings.LOG_IN,
+      action: () => setLogInFormVisible(true)
+    },
+    {
+      key: "2",
+      node: strings.CREATE_ACCOUNT,
+      action: () => setCreateAccountFormVisible(true)
+    }
+  ]
 
   return (
     <DefaultLayout style={{minWidth: "350px"}}>
+      <LogInModal isVisible={isLogInFormVisible} setVisible={setLogInFormVisible}/>
+      <CreateAccountModal isVisible={isCreateAccountFormVisible} setVisible={setCreateAccountFormVisible}/>
       <Header style={{backgroundColor: colors.HOMEPAGE.GRAY, padding: "0 10px"}}>
         <HorizontalNavbar menuItems={menuItems} menuBarProperties={{backgroundColor: colors.HOMEPAGE.GRAY}}/>
       </Header>
@@ -63,7 +69,10 @@ const Homepage = () => {
             </RowBlock>
             <RowBlock className={"flex-center"}>
               <Col span={24} className={"flex-center"} style={{margin: "0 0 50px 0"}}>
-                <Button type={"primary"} size={"large"} shape={"round"}>
+                <Button
+                  type={"primary"} size={"large"} shape={"round"}
+                  onClick={() => setCreateAccountFormVisible(true)}
+                >
                   {strings.CREATE_ACCOUNT}
                 </Button>
               </Col>
@@ -119,3 +128,6 @@ const Homepage = () => {
 };
 
 export default Homepage;
+
+const RowBlock = (props: RowProps) =>
+  <Row {...props} style={{...props.style, width: "100%"}}>{props.children}</Row>

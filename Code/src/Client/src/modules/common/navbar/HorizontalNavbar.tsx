@@ -11,7 +11,7 @@ interface HorizontalNavbarProps {
   menuItems: {
     key: Key
     node: React.ReactNode;
-    link: string;
+    action: (() => void);
   }[],
   menuBarProperties?: CSSProperties
 }
@@ -19,9 +19,11 @@ interface HorizontalNavbarProps {
 const HorizontalNavbar = (props: HorizontalNavbarProps) => {
   const navigate = useNavigate();
 
-  function handleClick(key: Key) {
-    let link = props.menuItems.find(item => item.key === key)?.link
-    navigate(link ? link : "/")
+  const handleClick = (key: Key) => {
+    let action = props.menuItems.find(item => item.key === key)?.action
+    if (action) {
+      action()
+    }
   }
 
   const menuItems = props.menuItems.map((item) =>
