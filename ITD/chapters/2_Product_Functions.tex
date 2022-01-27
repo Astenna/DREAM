@@ -1,5 +1,75 @@
 \chapter{Product Functions} \label{ch:product_functions}
 
+\todo{Clean up}
+
 \section{Implemented Functions}
+
+All the functions that are implemented in the initial prototype of the program are listed below.
+
+\begin{longtable}{@{}p{0.06\linewidth} p{0.88\linewidth}}
+	\toprule
+	\textbf{ID}   & \textbf{Requirement}\\
+	\midrule
+	
+	& \textbf{Authentication}\\
+    \midrule
+	\textbf{R1.} & The system must uniquely identify each user by his e-mail. \\
+	\textbf{R2.} & The system must allow an unregistered user to create an account with a chosen role. \\
+	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
+	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
+	\textbf{R7.} & The system must allow a registered user to reset his password. \\
+	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
+	\textbf{R9.} & The system must allow a registered user to delete his account. \\
+    \midrule
+
+	& \textbf{Policy maker} \\
+    \midrule
+	\textbf{R10.} & The system must allow a policy maker to assign a note to a farmer.\\
+	\textbf{R11.} & The system must ensure that every farmer initially has a neutral note.\\
+	\textbf{R12.} & The system must have a list of predefined farmer's problem types.\\
+    \textbf{R13.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
+    \todo{Partially R17}
+	\textbf{R17.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
+	\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
+	\textbf{R20.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
+	\textbf{R21.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
+	\textbf{R22.} & The system must allow a policy maker to find a farmer's summary by his name and surname.\\
+	\textbf{R23.} & The system must allow a policy maker to see a farmer's summary.\\
+	\midrule
+
+    & \textbf{Farmer}\\
+    \midrule
+	\textbf{R24.} & The system must allow a farmer to see his own farmer's summary.\\
+	\textbf{R25.} & The system must allow a farmer to see personalized suggestions.\\
+	\textbf{R26.} & The system must allow a farmer to manage his monthly production data.\\
+	\textbf{R27.} & The system must allow a farmer to see a list of help requests created by him.\\
+	\textbf{R28.} & The system must allow a farmer to find a help request created by him by the topic.\\
+	\textbf{R29.} & The system must allow a farmer to see a specific help request created by him.\\
+	\textbf{R30.} & The system must allow a farmer to delete a specific help request created by him.\\
+	\textbf{R31.} & The system must allow a farmer to create a new help request.\\
+	\textbf{R32.} & The system must allow a farmer with a positive note to see a list of all help requests in his mandal.\\
+	\textbf{R33.} & The system must allow a farmer with a positive note to find a help request in his mandal by the topic.\\
+	\textbf{R34.} & The system must allow a farmer with a positive note to see a specific help request in his mandal.\\
+	\textbf{R35.} & The system must allow a farmer with a positive note to respond to a specific help request in his mandal.\\
+	\textbf{R36.} & The system must allow a farmer with a positive note to delete a help response, only if it was created by him.\\
+	\textbf{R37.} & The farmer is able to see farmer's summary of a farmer with a negative note whose help request he received. \\
+	\textbf{R38.} & The system must allow a farmer to see a list of all forum threads in Telangana.\\
+	\textbf{R39.} & The system must allow a farmer to find a forum thread by the topic.\\
+	\textbf{R40.} & The system must allow a farmer to see a specific forum thread with its comments.\\
+	\textbf{R41.} & The system must allow a farmer to create a comment in a forum thread.\\
+	\textbf{R42.} & The system must allow a farmer to delete a comment in a forum thread, only if it was created by him.\\
+	\textbf{R43.} & The system must allow a farmer to create a forum thread.\\
+	\midrule
+
+    & \textbf{External systems}\\
+    \midrule
+    % \todo{Decide on the implementation}
+	% \textbf{R65.} & The system must read and update weather forecasts every day. \\
+	% \textbf{R66.} & The system must read and store data from humidity sensors every day. \\
+	% \textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
+	% \textbf{R68.} & The system must ensure that a farmer who creates a help request cannot be its recipient.\\
+		
+	\bottomrule
+\end{longtable}
 
 \section{Excluded Functions}
