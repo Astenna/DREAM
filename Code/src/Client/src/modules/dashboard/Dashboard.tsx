@@ -6,6 +6,8 @@ import Sider from 'antd/es/layout/Sider';
 import {DesktopOutlined, PieChartOutlined, UserOutlined,} from '@ant-design/icons';
 import DefaultLayout from '../common/layout/DefaultLayout';
 
+// TODO: in progress
+
 // const {SubMenu} = Menu;
 const {Header, Content, Footer} = Layout;
 

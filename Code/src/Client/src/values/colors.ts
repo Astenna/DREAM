@@ -1,3 +1,6 @@
+/**
+ * Main colors used in application.
+ */
 const colors = {
   PRIMARY: "#7749F8",
   PRIMARY_DARK: "#5227CC",

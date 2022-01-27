@@ -1,4 +1,4 @@
-import React, {Key, useEffect, useState} from 'react';
+import React, {Key, useState} from 'react';
 import {Button, Col, Modal, Row, Table} from 'antd';
 import strings from '../../../values/strings';
 import {DeleteOutlined} from '@ant-design/icons';
@@ -14,7 +14,9 @@ interface TableData {
 }
 
 /**
- * Not yet used.
+ * @deprecated
+ * Swapped by Select component in CreateAccount modal dialog.
+ * Would be useful for Agronomist role, but it won't be implemented.
  */
 const MandalTable = (props: MandalTypeProps) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([])

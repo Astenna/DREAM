@@ -6,11 +6,18 @@ import RemindPasswordModal from './RemindPasswordModal';
 import {LockOutlined, MailOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 
+/**
+ * Incoming properties managing visibility of current modal dialog.
+ */
 interface LogInModalProps {
   isVisible: boolean,
   setVisible: (value: boolean) => void
 }
 
+/**
+ * Modal dialog responsible for handling log in process.
+ * Can open modal dialog responsible for password reminding.
+ */
 const LogInModal = (props: LogInModalProps) => {
   const [form] = Form.useForm();
   const [isRemindPasswordVisible, setRemindPasswordVisible] = useState(false);

@@ -1,3 +1,6 @@
+/**
+ * Dummy list of mandals.
+ */
 export const mandals = [
   "aaaa1",
   "aaaa2",

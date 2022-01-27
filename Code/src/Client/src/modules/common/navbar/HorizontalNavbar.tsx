@@ -1,6 +1,6 @@
 import React, {CSSProperties} from 'react';
 import {Button, Col, Dropdown, Menu, Row} from 'antd';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {UnorderedListOutlined} from '@ant-design/icons';
 import './vertical-navbar.less'
 import Logo from '../Logo';
@@ -16,8 +16,11 @@ interface HorizontalNavbarProps {
   menuBarProperties?: CSSProperties
 }
 
+/**
+ * Horizontal navbar used in Homepage.
+ * @param props Menu items and CSS properties of the Menu component.
+ */
 const HorizontalNavbar = (props: HorizontalNavbarProps) => {
-  const navigate = useNavigate();
 
   const handleClick = (key: Key) => {
     let action = props.menuItems.find(item => item.key === key)?.action
