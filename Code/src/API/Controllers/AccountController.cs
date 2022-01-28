@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Dtos.Account;
+using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -7,9 +8,17 @@ namespace API.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+        private readonly IAccountService _accountService;
+
+        public AccountController(IAccountService accountService)
+        {
+            _accountService = accountService;
+        }
+
         [HttpPost("registration/farmer")]
         public async Task<IActionResult> PostFarmerAccountAsync([FromBody] RegisterFarmerDto registerFarmerDto)
         {
+            await _accountService.RegisterFarmerAsync(registerFarmerDto);
             return Ok();
         }
 

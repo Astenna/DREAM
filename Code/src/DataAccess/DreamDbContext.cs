@@ -13,6 +13,8 @@ namespace DataAccess
     {
         public DreamDbContext(DbContextOptions<DreamDbContext> options) : base(options) { }
 
+        public DbSet<User> Users { get; set; }
+
         public DbSet<Agronomist> Agronomists { get; set; }
 
         public DbSet<Farmer> Farmers { get; set; }
@@ -23,7 +25,7 @@ namespace DataAccess
 
         public DbSet<ForumComment> ForumComments { get; set; }
 
-        public DbSet<Farm> Farms { get; set; }
+        public DbSet<Farm>? Farms { get; set; }
 
         public DbSet<FarmProduction> FarmProductions { get; set; }
 

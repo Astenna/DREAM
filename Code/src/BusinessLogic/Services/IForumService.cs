@@ -9,6 +9,6 @@ namespace BusinessLogic.Services
         Task<ForumThreadDto> CreateForumThreadAsync(CreateForumThreadDto createForumThreadDto);
         Task DeleteForumCommentAsync(int id);
         Task<ForumThreadDto> GetForumThreadByIdAsync(int id);
-        Task<List<ForumThreadDto>> GetForumThreadAsync(ForumThreadsQuery forumThreadsQuery);
+        Task<List<ForumThreadDto>> GetForumThreadsAsync(ForumThreadsQuery forumThreadsQuery);
     }
 }

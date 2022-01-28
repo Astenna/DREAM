@@ -9,7 +9,7 @@ namespace DataAccess.Entites.Farms
 
         public string? Name { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.UtcNow;
 
         public string? AddressLine1 { get; set; }
 
@@ -19,13 +19,17 @@ namespace DataAccess.Entites.Farms
 
         public string? PostalCode { get; set; }
 
+        public int WaterIrrigationSystemId { get; set; }
+
+        public int SensorSystemId { get; set; }
+
         public List<FarmProduction>? Production { get; set; }
 
         public Farmer? Farmer { get; set; }
 
-        public SensorSystemResponse? SensorSystem { get; set; }
+        public List<SensorSystemResponse>? SensorSystemResponses { get; set; }
 
-        public WaterIrrigationSystemResponse? WaterIrrigationSystem { get; set; }
+        public List<WaterIrrigationSystemResponse>? WaterIrrigationSystemResponses { get; set; }
 
         public List<Visit>? Visits { get; set; }
     }
