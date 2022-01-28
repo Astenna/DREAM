@@ -1,0 +1,30 @@
+name: Client - build and test
+
+on:
+  push:
+    tags:
+      - v1.*
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  client-build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Code/Client
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test

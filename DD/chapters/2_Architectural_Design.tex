@@ -17,7 +17,7 @@ The DREAM server part uses a database hosted on a SQL Server to store data colle
 \section{Component View} \label{sec:component-view}
 
 \subsection{High level}
-The following diagram presents a high level overview of the whole DREAM system. It describes both structure of the system and high level interaction within him. The description of the system components, as well as the low level diagram of the application server, are presented below.
+The following diagram presents a high level overview of the whole DREAM system. It describes both structure of the system and high level interaction within it. The description of the system components, as well as the low level diagram of the application server, are presented below.
 
 \begin{figure}[H]
     \centering
@@ -71,7 +71,7 @@ Finally, the Data Access layer contains entities and classes required to efficie
 \end{figure}
 The system is divided into 5 parts: DREAM Server, Web Server, Database Server, Client Device, and Email Server.
 \begin{itemize}
-    \item \textbf{DREAM Server} - DREAM backend server, it handles application logic and provides a REST API. It runs using Kestrel Web Server, which is loaded by Common Language Runtime (CLR), the virtual machine component of Microsoft .NET Framework \todo{Missing references}
+    \item \textbf{DREAM Server} - DREAM backend server, it handles application logic and provides a REST API. It runs using Kestrel Web Server \cite{kestrel}, which is loaded by Common Language Runtime (CLR) \cite{clr}, the virtual machine component of Microsoft .NET Framework.
     \item \textbf{Web Server} - DREAM frontend server, it provides the user interface layer. It hosts the static version of the website using Nginx \cite{nginx}. The website communicates with the Application Server tier via REST API using HTTP requests.
     \item \textbf{Database Server} - Database storage system, using PostgreSQL \cite{postgresql}. It allows data access using DB driver. 
     \item \textbf{Client Device} - Device used by clients to access the website hosted in Web Server tier using HTTP requests. It can be any type of device, capable of running a modern web browser
@@ -240,7 +240,7 @@ Function presented in the listing \ref{lst:SetNote} assures that every time a fa
 
 \subsection{Database model}
 
-This section presents a database model devised for the DREAM application. One of the design decisions included in the figure (\ref{fig:db-model}) is to use one table per type configuration \cite{ef-Inheritance}. The configuration is used when modelling the class \textit{User}, which is the base of \textit{PolicyMaker}, \textit{Agronomist} and \textit{Farmer} classes. The decision was motivated by the great number of relationships that each of those derived classes has. With three separate classes for each role, these relationships will be easier to manage and maintain since creation of one, huge \textit{User} class is avoided. The major drawback of this decision is the need to perform additional queries to determine the role of a user during the log in process. To tackle this issue, a column \textit{Role} was introduced to the \textit{User} table. However, such column may introduce consistency issues because the \textit{Role} saved in a given row of User's table must correspond a foreign key \textit{UserId} in an appropriate table (\textit{PolicyMaker}, \textit{Agronomist} or \textit{Farmer}). This consistency issue is addressed by the implementation of the DREAM server application.
+This section presents a database model devised for the DREAM application. One of the design decisions included in the figure (\ref{fig:db-model}) is to use one table per type configuration \cite{ef-Inheritance}. The configuration is used when modelling the class \textit{User}, which is the base of \textit{PolicyMaker}, \textit{Agronomist} and \textit{Farmer} classes. The decision was motivated by the great number of relationships that each of those derived classes has. With three separate classes for each role, these relationships will be easier to manage and maintain since creation of one, huge \textit{User} class is avoided. The major drawback of this decision is the need to perform additional queries to determine the role of a user during the log in process. To tackle this issue, a column \textit{Role} was introduced to the \textit{User} table. However, such column may introduce consistency issues because the \textit{Role} saved in a given row of the User's table must correspond to a foreign key \textit{UserId} in an appropriate table (\textit{PolicyMaker}, \textit{Agronomist} or \textit{Farmer}). This consistency issue is addressed by the implementation of the DREAM server application.
 
 %\begin{figure}[H]
     %\centering
@@ -269,9 +269,9 @@ Using JSON Web Tokens affects the system in several ways. They come in two types
 The tokens have to be provided in a header of every API call, apart from sign-up, sign-on and remind password requests. They are stored in a local storage of user's browser. JWT can not be invalidated, so sign-out results in clearing the local storage and redirecting the user back to the home page.
 
 \subsection{WebApplication static content generation}
-The WebApplicaion tier consist of a Nginx server, hosting the production build of the website. The production build has to be generated from the code using a separate NodeJS environment during build phase and then passed to the Nginx process using a shared volume.
+The WebApplicaion tier consist of a Nginx server, hosting the production build of the website \cite{react-production-build}. The production build has to be generated from the code using a separate NodeJS environment during build phase and then passed to the Nginx process using a shared volume.
 
 The application can be also hosted directly using NodeJS, although it is not suited for production use and has limited scalability.
 
-\subsection{Dependency Injection}
+\subsection{Dependency Injection}\label{di-section}
 Dependency injection, also known as dependency inversion technique, focuses on providing implementations of required interfaces instead of creating them explicitly by the dependent objects \cite{di}. The implementation of DREAM Web Application will leverage it to address the difficulty of testing the business logic layer \cites{ntier}.

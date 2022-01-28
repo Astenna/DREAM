@@ -324,3 +324,7 @@ msbuild.wrn
 # Visual Paradigm
 *.lck
 *.bak_*
+venv/
+*.exe
+__pycache__/
+.pytest_cache/

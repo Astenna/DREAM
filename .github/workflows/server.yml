@@ -1,0 +1,51 @@
+name: Server - build and test
+
+on:
+  push:
+    tags:
+      - v1.*
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  server-build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core SDK 6.0.x
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Install API dependencies
+        run: dotnet restore
+        working-directory: ./Code/Server/API
+      - name: Build API
+        run: dotnet build --configuration Release --no-restore
+        working-directory: ./Code/Server/API
+      - name: Test API
+        run: dotnet test --no-restore --verbosity normal
+        working-directory: ./Code/Server/API
+
+      - name: Install BusinessLogic dependencies
+        run: dotnet restore
+        working-directory: ./Code/Server/BusinessLogic
+      - name: Build BusinessLogic
+        run: dotnet build --configuration Release --no-restore
+        working-directory: ./Code/Server/BusinessLogic
+      - name: Test BusinessLogic
+        run: dotnet test --no-restore --verbosity normal
+        working-directory: ./Code/Server/BusinessLogic
+
+      - name: Install DataAccess dependencies
+        run: dotnet restore
+        working-directory: ./Code/Server/DataAccess
+      - name: Build DataAccess
+        run: dotnet build --configuration Release --no-restore
+        working-directory: ./Code/Server/DataAccess
+      - name: Test DataAccess
+        run: dotnet test --no-restore --verbosity normal
+        working-directory: ./Code/Server/DataAccess
