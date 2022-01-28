@@ -3,13 +3,11 @@ import {AutoComplete, Form, Input, Modal, Select} from 'antd';
 import strings from '../../values/strings';
 import {mandals as allMandals} from '../../values/mandals';
 import {Rule} from 'antd/lib/form';
+import {useCreateAccount} from '../../hooks/authHooks';
+import {CreateAccountForm} from '../../model/CreateAccountForm';
+import {Role} from '../../model/Role';
 
 const {Option} = Select;
-
-/**
- * Type defining possible roles.
- */
-type Role = "farmer" | "policy_maker" | undefined;
 
 /**
  * Incoming properties managing visibility of current modal dialog.
@@ -26,7 +24,8 @@ interface CreateAccountModalProps {
 const CreateAccountModal = (props: CreateAccountModalProps) => {
   const [form] = Form.useForm();
   const [mandals, setMandals] = useState(allMandals);
-  const [role, setRole] = useState<Role>(undefined);
+  const [role, setRole] = useState<Role | undefined>(undefined);
+  const [createAccount, loading] = useCreateAccount();
 
 
   const formItemLayout = {
@@ -46,14 +45,11 @@ const CreateAccountModal = (props: CreateAccountModalProps) => {
     message: strings.FORM.ERROR.REQUIRED,
   }
 
+  const sendCreateAccountForm =
+    (formValues: any) => createAccount(formValues as CreateAccountForm)
 
-  const sendCreateAccountForm = (v: any) => {
-    console.log(v)
-  }
-  const cancelCreateAccountForm = () => {
+  const cancelCreateAccountForm = () =>
     props.setVisible(false)
-  }
-
 
   // Mandal search for Farmer
   const onMandalSearch = (searchText: string) => {
@@ -127,6 +123,7 @@ const CreateAccountModal = (props: CreateAccountModalProps) => {
   return (
     <>
       <Modal
+        confirmLoading={loading}
         title={strings.CREATE_ACCOUNT}
         visible={props.isVisible}
         onOk={form.submit}

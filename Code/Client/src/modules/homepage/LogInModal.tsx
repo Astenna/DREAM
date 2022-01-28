@@ -5,6 +5,8 @@ import strings from '../../values/strings';
 import RemindPasswordModal from './RemindPasswordModal';
 import {LockOutlined, MailOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
+import {useLogin} from '../../hooks/authHooks';
+import {LoginForm} from '../../model/LoginForm';
 
 /**
  * Incoming properties managing visibility of current modal dialog.
@@ -21,11 +23,11 @@ interface LogInModalProps {
 const LogInModal = (props: LogInModalProps) => {
   const [form] = Form.useForm();
   const [isRemindPasswordVisible, setRemindPasswordVisible] = useState(false);
+  const [login, loading] = useLogin();
 
-  const sendLogInForm = (v: any) => {
-    console.log(v)
-    props.setVisible(false)
-  }
+  const sendLogInForm = (loginForm: any) =>
+    login(loginForm as LoginForm)
+
   const cancelLogInForm = () => {
     props.setVisible(false)
   }
@@ -38,6 +40,7 @@ const LogInModal = (props: LogInModalProps) => {
     <>
       <RemindPasswordModal isVisible={isRemindPasswordVisible} setVisible={setRemindPasswordVisible}/>
       <Modal
+        confirmLoading={loading}
         title={strings.LOG_IN}
         visible={props.isVisible}
         onOk={form.submit}
