@@ -1,10 +1,8 @@
 \chapter{Product Functions} \label{ch:product_functions}
 
-\todo{Clean up}
-
 \section{Implemented Functions}
 
-All the functions that are implemented in the initial prototype of the program are listed below.
+All the requirements that are satisfied with the initial prototype of the program are listed below. \todo{Add justification}
 
 \begin{longtable}{@{}p{0.06\linewidth} p{0.88\linewidth}}
 	\toprule
@@ -28,8 +26,8 @@ All the functions that are implemented in the initial prototype of the program a
 	\textbf{R11.} & The system must ensure that every farmer initially has a neutral note.\\
 	\textbf{R12.} & The system must have a list of predefined farmer's problem types.\\
     \textbf{R13.} & The system must allow a policy maker to specify a problem type when assigning a negative note.\\
-    \todo{Partially R17}
 	\textbf{R17.} & The system must ensure that an automatic help request followed by additional farm visits are created, if a farmer receives a negative note.\\
+	& \textit{\textbf{R17} is implemented only partially - without creating additional farm visits.}\\
 	\textbf{R19.} & The system must allow a policy maker to see a list of all farmers in Telangana.\\
 	\textbf{R20.} & The system must allow a policy maker to see a list of all farmers with a specific note.\\
 	\textbf{R21.} & The system must allow a policy maker to see a list of all farmers in a given mandal.\\
@@ -61,15 +59,55 @@ All the functions that are implemented in the initial prototype of the program a
 	\textbf{R43.} & The system must allow a farmer to create a forum thread.\\
 	\midrule
 
-    & \textbf{External systems}\\
+    & \textbf{External systems}\todo{Decide on the implementation}\\
     \midrule
-    % \todo{Decide on the implementation}
-	% \textbf{R65.} & The system must read and update weather forecasts every day. \\
-	% \textbf{R66.} & The system must read and store data from humidity sensors every day. \\
-	% \textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
-	% \textbf{R68.} & The system must ensure that a farmer who creates a help request cannot be its recipient.\\
+	\textbf{R65.} & The system must read and update weather forecasts every day. \\
+	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
+	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
+	\textbf{R68.} & The system must ensure that a farmer who creates a help request cannot be its recipient.\\
 		
 	\bottomrule
 \end{longtable}
 
 \section{Excluded Functions}
+
+\begin{longtable}{@{}p{0.06\linewidth} p{0.88\linewidth}}
+	\toprule
+	\textbf{ID}   & \textbf{Requirement}\\
+	\midrule
+	
+	%Authentication
+	\textbf{R3.} & The system must ensure that an agronomist chooses the area of responsibility during the registration process. \\
+	\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
+	
+	%Policy maker
+    \textbf{R14.} & The system must ensure that a farm is visited more often in the event of any problems.\\
+    \textbf{R15.} & The system must have a specified number of additional visits caused by each predefined problem type.\\
+    \textbf{R16.} & The system must ensure that only the most recently specified problem type is taken into account when determining the number of visits.\\
+	\textbf{R18.} & The system must ensure that all the additional farm visits created due to obtaining a negative note are deleted after a farmer's negative note is updated with a positive or a neutral one.\\
+	
+	%Agronomist
+	\textbf{R44.} & The system must allow an agronomist to manage his area of responsibility.\\
+	\textbf{R45.} & The system must allow an agronomist to see the list of suggestions for mandals in his area of responsibility.\\
+	\textbf{R46.} & The system must allow an agronomist to manage the list of suggestions for mandals in his area of responsibility.\\
+	\textbf{R47.} & The system must allow an agronomist to see a list of all farmers in his area of responsibility.\\
+	\textbf{R48.} & The system must allow an agronomist to see a list of all farmers with a specific note in his area of responsibility.\\
+	\textbf{R49.} & The system must allow an agronomist to see a list of all farmers in a given mandal in his area of responsibility.\\
+	\textbf{R50.} & The system must allow an agronomist to find a farmer's summary in his area of responsibility by his name and surname.\\
+	\textbf{R51.} & The system must allow an agronomist to see a farmer's summary in his area of responsibility.\\
+	\textbf{R52.} & The system must allow an agronomist to see a list of all help requests in his area of responsibility.\\
+	\textbf{R53.} & The system must allow an agronomist to find a help request in his area of responsibility by the topic.\\
+	\textbf{R54.} & The system must allow an agronomist to see a specific help request in his area of responsibility.\\
+	\textbf{R55.} & The system must allow an agronomist to respond to a specific help request in his area of responsibility.\\
+	\textbf{R56.} & The system must allow an agronomist to delete a help response, only if it was created by him.\\
+	\textbf{R57.} & The system must allow an agronomist to see his daily plans.\\
+	\textbf{R58.} & The system must allow an agronomist to submit a daily plan's execution state, by rejecting or confirming each visit, on the same date or after the daily plan's date has passed. \\
+	\textbf{R59.} & The system must allow an agronomist to provide a comment for a visit he is confirming.\\
+	\textbf{R60.} & The system must ensure that after an agronomist submits his daily plan, for all the causal visits marked as confirmed, new ones are created in approximately half of a year.\\
+	\textbf{R61.} & The system must allow an agronomist to delete a visit before its date.\\
+	\textbf{R62.} & The system must ensure that a deleted visit is marked as rejected.\\
+	\textbf{R63.} & The system must ensure that in case of rejecting a casual visit, a new one is created in maximally 5 days.\\
+	\textbf{R64.} & The system must allow replanning any different visit than a casual one without any constraints.\\
+		
+	\bottomrule
+\end{longtable}
