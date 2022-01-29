@@ -36,10 +36,10 @@ namespace API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginAsync([FromBody] LoginDto loginDto)
+        public ActionResult Login([FromBody] LoginDto loginDto)
         {
-            await _accountService.LoginAsync(loginDto);
-            return Ok();
+            var tokens = _accountService.Login(loginDto);
+            return Ok(tokens);
         }
 
         [HttpPost("{id}/reset-password")]
