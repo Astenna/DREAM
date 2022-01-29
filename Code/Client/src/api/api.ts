@@ -2,6 +2,7 @@ import axios, {AxiosInstance} from 'axios';
 import {apiConfig} from '../config';
 import store from '../store/store';
 import {refreshAccessToken} from './tokenStorage';
+import strings from '../values/strings';
 
 export const createTokenAPI = (): AxiosInstance => {
   const API = axios.create()
@@ -35,7 +36,7 @@ export const createTokenAPI = (): AxiosInstance => {
           })
           // Refresh failed -> probably token expired -> send logout
           .catch(_ => {
-            return Promise.reject('logout')
+            return Promise.reject({type: "logout", message: strings.WARNING.LOGOUT})
           })
       }
     }

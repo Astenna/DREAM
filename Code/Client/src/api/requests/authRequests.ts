@@ -5,7 +5,7 @@ import {AxiosResponse} from 'axios';
 const unauthorizedApi = createNoAuthAPI()
 
 export const authRequests = {
-  refreshToken: (refreshToken: string): Promise<AxiosResponse> => (
-    unauthorizedApi.post(endpoints.REFRESH_TOKEN, {refresh: refreshToken})
-  )
+  refreshToken: (refreshToken: string): Promise<AxiosResponse<{aaa: string}>> => (
+    unauthorizedApi.post<any>(endpoints.REFRESH_TOKEN, {refresh: refreshToken})
+  ) //TODO: precise type
 }

@@ -5,22 +5,22 @@ import strings from '../../../values/strings';
 import DefaultLayout from '../layout/DefaultLayout';
 
 /**
- * Not Authorized page.
+ * 404 page.
  */
-const NotAuthorized403 = () => {
+const NotFound404 = () => {
 
   const navigate = useNavigate()
 
   return (
     <DefaultLayout>
       <Result
-        status="403"
-        title="403"
-        subTitle={strings.ERROR.NO_AUTHORIZED_403}
+        status="404"
+        title="404"
+        subTitle={strings.ERROR.NOT_FOUND_404}
         extra={<Button type="primary" onClick={() => navigate("/")}>{strings.RETURN_HOME}</Button>}
       />
     </DefaultLayout>
   );
 };
 
-export default NotAuthorized403;
+export default NotFound404;

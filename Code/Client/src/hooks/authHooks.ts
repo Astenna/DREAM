@@ -20,7 +20,7 @@ export const useLogin =
       }
       console.log(loginForm)
       setLoading(true)
-      new Promise(((resolve, reject) => {
+      new Promise(((resolve, reject) => { //TODO replace with real request
         setTimeout(resolve, 800)
       })).then(response => {
         dispatch(setAccessToken(""))
@@ -53,7 +53,7 @@ export const useCreateAccount =
       }
       console.log(createAccountForm)
       setLoading(true)
-      new Promise(((resolve, reject) => {
+      new Promise(((resolve, reject) => { //TODO replace with real request
         setTimeout(resolve, 800)
       })).then(response => {
         dispatch(setAccessToken(""))

@@ -5,9 +5,9 @@ import strings from '../../../values/strings';
 import DefaultLayout from '../layout/DefaultLayout';
 
 /**
- * Not Authorized page.
+ * Error 500 page.
  */
-const NotAuthorized403 = () => {
+const ServerError500 = () => {
 
   const navigate = useNavigate()
 
@@ -15,12 +15,12 @@ const NotAuthorized403 = () => {
     <DefaultLayout>
       <Result
         status="403"
-        title="403"
-        subTitle={strings.ERROR.NO_AUTHORIZED_403}
+        title="500"
+        subTitle={strings.ERROR.SERVER_ERROR_500}
         extra={<Button type="primary" onClick={() => navigate("/")}>{strings.RETURN_HOME}</Button>}
       />
     </DefaultLayout>
   );
 };
 
-export default NotAuthorized403;
+export default ServerError500;

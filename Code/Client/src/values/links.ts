@@ -3,7 +3,9 @@
  * TODO: not finished
  */
 const links = {
-  LOG_IN: "/login",
-  CREATE_ACCOUNT: "/signup",
+  NO_AUTHORIZED_403: "/403",
+  NOT_FOUND_404: "/404",
+  SERVER_ERROR_500: "/500",
+  ROOT: "/"
 }
 export default links
