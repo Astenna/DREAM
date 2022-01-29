@@ -1,9 +1,11 @@
 using BusinessLogic.Mapper;
 using BusinessLogic.ServiceCollectionExtensions;
 using BusinessLogic.Services;
+using BusinessLogic.Tools;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,9 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddTransient<IAccountService, AccountService>();
+builder.Services.AddTransient<ITokenProvider, TokenProvider>();
+
+builder.Services.Configure<AuthOptions>(o => builder.Configuration.GetSection(nameof(AuthOptions)).Bind(o));
 
 var app = builder.Build();
 

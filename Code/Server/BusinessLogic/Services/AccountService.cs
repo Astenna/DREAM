@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using BusinessLogic.Dtos.Account;
 using BusinessLogic.Exceptions;
+using BusinessLogic.Tools;
 using DataAccess;
 using DataAccess.Entites.Actors;
 using DataAccess.Entites.Farms;
 using DataAccess.Entities.Actors;
+using System.Security.Authentication;
 using System.Security.Cryptography;
 
 namespace BusinessLogic.Services
@@ -12,15 +14,18 @@ namespace BusinessLogic.Services
     public class AccountService : IAccountService
     {
         private readonly DreamDbContext _dreamDbContext;
+        private readonly ITokenProvider _tokenProvider;
         private readonly IMapper _mapper;
 
         private static readonly int HashSaltSize = 80;
         private static readonly int HashIterationsCount = 10000;
 
         public AccountService(DreamDbContext dreamDbContext,
+            ITokenProvider tokenProvider,
             IMapper mapper)
         {
             _dreamDbContext = dreamDbContext;
+            _tokenProvider = tokenProvider;
             _mapper = mapper;
         }
 
@@ -72,19 +77,48 @@ namespace BusinessLogic.Services
             return domainAccount;
         }
 
-        public async Task<TokenDto> LoginAsync(LoginDto loginDto)
+        public TokenDto Login(LoginDto loginDto)
         {
-            return new TokenDto();
+            var user = _dreamDbContext.Users.SingleOrDefault(x => x.Email.Equals(loginDto.Email));
+
+            if (user is null)
+            {
+                throw new ApiException($"User with email: {loginDto.Email} doesn't exist!");
+            }
+
+            if (AreLoginCredentialsValid(loginDto.Password, user))
+            {
+                return new TokenDto
+                {
+                    AccessToken = _tokenProvider.CreateToken(user)
+                };
+            }
+
+            throw new AuthenticationException();
         }
 
-        public async Task ResetPasswordAsync(int id, LoginDto loginDto)
+        public /*async*/ Task ResetPasswordAsync(int id, LoginDto loginDto)
         {
-            return;
+            throw new NotImplementedException();
         }
 
-        public async Task DeleteAccountAsync(int id, LoginDto loginDto)
+        public /*async*/ Task DeleteAccountAsync(int id, LoginDto loginDto)
         {
-            return;
+            throw new NotImplementedException();
+        }
+
+        private bool AreLoginCredentialsValid(string password, User user)
+        {
+            var givenPasswordHash = CreatePasswordHash(password, user.Salt);
+            for (var i = 0; i < user.PasswordHash.Length; i++)
+            {
+                if (user.PasswordHash[i] != givenPasswordHash[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private bool IsEmailAlreadyInUse(string email)
