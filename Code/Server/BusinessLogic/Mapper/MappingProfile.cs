@@ -15,6 +15,8 @@ namespace BusinessLogic.Mapper
                 .ForMember(dest => dest.City, src => src.MapFrom(x => x.FarmCity))
                 .ForMember(dest => dest.PostalCode, src => src.MapFrom(x => x.FarmPostalCode));
             CreateMap<RegisterFarmerDto, Farmer>();
+            CreateMap<RegisterPolicyMakerDto, PolicyMaker>();
+            CreateMap<RegisterPolicyMakerDto, User>();
             CreateMap<RegisterFarmerDto, User>();
         }
     }

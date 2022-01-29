@@ -23,20 +23,22 @@ namespace API.Controllers
         }
 
         [HttpPost("registration/agronomist")]
-        public async Task<IActionResult> PostAgronomistAccountAsync([FromBody] RegisterAgronomistDto registerAgronomistDto)
+        public /*async*/ Task<IActionResult> PostAgronomistAccountAsync([FromBody] RegisterAgronomistDto registerAgronomistDto)
         {
-            return Ok();
+            throw new NotImplementedException();
         }
 
         [HttpPost("registration/policy-maker")]
         public async Task<IActionResult> PostPolicyMakerAccountAsync([FromBody] RegisterPolicyMakerDto registerPolicyMakerDto)
         {
+            await _accountService.RegisterPolicyMakerAsync(registerPolicyMakerDto);
             return Ok();
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginDto loginDto)
         {
+            await _accountService.LoginAsync(loginDto);
             return Ok();
         }
 

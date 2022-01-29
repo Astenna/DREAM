@@ -23,8 +23,6 @@ namespace DataAccess.AutoMigrations
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<T>();
 
-                context.Database.EnsureCreated();
-
                 var pendingMigrations = context.Database.GetPendingMigrations();
 
                 if (pendingMigrations.Any())

@@ -29,6 +29,19 @@ services:
             - postgres
         restart: unless-stopped
 
+    server:
+        container_name: dream-server
+        build: ./Server
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=https://+:443;http://+:80
+        ports: 
+            - "5000:80"
+            - "5001:443"
+        networks:
+            - postgres
+        #restart: unless-stopped
+
 networks:
     postgres:
         driver: bridge # for linux containers

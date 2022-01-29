@@ -26,19 +26,8 @@ namespace BusinessLogic.Services
 
         public async Task RegisterFarmerAsync(RegisterFarmerDto registerDto)
         {
-            if (IsEmailAlreadyInUse(registerDto.Email))
-            {
-                throw new ApiException($"Email: {registerDto.Email} already in use!");
-            }
-
-            var salt = RandomNumberGenerator.GetBytes(HashSaltSize);
-            var hashedPassword = CreatePasswordHash(registerDto.Password, salt);
-
-            var domainAccount = _mapper.Map<User>(registerDto);
+            var domainAccount = GetDomainUserAccount(registerDto);
             domainAccount.Role = Role.Farmer;
-            domainAccount.PasswordHash = hashedPassword;
-            domainAccount.Salt = salt;
-
             var farmDomain = _mapper.Map<Farm>(registerDto);
             var farmerDomainAccount = _mapper.Map<Farmer>(registerDto);
             farmerDomainAccount.Farm = farmDomain;
@@ -50,14 +39,37 @@ namespace BusinessLogic.Services
             return;
         }
 
-        public async Task RegisterAgronomistAsync(RegisterAgronomistDto registerAgronomistDto)
+        public /*async*/ Task RegisterAgronomistAsync(RegisterAgronomistDto registerAgronomistDto)
         {
-            return;
+            throw new NotImplementedException();
         }
 
         public async Task RegisterPolicyMakerAsync(RegisterPolicyMakerDto registerPolicyMakerDto)
         {
-            return;
+            var domainAccount = GetDomainUserAccount(registerPolicyMakerDto);
+            domainAccount.Role = Role.PolicyMaker;
+            var policyMakerDomainAccount = _mapper.Map<PolicyMaker>(registerPolicyMakerDto);
+            policyMakerDomainAccount.User = domainAccount;
+
+            await _dreamDbContext.PolicyMakers.AddAsync(policyMakerDomainAccount);
+            await _dreamDbContext.SaveChangesAsync();
+        }
+
+        private User GetDomainUserAccount(RegisterDto registerDto)
+        {
+            if (IsEmailAlreadyInUse(registerDto.Email))
+            {
+                throw new ApiException($"Email: {registerDto.Email} already in use!");
+            }
+
+            var salt = RandomNumberGenerator.GetBytes(HashSaltSize);
+            var hashedPassword = CreatePasswordHash(registerDto.Password, salt);
+
+            var domainAccount = _mapper.Map<User>(registerDto);
+            domainAccount.PasswordHash = hashedPassword;
+            domainAccount.Salt = salt;
+
+            return domainAccount;
         }
 
         public async Task<TokenDto> LoginAsync(LoginDto loginDto)
