@@ -17,6 +17,7 @@ const AppRouter = () => {
     <Router>
       <Routes>
         <Route path="/" element={<>{authenticated ? <Dashboard/> : <Homepage/>}</>}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
       </Routes>
     </Router>
   );
