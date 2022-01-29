@@ -1,5 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit'
 import counterReducer from './counterSlice'
+import authReducer from './auth/authSlice'
 
 /**
  * Application store. Contains global data of the application.
@@ -7,6 +8,7 @@ import counterReducer from './counterSlice'
 const store = configureStore({
   reducer: {
     counter: counterReducer,
+    auth: authReducer
   },
 })
 

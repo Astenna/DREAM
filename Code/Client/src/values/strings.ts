@@ -44,6 +44,9 @@ const strings = {
       REQUIRED: "This field is required"
     },
   },
-
+  ERROR: {
+    NO_AUTHORIZED_403: "You don't have permissions to perform this action."
+  },
+  RETURN_HOME: "Return home!",
 }
 export default strings

@@ -1,6 +1,8 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Dashboard from '../dashboard/Dashboard';
+import {useAppSelector} from '../../store/hooks';
+import {selectAuthenticated} from '../../store/auth/authSlice';
 import Homepage from '../homepage/Homepage';
 
 /**
@@ -9,13 +11,12 @@ import Homepage from '../homepage/Homepage';
  * @constructor
  */
 const AppRouter = () => {
+  const authenticated = useAppSelector(selectAuthenticated)
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Homepage/>}/>
-        <Route path="/dashboard" element={<Dashboard/>}/>
-        <Route path="/login" element={<></>}/>
-        <Route path="/about" element={<></>}/>
+        <Route path="/" element={<>{authenticated ? <Dashboard/> : <Homepage/>}</>}/>
       </Routes>
     </Router>
   );

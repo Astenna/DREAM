@@ -1,0 +1,1 @@
+export type Role = "farmer" | "policy_maker";
