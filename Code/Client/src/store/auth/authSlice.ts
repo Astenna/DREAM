@@ -2,17 +2,31 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from '../store';
 import {AuthState, AuthStateInfo} from './AuthState';
 
+// const initialState: AuthState = {
+//   authenticated: false,
+//   info: {
+//     role: undefined,
+//     email: undefined,
+//     name: undefined,
+//     surname: undefined
+//   },
+//   tokens: {
+//     refreshToken: undefined,
+//     accessToken: undefined,
+//   }
+// }
+
 const initialState: AuthState = {
-  authenticated: false,
+  authenticated: true,
   info: {
-    role: undefined,
-    email: undefined,
-    name: undefined,
-    surname: undefined
+    role: "farmer",
+    email: "dummy@dummy.com",
+    name: "Bogdan",
+    surname: "Z Indii"
   },
   tokens: {
-    refreshToken: undefined,
-    accessToken: undefined,
+    refreshToken: "",
+    accessToken: "",
   }
 }
 

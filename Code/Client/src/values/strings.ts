@@ -4,7 +4,9 @@
  */
 const strings = {
   LOG_IN: "Log in",
+  HOME: "Home",
   CREATE_ACCOUNT: "Create account",
+  SIGN_OUT: "Sign out",
   DREAM: "DREAM",
   DREAM_SHORT_DESCRIPTION: "Data-dRiven PrEdictive FArMing in Telangana",
   DREAM_DESCRIPTION: "DREAM is a project that intends to redesign the food production process in the Telangana area in order to create more resilient agricultural systems that will be required to meet the region’s rising food demand.",

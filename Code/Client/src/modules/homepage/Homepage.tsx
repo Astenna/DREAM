@@ -3,7 +3,7 @@ import DefaultLayout from '../common/layout/DefaultLayout';
 import {Content, Header} from 'antd/es/layout/layout';
 import {Button, Col, Row, RowProps} from 'antd';
 import '../../stylesheets/common.less'
-import HorizontalNavbar from '../common/navbar/HorizontalNavbar';
+import HorizontalNavbarResponsive from '../common/navbar/HorizontalNavbarResponsive';
 import strings from '../../values/strings'
 import colors from '../../values/colors';
 import farmPicture from '../../assets/farm.jpg';
@@ -37,7 +37,7 @@ const Homepage = () => {
       <LogInModal isVisible={isLogInFormVisible} setVisible={setLogInFormVisible}/>
       <CreateAccountModal isVisible={isCreateAccountFormVisible} setVisible={setCreateAccountFormVisible}/>
       <Header style={{backgroundColor: colors.HOMEPAGE.GRAY, padding: "0 10px"}}>
-        <HorizontalNavbar menuItems={menuItems} menuBarProperties={{backgroundColor: colors.HOMEPAGE.GRAY}}/>
+        <HorizontalNavbarResponsive menuItems={menuItems} menuBarProperties={{backgroundColor: colors.HOMEPAGE.GRAY}}/>
       </Header>
       <Content style={{backgroundColor: colors.WHITE}}>
         <RowBlock className={"flex-center"} style={{backgroundColor: colors.HOMEPAGE.GRAY}}>
