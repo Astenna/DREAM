@@ -71,7 +71,7 @@ namespace DataAccess.Seeder
                                 VALUES('Weather', 1),
                                 ('Insects', 2),
                                 ('NegativeNote', 3),
-                                ('Other', 2); 
+                                ('Other', 2) 
                                 ON CONFLICT DO NOTHING;";
 
                 context.Database.ExecuteSqlRaw(script);
