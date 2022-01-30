@@ -8,7 +8,7 @@ import DefaultLayout from '../common/layout/DefaultLayout';
 import {useAppDispatch} from '../../store/hooks';
 import {logout} from '../../store/auth/authSlice';
 
-// TODO: in progress
+// TODO: only an example. Use DashboardLayout component instead of this one!
 
 // const {SubMenu} = Menu;
 const {Header, Content, Footer} = Layout;
@@ -64,7 +64,7 @@ const tips = [
 ]
 
 
-const Dashboard = () => {
+const DashboardDummy = () => {
   const [collapsed, setCollapsed] = useState(false)
   const dispatch = useAppDispatch();
 
@@ -219,7 +219,7 @@ const Dashboard = () => {
             </Row>
           </div>
         </Content>
-        <Footer style={{textAlign: 'center'}}>DREAM ©2022</Footer>
+        <Footer style={{textAlign: 'center'}}>DREAM 2022</Footer>
       </Layout>
     </DefaultLayout>
     // <Layout className="dashboard-layout">
@@ -356,4 +356,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardDummy;

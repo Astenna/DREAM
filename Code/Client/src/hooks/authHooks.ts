@@ -2,7 +2,7 @@
 
 import {useState} from 'react';
 import {useAppDispatch} from '../store/hooks';
-import {setAccessToken, setLoginInfo, setRefreshToken} from '../store/auth/authSlice';
+import {setAuthState} from '../store/auth/authSlice';
 import {CreateAccountForm} from '../model/CreateAccountForm';
 import {LoginForm} from '../model/LoginForm';
 
@@ -20,16 +20,24 @@ export const useLogin =
       }
       console.log(loginForm)
       setLoading(true)
-      new Promise(((resolve, reject) => {
+      new Promise(((resolve, reject) => { //TODO replace with real request
         setTimeout(resolve, 800)
       })).then(response => {
-        dispatch(setAccessToken(""))
-        dispatch(setRefreshToken(""))
-        dispatch(setLoginInfo({
-          role: "farmer",
-          email: "dummy@dummy.com", //TODO
-          name: "Bogdan",
-          surname: "Z Indii"
+        dispatch(setAuthState({
+          authenticated: true,
+          tokens: {
+            accessToken: "",
+            refreshToken: "",
+          },
+          info: {
+            email: "dummy@dummy.com", //TODO
+            name: "Bogdan",
+            surname: "Z Indii"
+          },
+          navigation: {
+            role: "farmer",
+            view: "dashboard",
+          }
         }))
         setLoading(false)
       })
@@ -53,16 +61,24 @@ export const useCreateAccount =
       }
       console.log(createAccountForm)
       setLoading(true)
-      new Promise(((resolve, reject) => {
+      new Promise(((resolve, reject) => { //TODO replace with real request
         setTimeout(resolve, 800)
       })).then(response => {
-        dispatch(setAccessToken(""))
-        dispatch(setRefreshToken(""))
-        dispatch(setLoginInfo({
-          role: "farmer",
-          email: "dummy@dummy.com", //TODO
-          name: "Bogdan",
-          surname: "Z Indii"
+        dispatch(setAuthState({
+          authenticated: true,
+          tokens: {
+            accessToken: "",
+            refreshToken: "",
+          },
+          info: {
+            email: "dummy@dummy.com", //TODO
+            name: "Bogdan",
+            surname: "Z Indii"
+          },
+          navigation: {
+            role: "farmer",
+            view: "dashboard",
+          }
         }))
         setLoading(false)
       })

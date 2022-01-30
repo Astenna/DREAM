@@ -6,6 +6,6 @@ const unauthorizedApi = createNoAuthAPI()
 
 export const authRequests = {
   refreshToken: (refreshToken: string): Promise<AxiosResponse> => (
-    unauthorizedApi.post(endpoints.REFRESH_TOKEN, {refresh: refreshToken})
-  )
+    unauthorizedApi.post<any>(endpoints.REFRESH_TOKEN, {refresh: refreshToken})
+  ) //TODO: precise type
 }

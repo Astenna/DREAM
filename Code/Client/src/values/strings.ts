@@ -4,7 +4,9 @@
  */
 const strings = {
   LOG_IN: "Log in",
+  HOME: "Home",
   CREATE_ACCOUNT: "Create account",
+  SIGN_OUT: "Sign out",
   DREAM: "DREAM",
   DREAM_SHORT_DESCRIPTION: "Data-dRiven PrEdictive FArMing in Telangana",
   DREAM_DESCRIPTION: "DREAM is a project that intends to redesign the food production process in the Telangana area in order to create more resilient agricultural systems that will be required to meet the region’s rising food demand.",
@@ -14,9 +16,18 @@ const strings = {
   SUBMIT: "Submit",
   ADD: "Add",
   REMIND_PASSWORD: "Remind password",
+  DASHBOARD: "Dashboard",
   ROLE: {
     FARMER: "Farmer",
     POLICY_MAKER: "Policy maker",
+  },
+  SIDEBAR: {
+    SUMMARY: "Summary",
+    PRODUCTION_DATA: "Production data",
+    MY_HELP_REQUESTS: "My help requests",
+    PROVIDE_HELP: "Provide help",
+    FORUM: "Forum",
+    FARMERS: "Farmers",
   },
   FORM: {
     LABEL: {
@@ -45,7 +56,13 @@ const strings = {
     },
   },
   ERROR: {
-    NO_AUTHORIZED_403: "You don't have permissions to perform this action."
+    NO_AUTHORIZED_403: "You don't have permissions to perform this action.",
+    NOT_FOUND_404: "Resource not found.",
+    SERVER_ERROR_500: "Server error occurred.",
+    CHILL_FOR_A_MOMENT_429: "You made too many requests. Try again later.",
+  },
+  WARNING: {
+    LOGOUT: "You were logged out.",
   },
   RETURN_HOME: "Return home!",
 }
