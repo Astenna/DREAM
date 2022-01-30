@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using BusinessLogic.Dtos.Account;
+using BusinessLogic.Dtos.Forum;
 using DataAccess.Entites.Actors;
 using DataAccess.Entites.Farms;
+using DataAccess.Entites.Forum;
 
 namespace BusinessLogic.Mapper
 {
@@ -18,6 +20,20 @@ namespace BusinessLogic.Mapper
             CreateMap<RegisterPolicyMakerDto, PolicyMaker>();
             CreateMap<RegisterPolicyMakerDto, User>();
             CreateMap<RegisterFarmerDto, User>();
+
+            CreateMap<CreateForumThreadDto, ForumThread>();
+            CreateMap<CreateForumCommentDto, ForumComment>();
+            CreateMap<ForumComment, ForumCommentDto>()
+                .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy)));
+            CreateMap<ForumThread, ForumThreadDto>()
+                .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy)));
+        }
+
+        private string CombineNameAndSurname(Farmer x)
+        {
+            var name = x?.User?.Name ?? string.Empty;
+            var surname = x?.User?.Surname ?? string.Empty;
+            return name + " " + surname;
         }
     }
 }

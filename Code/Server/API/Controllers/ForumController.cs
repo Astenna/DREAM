@@ -1,11 +1,13 @@
 ﻿using BusinessLogic.Dtos.Forum;
 using BusinessLogic.Queries;
 using BusinessLogic.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/forum")]
+    [Authorize]
     [ApiController]
     public class ForumController : ControllerBase
     {
@@ -16,35 +18,40 @@ namespace API.Controllers
             _forumService = forumService;
         }
 
-        [HttpPost]
+        [HttpPost("thread")]
         public async Task<IActionResult> PostForumThreadAsync([FromBody] CreateForumThreadDto createRequestDto)
         {
-            return Ok();
+            var result = await _forumService.CreateForumThreadAsync(createRequestDto);
+            return Ok(result);
         }
 
-        [HttpPost("{id}/comment")]
+        [HttpPost("thread/{forumThreadId}/comment/")]
         public async Task<IActionResult> PostForumCommentAsync([FromRoute] int forumThreadId, [FromBody] CreateForumCommentDto createForumCommentDto)
         {
-            return Ok();
+            var result = await _forumService.CreateForumCommentAsync(forumThreadId, createForumCommentDto);
+            return Ok(result);
         }
 
 
-        [HttpDelete("comment/{id}")]
+        [HttpDelete("thread/comment/{commentId}")]
         public async Task<IActionResult> DeleteForumCommentAsync([FromRoute] int commentId)
         {
+            await _forumService.DeleteForumCommentAsync(commentId);
             return Ok();
         }
 
-        [HttpGet]
+        [HttpGet("thread")]
         public async Task<IActionResult> GetForumThreadsAsync([FromQuery] ForumThreadsQuery requestsQuery)
         {
-            return Ok();
+            var result = await _forumService.GetForumThreadsAsync(requestsQuery);
+            return Ok(result);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetForumThreadByIdAsync([FromRoute] int id)
+        [HttpGet("thread/{id}")]
+        public  IActionResult GetForumThreadById([FromRoute] int id)
         {
-            return Ok();
+            var result = _forumService.GetForumThreadById(id);
+            return Ok(result);
         }
     }
 }

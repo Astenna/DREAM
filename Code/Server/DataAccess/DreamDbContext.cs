@@ -1,6 +1,6 @@
 ﻿using DataAccess.Configuration;
 using DataAccess.Entites.Actors;
-using DataAccess.Entites.DiscussionForum;
+using DataAccess.Entites.Forum;
 using DataAccess.Entites.Farms;
 using DataAccess.Entites.Visists;
 using DataAccess.Entities;
@@ -25,7 +25,7 @@ namespace DataAccess
 
         public DbSet<ForumComment> ForumComments { get; set; }
 
-        public DbSet<Farm>? Farms { get; set; }
+        public DbSet<Farm> Farms { get; set; }
 
         public DbSet<FarmProduction> FarmProductions { get; set; }
 

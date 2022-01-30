@@ -27,7 +27,8 @@ namespace BusinessLogic.Tools
             var claims = new List<Claim> {
                 new Claim("name", user.Name),
                 new Claim("surname", user.Surname),
-                new Claim("role", user.Role.ToString())
+                new Claim("role", user.Role.ToString()),
+                new Claim("email", user.Email)
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
