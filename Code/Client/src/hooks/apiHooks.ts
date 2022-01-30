@@ -9,7 +9,6 @@ import {ApplicationError} from '../model/ApplicationError';
 
 /**
  * Hook for default API error handling.
- * @returns {function(*=): void}
  */
 export const useAPIHandleErrors = () => {
   const navigate = useNavigate()

@@ -1,6 +1,6 @@
 import React from 'react';
 import strings from '../../values/strings';
-import {useLocation, useNavigate} from 'react-router';
+import {useNavigate} from 'react-router';
 import DefaultLayout from '../common/layout/DefaultLayout';
 import HorizontalNavbar from '../common/navbar/HorizontalNavbar';
 import {Layout} from 'antd';
@@ -15,6 +15,8 @@ import {logout, selectAuthenticated, selectAuthInfo, selectRoleNavigation} from 
 import {Role} from '../../model/Role';
 import {NavbarItem} from '../common/navbar/NavbarProperties';
 import links from '../../values/links';
+import {Route, Routes} from 'react-router-dom';
+import HelpRequestList from '../help-requests/HelpRequestList';
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -22,13 +24,12 @@ const DashboardLayout = () => {
   const authInfo = useAppSelector(selectAuthInfo);
   const roleNavigation = useAppSelector(selectRoleNavigation);
   const dispatch = useAppDispatch()
-  const location = useLocation()
 
   const logo = {
     key: "0",
     node: <Logo/>,
     icon: <HomeOutlined/>,
-    action: () => navigate("/"),
+    action: () => navigate(links.DASHBOARD.URL),
   }
 
   const horizontalMenuItems: NavbarItem[] = [
@@ -39,7 +40,7 @@ const DashboardLayout = () => {
           <UserOutlined style={{padding: "5px"}}/>
           <>{authInfo.name}</>
         </div>,
-      action: () => navigate(links.SUMMARY.URL)
+      action: () => navigate(links.DASHBOARD.URL + links.SUMMARY.URL)
     },
     {
       key: "logout",
@@ -53,27 +54,27 @@ const DashboardLayout = () => {
       {
         key: "summary",
         node: strings.SIDEBAR.SUMMARY,
-        action: () => navigate(links.SUMMARY.URL),
+        action: () => navigate(links.DASHBOARD.URL + links.SUMMARY.URL),
       },
       {
         key: "production_data",
         node: strings.SIDEBAR.PRODUCTION_DATA,
-        action: () => navigate(links.PRODUCTION_DATA.URL),
+        action: () => navigate(links.DASHBOARD.URL + links.PRODUCTION_DATA.URL),
       },
       {
         key: "my_help_requests",
         node: strings.SIDEBAR.MY_HELP_REQUESTS,
-        action: () => navigate(links.MY_HELP_REQUESTS.URL),
+        action: () => navigate(links.DASHBOARD.URL + links.MY_HELP_REQUESTS.URL),
       },
       {
         key: "provide_help",
         node: strings.SIDEBAR.PROVIDE_HELP,
-        action: () => navigate(links.PROVIDE_HELP.URL),
+        action: () => navigate(links.DASHBOARD.URL + links.PROVIDE_HELP.URL),
       },
       {
         key: "forum",
         node: strings.SIDEBAR.FORUM,
-        action: () => navigate(links.FORUM.URL),
+        action: () => navigate(links.DASHBOARD.URL + links.FORUM.URL),
       },
     ],
     policy_maker: [
@@ -101,8 +102,12 @@ const DashboardLayout = () => {
                         menuItems={horizontalMenuItems}
                     />
                 </Header>
-                <Content>
-                  {location.pathname}
+                <Content style={{padding: "15px"}}>
+                    <div style={{minHeight: "100%", backgroundColor: colors.WHITE}}>
+                        <Routes>
+                            <Route path={"/my_help_requests"} element={<HelpRequestList/>}/>
+                        </Routes>
+                    </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>DREAM 2022</Footer>
             </Layout>

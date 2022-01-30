@@ -19,31 +19,31 @@ const links = {
     BREADCRUMB: strings.DASHBOARD
   },
   SUMMARY: {
-    URL: "/dashboard/summary",
+    URL: "/summary",
     BREADCRUMB: strings.SIDEBAR.SUMMARY
   },
   PRODUCTION_DATA: {
-    URL: "/dashboard/production_data",
+    URL: "/production_data",
     BREADCRUMB: strings.SIDEBAR.PRODUCTION_DATA
   },
   MY_HELP_REQUESTS: {
-    URL: "/dashboard/my_help_requests",
+    URL: "/my_help_requests",
     BREADCRUMB: strings.SIDEBAR.MY_HELP_REQUESTS
   },
   PROVIDE_HELP: {
-    URL: "/dashboard/provide_help",
+    URL: "/provide_help",
     BREADCRUMB: strings.SIDEBAR.PROVIDE_HELP
   },
   FORUM: {
-    URL: "/dashboard/forum",
+    URL: "/forum",
     BREADCRUMB: strings.SIDEBAR.FORUM
   },
   FARMERS: {
-    URL: "/dashboard/farmers",
+    URL: "/farmers",
     BREADCRUMB: strings.SIDEBAR.FARMERS
   },
   ROOT: {
     URL: "/",
   }
-}
+};
 export default links
