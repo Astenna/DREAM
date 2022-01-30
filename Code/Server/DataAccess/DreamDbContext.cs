@@ -57,6 +57,7 @@ namespace DataAccess
 
             modelBuilder
                 .ApplyConfiguration(new MandalConfiguration())
+                .ApplyConfiguration(new ProblemTypeConfiguration())
                 .ApplyConfiguration(new FarmerConfiguration())
                 .ApplyConfiguration(new FarmConfiguration());
         }

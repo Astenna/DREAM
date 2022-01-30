@@ -24,7 +24,7 @@ namespace DataAccess.Configuration
                .WithMany(x => x.FarmersSent);
 
             builder
-               .HasMany(x => x.Note)
+               .HasMany(x => x.Notes)
                .WithOne(x => x.Farmer)
                .IsRequired()
                .OnDelete(DeleteBehavior.Cascade);

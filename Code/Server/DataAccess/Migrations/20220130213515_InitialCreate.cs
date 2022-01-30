@@ -609,6 +609,12 @@ namespace DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProblemTypes_Name",
+                table: "ProblemTypes",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SensorSystemResponses_FarmId",
                 table: "SensorSystemResponses",
                 column: "FarmId");

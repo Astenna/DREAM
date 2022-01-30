@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using BusinessLogic.Dtos;
 using BusinessLogic.Dtos.Account;
+using BusinessLogic.Dtos.Farmer;
 using BusinessLogic.Dtos.Forum;
+using BusinessLogic.Dtos.Requests;
 using DataAccess.Entites.Actors;
 using DataAccess.Entites.Farms;
 using DataAccess.Entites.Forum;
@@ -27,15 +28,24 @@ namespace BusinessLogic.Mapper
             CreateMap<CreateForumThreadDto, ForumThread>();
             CreateMap<CreateForumCommentDto, ForumComment>();
             CreateMap<ForumComment, ForumCommentDto>()
-                .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy)));
+                .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy.User)));
             CreateMap<ForumThread, ForumThreadDto>()
-                .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy)));
+                .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy.User)));
+
+            CreateMap<CreateFarmerNoteDto, FarmerNote>()
+                .ForMember(dest => dest.ProblemType, src => src.Ignore());
+            CreateMap<FarmerNote, FarmerNoteDto>()
+                .ForMember(dest => dest.ProblemTypeName, src => src.MapFrom(x => x.ProblemType.Name))
+                .ForMember(dest => dest.Farmer, src => src.MapFrom(x => CombineNameAndSurname(x.Farmer.User)))
+                .ForMember(dest => dest.Policy, src => src.MapFrom(x => CombineNameAndSurname(x.PolicyMaker.User)));
+
+            CreateMap<CreateHelpRequestDto, HelpRequest>();
         }
 
-        private string CombineNameAndSurname(Farmer x)
+        private string CombineNameAndSurname(User x)
         {
-            var name = x?.User?.Name ?? string.Empty;
-            var surname = x?.User?.Surname ?? string.Empty;
+            var name = x?.Name ?? string.Empty;
+            var surname = x?.Surname ?? string.Empty;
             return name + " " + surname;
         }
     }

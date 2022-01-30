@@ -61,5 +61,22 @@ namespace DataAccess.Seeder
                 _logger.LogInformation("Database seeded with mandals from mandals.sql.");
             }
         }
+
+        public void SeedProblemTypes()
+        {
+            using (var serviceScope = _serviceScopeFactory.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<T>();
+                string script = @"INSERT INTO ""ProblemTypes""(""Name"", ""NumberOfAdditionalVisits"")
+                                VALUES('Weather', 1),
+                                ('Insects', 2),
+                                ('NegativeNote', 3),
+                                ('Other', 2); 
+                                ON CONFLICT DO NOTHING;";
+
+                context.Database.ExecuteSqlRaw(script);
+                _logger.LogInformation("Database seeded with mandals from mandals.sql.");
+            }
+        }
     }
 }

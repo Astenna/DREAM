@@ -4,6 +4,7 @@ using BusinessLogic.Exceptions;
 using BusinessLogic.Queries;
 using BusinessLogic.Tools;
 using DataAccess;
+using DataAccess.Entites;
 using DataAccess.Entites.Actors;
 using DataAccess.Entities;
 using DataAccess.Entities.Actors;
@@ -52,10 +53,9 @@ namespace BusinessLogic.Services
             await _dreamDbContext.AddAsync(helpRequest);
             await _dreamDbContext.SaveChangesAsync();
 
-            //var addedForumThreadDto = _mapper.Map<ForumThreadDto>(helpRequest);
-            //return addedForumThreadDto;
+            var addedHelpRequestDto = _mapper.Map<HelpRequestDto>(helpRequest);
 
-            return new HelpRequestDto();
+            return addedHelpRequestDto;
         }
 
         public async Task<CreateResponseDto> CreateResponseAsync(CreateResponseDto createResponse)
@@ -91,16 +91,14 @@ namespace BusinessLogic.Services
         private List<Farmer> GetRecipientsFarmers(int mandalId)
         {
             var farmers = _dreamDbContext.Farmers
-                .Include(x => x.Farm)
+                .Include(x => x.Notes)
                 .Where(x => x.Farm.MandalId == mandalId)
-                .Select(x => x.Id)
                 .ToList();
-            var farmerNotes = _dreamDbContext.FarmerNotes
-                .Where(x => farmers.Contains(x.Id))
-                .OrderByDescending(x => x.Date)
-                .GroupBy(x => x.FarmerId)
-                .ToList();
-            return new List<Farmer>();
+
+            var farmerNotes = farmers
+                .Where(x => x.Notes.OrderByDescending(x => x.Date.Ticks).First().Note == Note.Positive);
+
+            return farmerNotes.ToList();
         }
     }
 }

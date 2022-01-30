@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(DreamDbContext))]
-    [Migration("20220130192903_InitialCreate")]
+    [Migration("20220130213515_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -525,6 +525,9 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("ProblemTypes");
                 });
 
@@ -727,7 +730,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.FarmerNote", b =>
                 {
                     b.HasOne("DataAccess.Entites.Actors.Farmer", "Farmer")
-                        .WithMany("Note")
+                        .WithMany("Notes")
                         .HasForeignKey("FarmerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -847,7 +850,7 @@ namespace DataAccess.Migrations
 
                     b.Navigation("CreatedHelpRequests");
 
-                    b.Navigation("Note");
+                    b.Navigation("Notes");
                 });
 
             modelBuilder.Entity("DataAccess.Entites.Farms.Farm", b =>

@@ -1,12 +1,14 @@
 ﻿using BusinessLogic.Dtos.Farmer;
 using BusinessLogic.Queries;
 using BusinessLogic.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/farmer")]
     [ApiController]
+    [Authorize]
     public class FarmerController : ControllerBase
     {
         private readonly IFarmService _farmService;
@@ -31,15 +33,17 @@ namespace API.Controllers
         }
 
         [HttpPost("{id}/note")]
-        public async Task<IActionResult> PostFarmerNoteAsync([FromRoute] int farmerId, CreateNoteDto createNoteDto)
+        public async Task<IActionResult> PostFarmerNoteAsync([FromRoute] int farmerId, CreateFarmerNoteDto createNoteDto)
         {
-            return Ok();
+            var result = await _farmerService.AddNoteToFarmerAsync(farmerId, createNoteDto);
+            return Ok(result);
         }
 
         [HttpGet("{id}/note")]
-        public async Task<IActionResult> GetFarmerNotesAsync([FromRoute] int farmerId)
+        public IActionResult GetFarmerNotes([FromRoute] int farmerId)
         {
-            return Ok();
+            var result = _farmerService.GetFarmerNotes(farmerId);
+            return Ok(result);
         }
 
         [HttpPost("{id}/farm/production-data")]

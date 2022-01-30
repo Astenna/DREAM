@@ -11,7 +11,7 @@ namespace DataAccess.Entities
 
         public ProblemType ProblemType { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.UtcNow;
 
         public int FarmerId { get; set; }
 

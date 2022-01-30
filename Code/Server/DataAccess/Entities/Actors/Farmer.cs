@@ -15,7 +15,7 @@ namespace DataAccess.Entites.Actors
 
         public Farm Farm { get; set; }
 
-        public List<FarmerNote> Note { get; set; }
+        public List<FarmerNote> Notes { get; set; }
 
         public List<HelpRequest> CreatedHelpRequests { get; set; }
 

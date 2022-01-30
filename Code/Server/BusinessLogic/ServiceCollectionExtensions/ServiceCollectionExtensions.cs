@@ -44,6 +44,7 @@ namespace BusinessLogic.ServiceCollectionExtensions
             foreach (var seeder in app.ApplicationServices.GetServices<ISeeder>())
             {
                 seeder?.SeedMandals();
+                seeder?.SeedProblemTypes();
             }
 
             return app;

@@ -78,6 +78,7 @@ builder.Services.AddTransient<IForumService, ForumService>();
 builder.Services.AddTransient<ITokenProvider, TokenProvider>(); 
 builder.Services.AddTransient<IRequestService, RequestService>();
 builder.Services.AddTransient<IMandalService, MandalService>();
+builder.Services.AddTransient<IProblemTypeService, ProblemTypeService>();
 
 builder.Services.Configure<AuthOptions>(o => builder.Configuration.GetSection(nameof(AuthOptions)).Bind(o));
 

@@ -3,5 +3,6 @@
     public interface ISeeder
     {
         void SeedMandals();
+        void SeedProblemTypes();
     }
 }
