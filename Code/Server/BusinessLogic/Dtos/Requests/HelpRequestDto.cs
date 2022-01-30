@@ -9,7 +9,5 @@
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
         public string CreatedBy { get; set; }
-
-        public List<int> FarmersSent { get; set; }
     }
 }

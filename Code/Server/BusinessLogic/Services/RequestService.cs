@@ -30,7 +30,10 @@ namespace BusinessLogic.Services
 
         public async Task<List<HelpRequestDto>> GetRequestsAsync(RequestsQuery requestsQuery)
         {
-            return new List<HelpRequestDto>();
+            var requests = await _dreamDbContext.HelpRequests
+                .Include(x => x.CreatedBy.User)
+                .ToListAsync();
+            return _mapper.Map<List<HelpRequestDto>>(requests);
         }
 
         public async Task<HelpRequestDto> GetRequestByIdAsync(int id)
@@ -45,16 +48,18 @@ namespace BusinessLogic.Services
             {
                 throw new ApiException("Only users with role Farmer can create requests for help!", ErrorCode.AuthorizationException);
             }
-            var farmer = _dreamDbContext.Farmers.Include(x => x.Farm).Single(x => x.UserId == user.Id);
+            var farmer = _dreamDbContext.Farmers
+                .Include(x => x.Farm)
+                .Single(x => x.UserId == user.Id);
 
             var helpRequest = _mapper.Map<HelpRequest>(createRequestDto);
             helpRequest.CreatedBy = farmer;
             helpRequest.FarmersSent = GetRecipientsFarmers(farmer.Farm.MandalId);
+
             await _dreamDbContext.AddAsync(helpRequest);
             await _dreamDbContext.SaveChangesAsync();
 
             var addedHelpRequestDto = _mapper.Map<HelpRequestDto>(helpRequest);
-
             return addedHelpRequestDto;
         }
 
@@ -90,15 +95,21 @@ namespace BusinessLogic.Services
 
         private List<Farmer> GetRecipientsFarmers(int mandalId)
         {
+            var user = _httpContext.GetUserUsingClaims(_dreamDbContext);
             var farmers = _dreamDbContext.Farmers
+                .Include(x => x.User)
                 .Include(x => x.Notes)
                 .Where(x => x.Farm.MandalId == mandalId)
                 .ToList();
 
+            // Latest note must be positive
             var farmerNotes = farmers
-                .Where(x => x.Notes.OrderByDescending(x => x.Date.Ticks).First().Note == Note.Positive);
+                .Where(x => x.Notes.Any() &&
+                            x.Notes.OrderByDescending(x => x.Date.Ticks)
+                                   .First().Note == Note.Positive);
 
-            return farmerNotes.ToList();
+            // Filter to remove author of the request from recipients
+            return farmerNotes.Where(x => x.User.Id != user.Id).ToList();
         }
     }
 }

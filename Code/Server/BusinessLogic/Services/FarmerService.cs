@@ -47,19 +47,23 @@ namespace BusinessLogic.Services
                 throw new ApiException("Only users with role PolicyMaker assign notes!", ErrorCode.AuthorizationException);
             }
             var policyMaker = _dreamDbContext.PolicyMakers.Single(x => x.UserId == user.Id);
+            
+            var domainNote = _mapper.Map<FarmerNote>(createNoteDto);
+            domainNote.FarmerId = farmerId;
+            domainNote.PolicyMakerId = policyMaker.Id;
 
-            var domainProblemType = _dreamDbContext.ProblemTypes.SingleOrDefault(x => x.Name == createNoteDto.ProblemTypeName);
-            if (domainProblemType is null)
+            if (!string.IsNullOrEmpty(createNoteDto.ProblemTypeName))
             {
-                throw new ApiException($"Incorrect ProblemtType specified!");
+                var domainProblemType = _dreamDbContext.ProblemTypes.SingleOrDefault(x => x.Name == createNoteDto.ProblemTypeName);
+                if (domainProblemType is null)
+                {
+                    throw new ApiException($"Incorrect ProblemtType specified!");
+                }
+                domainNote.PolicyMaker = policyMaker;
             }
 
-            var domainNote = _mapper.Map<FarmerNote>(createNoteDto);
-            domainNote.ProblemType = domainProblemType;
-            domainNote.PolicyMaker = policyMaker;
-            domainNote.FarmerId = farmerId;
-
             await _dreamDbContext.FarmerNotes.AddAsync(domainNote);
+            await _dreamDbContext.SaveChangesAsync();
             return _mapper.Map<FarmerNoteDto>(domainNote);
         }
 

@@ -20,7 +20,7 @@ namespace API.Controllers
             _farmerService = farmerService;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{farmerId}")]
         public async Task<IActionResult> GetFarmerByIdAsync([FromRoute] int farmerId)
         {
             return Ok();
@@ -32,45 +32,45 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpPost("{id}/note")]
+        [HttpPost("{farmerId}/note")]
         public async Task<IActionResult> PostFarmerNoteAsync([FromRoute] int farmerId, CreateFarmerNoteDto createNoteDto)
         {
             var result = await _farmerService.AddNoteToFarmerAsync(farmerId, createNoteDto);
             return Ok(result);
         }
 
-        [HttpGet("{id}/note")]
+        [HttpGet("{farmerId}/note")]
         public IActionResult GetFarmerNotes([FromRoute] int farmerId)
         {
             var result = _farmerService.GetFarmerNotes(farmerId);
             return Ok(result);
         }
 
-        [HttpPost("{id}/farm/production-data")]
+        [HttpPost("{farmerId}/farm/production-data")]
         public async Task<IActionResult> PostProductionDataAsync([FromRoute] int farmerId, [FromBody] CreateProductionDataDto createProductionData)
         {
             return Ok();
         }
 
-        [HttpPut("farm/production-data/{id}")]
+        [HttpPut("farm/production-data/{productionDataId}")]
         public async Task<IActionResult> PutProductionDataAsync([FromRoute] int productionDataId, [FromBody] EditProductionDataDto editProductionData)
         {
             return Ok();
         }
 
-        [HttpGet("{id}/farm/production-data")]
+        [HttpGet("{farmerId}/farm/production-data")]
         public async Task<IActionResult> GetProductionDataAsync([FromRoute] int farmerId, [FromBody] ProductionDataQuery query)
         {
             return Ok();
         }
 
-        [HttpGet("{id}/farm/sensor-system")]
+        [HttpGet("{farmerId}/farm/sensor-system")]
         public async Task<IActionResult> GetSensorSystemDataAsync([FromRoute] int farmerId, [FromBody] SensorSystemQuery query)
         {
             return Ok();
         }
 
-        [HttpGet("{id}/farm/irrigation-system")]
+        [HttpGet("{farmerId}/farm/irrigation-system")]
         public async Task<IActionResult> GetIrrigatoinSystemionDataAsync([FromRoute] int farmerId, [FromBody] IrrigationSystemQuery query)
         {
             return Ok();

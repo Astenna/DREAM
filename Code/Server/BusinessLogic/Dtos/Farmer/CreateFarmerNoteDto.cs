@@ -1,5 +1,4 @@
 ﻿using DataAccess.Entites;
-using FluentValidation;
 
 namespace BusinessLogic.Dtos.Farmer
 {
@@ -8,13 +7,5 @@ namespace BusinessLogic.Dtos.Farmer
         public Note Note { get; set; }
 
         public string ProblemTypeName { get; set; }
-    }
-
-    public class CreateNoteDtoValidator : AbstractValidator<CreateFarmerNoteDto>
-    {
-        public CreateNoteDtoValidator()
-        {
-            RuleFor(x => x.ProblemTypeName).NotEmpty();
-        }
     }
 }

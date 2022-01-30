@@ -18,6 +18,6 @@ namespace BusinessLogic.Dtos.Farmer
 
         public int PolicyMakerId { get; set; }
 
-        public string Policy { get; set; }
+        public string PolicyMaker { get; set; }
     }
 }

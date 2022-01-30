@@ -23,19 +23,19 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("response")]
+        [HttpPost("{requestId}/response")]
         public async Task<IActionResult> PostResponseAsync([FromRoute] int requestId, [FromBody] CreateResponseDto createResponseDto)
         {
             return Ok();
         }
 
-        [HttpPost("{id}")]
-        public async Task<IActionResult> PutRequestAsync([FromRoute] int responseId, [FromBody] EditHelpRequestDto editRequestDto)
+        [HttpPost("{requestId}")]
+        public async Task<IActionResult> PutRequestAsync([FromRoute] int requestId, [FromBody] EditHelpRequestDto editRequestDto)
         {
             return Ok();
         }
 
-        [HttpPost("response/{id}")]
+        [HttpPost("response/{responseId}")]
         public async Task<IActionResult> PutResponseAsync([FromRoute] int responseId, [FromBody] EditResponseDto editResponseDto)
         {
             return Ok();
@@ -56,7 +56,8 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetRequestsAsync([FromQuery] RequestsQuery requestsQuery)
         {
-            return Ok();
+            var result = await _requestService.GetRequestsAsync(requestsQuery);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]

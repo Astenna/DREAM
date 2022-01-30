@@ -37,9 +37,11 @@ namespace BusinessLogic.Mapper
             CreateMap<FarmerNote, FarmerNoteDto>()
                 .ForMember(dest => dest.ProblemTypeName, src => src.MapFrom(x => x.ProblemType.Name))
                 .ForMember(dest => dest.Farmer, src => src.MapFrom(x => CombineNameAndSurname(x.Farmer.User)))
-                .ForMember(dest => dest.Policy, src => src.MapFrom(x => CombineNameAndSurname(x.PolicyMaker.User)));
+                .ForMember(dest => dest.PolicyMaker, src => src.MapFrom(x => CombineNameAndSurname(x.PolicyMaker.User)));
 
             CreateMap<CreateHelpRequestDto, HelpRequest>();
+            CreateMap<HelpRequest, HelpRequestDto>()
+                .ForMember(dest => dest.CreatedBy, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy.User)));
         }
 
         private string CombineNameAndSurname(User x)
