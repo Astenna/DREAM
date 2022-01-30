@@ -5,11 +5,15 @@ import Sider from 'antd/es/layout/Sider';
 import "./SiderNavbarResponsive.less"
 import {UnorderedListOutlined} from '@ant-design/icons';
 import strings from '../../../values/strings';
+import {View} from '../../../model/View';
+import {useLocation} from 'react-router';
 
 const SiderNavbarResponsive = (props: SiderNavbarProperties) => {
   const [collapsed, setCollapsed] = useState(false)
+  const location = useLocation();
+  const view = location.pathname.split("/")[2] as View | undefined
 
-  const handleClick = (key: string) => {
+  const handleClick = (key: View) => {
     let action = [props.logo, ...props.menuItems].find(item => item.key === key)?.action
     if (action) {
       action()
@@ -25,7 +29,7 @@ const SiderNavbarResponsive = (props: SiderNavbarProperties) => {
   ]
 
   const dropDownMenu =
-    <Menu mode={"vertical"} onClick={k => handleClick(k.key)}>{dropDownMenuItems}</Menu>
+    <Menu mode={"vertical"} onClick={k => handleClick(k.key as View)}>{dropDownMenuItems}</Menu>
 
   return (
     <>
@@ -34,7 +38,12 @@ const SiderNavbarResponsive = (props: SiderNavbarProperties) => {
       </Dropdown>
       <Sider className={"sider-navbar-sider"} collapsible collapsed={collapsed}
              onCollapse={(collapsed) => setCollapsed(collapsed)}>
-        <Menu theme="dark" mode="vertical" onClick={k => handleClick(k.key)}>
+        <Menu
+          selectedKeys={view ? [view] : []}
+          theme="dark"
+          mode="vertical"
+          onClick={k => handleClick(k.key as View)}
+        >
           <Menu.Item
             key={props.logo.key}
             icon={collapsed && props.logo.icon}

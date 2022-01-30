@@ -21,13 +21,13 @@ export const useAPIHandleErrors = () => {
   return (error: AxiosError | ApplicationError) => {
     if (isAxiosError(error)) {
       if (error.response?.status === 401 || error?.response?.status === 403) {
-        navigate(links.NO_AUTHORIZED_403)
+        navigate(links.NO_AUTHORIZED_403.URL)
       } else if (error?.response?.status === 404) {
-        navigate(links.NOT_FOUND_404)
+        navigate(links.NOT_FOUND_404.URL)
       } else if (error?.response?.status === 429) {
         notification['error']({message: strings.ERROR.CHILL_FOR_A_MOMENT_429})
       } else if (error?.response?.status === 500) {
-        navigate(links.SERVER_ERROR_500)
+        navigate(links.SERVER_ERROR_500.URL)
         console.error(error)
         // } else if (error?.response?.data?.detail) { //TODO
         //   notification['error']({message: error?.response?.data?.detail})
@@ -38,7 +38,7 @@ export const useAPIHandleErrors = () => {
       if (error.type === 'logout') {
         notification['warning']({message: error.message})
         dispatch(logout())
-        navigate(links.ROOT)
+        navigate(links.ROOT.URL)
       }
     }
   }

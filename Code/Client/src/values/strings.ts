@@ -16,9 +16,18 @@ const strings = {
   SUBMIT: "Submit",
   ADD: "Add",
   REMIND_PASSWORD: "Remind password",
+  DASHBOARD: "Dashboard",
   ROLE: {
     FARMER: "Farmer",
     POLICY_MAKER: "Policy maker",
+  },
+  SIDEBAR: {
+    SUMMARY: "Summary",
+    PRODUCTION_DATA: "Production data",
+    MY_HELP_REQUESTS: "My help requests",
+    PROVIDE_HELP: "Provide help",
+    FORUM: "Forum",
+    FARMERS: "Farmers",
   },
   FORM: {
     LABEL: {

@@ -19,16 +19,6 @@ const HorizontalNavbar = (props: NavbarProperties) => {
 
   return (
     <>
-      {/*<Row style={{*/}
-      {/*  justifyContent: "space-between"*/}
-      {/*}}>*/}
-      {/*  <Col style={{*/}
-      {/*    width: */}
-      {/*  }}*/}
-      {/*  />*/}
-      {/*  <Col style={{*/}
-      {/*    flex: "1 1"*/}
-      {/*  }}>*/}
       <Menu
         style={{
           ...props.menuBarProperties,
@@ -41,8 +31,6 @@ const HorizontalNavbar = (props: NavbarProperties) => {
         {props.menuItems.map((item) =>
           <Menu.Item key={item.key}>{item.node}</Menu.Item>)}
       </Menu>
-      {/*  </Col>*/}
-      {/*</Row>*/}
     </>
   );
 };
