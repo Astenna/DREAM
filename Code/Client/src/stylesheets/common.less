@@ -13,6 +13,9 @@
 }
 
 .dashboard-list-item-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   margin: 3px 0;
   font-size: 15px;
   font-weight: 600;
@@ -21,8 +24,10 @@
 .dashboard-item-author {
   color: @purple-base;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .dashboard-item-attribute {
   font-weight: 500;
+  white-space: nowrap;
 }

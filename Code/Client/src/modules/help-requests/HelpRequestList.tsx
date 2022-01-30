@@ -28,7 +28,7 @@ const HelpRequestList = () => {
           <Row>
             <Col>
               <Search placeholder="Search by name" onSearch={() => {
-              }} style={{width: 400}}/>
+              }} style={{width: 250}}/>
             </Col>
           </Row>
           <Divider style={{margin: "10px 0"}}/>
@@ -53,12 +53,18 @@ const HelpRequestList = () => {
                     <span className={"dashboard-item-attribute"}>28.08.2019</span>
                   </span>
                 </Col>
-                <Col style={{}}>
-                  <span style={{marginRight: "10px"}}>
-                    <ClockCircleOutlined style={{color: purple.primary, marginRight: "3px"}}/>
-                    <span className={"dashboard-item-attribute"}>28.08.2019 12:46</span>
-                  </span>
-                  <span className={"dashboard-item-author"}>Grzegorz Grzegoski</span>
+                <Col>
+                  <Row>
+                    <Col>
+                      <span style={{marginRight: "10px"}}>
+                        <ClockCircleOutlined style={{color: purple.primary, marginRight: "3px"}}/>
+                        <span className={"dashboard-item-attribute"}>28.08.2019 12:46</span>
+                      </span>
+                    </Col>
+                    <Col>
+                      <span className={"dashboard-item-author"}>Grzegorz Grzegoski</span>
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
             </Col>
