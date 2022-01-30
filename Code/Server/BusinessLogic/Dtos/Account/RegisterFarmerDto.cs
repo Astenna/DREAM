@@ -14,10 +14,13 @@ namespace BusinessLogic.Dtos.Account
 
         public string FarmPostalCode { get; set; }
 
+        public string Mandal { get; set; }
+
         public int WaterIrrigationSystemId { get; set; }
 
         public int SensorSystemId { get; set; }
     }
+
     public class RegisterFarmerDtoValidator : AbstractValidator<RegisterFarmerDto>
     {
         public RegisterFarmerDtoValidator()
@@ -27,6 +30,7 @@ namespace BusinessLogic.Dtos.Account
             RuleFor(x => x.FarmAddressLine1).NotEmpty();
             RuleFor(x => x.FarmCity).NotEmpty();
             RuleFor(x => x.FarmPostalCode).NotEmpty();
+            RuleFor(x => x.Mandal).NotEmpty();
         }
     }
 }

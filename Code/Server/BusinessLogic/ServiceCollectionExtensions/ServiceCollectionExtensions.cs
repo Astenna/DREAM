@@ -1,4 +1,5 @@
 ﻿using DataAccess.AutoMigrations;
+using DataAccess.Seeder;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,26 @@ namespace BusinessLogic.ServiceCollectionExtensions
             foreach (var autoMigration in app.ApplicationServices.GetServices<IAutoMigrations>())
             {
                 autoMigration?.ApplyMigrations();
+            }
+
+            return app;
+        }
+
+        public static IServiceCollection AddSeeder<T>(this IServiceCollection services, IConfiguration configuration) where T : DbContext
+        {
+            if (configuration.GetValue<bool>("EnableSeeder"))
+            {
+                services.AddSingleton<ISeeder, Seeder<T>>();
+            }
+
+            return services;
+        }
+
+        public static IApplicationBuilder UseSeeder(this IApplicationBuilder app)
+        {
+            foreach (var seeder in app.ApplicationServices.GetServices<ISeeder>())
+            {
+                seeder?.SeedMandals();
             }
 
             return app;

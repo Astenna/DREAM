@@ -1,5 +1,6 @@
 ﻿using DataAccess.Entites.Actors;
 using DataAccess.Entites.Visists;
+using DataAccess.Entities;
 
 namespace DataAccess.Entites.Farms
 {
@@ -7,30 +8,34 @@ namespace DataAccess.Entites.Farms
     {
         public int Id { get; set; }
 
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         public DateTime CreateDate { get; set; } = DateTime.UtcNow;
 
-        public string? AddressLine1 { get; set; }
+        public string AddressLine1 { get; set; }
 
-        public string? AddressLine2 { get; set; }
+        public string AddressLine2 { get; set; }
 
-        public string? City { get; set; }
+        public string City { get; set; }
 
-        public string? PostalCode { get; set; }
+        public string PostalCode { get; set; }
 
         public int WaterIrrigationSystemId { get; set; }
 
         public int SensorSystemId { get; set; }
 
-        public List<FarmProduction>? Production { get; set; }
+        public int MandalId { get; set; }
 
-        public Farmer? Farmer { get; set; }
+        public Mandal Mandal { get; set; }
 
-        public List<SensorSystemResponse>? SensorSystemResponses { get; set; }
+        public List<FarmProduction> Production { get; set; }
 
-        public List<WaterIrrigationSystemResponse>? WaterIrrigationSystemResponses { get; set; }
+        public Farmer Farmer { get; set; }
 
-        public List<Visit>? Visits { get; set; }
+        public List<SensorSystemResponse> SensorSystemResponses { get; set; }
+
+        public List<WaterIrrigationSystemResponse> WaterIrrigationSystemResponses { get; set; }
+
+        public List<Visit> Visits { get; set; }
     }
 }

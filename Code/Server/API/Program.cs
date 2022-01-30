@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using DataAccess.Seeder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,8 @@ builder.Services.AddControllers().AddFluentValidation(x => x.RegisterValidatorsF
 builder.Services.AddDbContext<DreamDbContext>(o =>
                 o.UseNpgsql(con, x => x.MigrationsAssembly("DataAccess")
                     .EnableRetryOnFailure()))
-                .AddAutomigrations<DreamDbContext>(builder.Configuration);
+                .AddAutomigrations<DreamDbContext>(builder.Configuration)
+                .AddSeeder<DreamDbContext>(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -73,7 +75,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddTransient<IForumService, ForumService>();
-builder.Services.AddTransient<ITokenProvider, TokenProvider>();
+builder.Services.AddTransient<ITokenProvider, TokenProvider>(); 
+builder.Services.AddTransient<IRequestService, RequestService>();
+builder.Services.AddTransient<IMandalService, MandalService>();
 
 builder.Services.Configure<AuthOptions>(o => builder.Configuration.GetSection(nameof(AuthOptions)).Bind(o));
 
@@ -103,5 +107,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseAutoMigration();
+app.UseSeeder();
 
 app.Run();

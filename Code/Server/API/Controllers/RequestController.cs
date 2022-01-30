@@ -17,9 +17,10 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostRequestAsync([FromBody] CreateRequestDto createRequestDto)
+        public async Task<IActionResult> PostRequestAsync([FromBody] CreateHelpRequestDto createRequestDto)
         {
-            return Ok();
+            var result = await _requestService.CreateRequestAsync(createRequestDto);
+            return Ok(result);
         }
 
         [HttpPost("response")]
@@ -29,7 +30,7 @@ namespace API.Controllers
         }
 
         [HttpPost("{id}")]
-        public async Task<IActionResult> PutRequestAsync([FromRoute] int responseId, [FromBody] EditRequestDto editRequestDto)
+        public async Task<IActionResult> PutRequestAsync([FromRoute] int responseId, [FromBody] EditHelpRequestDto editRequestDto)
         {
             return Ok();
         }

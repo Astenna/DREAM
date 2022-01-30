@@ -8,6 +8,6 @@ namespace DataAccess.Entities
 
         public string Name { get; set; }
 
-        public List<WeatherForecastResponse>? WeatherForecastResponses { get; set; }
+        public List<WeatherForecastResponse> WeatherForecastResponses { get; set; }
     }
 }

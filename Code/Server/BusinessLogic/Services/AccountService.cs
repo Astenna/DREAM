@@ -31,9 +31,16 @@ namespace BusinessLogic.Services
 
         public async Task RegisterFarmerAsync(RegisterFarmerDto registerDto)
         {
+            var selectedMandal = _dreamDbContext.Mandals.SingleOrDefault(x => x.Name.ToLower() == registerDto.Mandal.ToLower());
+            if (selectedMandal is null)
+            {
+                throw new ApiException($"{registerDto.Mandal} is not a correct mandal name!");
+            }
+
             var domainAccount = GetDomainUserAccount(registerDto);
             domainAccount.Role = Role.Farmer;
             var farmDomain = _mapper.Map<Farm>(registerDto);
+            farmDomain.Mandal = selectedMandal;
             var farmerDomainAccount = _mapper.Map<Farmer>(registerDto);
             farmerDomainAccount.Farm = farmDomain;
             farmerDomainAccount.User = domainAccount;

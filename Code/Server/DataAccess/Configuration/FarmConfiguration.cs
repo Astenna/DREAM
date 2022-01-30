@@ -17,6 +17,12 @@ namespace DataAccess.Configuration
                .HasMany(x => x.WaterIrrigationSystemResponses)
                .WithOne(x => x.Farm)
                .OnDelete(DeleteBehavior.Cascade);
+
+            builder
+               .HasOne(x => x.Farmer)
+               .WithOne(x => x.Farm)
+               .IsRequired()
+               .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

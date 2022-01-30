@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(DreamDbContext))]
-    [Migration("20220128111441_InitialCreate")]
+    [Migration("20220130192903_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,6 +66,7 @@ namespace DataAccess.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("FarmId")
+                        .IsRequired()
                         .HasColumnType("integer");
 
                     b.Property<int>("UserId")
@@ -130,62 +131,6 @@ namespace DataAccess.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DataAccess.Entites.DiscussionForum.ForumComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int?>("ForumThreadId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("ForumThreadId");
-
-                    b.ToTable("ForumComments");
-                });
-
-            modelBuilder.Entity("DataAccess.Entites.DiscussionForum.ForumThread", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Topic")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
-
-                    b.ToTable("ForumThreads");
-                });
-
             modelBuilder.Entity("DataAccess.Entites.Farms.Farm", b =>
                 {
                     b.Property<int>("Id")
@@ -206,6 +151,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("MandalId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -219,6 +167,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MandalId");
 
                     b.ToTable("Farms");
                 });
@@ -304,6 +254,62 @@ namespace DataAccess.Migrations
                     b.HasIndex("FarmId");
 
                     b.ToTable("WaterIrrigationSystemResponses");
+                });
+
+            modelBuilder.Entity("DataAccess.Entites.Forum.ForumComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("ForumThreadId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("ForumThreadId");
+
+                    b.ToTable("ForumComments");
+                });
+
+            modelBuilder.Entity("DataAccess.Entites.Forum.ForumThread", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Topic")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.ToTable("ForumThreads");
                 });
 
             modelBuilder.Entity("DataAccess.Entites.Visists.Visit", b =>
@@ -497,6 +503,9 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("AgronomistId");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Mandals");
                 });
 
@@ -590,7 +599,9 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("DataAccess.Entites.Farms.Farm", "Farm")
                         .WithOne("Farmer")
-                        .HasForeignKey("DataAccess.Entites.Actors.Farmer", "FarmId");
+                        .HasForeignKey("DataAccess.Entites.Actors.Farmer", "FarmId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DataAccess.Entites.Actors.User", "User")
                         .WithMany()
@@ -614,28 +625,15 @@ namespace DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DataAccess.Entites.DiscussionForum.ForumComment", b =>
+            modelBuilder.Entity("DataAccess.Entites.Farms.Farm", b =>
                 {
-                    b.HasOne("DataAccess.Entites.Actors.Farmer", "CreatedBy")
+                    b.HasOne("DataAccess.Entities.Mandal", "Mandal")
                         .WithMany()
-                        .HasForeignKey("CreatedById");
+                        .HasForeignKey("MandalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("DataAccess.Entites.DiscussionForum.ForumThread", "ForumThread")
-                        .WithMany("Comments")
-                        .HasForeignKey("ForumThreadId");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("ForumThread");
-                });
-
-            modelBuilder.Entity("DataAccess.Entites.DiscussionForum.ForumThread", b =>
-                {
-                    b.HasOne("DataAccess.Entites.Actors.Farmer", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.Navigation("CreatedBy");
+                    b.Navigation("Mandal");
                 });
 
             modelBuilder.Entity("DataAccess.Entites.Farms.FarmProduction", b =>
@@ -677,6 +675,34 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Farm");
+                });
+
+            modelBuilder.Entity("DataAccess.Entites.Forum.ForumComment", b =>
+                {
+                    b.HasOne("DataAccess.Entites.Actors.Farmer", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataAccess.Entites.Forum.ForumThread", "ForumThread")
+                        .WithMany("Comments")
+                        .HasForeignKey("ForumThreadId");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("ForumThread");
+                });
+
+            modelBuilder.Entity("DataAccess.Entites.Forum.ForumThread", b =>
+                {
+                    b.HasOne("DataAccess.Entites.Actors.Farmer", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedBy");
                 });
 
             modelBuilder.Entity("DataAccess.Entites.Visists.Visit", b =>
@@ -824,11 +850,6 @@ namespace DataAccess.Migrations
                     b.Navigation("Note");
                 });
 
-            modelBuilder.Entity("DataAccess.Entites.DiscussionForum.ForumThread", b =>
-                {
-                    b.Navigation("Comments");
-                });
-
             modelBuilder.Entity("DataAccess.Entites.Farms.Farm", b =>
                 {
                     b.Navigation("Farmer");
@@ -840,6 +861,11 @@ namespace DataAccess.Migrations
                     b.Navigation("Visits");
 
                     b.Navigation("WaterIrrigationSystemResponses");
+                });
+
+            modelBuilder.Entity("DataAccess.Entites.Forum.ForumThread", b =>
+                {
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.HelpRequest", b =>

@@ -11,12 +11,12 @@ namespace DataAccess.Entites.Actors
 
         public int UserId { get; set; }
 
-        public List<Mandal>? Mandals { get; set; }
+        public List<Mandal> Mandals { get; set; }
 
-        public List<HelpRequest>? ReceivedHelpRequests { get; set; }
+        public List<HelpRequest> ReceivedHelpRequests { get; set; }
 
-        public List<HelpResponse>? CreatedHelpReponses { get; set; }
+        public List<HelpResponse> CreatedHelpReponses { get; set; }
 
-        public List<Visit>? Visits { get; set; }
+        public List<Visit> Visits { get; set; }
     }
 }

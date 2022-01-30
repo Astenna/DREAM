@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using BusinessLogic.Dtos;
 using BusinessLogic.Dtos.Account;
 using BusinessLogic.Dtos.Forum;
 using DataAccess.Entites.Actors;
 using DataAccess.Entites.Farms;
 using DataAccess.Entites.Forum;
+using DataAccess.Entities;
 
 namespace BusinessLogic.Mapper
 {
@@ -15,7 +17,8 @@ namespace BusinessLogic.Mapper
                 .ForMember(dest => dest.AddressLine1, src => src.MapFrom(x => x.FarmAddressLine1))
                 .ForMember(dest => dest.AddressLine2, src => src.MapFrom(x => x.FarmAddressLine2))
                 .ForMember(dest => dest.City, src => src.MapFrom(x => x.FarmCity))
-                .ForMember(dest => dest.PostalCode, src => src.MapFrom(x => x.FarmPostalCode));
+                .ForMember(dest => dest.PostalCode, src => src.MapFrom(x => x.FarmPostalCode))
+                .ForMember(dest => dest.Mandal, src => src.Ignore());
             CreateMap<RegisterFarmerDto, Farmer>();
             CreateMap<RegisterPolicyMakerDto, PolicyMaker>();
             CreateMap<RegisterPolicyMakerDto, User>();

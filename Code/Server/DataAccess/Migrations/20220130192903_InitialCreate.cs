@@ -24,26 +24,6 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Farms",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    AddressLine1 = table.Column<string>(type: "text", nullable: true),
-                    AddressLine2 = table.Column<string>(type: "text", nullable: true),
-                    City = table.Column<string>(type: "text", nullable: true),
-                    PostalCode = table.Column<string>(type: "text", nullable: true),
-                    WaterIrrigationSystemId = table.Column<int>(type: "integer", nullable: false),
-                    SensorSystemId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Farms", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProblemTypes",
                 columns: table => new
                 {
@@ -73,6 +53,164 @@ namespace DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Agronomists",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Agronomists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Agronomists_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PolicyMakers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PolicyMakers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PolicyMakers_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Mandals",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    AgronomistId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Mandals", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Mandals_Agronomists_AgronomistId",
+                        column: x => x.AgronomistId,
+                        principalTable: "Agronomists",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Farms",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    AddressLine1 = table.Column<string>(type: "text", nullable: true),
+                    AddressLine2 = table.Column<string>(type: "text", nullable: true),
+                    City = table.Column<string>(type: "text", nullable: true),
+                    PostalCode = table.Column<string>(type: "text", nullable: true),
+                    WaterIrrigationSystemId = table.Column<int>(type: "integer", nullable: false),
+                    SensorSystemId = table.Column<int>(type: "integer", nullable: false),
+                    MandalId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Farms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Farms_Mandals_MandalId",
+                        column: x => x.MandalId,
+                        principalTable: "Mandals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Suggestions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Text = table.Column<string>(type: "text", nullable: true),
+                    MandalId = table.Column<int>(type: "integer", nullable: true),
+                    ProductionTypeId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Suggestions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Suggestions_FarmProductionTypes_ProductionTypeId",
+                        column: x => x.ProductionTypeId,
+                        principalTable: "FarmProductionTypes",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Suggestions_Mandals_MandalId",
+                        column: x => x.MandalId,
+                        principalTable: "Mandals",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WeatherForecastResponses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Degrees = table.Column<float>(type: "real", nullable: false),
+                    Rainfall = table.Column<float>(type: "real", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    WeatherType = table.Column<int>(type: "integer", nullable: false),
+                    MandalId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WeatherForecastResponses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WeatherForecastResponses_Mandals_MandalId",
+                        column: x => x.MandalId,
+                        principalTable: "Mandals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Farmers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    FarmId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Farmers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Farmers_Farms_FarmId",
+                        column: x => x.FarmId,
+                        principalTable: "Farms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Farmers_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -126,110 +264,6 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WaterIrrigationSystemResponses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    WaterUsed = table.Column<float>(type: "real", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    FarmId = table.Column<int>(type: "integer", nullable: false),
-                    Url = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WaterIrrigationSystemResponses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_WaterIrrigationSystemResponses_Farms_FarmId",
-                        column: x => x.FarmId,
-                        principalTable: "Farms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Agronomists",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Agronomists", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Agronomists_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Farmers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    FarmId = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Farmers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Farmers_Farms_FarmId",
-                        column: x => x.FarmId,
-                        principalTable: "Farms",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Farmers_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PolicyMakers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PolicyMakers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PolicyMakers_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Mandals",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    AgronomistId = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Mandals", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Mandals_Agronomists_AgronomistId",
-                        column: x => x.AgronomistId,
-                        principalTable: "Agronomists",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Visits",
                 columns: table => new
                 {
@@ -260,43 +294,23 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ForumThreads",
+                name: "WaterIrrigationSystemResponses",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Topic = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    CreatedById = table.Column<int>(type: "integer", nullable: true)
+                    WaterUsed = table.Column<float>(type: "real", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    FarmId = table.Column<int>(type: "integer", nullable: false),
+                    Url = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ForumThreads", x => x.Id);
+                    table.PrimaryKey("PK_WaterIrrigationSystemResponses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ForumThreads_Farmers_CreatedById",
-                        column: x => x.CreatedById,
-                        principalTable: "Farmers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "HelpRequests",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Message = table.Column<string>(type: "text", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatedById = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HelpRequests", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_HelpRequests_Farmers_CreatedById",
-                        column: x => x.CreatedById,
-                        principalTable: "Farmers",
+                        name: "FK_WaterIrrigationSystemResponses_Farms_FarmId",
+                        column: x => x.FarmId,
+                        principalTable: "Farms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -336,49 +350,44 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Suggestions",
+                name: "ForumThreads",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Text = table.Column<string>(type: "text", nullable: true),
-                    MandalId = table.Column<int>(type: "integer", nullable: true),
-                    ProductionTypeId = table.Column<int>(type: "integer", nullable: true)
+                    Topic = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedById = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Suggestions", x => x.Id);
+                    table.PrimaryKey("PK_ForumThreads", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Suggestions_FarmProductionTypes_ProductionTypeId",
-                        column: x => x.ProductionTypeId,
-                        principalTable: "FarmProductionTypes",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Suggestions_Mandals_MandalId",
-                        column: x => x.MandalId,
-                        principalTable: "Mandals",
-                        principalColumn: "Id");
+                        name: "FK_ForumThreads_Farmers_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Farmers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "WeatherForecastResponses",
+                name: "HelpRequests",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Degrees = table.Column<float>(type: "real", nullable: false),
-                    Rainfall = table.Column<float>(type: "real", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    WeatherType = table.Column<int>(type: "integer", nullable: false),
-                    MandalId = table.Column<int>(type: "integer", nullable: false)
+                    Message = table.Column<string>(type: "text", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedById = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WeatherForecastResponses", x => x.Id);
+                    table.PrimaryKey("PK_HelpRequests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WeatherForecastResponses_Mandals_MandalId",
-                        column: x => x.MandalId,
-                        principalTable: "Mandals",
+                        name: "FK_HelpRequests_Farmers_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Farmers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -391,7 +400,7 @@ namespace DataAccess.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Content = table.Column<string>(type: "text", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    CreatedById = table.Column<int>(type: "integer", nullable: true),
+                    CreatedById = table.Column<int>(type: "integer", nullable: false),
                     ForumThreadId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -401,7 +410,8 @@ namespace DataAccess.Migrations
                         name: "FK_ForumComments_Farmers_CreatedById",
                         column: x => x.CreatedById,
                         principalTable: "Farmers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ForumComments_ForumThreads_ForumThreadId",
                         column: x => x.ForumThreadId,
@@ -543,6 +553,11 @@ namespace DataAccess.Migrations
                 column: "ProductionTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Farms_MandalId",
+                table: "Farms",
+                column: "MandalId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ForumComments_CreatedById",
                 table: "ForumComments",
                 column: "CreatedById");
@@ -581,6 +596,12 @@ namespace DataAccess.Migrations
                 name: "IX_Mandals_AgronomistId",
                 table: "Mandals",
                 column: "AgronomistId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Mandals_Name",
+                table: "Mandals",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_PolicyMakers_UserId",
@@ -674,16 +695,16 @@ namespace DataAccess.Migrations
                 name: "FarmProductionTypes");
 
             migrationBuilder.DropTable(
-                name: "Mandals");
-
-            migrationBuilder.DropTable(
                 name: "Farmers");
 
             migrationBuilder.DropTable(
-                name: "Agronomists");
+                name: "Farms");
 
             migrationBuilder.DropTable(
-                name: "Farms");
+                name: "Mandals");
+
+            migrationBuilder.DropTable(
+                name: "Agronomists");
 
             migrationBuilder.DropTable(
                 name: "Users");

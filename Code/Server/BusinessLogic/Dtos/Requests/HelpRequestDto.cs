@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.Dtos.Requests
 {
-    public class RequestDto
+    public class HelpRequestDto
     {
     }
 }

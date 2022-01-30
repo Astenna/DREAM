@@ -56,7 +56,9 @@ namespace DataAccess
             base.OnModelCreating(modelBuilder);
 
             modelBuilder
-                .ApplyConfiguration(new FarmerConfiguration());
+                .ApplyConfiguration(new MandalConfiguration())
+                .ApplyConfiguration(new FarmerConfiguration())
+                .ApplyConfiguration(new FarmConfiguration());
         }
     }
 }
