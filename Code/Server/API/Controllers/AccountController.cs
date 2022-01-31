@@ -48,9 +48,10 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpPost("{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccountAsync([FromRoute] int id, [FromBody] LoginDto loginDto)
         {
+            await _accountService.DeleteAccountAsync(id, loginDto);
             return Ok();
         }
     }

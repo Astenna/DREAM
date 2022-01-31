@@ -6,6 +6,7 @@ using DataAccess;
 using DataAccess.Entites.Actors;
 using DataAccess.Entites.Farms;
 using DataAccess.Entities.Actors;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Authentication;
 using System.Security.Cryptography;
 
@@ -109,9 +110,23 @@ namespace BusinessLogic.Services
             throw new NotImplementedException();
         }
 
-        public /*async*/ Task DeleteAccountAsync(int id, LoginDto loginDto)
+        public async Task DeleteAccountAsync(int id, LoginDto loginDto)
         {
-            throw new NotImplementedException();
+            var user = await _dreamDbContext.Users.SingleOrDefaultAsync(x => x.Email.Equals(loginDto.Email));
+
+            if (user is null)
+            {
+                throw new ApiException($"User with email: {loginDto.Email} doesn't exist!");
+            }
+
+            if (AreLoginCredentialsValid(loginDto.Password, user))
+            {
+                _dreamDbContext.Users.Remove(user);
+                await _dreamDbContext.SaveChangesAsync();
+                return;
+            }
+
+            throw new AuthenticationException();
         }
 
         private bool AreLoginCredentialsValid(string password, User user)
