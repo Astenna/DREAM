@@ -94,7 +94,8 @@ builder.Services.Configure<AuthOptions>(
 var app = builder.Build();
 
 // TODO: investigate why it is not working
-// app.UseGlobalExceptionMiddleware();
+app.UseMiddleware<GlobalExceptionMiddleware>();
+//app.UseGlobalExceptionMiddleware();
 
 app.UseCors(builder => builder
               .AllowAnyOrigin()

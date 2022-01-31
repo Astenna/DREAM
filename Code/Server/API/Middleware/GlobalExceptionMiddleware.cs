@@ -37,7 +37,7 @@ namespace API.Middleware
 
         private static async Task HandleExceptionAsync(HttpContext context, Exception ex, ILogger<GlobalExceptionMiddleware> logger)
         {
-            context.Response.Clear();
+            context.Response.ContentType = "application/json";
             var json = JsonConvert.SerializeObject(ex.Message);
 
             switch (ex)
@@ -66,7 +66,6 @@ namespace API.Middleware
                     break;
             }
 
-            context.Response.ContentType = "application/json";
             logger.LogWarning($"Error {context.Response} occurred during processing the request {context.Request}. Server responded with {context.Response.StatusCode}");
         }
     }
