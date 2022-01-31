@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(DreamDbContext))]
-    [Migration("20220131114940_InitialCreate")]
+    [Migration("20220131131745_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -443,6 +443,9 @@ namespace DataAccess.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsAutomatic")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Topic")
                         .HasColumnType("text");

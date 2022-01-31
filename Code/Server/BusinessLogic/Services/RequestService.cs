@@ -18,16 +18,19 @@ namespace BusinessLogic.Services
         private readonly DreamDbContext _dreamDbContext;
         private readonly HttpContext _httpContext;
         private readonly IRequestsQueryBuilder _requestsQueryBuilder;
+        private readonly IRequestRecipientsProvider _requestRecipientsProvider;
         private readonly IMapper _mapper;
 
         public RequestService(DreamDbContext dreamDbContext,
             IHttpContextAccessor httpContextAccessor,
             IRequestsQueryBuilder requestsQueryBuilder,
+            IRequestRecipientsProvider requestRecipientsProvider,
             IMapper mapper)
         {
             _dreamDbContext = dreamDbContext;
             _httpContext = httpContextAccessor.HttpContext;
             _requestsQueryBuilder = requestsQueryBuilder;
+            _requestRecipientsProvider = requestRecipientsProvider;
             _mapper = mapper;
         }
 
@@ -74,7 +77,7 @@ namespace BusinessLogic.Services
 
             var helpRequest = _mapper.Map<HelpRequest>(createRequestDto);
             helpRequest.CreatedBy = farmer;
-            helpRequest.FarmersSent = GetRecipientsFarmers(farmer.Farm.MandalId);
+            helpRequest.FarmersSent = _requestRecipientsProvider.GetRecipientsFarmers(farmer.Farm.MandalId, farmer.Id);
 
             await _dreamDbContext.AddAsync(helpRequest);
             await _dreamDbContext.SaveChangesAsync();
@@ -237,25 +240,6 @@ namespace BusinessLogic.Services
         private List<Agronomist> GetRecipientsAgronomists()
         {
             throw new NotImplementedException();
-        }
-
-        private List<Farmer> GetRecipientsFarmers(int mandalId)
-        {
-            var user = _httpContext.GetUserUsingClaims(_dreamDbContext);
-            var farmers = _dreamDbContext.Farmers
-                .Include(x => x.User)
-                .Include(x => x.Notes)
-                .Where(x => x.Farm.MandalId == mandalId)
-                .ToList();
-
-            // Latest note must be positive
-            var farmerNotes = farmers
-                .Where(x => x.Notes.Any() &&
-                            x.Notes.OrderByDescending(x => x.Date.Ticks)
-                                   .First().Note == Note.Positive);
-
-            // Filter to remove author of the request from recipients
-            return farmerNotes.Where(x => x.User.Id != user.Id).ToList();
         }
     }
 }

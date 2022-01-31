@@ -442,6 +442,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsAutomatic")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Topic")
                         .HasColumnType("text");
 

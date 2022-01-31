@@ -4,9 +4,11 @@ using BusinessLogic.Exceptions;
 using BusinessLogic.Queries;
 using BusinessLogic.Tools;
 using DataAccess;
+using DataAccess.Entites;
 using DataAccess.Entities;
 using DataAccess.Entities.Actors;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Services
 {
@@ -14,14 +16,17 @@ namespace BusinessLogic.Services
     {
         private readonly DreamDbContext _dreamDbContext;
         private readonly HttpContext _httpContext;
+        private readonly IRequestRecipientsProvider _requestRecipientsProvider;
         private readonly IMapper _mapper;
 
         public FarmerService(DreamDbContext dreamDbContext,
             IHttpContextAccessor httpContextAccessor,
+            IRequestRecipientsProvider requestRecipientsProvider,
             IMapper mapper)
         {
             _dreamDbContext = dreamDbContext;
             _httpContext = httpContextAccessor.HttpContext;
+            _requestRecipientsProvider = requestRecipientsProvider;
             _mapper = mapper;
         }
 
@@ -49,7 +54,6 @@ namespace BusinessLogic.Services
             var policyMaker = _dreamDbContext.PolicyMakers.Single(x => x.UserId == user.Id);
             
             var domainNote = _mapper.Map<FarmerNote>(createNoteDto);
-            domainNote.FarmerId = farmerId;
             domainNote.PolicyMakerId = policyMaker.Id;
 
             if (!string.IsNullOrEmpty(createNoteDto.ProblemTypeName))
@@ -60,6 +64,25 @@ namespace BusinessLogic.Services
                     throw new ApiException($"Incorrect ProblemtType specified!");
                 }
                 domainNote.PolicyMaker = policyMaker;
+            }
+
+            var farmer = await _dreamDbContext.Farmers.Include(x => x.Farm)
+                                    .SingleOrDefaultAsync(x => x.Id == farmerId);
+            if(farmer is null)
+            {
+                throw new ApiException($"Farmer with id {farmerId} does not exists!");
+            }
+            domainNote.Farmer = farmer;
+
+            if (createNoteDto.Note == Note.Negative)
+            {
+                var automaticHelpRequest = new HelpRequest {
+                    Topic = createNoteDto.ProblemTypeName,
+                    FarmersSent = _requestRecipientsProvider.GetRecipientsFarmers(farmer.Farm.MandalId, farmerId),
+                    IsAutomatic = true,
+                    CreatedById = farmerId
+                };
+                await _dreamDbContext.HelpRequests.AddAsync(automaticHelpRequest);
             }
 
             await _dreamDbContext.FarmerNotes.AddAsync(domainNote);

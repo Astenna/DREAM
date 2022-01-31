@@ -12,6 +12,8 @@ namespace DataAccess.Entities
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
+        public bool IsAutomatic { get; set; }
+
         public int CreatedById { get; set; }
 
         public Farmer CreatedBy { get; set; }

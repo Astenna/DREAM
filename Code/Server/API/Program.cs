@@ -82,6 +82,7 @@ builder.Services.AddTransient<IFarmerService, FarmerService>();
 builder.Services.AddTransient<IRequestService, RequestService>();
 builder.Services.AddTransient<IMandalService, MandalService>();
 builder.Services.AddTransient<IProblemTypeService, ProblemTypeService>();
+builder.Services.AddTransient<IRequestRecipientsProvider, RequestRecipientsProvider>();
 builder.Services.AddScoped<IRequestsQueryBuilder, RequestsQueryBuilder>();
 
 builder.Services.Configure<AuthOptions>(

@@ -380,6 +380,7 @@ namespace DataAccess.Migrations
                     Topic = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsAutomatic = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedById = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

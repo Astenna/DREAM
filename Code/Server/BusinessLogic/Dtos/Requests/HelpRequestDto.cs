@@ -10,6 +10,8 @@
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
+        public bool IsAutomatic { get; set; }
+
         public string CreatedBy { get; set; }
 
         public List<HelpResponseDto> HelpResponses { get; set; }
