@@ -5,6 +5,7 @@ import {useAppDispatch} from '../store/hooks';
 import {setAuthState} from '../store/auth/authSlice';
 import {CreateAccountForm} from '../model/CreateAccountForm';
 import {LoginForm} from '../model/LoginForm';
+import {Role} from "../model/Role";
 
 /**
  * Hook for handling login request. Obtains user info and new token pair.
@@ -35,7 +36,7 @@ export const useLogin =
             surname: "Z Indii"
           },
           navigation: {
-            role: "farmer",
+            role: Role.FARMER,
             view: "dashboard",
           }
         }))
@@ -76,7 +77,7 @@ export const useCreateAccount =
             surname: "Z Indii"
           },
           navigation: {
-            role: "farmer",
+            role: Role.FARMER,
             view: "dashboard",
           }
         }))

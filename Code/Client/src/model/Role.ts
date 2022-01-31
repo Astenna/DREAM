@@ -1,1 +1,4 @@
-export type Role = "farmer" | "policy_maker";
+export enum Role {
+  FARMER = 'farmer',
+  POLICY_MAKER = 'policy_maker'
+}

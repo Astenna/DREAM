@@ -17,6 +17,9 @@ import {NavbarItem} from '../common/navbar/NavbarProperties';
 import links from '../../values/links';
 import {Route, Routes} from 'react-router-dom';
 import HelpRequestList from '../help-requests/HelpRequestList';
+import PMUser from "../policy-maker/PMUser";
+import PMDashboard from "../policy-maker/PMDashboard";
+import FarmersList from "../policy-maker/FarmersList";
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -81,7 +84,7 @@ const DashboardLayout = () => {
       {
         key: "farmers",
         node: strings.SIDEBAR.FARMERS,
-        action: () => navigate("/farmers"),
+        action: () => navigate(links.DASHBOARD.URL + links.FARMERS.URL),
       },
     ]
   }
@@ -91,27 +94,38 @@ const DashboardLayout = () => {
     <DefaultLayout>
       {
         (authenticated && roleNavigation.role) &&
-        <>
-            <SiderNavbarResponsive
-                logo={logo}
-                menuItems={sidebarMenuItems[roleNavigation!.role]}
-            />
-            <Layout>
-                <Header style={{backgroundColor: colors.WHITE, paddingLeft: "70px"}}>
-                    <HorizontalNavbar
-                        menuItems={horizontalMenuItems}
-                    />
-                </Header>
-                <Content style={{padding: "15px"}}>
-                    <div style={{minHeight: "100%", backgroundColor: colors.WHITE}}>
-                        <Routes>
-                            <Route path={"/my_help_requests"} element={<HelpRequestList/>}/>
-                        </Routes>
-                    </div>
-                </Content>
-                <Footer style={{textAlign: 'center'}}>DREAM 2022</Footer>
-            </Layout>
-        </>
+          <>
+              <SiderNavbarResponsive
+                  logo={logo}
+                  menuItems={sidebarMenuItems[roleNavigation!.role]}
+              />
+              <Layout>
+                  <Header style={{backgroundColor: colors.WHITE, paddingLeft: "70px"}}>
+                      <HorizontalNavbar
+                          menuItems={horizontalMenuItems}
+                      />
+                  </Header>
+                  <Content style={{padding: "15px"}}>
+                      <div style={{minHeight: "100%", backgroundColor: colors.WHITE}}>
+                          <Routes>
+                            {roleNavigation.role === Role.FARMER &&
+                                <>
+                                    <Route path={"/my_help_requests"} element={<HelpRequestList/>}/>
+                                </>
+                            }
+                            {roleNavigation.role === Role.POLICY_MAKER &&
+                                <>
+                                    <Route path={"/"} element={<PMDashboard/>}/>
+                                    <Route path={links.SUMMARY.URL} element={<PMUser/>}/>
+                                    <Route path={links.FARMERS.URL} element={<FarmersList/>}/>
+                                </>
+                            }
+                          </Routes>
+                      </div>
+                  </Content>
+                  <Footer style={{textAlign: 'center'}}>DREAM 2022</Footer>
+              </Layout>
+          </>
       }
     </DefaultLayout>
   );
