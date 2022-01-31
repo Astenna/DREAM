@@ -55,11 +55,15 @@ const strings = {
       REQUIRED: "This field is required"
     },
   },
+  INFO: {
+    ACCOUNT_CREATED: "Account created successfully.",
+  },
   ERROR: {
     NO_AUTHORIZED_403: "You don't have permissions to perform this action.",
     NOT_FOUND_404: "Resource not found.",
     SERVER_ERROR_500: "Server error occurred.",
     CHILL_FOR_A_MOMENT_429: "You made too many requests. Try again later.",
+    UNIDENTIFIED_ERROR: "An unidentified error occurred."
   },
   WARNING: {
     LOGOUT: "You were logged out.",

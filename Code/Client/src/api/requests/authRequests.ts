@@ -1,11 +1,30 @@
-import {createNoAuthAPI} from '../api';
+import {noAuthAPI} from '../api';
 import {endpoints} from '../../values/endpoints';
 import {AxiosResponse} from 'axios';
+import {CreateAccountFarmerRequest, CreateAccountFarmerResponse} from '../../model/api/CreateAccountFarmer';
+import {useAPI} from '../../hooks/apiHooks';
+import {
+  CreateAccountPolicyMakerRequest,
+  CreateAccountPolicyMakerResponse
+} from '../../model/api/CreateAccountPolicyMaker';
 
-const unauthorizedApi = createNoAuthAPI()
 
 export const authRequests = {
   refreshToken: (refreshToken: string): Promise<AxiosResponse> => (
-    unauthorizedApi.post<any>(endpoints.REFRESH_TOKEN, {refresh: refreshToken})
-  ) //TODO: precise type
+    noAuthAPI.post<any>(endpoints.INVALID_REFRESH_TOKEN, {refresh: refreshToken})
+  ), //TODO: precise type
+
+  usePostCreateAccountFarmer: ():
+    (values: CreateAccountFarmerRequest) => Promise<AxiosResponse<CreateAccountFarmerResponse>> => {
+    const api = useAPI()
+    return (values) =>
+      api(noAuthAPI.post<CreateAccountFarmerResponse>(endpoints.POST_ACCOUNT_REGISTRATION_FARMER, values))
+  },
+
+  usePostCreateAccountPolicyMaker: ():
+    (values: CreateAccountPolicyMakerRequest) => Promise<AxiosResponse<CreateAccountPolicyMakerResponse>> => {
+    const api = useAPI()
+    return (values) =>
+      api(noAuthAPI.post<CreateAccountPolicyMakerResponse>(endpoints.POST_ACCOUNT_REGISTRATION_POLICY_MAKER, values))
+  },
 }

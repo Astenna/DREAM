@@ -5,7 +5,7 @@ import HelpRequestListItem, {HelpRequestListItemProps} from './HelpRequestListIt
 
 const {Search} = Input
 
-let helpRequestListItems: HelpRequestListItemProps[] = [
+let allHelpRequestListItems: HelpRequestListItemProps[] = [
   {
     id: "1",
     title: "Lorem ipsum blah blah blah blah blah",
@@ -17,16 +17,44 @@ let helpRequestListItems: HelpRequestListItemProps[] = [
       surname: "Grzegoski",
     }
   },
+  {
+    id: "1",
+    title: "sdfsdf Lorem ipsum blah blah blah blah blah",
+    commentCount: 1,
+    lastCommentDate: new Date("2011-10-05"),
+    createDateTime: new Date("2011-10-05T14:48:00.000Z"),
+    author: {
+      name: "Grzegorz",
+      surname: "Grzegoski",
+    }
+  },
+  {
+    id: "1",
+    title: "aaaaasdfsdf Lorem ipsum blah blah blah blah blah",
+    commentCount: 1,
+    lastCommentDate: new Date("2011-10-05"),
+    createDateTime: new Date("2011-10-05T14:48:00.000Z"),
+    author: {
+      name: "Grzegorz",
+      surname: "Grzegoski",
+    }
+  },
 ]
 
 // dummy values TODO
-helpRequestListItems =
-  helpRequestListItems.reduce((p: HelpRequestListItemProps[], c) =>
-    p.concat(Array(70).fill(c)), [])
+// allHelpRequestListItems =
+//   allHelpRequestListItems.reduce((p: HelpRequestListItemProps[], c) =>
+//     p.concat(Array(70).fill(c)), [])
 
 const HelpRequestList = () => {
   const [pageSize, setPageSize] = useState(5)
   const [currentPage, setCurrentPage] = useState(1)
+  const [helpRequestListItem, setHelpRequestListItem] = useState(allHelpRequestListItems)
+
+  const searchHelpRequestListItem = (searchString: string) => {
+    setHelpRequestListItem(allHelpRequestListItems.filter(m =>
+      m.title.toUpperCase().startsWith(searchString.toUpperCase())))
+  }
 
   return (
     <>
@@ -49,14 +77,13 @@ const HelpRequestList = () => {
         <Col style={{width: "100%"}}>
           <Row>
             <Col>
-              <Search placeholder="Search by name" onSearch={() => {
-              }} style={{width: 250}}/>
+              <Search placeholder="Search by name" onSearch={searchHelpRequestListItem} style={{width: 250}}/>
             </Col>
           </Row>
           <Divider style={{margin: "10px 0"}}/>
           <>
             {
-              helpRequestListItems
+              helpRequestListItem
                 .slice((currentPage - 1) * pageSize, currentPage * pageSize)
                 .map((item, key) =>
                   <HelpRequestListItem key={key} item={item}/>)
@@ -67,10 +94,11 @@ const HelpRequestList = () => {
               <Pagination
                 style={{paddingBottom: "15px"}}
                 showSizeChanger
-                total={helpRequestListItems.length}
+                total={helpRequestListItem.length}
                 pageSizeOptions={[5, 10, 20]}
                 pageSize={pageSize}
                 onChange={(c, s) => {
+                  console.log(s, c)
                   setCurrentPage(c)
                   setPageSize(s)
                 }}

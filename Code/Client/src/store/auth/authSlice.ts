@@ -2,20 +2,23 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from '../store';
 import {AuthState, AuthStateInfo} from './AuthState';
 import {View} from '../../model/View';
-import {Role} from "../../model/Role";
+import {Role} from '../../model/Role';
 
 // const initialState: AuthState = {
 //   authenticated: false,
 //   info: {
-//     role: undefined,
 //     email: undefined,
 //     name: undefined,
 //     surname: undefined
 //   },
+//   navigation: {
+//     role: undefined,
+//     view: undefined
+//   },
 //   tokens: {
 //     refreshToken: undefined,
 //     accessToken: undefined,
-//   }
+//   },
 // }
 
 const initialState: AuthState = {
