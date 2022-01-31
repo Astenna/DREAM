@@ -30,6 +30,9 @@ const links = {
     URL: "/my_help_requests",
     BREADCRUMB: strings.SIDEBAR.MY_HELP_REQUESTS
   },
+  MY_HELP_REQUESTS_DETAIL: {
+    URL: "/my_help_requests/:id",
+  },
   PROVIDE_HELP: {
     URL: "/provide_help",
     BREADCRUMB: strings.SIDEBAR.PROVIDE_HELP

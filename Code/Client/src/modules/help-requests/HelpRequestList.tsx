@@ -1,7 +1,9 @@
 import {ArrowLeftOutlined} from '@ant-design/icons';
-import {Col, Divider, Input, Pagination, Row} from 'antd';
+import {Button, Col, Divider, Input, Pagination, Row} from 'antd';
 import React, {useState} from 'react';
 import HelpRequestListItem, {HelpRequestListItemProps} from './HelpRequestListItem';
+import strings from '../../values/strings';
+import CreateHelpRequestModal from './CreateHelpRequestModal';
 
 const {Search} = Input
 
@@ -48,6 +50,7 @@ let allHelpRequestListItems: HelpRequestListItemProps[] = [
 
 const HelpRequestList = () => {
   const [pageSize, setPageSize] = useState(5)
+  const [isCreateHelpRequestModalVisible, setCreateHelpRequestModalVisible] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [helpRequestListItem, setHelpRequestListItem] = useState(allHelpRequestListItems)
 
@@ -58,6 +61,8 @@ const HelpRequestList = () => {
 
   return (
     <>
+      <CreateHelpRequestModal isVisible={isCreateHelpRequestModalVisible}
+                              setVisible={setCreateHelpRequestModalVisible}/>
       <Row style={{padding: "15px 15px 0 15px"}}>
         <Col style={{width: "100%"}}>
           <Row>
@@ -75,9 +80,15 @@ const HelpRequestList = () => {
       <Divider style={{margin: "10px 0"}}/>
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>
-          <Row>
+          <Row justify={'space-between'}>
             <Col>
-              <Search placeholder="Search by name" onSearch={searchHelpRequestListItem} style={{width: 250}}/>
+              <Search style={{margin: "3px", width: 250}} placeholder="Search by name"
+                      onSearch={searchHelpRequestListItem}/>
+            </Col>
+            <Col>
+              <Button style={{margin: "3px"}} type={"primary"} onClick={() => setCreateHelpRequestModalVisible(true)}>
+                {strings.CREATE_HELP_REQUEST}
+              </Button>
             </Col>
           </Row>
           <Divider style={{margin: "10px 0"}}/>
