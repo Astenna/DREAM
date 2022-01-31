@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using DataAccess.Entites.Actors;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Tools
 {
@@ -17,6 +18,20 @@ namespace BusinessLogic.Tools
             }
 
             return user;
+        }
+
+        public static Farmer GetFarmerUsingClaims(this HttpContext httpContext, DreamDbContext dreamDbContext)
+        {
+            var farmerIdFromClaims = httpContext.User.FindFirst("farmerId").Value;
+            var farmer = dreamDbContext.Farmers
+                            .SingleOrDefault(x => x.Id.ToString() == farmerIdFromClaims);
+
+            if (farmer is null)
+            {
+                throw new UnauthorizedAccessException();
+            }
+
+            return farmer;
         }
     }
 }

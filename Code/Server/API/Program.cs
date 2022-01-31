@@ -17,7 +17,6 @@ using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 var con = builder.Configuration.GetValue<string>("ConnectionString").ToString();
 
 builder.Services.AddMvc();
@@ -100,7 +99,6 @@ app.UseCors(builder => builder
               .AllowAnyOrigin()
               .AllowAnyMethod()
               .AllowAnyHeader());
-
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>

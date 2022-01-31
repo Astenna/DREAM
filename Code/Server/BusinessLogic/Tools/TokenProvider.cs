@@ -1,5 +1,7 @@
 ﻿using BusinessLogic.Dtos.Account;
+using DataAccess;
 using DataAccess.Entites.Actors;
+using DataAccess.Entities.Actors;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -11,10 +13,12 @@ namespace BusinessLogic.Tools
     public class TokenProvider : ITokenProvider
     {
         private readonly IOptions<AuthOptions> _authOptions;
+        private readonly DreamDbContext _dreamDbContext;
 
-        public TokenProvider(IOptions<AuthOptions> authOptions)
+        public TokenProvider(IOptions<AuthOptions> authOptions, DreamDbContext dreamDbContext)
         {
             _authOptions = authOptions;
+            _dreamDbContext = dreamDbContext;
         }
 
         public string CreateRefreshToken(User user)
@@ -31,6 +35,12 @@ namespace BusinessLogic.Tools
                 new Claim("userId", user.Id.ToString()),
                 new Claim("email", user.Email)
             };
+
+            if (user.Role == Role.Farmer)
+            {
+                var farmer = _dreamDbContext.Farmers.Single(x => x.UserId == user.Id);
+                claims.Add(new Claim("farmerId", farmer.Id.ToString()));
+            }
 
             var tokenHandler = new JwtSecurityTokenHandler();
 

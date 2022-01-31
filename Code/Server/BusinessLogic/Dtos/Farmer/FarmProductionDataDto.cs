@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.Dtos.Farmer
 {
-    public class EditProductionDataDto
+    public class FarmProductionDataDto
     {
         public int Id { get; set; }
 

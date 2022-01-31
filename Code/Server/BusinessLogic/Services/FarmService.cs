@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
 using BusinessLogic.Dtos.Farmer;
+using BusinessLogic.Exceptions;
 using BusinessLogic.Queries;
+using BusinessLogic.Tools;
 using DataAccess;
+using DataAccess.Entites.Farms;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Services
@@ -9,27 +13,57 @@ namespace BusinessLogic.Services
     public class FarmService : IFarmService
     {
         private readonly DreamDbContext _dreamDbContext;
+        private readonly HttpContext _httpContext;
         private readonly IMapper _mapper;
 
-        public FarmService(DreamDbContext dreamDbContext, IMapper mapper)
+        public FarmService(DreamDbContext dreamDbContext,
+            IHttpContextAccessor httpContextAccessor,
+            IMapper mapper)
         {
             _dreamDbContext = dreamDbContext;
+            _httpContext = httpContextAccessor.HttpContext;
             _mapper = mapper;
         }
 
-        public async Task<ProductionDataDto> AddProductionDataAsync(int farmId, CreateProductionDataDto createProductionData)
+        public async Task<FarmProductionDataDto> AddProductionDataAsync(int farmerId, CreateFarmProductionDto createProductionData)
         {
-            return new ProductionDataDto();
+            var farmer = _httpContext.GetFarmerUsingClaims(_dreamDbContext);
+            var domainProductiondata = _mapper.Map<FarmProduction>(createProductionData);
+
+            var productionDataType = await _dreamDbContext.FarmProductionTypes
+                .SingleOrDefaultAsync(x => x.Name == createProductionData.ProductionType);
+            if(productionDataType is null)
+            {
+                throw new ApiException($"ProductionType {createProductionData.ProductionType} is not a valid production type!");
+            }
+
+            domainProductiondata.ProductionType = productionDataType;
+            domainProductiondata.FarmId = farmer.FarmId;
+
+            await _dreamDbContext.FarmProductions.AddAsync(domainProductiondata);
+            await _dreamDbContext.SaveChangesAsync();
+
+            return _mapper.Map<FarmProductionDataDto>(domainProductiondata);
         }
 
-        public async Task<ProductionDataDto> EditProductionDataAsync(int farmId, EditProductionDataDto editProductionDataDto)
+        public async Task<FarmProductionDataDto> EditProductionDataAsync(int farmId, EditProductionDataDto editProductionDataDto)
         {
-            return new ProductionDataDto();
+            return new FarmProductionDataDto();
         }
 
-        public async Task<List<ProductionDataDto>> GetProductionDataAsync(int farmId, ProductionDataQuery productionDataQuery)
+        public async Task<List<FarmProductionDataDto>> GetProductionDataAsync(int farmerId, ProductionDataQuery productionDataQuery)
         {
-            return new List<ProductionDataDto>();
+            var farmer = await _dreamDbContext.Farmers.SingleOrDefaultAsync(x => x.Id == farmerId);
+            if (farmer is null)
+            {
+                throw new ApiException($"Farmer with id {farmerId} not found!");
+            }
+
+           var production = _dreamDbContext.FarmProductions
+                .Include(x => x.ProductionType)
+                .Where(x => x.FarmId == farmer.FarmId);
+
+            return _mapper.Map<List<FarmProductionDataDto>>(production);
         }
 
         public async Task<List<SensorSystemDto>> GetSensorSystemDataAsync(int farmId, SensorSystemQuery sensorSystemQuery)

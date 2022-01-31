@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Exceptions;
+using Newtonsoft.Json;
 using System.Net;
 using System.Security.Authentication;
 
@@ -37,19 +38,21 @@ namespace API.Middleware
         private async Task HandleExceptionAsync(HttpContext context, Exception ex, ILogger<GlobalExceptionMiddleware> logger)
         {
             context.Response.Clear();
+            var json = JsonConvert.SerializeObject(ex.Message);
+
             switch (ex)
             {
                 case ApiException apiException when apiException.ErrorCode == ErrorCode.InvalidInput:
                     context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    await context.Response.WriteAsync(apiException.Message);
+                    await context.Response.WriteAsync(json);
                     break;
                 case ApiException apiException when apiException.ErrorCode == ErrorCode.AuthorizationException:
                     context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                    await context.Response.WriteAsync(apiException.Message);
+                    await context.Response.WriteAsync(json);
                     break;
-                case FluentValidation.ValidationException validationException:
+                case FluentValidation.ValidationException _:
                     context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    await context.Response.WriteAsync(validationException.Message);
+                    await context.Response.WriteAsync(json);
                     break;
                 case AuthenticationException _:
                     context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
@@ -59,7 +62,7 @@ namespace API.Middleware
                     break;
                 default:
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    await context.Response.WriteAsync(ex.Message);
+                    await context.Response.WriteAsync(json);
                     break;
             }
 

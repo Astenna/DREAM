@@ -47,9 +47,10 @@ namespace API.Controllers
         }
 
         [HttpPost("{farmerId}/farm/production-data")]
-        public async Task<IActionResult> PostProductionDataAsync([FromRoute] int farmerId, [FromBody] CreateProductionDataDto createProductionData)
+        public async Task<IActionResult> PostProductionDataAsync([FromRoute] int farmerId, [FromBody] CreateFarmProductionDto createProductionData)
         {
-            return Ok();
+            var result = await _farmService.AddProductionDataAsync(farmerId, createProductionData);
+            return Ok(result);
         }
 
         [HttpPut("farm/production-data/{productionDataId}")]
@@ -59,9 +60,10 @@ namespace API.Controllers
         }
 
         [HttpGet("{farmerId}/farm/production-data")]
-        public async Task<IActionResult> GetProductionDataAsync([FromRoute] int farmerId, [FromBody] ProductionDataQuery query)
+        public async Task<IActionResult> GetProductionDataAsync([FromRoute] int farmerId, [FromQuery] ProductionDataQuery query)
         {
-            return Ok();
+            var result = await _farmService.GetProductionDataAsync(farmerId, query);
+            return Ok(result);
         }
 
         [HttpGet("farm/production-data/production-types")]

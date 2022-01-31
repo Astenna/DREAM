@@ -1,9 +1,7 @@
 ﻿namespace BusinessLogic.Dtos.Farmer
 {
-    public class EditProductionDataDto
+    public class CreateFarmProductionDto
     {
-        public int Id { get; set; }
-
         public float Amount { get; set; }
 
         public DateTime Date { get; set; }
