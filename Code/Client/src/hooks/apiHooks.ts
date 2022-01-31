@@ -32,13 +32,12 @@ export const useAPIHandleErrors = () => {
         notification['error']({message: strings.ERROR.CHILL_FOR_A_MOMENT_429})
       } else if (error?.response?.status === 500) {
         notification['error']({message: strings.ERROR.UNIDENTIFIED_ERROR})
-        console.error(error)
       } else if (error?.response?.status === 400) {
         notification['error']({message: strings.ERROR.UNIDENTIFIED_ERROR})
-        console.error(error)
       } else {
         notification['error']({message: error.toString()})
       }
+      console.error(error)
       handled = true
     } else if (isApplicationError(error)) {
       if (error.type === 'logout') {

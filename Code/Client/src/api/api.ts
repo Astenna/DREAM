@@ -53,3 +53,4 @@ export const createNoAuthAPI = (): AxiosInstance => {
 }
 
 export const noAuthAPI = createNoAuthAPI()
+export const tokenAPI = createTokenAPI()

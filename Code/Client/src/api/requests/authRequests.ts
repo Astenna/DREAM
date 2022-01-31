@@ -3,6 +3,10 @@ import {endpoints} from '../../values/endpoints';
 import {AxiosResponse} from 'axios';
 import {CreateAccountFarmerRequest, CreateAccountFarmerResponse} from '../../model/api/CreateAccountFarmer';
 import {useAPI} from '../../hooks/apiHooks';
+import {
+  CreateAccountPolicyMakerRequest,
+  CreateAccountPolicyMakerResponse
+} from '../../model/api/CreateAccountPolicyMaker';
 
 
 export const authRequests = {
@@ -15,5 +19,12 @@ export const authRequests = {
     const api = useAPI()
     return (values) =>
       api(noAuthAPI.post<CreateAccountFarmerResponse>(endpoints.POST_ACCOUNT_REGISTRATION_FARMER, values))
-  }
+  },
+
+  usePostCreateAccountPolicyMaker: ():
+    (values: CreateAccountPolicyMakerRequest) => Promise<AxiosResponse<CreateAccountPolicyMakerResponse>> => {
+    const api = useAPI()
+    return (values) =>
+      api(noAuthAPI.post<CreateAccountPolicyMakerResponse>(endpoints.POST_ACCOUNT_REGISTRATION_POLICY_MAKER, values))
+  },
 }

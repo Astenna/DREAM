@@ -4,6 +4,7 @@ import {authRequests} from '../../api/requests/authRequests';
 import {Role} from '../../model/Role';
 import {notification} from 'antd';
 import strings from '../../values/strings';
+import {CreateAccountPolicyMakerRequest} from '../../model/api/CreateAccountPolicyMaker';
 
 /**
  * Hook for register request. Create account and log in.
@@ -13,6 +14,7 @@ export const useCreateAccount =
   (setModalVisible: (value: boolean) => void): [((v: CreateAccountFarmerRequest) => void), boolean, ((v: boolean) => void)] => {
     const [loading, setLoading] = useState(false)
     const postCreateAccountFarmer = authRequests.usePostCreateAccountFarmer()
+    const postCreateAccountPolicyMaker = authRequests.usePostCreateAccountPolicyMaker()
 
     const createAccount = (createAccountForm: any) => {
       if (loading) {
@@ -23,7 +25,7 @@ export const useCreateAccount =
       if (createAccountForm.role === Role.FARMER) {
         const form = createAccountForm as CreateAccountFarmerRequest
         form.farmName = "dummy" //TODO
-        postCreateAccountFarmer(createAccountForm)
+        postCreateAccountFarmer(form)
           .then(_ => {
             setModalVisible(false)
             notification['info']({message: strings.INFO.ACCOUNT_CREATED})
@@ -32,7 +34,15 @@ export const useCreateAccount =
           })
           .finally(() => setLoading(false))
       } else if (createAccountForm.role === Role.POLICY_MAKER) {
-        console.log("policy maker not yet implemented")
+        const form = createAccountForm as CreateAccountPolicyMakerRequest
+        postCreateAccountPolicyMaker(form)
+          .then(_ => {
+            setModalVisible(false)
+            notification['info']({message: strings.INFO.ACCOUNT_CREATED})
+          })
+          .catch(_ => {
+          })
+          .finally(() => setLoading(false))
       }
     }
 
