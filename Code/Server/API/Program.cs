@@ -12,12 +12,15 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using BusinessLogic.Queries;
+using API.Extensions;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var con = builder.Configuration.GetValue<string>("ConnectionString").ToString();
 
+builder.Services.AddMvc();
 builder.Services.AddControllers()
     .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RegisterDto>());
 
@@ -91,22 +94,20 @@ builder.Services.Configure<AuthOptions>(
 
 var app = builder.Build();
 
+app.UseGlobalExceptionMiddleware();
+
 app.UseCors(builder => builder
               .AllowAnyOrigin()
               .AllowAnyMethod()
               .AllowAnyHeader());
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "DREAM API V1");
-        c.RoutePrefix = string.Empty;
-    });
-}
 
-app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "DREAM API V1");
+    c.RoutePrefix = string.Empty;
+});
 
 app.UseAuthentication();
 app.UseAuthorization();

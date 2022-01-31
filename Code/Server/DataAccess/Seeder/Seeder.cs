@@ -58,7 +58,45 @@ namespace DataAccess.Seeder
                 ON CONFLICT DO NOTHING;";
 
                 context.Database.ExecuteSqlRaw(script);
-                _logger.LogInformation("Database seeded with mandals from mandals.sql.");
+                _logger.LogInformation("Database seeded with mandals");
+            }
+        }
+
+        public void SeedFarmProducitonTypes()
+        {
+            using (var serviceScope = _serviceScopeFactory.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<T>();
+                string script = @"INSERT INTO ""FarmProductionTypes"" (""Name"")
+                                    VALUES
+                                        ('Milk'),
+                                        ('Cucumber'),
+                                        ('Rice'),
+                                        ('Wheat'),
+                                        ('Sugarcane'),
+                                        ('Cotton'),
+                                        ('Wool'),
+                                        ('Groundnuts'),
+                                        ('Jute'),
+                                        ('Soy Bean'),
+                                        ('Sunflower'),
+                                        ('Mandarin'),
+                                        ('Banana'),
+                                        ('Guava'),
+                                        ('Mango'),
+                                        ('Papaya'),
+                                        ('Pomegranate'),
+                                        ('Cauliflower'),
+                                        ('Onion'),
+                                        ('Coconut'),
+                                        ('Cumin'),
+                                        ('Coriander'),
+                                        ('Grapes'),
+                                        ('Apple')
+                ON CONFLICT DO NOTHING;";
+
+                context.Database.ExecuteSqlRaw(script);
+                _logger.LogInformation("Database seeded with farm production types.");
             }
         }
 
@@ -75,7 +113,7 @@ namespace DataAccess.Seeder
                                 ON CONFLICT DO NOTHING;";
 
                 context.Database.ExecuteSqlRaw(script);
-                _logger.LogInformation("Database seeded with mandals from mandals.sql.");
+                _logger.LogInformation("Database seeded with problem types.");
             }
         }
     }

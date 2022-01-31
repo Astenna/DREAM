@@ -555,6 +555,12 @@ namespace DataAccess.Migrations
                 column: "ProductionTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FarmProductionTypes_Name",
+                table: "FarmProductionTypes",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Farms_MandalId",
                 table: "Farms",
                 column: "MandalId");

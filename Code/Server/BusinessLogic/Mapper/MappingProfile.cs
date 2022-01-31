@@ -7,6 +7,7 @@ using DataAccess.Entites.Actors;
 using DataAccess.Entites.Farms;
 using DataAccess.Entites.Forum;
 using DataAccess.Entities;
+using DataAccess.Entities.Farms;
 
 namespace BusinessLogic.Mapper
 {
