@@ -109,8 +109,6 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 });
 
-app.UseExceptionHandler();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
