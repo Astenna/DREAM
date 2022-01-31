@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import {AutoComplete, Form, Input, Modal, Select} from 'antd';
 import strings from '../../values/strings';
-import {mandals as allMandals} from '../../values/mandals';
 import {Rule} from 'antd/lib/form';
-import {useCreateAccount} from '../../hooks/authHooks';
-import {CreateAccountForm} from '../../model/CreateAccountForm';
 import {Role} from '../../model/Role';
+import {mandal} from '../../api/requests/mandalRequests';
+import {useCreateAccount} from './createAccountModalHooks';
 
 const {Option} = Select;
 
@@ -23,10 +22,9 @@ interface CreateAccountModalProps {
  */
 const CreateAccountModal = (props: CreateAccountModalProps) => {
   const [form] = Form.useForm();
-  const [mandals, setMandals] = useState(allMandals);
   const [role, setRole] = useState<Role | undefined>(undefined);
-  const [createAccount, loading] = useCreateAccount();
-
+  const [mandals, searchMandals] = mandal.useGetMandals()
+  const [createAccount, loading] = useCreateAccount(props.setVisible)
 
   const formItemLayout = {
     labelCol: {
@@ -45,55 +43,47 @@ const CreateAccountModal = (props: CreateAccountModalProps) => {
     message: strings.FORM.ERROR.REQUIRED,
   }
 
-  const sendCreateAccountForm =
-    (formValues: any) => createAccount(formValues as CreateAccountForm)
-
   const cancelCreateAccountForm = () =>
     props.setVisible(false)
-
-  // Mandal search for Farmer
-  const onMandalSearch = (searchText: string) => {
-    setMandals(!searchText ? [] : allMandals.filter(m => m.startsWith(searchText)).sort().slice(0, 5))
-  }
 
   // Object defining specifics of roles - key, role name and (!) additional form items.
   const roles = {
     "farmer": {
-      key: "farmer",
+      key: Role.FARMER,
       value: strings.ROLE.FARMER,
       additional_fields: [
         <Form.Item
-          key="sensorID" name="sensorID" label={strings.FORM.LABEL.SENSOR_SYSTEM_ID}
+          key="sensorSystemId" name="sensorSystemId" label={strings.FORM.LABEL.SENSOR_SYSTEM_ID}
           rules={[requiredCheck]}
         >
           <Input/>
         </Form.Item>,
         <Form.Item
-          key="waterID" name="waterID" label={strings.FORM.LABEL.WATER_IRRIGATION_ID}
+          key="waterIrrigationSystemId" name="waterIrrigationSystemId" label={strings.FORM.LABEL.WATER_IRRIGATION_ID}
           rules={[requiredCheck]}
         >
           <Input/>
         </Form.Item>,
         <Form.Item
-          key="address1" name="address1" label={strings.FORM.LABEL.ADDRESS_LINE_1}
+          key="farmAddressLine1" name="farmAddressLine1" label={strings.FORM.LABEL.ADDRESS_LINE_1}
           rules={[requiredCheck]}
         >
           <Input/>
         </Form.Item>,
         <Form.Item
-          key="address2" name="address2" label={strings.FORM.LABEL.ADDRESS_LINE_2}
+          key="farmAddressLine2" name="farmAddressLine2" label={strings.FORM.LABEL.ADDRESS_LINE_2}
           rules={[requiredCheck]}
         >
           <Input/>
         </Form.Item>,
         <Form.Item
-          key="city" name="city" label={strings.FORM.LABEL.CITY}
+          key="farmCity" name="farmCity" label={strings.FORM.LABEL.CITY}
           rules={[requiredCheck]}
         >
           <Input/>
         </Form.Item>,
         <Form.Item
-          key="postalCode" name="postalCode" label={strings.FORM.LABEL.POSTAL_CODE}
+          key="farmPostalCode" name="farmPostalCode" label={strings.FORM.LABEL.POSTAL_CODE}
           rules={[requiredCheck]}
         >
           <Input/>
@@ -102,7 +92,7 @@ const CreateAccountModal = (props: CreateAccountModalProps) => {
           key="mandal" name="mandal" label={strings.FORM.LABEL.MANDAL}
           rules={[requiredCheck]}
         >
-          <AutoComplete onSearch={onMandalSearch}>
+          <AutoComplete onSearch={searchMandals}>
             {mandals.map(m =>
               <Option key={m} value={m}>
                 {m}
@@ -114,7 +104,7 @@ const CreateAccountModal = (props: CreateAccountModalProps) => {
       ]
     },
     "policy_maker": {
-      key: "policy_maker",
+      key: Role.POLICY_MAKER,
       value: strings.ROLE.POLICY_MAKER,
       additional_fields: []
     },
@@ -134,7 +124,7 @@ const CreateAccountModal = (props: CreateAccountModalProps) => {
           {...formItemLayout}
           form={form}
           name="register"
-          onFinish={sendCreateAccountForm}
+          onFinish={createAccount}
           scrollToFirstError
         >
           <Form.Item

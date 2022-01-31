@@ -51,3 +51,5 @@ export const createNoAuthAPI = (): AxiosInstance => {
   API.defaults.timeout = apiConfig.timeout
   return API
 }
+
+export const noAuthAPI = createNoAuthAPI()
