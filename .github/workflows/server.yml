@@ -49,3 +49,7 @@ jobs:
       - name: Test DataAccess
         run: dotnet test --no-restore --verbosity normal
         working-directory: ./Code/Server/DataAccess
+        
+      - name: Publishing
+        run: dotnet publish --configuration Release
+        working-directory: ./Code/Server
