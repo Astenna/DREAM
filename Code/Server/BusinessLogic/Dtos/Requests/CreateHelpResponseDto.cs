@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.Dtos.Requests
 {
-    public class EditResponseDto
+    public class CreateHelpResponseDto
     {
         public string Message { get; set; }
     }

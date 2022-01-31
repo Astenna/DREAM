@@ -42,9 +42,13 @@ namespace BusinessLogic.Mapper
             CreateMap<CreateHelpRequestDto, HelpRequest>();
             CreateMap<HelpRequest, HelpRequestDto>()
                 .ForMember(dest => dest.CreatedBy, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy.User)));
+            CreateMap<CreateHelpResponseDto, HelpResponse>();
+            CreateMap<HelpResponse, HelpResponseDto>()
+                .ForMember(dest => dest.CreatedByAgronomist, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedByAgronomist.User)))
+                .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedByFarmer.User)));
         }
 
-        private string CombineNameAndSurname(User x)
+        private static string CombineNameAndSurname(User x)
         {
             var name = x?.Name ?? string.Empty;
             var surname = x?.Surname ?? string.Empty;

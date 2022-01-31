@@ -1,11 +1,13 @@
 ﻿using BusinessLogic.Dtos.Requests;
 using BusinessLogic.Queries;
 using BusinessLogic.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/requests")]
+    [Authorize]
     [ApiController]
     public class RequestController : ControllerBase
     {
@@ -24,32 +26,37 @@ namespace API.Controllers
         }
 
         [HttpPost("{requestId}/response")]
-        public async Task<IActionResult> PostResponseAsync([FromRoute] int requestId, [FromBody] CreateResponseDto createResponseDto)
+        public async Task<IActionResult> PostResponseAsync([FromRoute] int requestId, [FromBody] CreateHelpResponseDto createResponseDto)
         {
-            return Ok();
+            var result = await _requestService.CreateResponseAsync(requestId, createResponseDto);
+            return Ok(result);
         }
 
-        [HttpPost("{requestId}")]
+        [HttpPut("{requestId}")]
         public async Task<IActionResult> PutRequestAsync([FromRoute] int requestId, [FromBody] EditHelpRequestDto editRequestDto)
         {
-            return Ok();
+            var result = await _requestService.EditRequestAsync(requestId, editRequestDto);
+            return Ok(result);
         }
 
-        [HttpPost("response/{responseId}")]
+        [HttpPut("response/{responseId}")]
         public async Task<IActionResult> PutResponseAsync([FromRoute] int responseId, [FromBody] EditResponseDto editResponseDto)
         {
-            return Ok();
+            var result = await _requestService.EditResponseAsync(responseId, editResponseDto);
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRequestAsync([FromRoute] int id)
         {
+            await _requestService.DeleteRequestAsync(id);
             return Ok();
         }
 
         [HttpDelete("response/{id}")]
         public async Task<IActionResult> DeleteResponseAsync([FromRoute] int id)
         {
+            await _requestService.DeleteResponseAsync(id);
             return Ok();
         }
 
@@ -63,7 +70,8 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRequestByIdAsync([FromRoute] int id)
         {
-            return Ok();
+            var result = await _requestService.GetRequestByIdAsync(id);
+            return Ok(result);
         }
     }
 }

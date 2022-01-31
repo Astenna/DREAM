@@ -28,6 +28,7 @@ namespace BusinessLogic.Tools
                 new Claim("name", user.Name),
                 new Claim("surname", user.Surname),
                 new Claim("role", user.Role.ToString()),
+                new Claim("userId", user.Id.ToString()),
                 new Claim("email", user.Email)
             };
 

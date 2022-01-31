@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using BusinessLogic.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,6 +82,7 @@ builder.Services.AddTransient<IFarmerService, FarmerService>();
 builder.Services.AddTransient<IRequestService, RequestService>();
 builder.Services.AddTransient<IMandalService, MandalService>();
 builder.Services.AddTransient<IProblemTypeService, ProblemTypeService>();
+builder.Services.AddScoped<IRequestsQueryBuilder, RequestsQueryBuilder>();
 
 builder.Services.Configure<AuthOptions>(
     o => builder.Configuration.GetSection(nameof(AuthOptions))

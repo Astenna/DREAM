@@ -439,7 +439,10 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Message")
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Topic")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

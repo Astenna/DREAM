@@ -4,14 +4,17 @@ namespace BusinessLogic.Dtos.Requests
 {
     public class CreateHelpRequestDto
     {
-        public string Message { get; set; }
+        public string Topic { get; set; }
+
+        public string Description { get; set; }
     }
 
     public class CreateHelpRequestDtoValidator : AbstractValidator<CreateHelpRequestDto>
     {
         public CreateHelpRequestDtoValidator()
         {
-            RuleFor(x => x.Message).NotEmpty();
+            RuleFor(x => x.Topic).NotEmpty();
+            RuleFor(x => x.Description).NotEmpty();
         }
     }
 }
