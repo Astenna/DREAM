@@ -64,6 +64,13 @@ namespace API.Controllers
             return Ok();
         }
 
+        [HttpGet("farm/production-data/production-types")]
+        public async Task<IActionResult> GetFarmProductionTypesAsync()
+        {
+            var result = await _farmService.GetFarmProductionTypes();
+            return Ok(result);
+        }
+
         [HttpGet("{farmerId}/farm/sensor-system")]
         public async Task<IActionResult> GetSensorSystemDataAsync([FromRoute] int farmerId, [FromBody] SensorSystemQuery query)
         {

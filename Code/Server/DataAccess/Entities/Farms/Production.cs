@@ -12,10 +12,10 @@ namespace DataAccess.Entites.Farms
 
         public int ProductionTypeId { get; set; }
 
-        public FarmProductionType? ProductionType { get; set; }
+        public FarmProductionType ProductionType { get; set; }
 
         public int FarmId { get; set; }
 
-        public Farm? Farm { get; set; }
+        public Farm Farm { get; set; }
     }
 }

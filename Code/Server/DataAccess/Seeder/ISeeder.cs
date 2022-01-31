@@ -4,5 +4,6 @@
     {
         void SeedMandals();
         void SeedProblemTypes();
+        void SeedFarmProducitonTypes();
     }
 }
