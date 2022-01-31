@@ -110,7 +110,7 @@ const DashboardLayout = () => {
                           <Routes>
                             {roleNavigation.role === Role.FARMER &&
                                 <>
-                                    <Route path={"/my_help_requests"} element={<HelpRequestList/>}/>
+                                    <Route path={links.MY_HELP_REQUESTS.URL} element={<HelpRequestList/>}/>
                                 </>
                             }
                             {roleNavigation.role === Role.POLICY_MAKER &&

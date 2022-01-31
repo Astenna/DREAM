@@ -1,11 +1,32 @@
-import {ArrowLeftOutlined, ClockCircleOutlined, CommentOutlined} from '@ant-design/icons';
-import {Col, Divider, Input, Row} from 'antd';
-import React from 'react';
-import {purple} from '@ant-design/colors';
+import {ArrowLeftOutlined} from '@ant-design/icons';
+import {Col, Divider, Input, Pagination, Row} from 'antd';
+import React, {useState} from 'react';
+import HelpRequestListItem, {HelpRequestListItemProps} from './HelpRequestListItem';
 
 const {Search} = Input
 
+let helpRequestListItems: HelpRequestListItemProps[] = [
+  {
+    title: "Lorem ipsum blah blah blah blah blah",
+    commentCount: 1,
+    lastCommentDate: new Date("2011-10-05"),
+    createDateTime: new Date("2011-10-05T14:48:00.000Z"),
+    author: {
+      name: "Grzegorz",
+      surname: "Grzegoski",
+    }
+  },
+]
+
+// dummy values TODO
+helpRequestListItems =
+  helpRequestListItems.reduce((p: HelpRequestListItemProps[], c) =>
+    p.concat(Array(70).fill(c)), [])
+
 const HelpRequestList = () => {
+  const [pageSize, setPageSize] = useState(10)
+  const [currentPage, setCurrentPage] = useState(1)
+
   return (
     <>
       <Row style={{padding: "15px 15px 0 15px"}}>
@@ -32,45 +53,29 @@ const HelpRequestList = () => {
             </Col>
           </Row>
           <Divider style={{margin: "10px 0"}}/>
-          {/*here split later*/}
-          <Row>
-            <Col style={{width: "100%"}}>
-              <Row>
-                <Col>
-                  <h1 className={"dashboard-list-item-title "}>
-                    Lorem ipsum blah blah blah blah blah
-                  </h1>
-                </Col>
-              </Row>
-              <Row style={{justifyContent: "space-between"}}>
-                <Col style={{}}>
-                  <span style={{marginRight: "10px"}}>
-                    <CommentOutlined style={{color: purple.primary, marginRight: "3px"}}/>
-                    <span className={"dashboard-item-attribute"}>1</span>
-                  </span>
-                  <span>
-                    <ClockCircleOutlined style={{color: purple.primary, marginRight: "3px"}}/>
-                    <span className={"dashboard-item-attribute"}>28.08.2019</span>
-                  </span>
-                </Col>
-                <Col>
-                  <Row>
-                    <Col>
-                      <span style={{marginRight: "10px"}}>
-                        <ClockCircleOutlined style={{color: purple.primary, marginRight: "3px"}}/>
-                        <span className={"dashboard-item-attribute"}>28.08.2019 12:46</span>
-                      </span>
-                    </Col>
-                    <Col>
-                      <span className={"dashboard-item-author"}>Grzegorz Grzegoski</span>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
+          <>
+            {
+              helpRequestListItems
+                .slice((currentPage - 1) * pageSize, currentPage * pageSize)
+                .map((item, key) =>
+                  <HelpRequestListItem key={key} item={item}/>)
+            }
+          </>
+          <Row justify={'end'}>
+            <Col>
+              <Pagination
+                style={{paddingBottom: "15px"}}
+                showSizeChanger
+                total={helpRequestListItems.length}
+                pageSizeOptions={[5, 10, 20]}
+                pageSize={pageSize}
+                onChange={(c, s) => {
+                  setCurrentPage(c)
+                  setPageSize(s)
+                }}
+              />
             </Col>
           </Row>
-          <Divider style={{margin: "10px 0"}}/>
-          {/*here split later*/}
         </Col>
       </Row>
     </>
