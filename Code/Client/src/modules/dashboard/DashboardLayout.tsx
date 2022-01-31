@@ -20,6 +20,7 @@ import HelpRequestList from '../help-requests/HelpRequestList';
 import PMUser from "../policy-maker/PMUser";
 import PMDashboard from "../policy-maker/PMDashboard";
 import FarmersList from "../policy-maker/FarmersList";
+import FarmersSummary from "../common/farmers-summary/FarmersSummary";
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -110,6 +111,7 @@ const DashboardLayout = () => {
                           <Routes>
                             {roleNavigation.role === Role.FARMER &&
                                 <>
+                                    <Route path={links.SUMMARY.URL} element={<FarmersSummary/>}/>
                                     <Route path={links.MY_HELP_REQUESTS.URL} element={<HelpRequestList/>}/>
                                 </>
                             }

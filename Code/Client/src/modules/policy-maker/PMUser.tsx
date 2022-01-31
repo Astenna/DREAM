@@ -1,5 +1,6 @@
-import {Button, Col, Descriptions, Divider, Row} from "antd";
+import {Col, Descriptions, Divider, Row} from "antd";
 import React from "react";
+import DeleteAccount from "../common/farmers-summary/DeleteAccount";
 
 const userData = {
   name: "Assish Rai",
@@ -28,23 +29,7 @@ const PMUser = () => {
             </Descriptions>
           </Col>
 
-          <Row style={{padding: "20px 0 5px 0"}}>
-            <Col>
-              <h1 className={"dashboard-h1"}>
-                Delete account
-              </h1>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              By clicking the button below you can delete your account completely. Please note, that this action is
-              irreversible.
-            </Col>
-          </Row>
-          <Button type={"primary"} style={{margin: "15px 0"}} danger>
-            Delete account
-            {/*  TODO: Add on click action*/}
-          </Button>
+          <DeleteAccount/>
         </Col>
       </Row>
     </>
