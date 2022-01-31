@@ -7,6 +7,7 @@ const {Search} = Input
 
 let helpRequestListItems: HelpRequestListItemProps[] = [
   {
+    id: "1",
     title: "Lorem ipsum blah blah blah blah blah",
     commentCount: 1,
     lastCommentDate: new Date("2011-10-05"),
@@ -24,7 +25,7 @@ helpRequestListItems =
     p.concat(Array(70).fill(c)), [])
 
 const HelpRequestList = () => {
-  const [pageSize, setPageSize] = useState(10)
+  const [pageSize, setPageSize] = useState(5)
   const [currentPage, setCurrentPage] = useState(1)
 
   return (

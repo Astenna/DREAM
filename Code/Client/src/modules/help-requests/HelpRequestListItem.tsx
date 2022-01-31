@@ -2,8 +2,11 @@ import React from 'react';
 import {Col, Divider, Row} from 'antd';
 import {ClockCircleOutlined, CommentOutlined} from '@ant-design/icons';
 import {purple} from '@ant-design/colors';
+import {Link} from 'react-router-dom';
+import links from '../../values/links';
 
 export interface HelpRequestListItemProps {
+  id: string
   title: string
   commentCount: number
   lastCommentDate: Date
@@ -17,8 +20,11 @@ export interface HelpRequestListItemProps {
 const HelpRequestListItem = (props: { item: HelpRequestListItemProps }) => {
   const item = props.item
   return (
-    <>
-      <Row>
+    <Link
+      to={links.DASHBOARD.URL + links.MY_HELP_REQUESTS.URL + `/${item.id}`}
+      style={{color: 'initial'}}
+    >
+      <Row className={"list-item"}>
         <Col style={{width: "100%"}}>
           <Row>
             <Col>
@@ -55,8 +61,7 @@ const HelpRequestListItem = (props: { item: HelpRequestListItemProps }) => {
         </Col>
       </Row>
       <Divider style={{margin: "10px 0"}}/>
-
-    </>
+    </Link>
   );
 };
 
