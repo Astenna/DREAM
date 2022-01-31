@@ -50,7 +50,7 @@ builder.Services.AddSwaggerGen(c =>
                 Id = "Bearer"
             }
             },
-            new string[] { }
+            Array.Empty<string>()
         }
     });
 });
@@ -93,7 +93,8 @@ builder.Services.Configure<AuthOptions>(
 
 var app = builder.Build();
 
-app.UseGlobalExceptionMiddleware();
+// TODO: investigate why it is not working
+// app.UseGlobalExceptionMiddleware();
 
 app.UseCors(builder => builder
               .AllowAnyOrigin()
@@ -111,6 +112,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseHttpsRedirection();
 
 app.UseAutoMigration();
 app.UseSeeder();

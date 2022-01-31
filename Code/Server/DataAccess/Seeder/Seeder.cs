@@ -17,10 +17,9 @@ namespace DataAccess.Seeder
 
         public void SeedMandals()
         {
-            using (var serviceScope = _serviceScopeFactory.CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<T>();
-                string script = @"INSERT INTO ""Mandals"" (""Name"") 
+            using var serviceScope = _serviceScopeFactory.CreateScope();
+            var context = serviceScope.ServiceProvider.GetRequiredService<T>();
+            string script = @"INSERT INTO ""Mandals"" (""Name"") 
                                     VALUES
                                         ('Kothagudem'), 
                                         ('Palwancha'), 
@@ -57,17 +56,15 @@ namespace DataAccess.Seeder
                                         ('Tekumatla')
                 ON CONFLICT DO NOTHING;";
 
-                context.Database.ExecuteSqlRaw(script);
-                _logger.LogInformation("Database seeded with mandals");
-            }
+            context.Database.ExecuteSqlRaw(script);
+            _logger.LogInformation("Database seeded with mandals");
         }
 
         public void SeedFarmProducitonTypes()
         {
-            using (var serviceScope = _serviceScopeFactory.CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<T>();
-                string script = @"INSERT INTO ""FarmProductionTypes"" (""Name"")
+            using var serviceScope = _serviceScopeFactory.CreateScope();
+            var context = serviceScope.ServiceProvider.GetRequiredService<T>();
+            string script = @"INSERT INTO ""FarmProductionTypes"" (""Name"")
                                     VALUES
                                         ('Milk'),
                                         ('Cucumber'),
@@ -95,26 +92,23 @@ namespace DataAccess.Seeder
                                         ('Apple')
                 ON CONFLICT DO NOTHING;";
 
-                context.Database.ExecuteSqlRaw(script);
-                _logger.LogInformation("Database seeded with farm production types.");
-            }
+            context.Database.ExecuteSqlRaw(script);
+            _logger.LogInformation("Database seeded with farm production types.");
         }
 
         public void SeedProblemTypes()
         {
-            using (var serviceScope = _serviceScopeFactory.CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<T>();
-                string script = @"INSERT INTO ""ProblemTypes""(""Name"", ""NumberOfAdditionalVisits"")
+            using var serviceScope = _serviceScopeFactory.CreateScope();
+            var context = serviceScope.ServiceProvider.GetRequiredService<T>();
+            string script = @"INSERT INTO ""ProblemTypes""(""Name"", ""NumberOfAdditionalVisits"")
                                 VALUES('Weather', 1),
                                 ('Insects', 2),
                                 ('NegativeNote', 3),
                                 ('Other', 2) 
                                 ON CONFLICT DO NOTHING;";
 
-                context.Database.ExecuteSqlRaw(script);
-                _logger.LogInformation("Database seeded with problem types.");
-            }
+            context.Database.ExecuteSqlRaw(script);
+            _logger.LogInformation("Database seeded with problem types.");
         }
     }
 }

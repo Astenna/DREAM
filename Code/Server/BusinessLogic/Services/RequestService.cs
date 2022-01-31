@@ -236,10 +236,5 @@ namespace BusinessLogic.Services
             await _dreamDbContext.SaveChangesAsync();
             return;
         }
-
-        private List<Agronomist> GetRecipientsAgronomists()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

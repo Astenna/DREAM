@@ -19,25 +19,23 @@ namespace DataAccess.AutoMigrations
 
         public void ApplyMigrations()
         {
-            using (var serviceScope = _serviceScopeFactory.CreateScope())
+            using var serviceScope = _serviceScopeFactory.CreateScope();
+            var context = serviceScope.ServiceProvider.GetRequiredService<T>();
+
+            var pendingMigrations = context.Database.GetPendingMigrations();
+
+            if (pendingMigrations.Any())
             {
-                var context = serviceScope.ServiceProvider.GetRequiredService<T>();
+                _logger.LogInformation("Not applied migrations found. Apllying new migrations started.");
 
-                var pendingMigrations = context.Database.GetPendingMigrations();
+                context.Database.Migrate();
+                context.Database.GetDbConnection();
 
-                if (pendingMigrations.Any())
-                {
-                    _logger.LogInformation("Not applied migrations found. Apllying new migrations started.");
-
-                    context.Database.Migrate();
-                    context.Database.GetDbConnection();
-
-                    _logger.LogInformation("Applying new migrations finished.");
-                }
-                else
-                {
-                    _logger.LogInformation("Database migrations check: All migrations already applied.");
-                }
+                _logger.LogInformation("Applying new migrations finished.");
+            }
+            else
+            {
+                _logger.LogInformation("Database migrations check: All migrations already applied.");
             }
         }
     }

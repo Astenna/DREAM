@@ -35,7 +35,7 @@ namespace API.Middleware
             }
         }
 
-        private async Task HandleExceptionAsync(HttpContext context, Exception ex, ILogger<GlobalExceptionMiddleware> logger)
+        private static async Task HandleExceptionAsync(HttpContext context, Exception ex, ILogger<GlobalExceptionMiddleware> logger)
         {
             context.Response.Clear();
             var json = JsonConvert.SerializeObject(ex.Message);
@@ -67,8 +67,7 @@ namespace API.Middleware
             }
 
             context.Response.ContentType = "application/json";
-            logger.LogWarning($"Error {context.Response} occurred during processing the request {context.Request}. " +
-                $"Server responded with {context.Response.StatusCode}");
+            logger.LogWarning($"Error {context.Response} occurred during processing the request {context.Request}. Server responded with {context.Response.StatusCode}");
         }
     }
 }
