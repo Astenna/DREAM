@@ -29,7 +29,6 @@ const AppRouter = () => {
         <Route path={links.SERVER_ERROR_500.URL} element={<ServerError500/>}/>
         <Route path={links.DASHBOARD.URL + "/*"} element={<DashboardLayout/>}/>
         <Route path="/home" element={<Homepage/>}/>
-        <Route path="/layout" element={<DashboardLayout/>}/>
       </Routes>
     </Router>
   );

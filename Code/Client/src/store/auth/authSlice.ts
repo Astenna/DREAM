@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from '../store';
 import {AuthState, AuthStateInfo} from './AuthState';
 import {View} from '../../model/View';
+import {Role} from "../../model/Role";
 
 // const initialState: AuthState = {
 //   authenticated: false,
@@ -25,7 +26,7 @@ const initialState: AuthState = {
     surname: "Z Indii"
   },
   navigation: {
-    role: "farmer",
+    role: Role.FARMER,
     view: "dashboard"
   },
   tokens: {
