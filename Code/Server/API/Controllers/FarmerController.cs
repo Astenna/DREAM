@@ -56,7 +56,8 @@ namespace API.Controllers
         [HttpPut("farm/production-data/{productionDataId}")]
         public async Task<IActionResult> PutProductionDataAsync([FromRoute] int productionDataId, [FromBody] EditProductionDataDto editProductionData)
         {
-            return Ok();
+            var result = await _farmService.EditProductionDataAsync(productionDataId, editProductionData);
+            return Ok(result);
         }
 
         [HttpGet("{farmerId}/farm/production-data")]

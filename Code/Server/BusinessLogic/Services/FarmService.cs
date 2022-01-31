@@ -46,9 +46,26 @@ namespace BusinessLogic.Services
             return _mapper.Map<FarmProductionDataDto>(domainProductiondata);
         }
 
-        public async Task<FarmProductionDataDto> EditProductionDataAsync(int farmId, EditProductionDataDto editProductionDataDto)
+        public async Task<FarmProductionDataDto> EditProductionDataAsync(int productionDataId, EditProductionDataDto editProductionDataDto)
         {
-            return new FarmProductionDataDto();
+            var farmer = _httpContext.GetFarmerUsingClaims(_dreamDbContext);
+            var productionDataToEdit = await _dreamDbContext.FarmProductions.SingleOrDefaultAsync(x => x.Id == productionDataId);
+
+            var productionDataType = await _dreamDbContext.FarmProductionTypes
+                .SingleOrDefaultAsync(x => x.Name == editProductionDataDto.ProductionType);
+            if (productionDataType is null)
+            {
+                throw new ApiException($"ProductionType {editProductionDataDto.ProductionType} is not a valid production type!");
+            }
+
+            productionDataToEdit.Amount = editProductionDataDto.Amount;
+            productionDataToEdit.Date = editProductionDataDto.Date;
+            productionDataToEdit.ProductionType = productionDataType;
+
+            _dreamDbContext.FarmProductions.Update(productionDataToEdit);
+            await _dreamDbContext.SaveChangesAsync();
+
+            return _mapper.Map<FarmProductionDataDto>(productionDataToEdit);
         }
 
         public async Task<List<FarmProductionDataDto>> GetProductionDataAsync(int farmerId, ProductionDataQuery productionDataQuery)
