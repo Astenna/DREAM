@@ -1,10 +1,10 @@
 import React from 'react';
 import {useParams} from 'react-router';
 import {Button, Col, Divider, Form, Input, Row} from 'antd';
-import {ArrowLeftOutlined} from '@ant-design/icons';
 import strings from '../../values/strings';
 import {Rule} from 'antd/lib/form';
 import HelpRequestListItemDetailComment from './HelpRequestListItemDetailComment';
+import NavigateBack from '../common/other/NavigateBack';
 
 export interface HelpRequestListItemDetail {
   author: { surname: string; name: string };
@@ -70,12 +70,11 @@ const HelpRequestListItemDetail = () => {
 
   return (
     <>
-
       <Row style={{padding: "15px 15px 0 15px"}}>
         <Col style={{width: "100%"}}>
           <Row>
             <Col className={"flex-center"} style={{marginRight: "7px"}}>
-              <ArrowLeftOutlined/>
+              <NavigateBack/>
             </Col>
             <Col>
               <h1 className={"dashboard-h1"}>
