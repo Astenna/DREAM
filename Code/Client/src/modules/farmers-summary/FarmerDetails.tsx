@@ -2,7 +2,7 @@ import {ArrowLeftOutlined} from '@ant-design/icons';
 import {Col, Descriptions, Divider, Row} from 'antd';
 
 import React from 'react';
-import {Note} from "../../../model/Note";
+import {Note} from "../../model/Note";
 
 
 const userData = {

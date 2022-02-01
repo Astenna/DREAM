@@ -1,7 +1,7 @@
 import React from 'react';
 import {Menu} from 'antd';
 import './HorizontalNavbarResponsive.less'
-import '../../../stylesheets/common.less'
+import '../../stylesheets/common.less'
 import {NavbarProperties} from './NavbarProperties';
 
 /**

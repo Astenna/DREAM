@@ -4,7 +4,7 @@ import "./Dashboard.less"
 import {Link} from 'react-router-dom';
 import Sider from 'antd/es/layout/Sider';
 import {DesktopOutlined, PieChartOutlined, UserOutlined,} from '@ant-design/icons';
-import DefaultLayout from '../common/layout/DefaultLayout';
+import DefaultLayout from '../layout/DefaultLayout';
 import {useAppDispatch} from '../../store/hooks';
 import {logout} from '../../store/auth/authSlice';
 

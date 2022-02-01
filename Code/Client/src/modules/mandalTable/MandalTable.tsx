@@ -1,6 +1,6 @@
 import React, {Key, useState} from 'react';
 import {Button, Col, Modal, Row, Table} from 'antd';
-import strings from '../../../values/strings';
+import strings from '../../values/strings';
 import {DeleteOutlined} from '@ant-design/icons';
 
 interface MandalTypeProps {

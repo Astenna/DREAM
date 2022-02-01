@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import HelpRequestListItem, {HelpRequestListItemProps} from './HelpRequestListItem';
 import strings from '../../values/strings';
 import CreateHelpRequestModal from './CreateHelpRequestModal';
-import NavigateBack from '../common/other/NavigateBack';
+import NavigateBack from '../other/NavigateBack';
 
 const {Search} = Input
 

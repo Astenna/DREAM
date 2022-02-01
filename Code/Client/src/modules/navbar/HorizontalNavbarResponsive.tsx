@@ -3,7 +3,7 @@ import {Button, Col, Dropdown, Menu, Row} from 'antd';
 import {Link} from 'react-router-dom';
 import {UnorderedListOutlined} from '@ant-design/icons';
 import './HorizontalNavbarResponsive.less'
-import Logo from '../Logo';
+import Logo from '../other/Logo';
 import {NavbarProperties} from './NavbarProperties';
 
 /**

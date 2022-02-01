@@ -3,9 +3,9 @@ import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom
 import {useAppSelector} from '../../store/hooks';
 import {selectAuthenticated} from '../../store/auth/authSlice';
 import Homepage from '../homepage/Homepage';
-import NotAuthorized403 from '../common/not-authorized-403/NotAuthorized403';
-import NotFound404 from '../common/not-found-404/NotFound404';
-import ServerError500 from '../common/server-error-500/ServerError500';
+import NotAuthorized403 from '../http-errors/NotAuthorized403';
+import NotFound404 from '../http-errors/NotFound404';
+import ServerError500 from '../http-errors/ServerError500';
 import links from '../../values/links';
 import DashboardLayout from '../dashboard/DashboardLayout';
 

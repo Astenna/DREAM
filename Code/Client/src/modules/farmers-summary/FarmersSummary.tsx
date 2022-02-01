@@ -9,9 +9,9 @@ import FarmerDetails from "./FarmerDetails";
 import SoilHumidity from "./SoilHumidity";
 import WaterUsage from "./WaterUsage";
 import DeleteAccount from "./DeleteAccount";
-import {selectRoleNavigation} from '../../../store/auth/authSlice';
-import {useAppSelector} from "../../../store/hooks";
-import {Role} from "../../../model/Role";
+import {selectRoleNavigation} from '../../store/auth/authSlice';
+import {useAppSelector} from "../../store/hooks";
+import {Role} from "../../model/Role";
 
 const FarmersSummary = () => {
   const roleNavigation = useAppSelector(selectRoleNavigation);

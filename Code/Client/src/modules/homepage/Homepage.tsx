@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import DefaultLayout from '../common/layout/DefaultLayout';
+import DefaultLayout from '../layout/DefaultLayout';
 import {Content, Header} from 'antd/es/layout/layout';
 import {Button, Col, Row, RowProps} from 'antd';
 import '../../stylesheets/common.less'
-import HorizontalNavbarResponsive from '../common/navbar/HorizontalNavbarResponsive';
+import HorizontalNavbarResponsive from '../navbar/HorizontalNavbarResponsive';
 import strings from '../../values/strings'
 import colors from '../../values/colors';
 import farmPicture from '../../assets/farm.jpg';

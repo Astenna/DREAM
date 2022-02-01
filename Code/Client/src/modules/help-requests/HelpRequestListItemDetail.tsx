@@ -4,7 +4,7 @@ import {Button, Col, Divider, Form, Input, Row} from 'antd';
 import strings from '../../values/strings';
 import {Rule} from 'antd/lib/form';
 import HelpRequestListItemDetailComment from './HelpRequestListItemDetailComment';
-import NavigateBack from '../common/other/NavigateBack';
+import NavigateBack from '../other/NavigateBack';
 
 export interface HelpRequestListItemDetail {
   author: { surname: string; name: string };

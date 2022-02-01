@@ -4,8 +4,8 @@ import {SiderNavbarProperties} from './NavbarProperties';
 import Sider from 'antd/es/layout/Sider';
 import "./SiderNavbarResponsive.less"
 import {UnorderedListOutlined} from '@ant-design/icons';
-import strings from '../../../values/strings';
-import {View} from '../../../model/View';
+import strings from '../../values/strings';
+import {View} from '../../model/View';
 import {useLocation} from 'react-router';
 
 const SiderNavbarResponsive = (props: SiderNavbarProperties) => {

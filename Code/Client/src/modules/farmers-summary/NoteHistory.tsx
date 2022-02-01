@@ -2,8 +2,8 @@ import {StarOutlined} from '@ant-design/icons';
 import {Table} from 'antd';
 
 import React from 'react';
-import colors from "../../../values/colors";
-import {Note} from "../../../model/Note";
+import colors from "../../values/colors";
+import {Note} from "../../model/Note";
 
 const noteHistoryData = [
   {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Result} from "antd";
 import {useNavigate} from "react-router-dom";
-import strings from '../../../values/strings';
+import strings from '../../values/strings';
 import DefaultLayout from '../layout/DefaultLayout';
 
 /**

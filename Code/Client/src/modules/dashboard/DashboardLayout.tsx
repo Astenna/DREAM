@@ -1,26 +1,26 @@
 import React from 'react';
 import strings from '../../values/strings';
 import {useNavigate} from 'react-router';
-import DefaultLayout from '../common/layout/DefaultLayout';
-import HorizontalNavbar from '../common/navbar/HorizontalNavbar';
+import DefaultLayout from '../layout/DefaultLayout';
+import HorizontalNavbar from '../navbar/HorizontalNavbar';
 import {Layout} from 'antd';
 import {Content, Footer, Header} from 'antd/es/layout/layout';
 import colors from '../../values/colors';
-import Logo from '../common/Logo';
+import Logo from '../other/Logo';
 import '../../stylesheets/common.less';
 import {HomeOutlined, UserOutlined} from '@ant-design/icons';
-import SiderNavbarResponsive from '../common/navbar/SiderNavbarResponsive';
+import SiderNavbarResponsive from '../navbar/SiderNavbarResponsive';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {logout, selectAuthenticated, selectAuthInfo, selectRoleNavigation} from '../../store/auth/authSlice';
 import {Role} from '../../model/Role';
-import {NavbarItem} from '../common/navbar/NavbarProperties';
+import {NavbarItem} from '../navbar/NavbarProperties';
 import links from '../../values/links';
 import {Route, Routes} from 'react-router-dom';
 import HelpRequestList from '../help-requests/HelpRequestList';
 import PMUser from "../policy-maker/PMUser";
 import PMDashboard from "../policy-maker/PMDashboard";
 import FarmersList from "../policy-maker/FarmersList";
-import FarmersSummary from "../common/farmers-summary/FarmersSummary";
+import FarmersSummary from "../farmers-summary/FarmersSummary";
 import HelpRequestListItemDetail from '../help-requests/HelpRequestListItemDetail';
 
 const DashboardLayout = () => {
