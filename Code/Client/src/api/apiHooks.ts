@@ -7,6 +7,7 @@ import {AxiosError, AxiosResponse} from 'axios';
 import links from '../values/links';
 import {ApplicationError} from '../model/ApplicationError';
 import {useEffect, useState} from 'react';
+import {useLogout} from './logoutHooks';
 
 /**
  * Hook for default API error handling.
@@ -14,6 +15,7 @@ import {useEffect, useState} from 'react';
 export const useAPIHandleErrors = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const logout = useLogout()
 
   const isAxiosError = (error: AxiosError | ApplicationError | any): error is AxiosError =>
     (error as AxiosError).response !== undefined
@@ -41,9 +43,7 @@ export const useAPIHandleErrors = () => {
       handled = true
     } else if (isApplicationError(error)) {
       if (error.type === 'logout') {
-        notification['warning']({message: error.message})
-        dispatch(logout())
-        navigate(links.ROOT.URL)
+        logout()
         handled = true
       }
     } else {
