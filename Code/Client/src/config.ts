@@ -1,4 +1,4 @@
 export const apiConfig = {
-  url: "http://localhost:5000",
+  url: "https://localhost:5001",
   timeout: 30000
 }
