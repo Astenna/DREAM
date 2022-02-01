@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {AutoComplete, Form, Input, Modal, Select} from 'antd';
-import strings from '../../values/strings';
+import strings from '../../../values/strings';
 import {Rule} from 'antd/lib/form';
-import {Role} from '../../model/Role';
-import {mandal} from '../../api/requests/mandalRequests';
+import {Role} from '../../../model/Role';
+import {mandal} from '../../../api/requests/mandalRequests';
 import {useCreateAccount} from './createAccountModalHooks';
 
 const {Option} = Select;

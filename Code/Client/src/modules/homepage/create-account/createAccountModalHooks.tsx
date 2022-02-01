@@ -1,10 +1,10 @@
-import {CreateAccountFarmerRequest} from '../../model/api/CreateAccountFarmer';
+import {CreateAccountFarmerRequest} from '../../../model/api/CreateAccountFarmer';
 import {useState} from 'react';
-import {authRequests} from '../../api/requests/authRequests';
-import {Role} from '../../model/Role';
+import {authRequests} from '../../../api/requests/authRequests';
+import {Role} from '../../../model/Role';
 import {notification} from 'antd';
-import strings from '../../values/strings';
-import {CreateAccountPolicyMakerRequest} from '../../model/api/CreateAccountPolicyMaker';
+import strings from '../../../values/strings';
+import {CreateAccountPolicyMakerRequest} from '../../../model/api/CreateAccountPolicyMaker';
 
 /**
  * Hook for register request. Create account and log in.

@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {Col, Form, Input, Modal, Row} from 'antd';
-import strings from '../../values/strings';
+import strings from '../../../values/strings';
 
-import RemindPasswordModal from './RemindPasswordModal';
+import RemindPasswordModal from '../remind-password/RemindPasswordModal';
 import {LockOutlined, MailOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
-import {useLogin} from '../../hooks/authHooks';
-import {LoginForm} from '../../model/LoginForm';
+import {useLogin} from '../../../hooks/authHooks';
+import {LoginForm} from '../../../model/LoginForm';
 
 /**
  * Incoming properties managing visibility of current modal dialog.

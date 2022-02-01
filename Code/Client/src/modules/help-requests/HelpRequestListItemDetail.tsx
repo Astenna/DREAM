@@ -1,10 +1,10 @@
 import React from 'react';
 import {useParams} from 'react-router';
-import {Button, Col, Divider, Form, Input, Row} from 'antd';
+import {Button, Col, Form, Input, Row} from 'antd';
 import strings from '../../values/strings';
 import {Rule} from 'antd/lib/form';
 import HelpRequestListItemDetailComment from './HelpRequestListItemDetailComment';
-import NavigateBack from '../other/NavigateBack';
+import ViewHeader from '../other/ViewHeader';
 
 export interface HelpRequestListItemDetail {
   author: { surname: string; name: string };
@@ -70,21 +70,7 @@ const HelpRequestListItemDetail = () => {
 
   return (
     <>
-      <Row style={{padding: "15px 15px 0 15px"}}>
-        <Col style={{width: "100%"}}>
-          <Row>
-            <Col className={"flex-center"} style={{marginRight: "7px"}}>
-              <NavigateBack/>
-            </Col>
-            <Col>
-              <h1 className={"dashboard-h1"}>
-                {`Help request: ${helpRequestDetail.topic}`}
-              </h1>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-      <Divider style={{margin: "10px 0"}}/>
+      <ViewHeader title={`Help request: ${helpRequestDetail.topic}`}/>
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>
           <Row>

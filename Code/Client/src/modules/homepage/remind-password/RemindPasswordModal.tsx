@@ -1,6 +1,6 @@
 import React from 'react';
 import {Col, Form, Input, Modal, Row} from 'antd';
-import strings from '../../values/strings';
+import strings from '../../../values/strings';
 import {MailOutlined} from '@ant-design/icons';
 
 /**

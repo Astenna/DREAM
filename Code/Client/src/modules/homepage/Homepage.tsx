@@ -8,8 +8,8 @@ import strings from '../../values/strings'
 import colors from '../../values/colors';
 import farmPicture from '../../assets/farm.jpg';
 import './homepage.less';
-import LogInModal from './LogInModal';
-import CreateAccountModal from './CreateAccountModal';
+import LogInModal from './login/LogInModal';
+import CreateAccountModal from './create-account/CreateAccountModal';
 
 /**
  * Homepage of the DREAM app. Can invoke modal dialogs responsible for

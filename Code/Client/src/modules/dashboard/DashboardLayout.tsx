@@ -22,6 +22,7 @@ import PMDashboard from "../policy-maker/PMDashboard";
 import FarmersList from "../policy-maker/FarmersList";
 import FarmersSummary from "../farmers-summary/FarmersSummary";
 import HelpRequestListItemDetail from '../help-requests/HelpRequestListItemDetail';
+import FarmerProductionData from '../production-data/FarmerProductionData';
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -113,6 +114,7 @@ const DashboardLayout = () => {
                             {roleNavigation.role === Role.FARMER &&
                                 <>
                                     <Route path={links.SUMMARY.URL} element={<FarmersSummary/>}/>
+                                    <Route path={links.PRODUCTION_DATA.URL} element={<FarmerProductionData/>}/>
                                     <Route path={links.MY_HELP_REQUESTS.URL} element={<HelpRequestList/>}/>
                                     <Route path={links.MY_HELP_REQUESTS_DETAIL.URL}
                                            element={<HelpRequestListItemDetail/>}/>

@@ -1,6 +1,4 @@
-import {ArrowLeftOutlined} from '@ant-design/icons';
-import {Col, Descriptions, Divider, Row} from 'antd';
-
+import {Col, Descriptions, Row} from 'antd';
 import React from 'react';
 import {Note} from "../../model/Note";
 
@@ -16,19 +14,6 @@ const userData = {
 const FarmerDetails = () => {
   return (
     <>
-      <Row>
-        <Col className={"flex-center"} style={{marginRight: "7px"}}>
-          <ArrowLeftOutlined/>
-        </Col>
-        <Col>
-          <h1 className={"dashboard-h1"}>
-            Farmer: {userData.name}
-          </h1>
-        </Col>
-      </Row>
-
-      <Divider style={{margin: "10px 0"}}/>
-
       <Row style={{padding: "15px 0 15px 0"}}>
 
         <Col style={{width: "50%", padding: "0 20px 0 0"}}>

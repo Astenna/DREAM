@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import HelpRequestListItem, {HelpRequestListItemProps} from './HelpRequestListItem';
 import strings from '../../values/strings';
 import CreateHelpRequestModal from './CreateHelpRequestModal';
-import NavigateBack from '../other/NavigateBack';
+import ViewHeader from '../other/ViewHeader';
 
 const {Search} = Input
 
@@ -63,21 +63,7 @@ const HelpRequestList = () => {
     <>
       <CreateHelpRequestModal isVisible={isCreateHelpRequestModalVisible}
                               setVisible={setCreateHelpRequestModalVisible}/>
-      <Row style={{padding: "15px 15px 0 15px"}}>
-        <Col style={{width: "100%"}}>
-          <Row>
-            <Col className={"flex-center"} style={{marginRight: "7px"}}>
-              <NavigateBack/>
-            </Col>
-            <Col>
-              <h1 className={"dashboard-h1"}>
-                {strings.SIDEBAR.MY_HELP_REQUESTS}
-              </h1>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-      <Divider style={{margin: "10px 0"}}/>
+      <ViewHeader title={strings.SIDEBAR.MY_HELP_REQUESTS}/>
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>
           <Row justify={'space-between'}>
