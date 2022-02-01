@@ -2,11 +2,12 @@ import {noAuthAPI} from '../api';
 import {endpoints} from '../../values/endpoints';
 import {AxiosResponse} from 'axios';
 import {CreateAccountFarmerRequest, CreateAccountFarmerResponse} from '../../model/api/CreateAccountFarmer';
-import {useAPI} from '../../hooks/apiHooks';
+import {useAPI} from '../apiHooks';
 import {
   CreateAccountPolicyMakerRequest,
   CreateAccountPolicyMakerResponse
 } from '../../model/api/CreateAccountPolicyMaker';
+import {PostAccountLoginRequest, PostAccountLoginResponse} from '../../model/api/PostAccountLogin';
 
 
 export const authRequests = {
@@ -26,5 +27,12 @@ export const authRequests = {
     const api = useAPI()
     return (values) =>
       api(noAuthAPI.post<CreateAccountPolicyMakerResponse>(endpoints.POST_ACCOUNT_REGISTRATION_POLICY_MAKER, values))
+  },
+
+  usePostLogin: ():
+    (values: PostAccountLoginRequest) => Promise<AxiosResponse<PostAccountLoginResponse>> => {
+    const api = useAPI()
+    return (values) =>
+      api(noAuthAPI.post<PostAccountLoginResponse>(endpoints.POST_ACCOUNT_LOGIN, values))
   },
 }

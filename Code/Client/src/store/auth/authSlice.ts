@@ -2,41 +2,40 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from '../store';
 import {AuthState, AuthStateInfo} from './AuthState';
 import {View} from '../../model/View';
-import {Role} from '../../model/Role';
-
-// const initialState: AuthState = {
-//   authenticated: false,
-//   info: {
-//     email: undefined,
-//     name: undefined,
-//     surname: undefined
-//   },
-//   navigation: {
-//     role: undefined,
-//     view: undefined
-//   },
-//   tokens: {
-//     refreshToken: undefined,
-//     accessToken: undefined,
-//   },
-// }
 
 const initialState: AuthState = {
-  authenticated: true,
+  authenticated: false,
   info: {
-    email: "dummy@dummy.com",
-    name: "Bogdan",
-    surname: "Z Indii"
+    email: undefined,
+    name: undefined,
+    surname: undefined
   },
   navigation: {
-    role: Role.FARMER,
-    view: "dashboard"
+    role: undefined,
+    view: undefined
   },
   tokens: {
-    refreshToken: "",
-    accessToken: "",
+    refreshToken: undefined,
+    accessToken: undefined,
   },
 }
+
+// const initialState: AuthState = {
+//   authenticated: true,
+//   info: {
+//     email: "dummy@dummy.com",
+//     name: "Bogdan",
+//     surname: "Z Indii"
+//   },
+//   navigation: {
+//     role: Role.FARMER,
+//     view: "dashboard"
+//   },
+//   tokens: {
+//     refreshToken: "",
+//     accessToken: "",
+//   },
+// }
 
 export const authSlice = createSlice({
   name: 'user',
@@ -52,8 +51,10 @@ export const authSlice = createSlice({
       state.tokens.accessToken = action.payload
     },
     setRefreshToken: (state, action: PayloadAction<string>) => {
-      state.authenticated = true
       state.tokens.refreshToken = action.payload
+    },
+    setAuthenticated: (state, action: PayloadAction<boolean>) => {
+      state.authenticated = action.payload
     },
     dashboardNavigate: (state, action: PayloadAction<View>) => {
       state.navigation.view = action.payload
@@ -74,7 +75,8 @@ export const {
   setAccessToken,
   setLoginInfo,
   logout,
-  dashboardNavigate
+  dashboardNavigate,
+  setAuthenticated
 } = authSlice.actions
 
 export default authSlice.reducer

@@ -1,7 +1,7 @@
 import {noAuthAPI} from '../api';
 import {endpoints} from '../../values/endpoints';
 import {GetMandalsResponse, GetMandalsResponseItem} from '../../model/api/GetMandals';
-import {useAPILocalStringSearch} from '../../hooks/apiHooks';
+import {useAPILocalStringSearch} from '../apiHooks';
 
 
 export const mandal = {
