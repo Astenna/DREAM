@@ -18,6 +18,8 @@ const strings = {
   REMIND_PASSWORD: "Remind password",
   DASHBOARD: "Dashboard",
   CREATE_HELP_REQUEST: "Create help request",
+  HELP_REQUEST: "Help request",
+  ADVICE: "Advice",
   ROLE: {
     FARMER: "Farmer",
     POLICY_MAKER: "Policy maker",
@@ -50,6 +52,7 @@ const strings = {
       REMIND_PASSWORD: "Please enter the e-mail address associated with your account.",
       TOPIC: "Topic",
       DESCRIPTION: "Description",
+      MESSAGE_CONTENT: "Write content of your message here",
     },
     ERROR: {
       EMAIL_INCORRECT_FORMAT: "Provided email has incorrect format",

@@ -71,7 +71,7 @@ const HelpRequestList = () => {
             </Col>
             <Col>
               <h1 className={"dashboard-h1"}>
-                My help requests
+                {strings.SIDEBAR.MY_HELP_REQUESTS}
               </h1>
             </Col>
           </Row>
