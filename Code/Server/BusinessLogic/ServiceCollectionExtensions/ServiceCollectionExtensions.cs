@@ -46,6 +46,7 @@ namespace BusinessLogic.ServiceCollectionExtensions
                 seeder?.SeedMandals();
                 seeder?.SeedProblemTypes();
                 seeder?.SeedFarmProducitonTypes();
+                seeder.SeedSuggestions();
             }
 
             return app;

@@ -26,7 +26,6 @@ namespace BusinessLogic.Dtos.Account
         public RegisterFarmerDtoValidator()
         {
             Include(new RegisterDtoValidator());
-            RuleFor(x => x.FarmName).NotEmpty();
             RuleFor(x => x.FarmAddressLine1).NotEmpty();
             RuleFor(x => x.FarmCity).NotEmpty();
             RuleFor(x => x.FarmPostalCode).NotEmpty();

@@ -8,6 +8,7 @@ namespace DataAccess.Seeder
     {
         private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly ILogger<Seeder<T>> _logger;
+        public static string SuggestionsFilename = "Suggestions.sql";
 
         public Seeder(IServiceScopeFactory serviceScopeFactory, ILogger<Seeder<T>> logger)
         {
@@ -94,6 +95,27 @@ namespace DataAccess.Seeder
 
             context.Database.ExecuteSqlRaw(script);
             _logger.LogInformation("Database seeded with farm production types.");
+        }
+        public void SeedSuggestions()
+        {
+            using var serviceScope = _serviceScopeFactory.CreateScope();
+            var context = serviceScope.ServiceProvider.GetRequiredService<T>(); 
+            
+            var assembly = typeof(Seeder<DbContext>).Assembly;
+            var files = assembly.GetManifestResourceNames();
+            var file = assembly.GetManifestResourceNames()
+                .SingleOrDefault(x => x.Contains(SuggestionsFilename));
+            
+            if(file is null)
+            {
+                _logger.LogWarning("Could not find sql script for Suggestions seeder. Suggestions not added.");
+            }
+
+            using Stream stream = assembly.GetManifestResourceStream(file);
+            using StreamReader reader = new StreamReader(stream);
+            string command = reader.ReadToEnd();
+            context.Database.ExecuteSqlRaw(command);
+            _logger.LogInformation("Database seeded with suggestions.");
         }
 
         public void SeedProblemTypes()
