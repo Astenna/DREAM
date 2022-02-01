@@ -118,6 +118,7 @@ const DashboardLayout = () => {
                                     <Route path={links.MY_HELP_REQUESTS.URL} element={<HelpRequestList/>}/>
                                     <Route path={links.MY_HELP_REQUESTS_DETAIL.URL}
                                            element={<HelpRequestListItemDetail/>}/>
+                                    <Route path={links.PROVIDE_HELP.URL} element={<></>}/>
                                 </>
                             }
                             {roleNavigation.role === Role.POLICY_MAKER &&
