@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Dtos.Farmer;
+using BusinessLogic.Dtos.Suggestion;
 using BusinessLogic.Queries;
 
 namespace BusinessLogic.Services
@@ -9,6 +10,5 @@ namespace BusinessLogic.Services
         Task<FarmerDto> GetFarmerByIdAsync(int id);
         Task<List<FarmerDto>> GetFarmersAsync(FarmersQuery farmersQuery);
         List<FarmerNoteDto> GetFarmerNotes(int farmerId);
-        Task<SuggestionDto> GetFarmerSuggestionAsync(int farmerId);
     }
 }

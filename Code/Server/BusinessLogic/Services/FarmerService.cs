@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogic.Dtos.Farmer;
+using BusinessLogic.Dtos.Suggestion;
 using BusinessLogic.Exceptions;
 using BusinessLogic.Queries;
 using BusinessLogic.Tools;
@@ -30,10 +31,6 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public async Task<SuggestionDto> GetFarmerSuggestionAsync(int farmerId)
-        {
-            return new SuggestionDto();
-        }
 
         public List<FarmerNoteDto> GetFarmerNotes(int farmerId)
         {
