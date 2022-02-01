@@ -12,7 +12,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using BusinessLogic.Queries;
-using API.Extensions;
 using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -93,9 +92,7 @@ builder.Services.Configure<AuthOptions>(
 
 var app = builder.Build();
 
-// TODO: investigate why it is not working
 app.UseMiddleware<GlobalExceptionMiddleware>();
-//app.UseGlobalExceptionMiddleware();
 
 app.UseCors(builder => builder
               .AllowAnyOrigin()
@@ -113,8 +110,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.UseHttpsRedirection();
 
 app.UseAutoMigration();
 app.UseSeeder();
