@@ -2,15 +2,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+from constants.paths import URL
 from constants.timeout import TIMEOUT
-from helpers.general import wait_and_fill_in_fields, wait_for_pop_up_to_disappear
+from helpers.general import wait_and_fill_in_fields
 
 INVALID_EMAIL = 'Provided email has incorrect format'
 INVALID_PASSWORD = 'This field is required'
 
 
 def open_log_in_dialog(driver):
-    wait_for_pop_up_to_disappear(driver)
+    driver.get(URL)
 
     element = WebDriverWait(driver, TIMEOUT).until(
         EC.visibility_of_element_located((

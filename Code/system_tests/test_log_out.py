@@ -1,14 +1,11 @@
 from constants.paths import URL
 from helpers.general import wait_for_view_change
 from helpers.log_out import log_out
-from models.Farmer import Farmer
-from models.PolicyMaker import PolicyMaker
-from test_log_in import test_log_in_farmer, test_log_in_policy_maker
+import test_log_in as tli
 
 
 def test_log_out_policy_maker(driver):
-    policy_maker = PolicyMaker(idx=4)
-    test_log_in_policy_maker(driver, policy_maker)
+    tli.test_log_in_policy_maker(driver)
 
     log_out(driver)
 
@@ -17,8 +14,7 @@ def test_log_out_policy_maker(driver):
 
 
 def test_log_out_farmer(driver):
-    farmer = Farmer(idx=4)
-    test_log_in_farmer(driver, farmer)
+    tli.test_log_in_farmer(driver)
 
     log_out(driver)
 
