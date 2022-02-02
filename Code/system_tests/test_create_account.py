@@ -7,8 +7,7 @@ from models.PolicyMaker import PolicyMaker
 
 
 def test_create_policy_maker_account(driver, p_policy_maker=None, assertion=SUCCESS):
-    policy_maker = PolicyMaker(
-        idx=40) if p_policy_maker is None else p_policy_maker
+    policy_maker = PolicyMaker() if p_policy_maker is None else p_policy_maker
 
     open_registration_form(driver)
     fill_in_common_fields(driver, policy_maker)
@@ -25,7 +24,7 @@ def test_create_two_policy_makers_with_the_same_data_with_error(driver):
 
 
 def test_create_farmer_account(driver, p_farmer=None, assertion=SUCCESS):
-    farmer = Farmer(idx=40) if p_farmer is None else p_farmer
+    farmer = Farmer() if p_farmer is None else p_farmer
 
     open_registration_form(driver)
     fill_in_common_fields(driver, farmer)

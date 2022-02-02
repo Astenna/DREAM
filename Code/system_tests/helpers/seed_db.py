@@ -6,8 +6,8 @@ from models.PolicyMaker import PolicyMaker
 
 from models.Role import Role
 
-seed_farmer = Farmer(idx=300)
-seed_policy_maker = PolicyMaker(idx=300)
+seed_farmer = Farmer(idx=5)
+seed_policy_maker = PolicyMaker(idx=5)
 
 
 def seed_db(driver):
