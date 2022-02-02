@@ -23,13 +23,15 @@ namespace API.Controllers
         [HttpGet("{farmerId}")]
         public async Task<IActionResult> GetFarmerByIdAsync([FromRoute] int farmerId)
         {
-            return Ok();
+            var result = await _farmerService.GetFarmerByIdAsync(farmerId);
+            return Ok(result);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetFarmersAsync([FromRoute] FarmersQuery query)
         {
-            return Ok();
+            var result = await _farmerService.GetFarmersAsync(query);
+            return Ok(result);
         }
 
         [HttpPost("{farmerId}/note")]

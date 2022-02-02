@@ -37,6 +37,18 @@ namespace BusinessLogic.Services
             {
                 throw new ApiException($"{registerDto.Mandal} is not a correct mandal name!");
             }
+            
+            if(_dreamDbContext.Farmers.Include(x => x.Farm)
+                .Any(x => x.Farm.SensorSystemId == registerDto.SensorSystemId))
+            {
+                throw new ApiException($"Farm with given sensorId was already created!");
+            }
+
+            if (_dreamDbContext.Farmers.Include(x => x.Farm)
+                .Any(x => x.Farm.WaterIrrigationSystemId == registerDto.WaterIrrigationSystemId))
+            {
+                throw new ApiException($"Farm with given WaterIrrigationSystemId was already created!");
+            }
 
             var domainAccount = GetDomainUserAccount(registerDto);
             domainAccount.Role = Role.Farmer;

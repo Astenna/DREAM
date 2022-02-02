@@ -8,7 +8,7 @@ namespace BusinessLogic.Services
     {
         Task<FarmerNoteDto> AddNoteToFarmerAsync(int farmerId, CreateFarmerNoteDto createNoteDto);
         Task<FarmerDto> GetFarmerByIdAsync(int id);
-        Task<List<FarmerDto>> GetFarmersAsync(FarmersQuery farmersQuery);
+        Task<List<ListFarmerDto>> GetFarmersAsync(FarmersQuery farmersQuery);
         List<FarmerNoteDto> GetFarmerNotes(int farmerId);
     }
 }
