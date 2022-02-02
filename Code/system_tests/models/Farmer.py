@@ -16,7 +16,7 @@ class Farmer(User):
                  idx=None,
                  ):
         if idx is not None:
-            email = f'json{idx}.rajesh@mail.com'
+            email = f'arun{idx}.ghosh@mail.com'
 
         super().__init__(name, surname, email, password, role)
         self.farm = farm if idx is None else Farm(idx=idx)
