@@ -1,4 +1,4 @@
-from constants.paths import DASHBOARD
+from constants.paths import URL
 from helpers.general import wait_for_view_change
 from helpers.log_out import log_out
 from models.Farmer import Farmer
@@ -12,8 +12,8 @@ def test_log_out_policy_maker(driver):
 
     log_out(driver)
 
-    wait_for_view_change(driver, DASHBOARD)
-    assert driver.current_url == DASHBOARD
+    wait_for_view_change(driver, URL)
+    assert driver.current_url == URL
 
 
 def test_log_out_farmer(driver):
@@ -22,5 +22,5 @@ def test_log_out_farmer(driver):
 
     log_out(driver)
 
-    wait_for_view_change(driver, DASHBOARD)
-    assert driver.current_url == DASHBOARD
+    wait_for_view_change(driver, URL)
+    assert driver.current_url == URL

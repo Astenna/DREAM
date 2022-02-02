@@ -13,6 +13,6 @@ class PolicyMaker(User):
                  role=Role.POLICY_MAKER,
                  idx=None
                  ):
-        super().__init__(name, surname, email, password, role)
         if idx is not None:
             self.email = f'json{idx}.rajesh@mail.com',
+        super().__init__(name, surname, email, password, role)
