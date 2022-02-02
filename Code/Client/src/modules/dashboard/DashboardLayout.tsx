@@ -10,7 +10,7 @@ import Logo from '../other/Logo';
 import '../../stylesheets/common.less';
 import {HomeOutlined, UserOutlined} from '@ant-design/icons';
 import SiderNavbarResponsive from '../navbar/SiderNavbarResponsive';
-import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {useAppSelector} from '../../store/hooks';
 import {logout, selectAuthenticated, selectAuthInfo, selectRoleNavigation} from '../../store/auth/authSlice';
 import {Role} from '../../model/Role';
 import {NavbarItem} from '../navbar/NavbarProperties';
@@ -23,13 +23,14 @@ import FarmersList from "../policy-maker/FarmersList";
 import FarmersSummary from "../farmers-summary/FarmersSummary";
 import HelpRequestListItemDetail from '../help-requests/HelpRequestListItemDetail';
 import FarmerProductionData from '../production-data/FarmerProductionData';
+import {useLogout} from '../../api/logoutHooks';
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
   const authenticated = useAppSelector(selectAuthenticated);
   const authInfo = useAppSelector(selectAuthInfo);
   const roleNavigation = useAppSelector(selectRoleNavigation);
-  const dispatch = useAppDispatch()
+  const logout = useLogout()
 
   const logo = {
     key: "0",
@@ -51,7 +52,7 @@ const DashboardLayout = () => {
     {
       key: "logout",
       node: strings.SIGN_OUT,
-      action: () => dispatch(logout()),
+      action: () => logout(),
     }
   ]
 
@@ -97,43 +98,43 @@ const DashboardLayout = () => {
     <DefaultLayout>
       {
         (authenticated && roleNavigation.role) &&
-          <>
-              <SiderNavbarResponsive
-                  logo={logo}
-                  menuItems={sidebarMenuItems[roleNavigation!.role]}
-              />
-              <Layout>
-                  <Header style={{backgroundColor: colors.WHITE, paddingLeft: "70px"}}>
-                      <HorizontalNavbar
-                          menuItems={horizontalMenuItems}
-                      />
-                  </Header>
-                  <Content style={{padding: "15px"}}>
-                      <div style={{minHeight: "100%", backgroundColor: colors.WHITE}}>
-                          <Routes>
-                            {roleNavigation.role === Role.FARMER &&
-                                <>
-                                    <Route path={links.SUMMARY.URL} element={<FarmersSummary/>}/>
-                                    <Route path={links.PRODUCTION_DATA.URL} element={<FarmerProductionData/>}/>
-                                    <Route path={links.MY_HELP_REQUESTS.URL} element={<HelpRequestList/>}/>
-                                    <Route path={links.MY_HELP_REQUESTS_DETAIL.URL}
-                                           element={<HelpRequestListItemDetail/>}/>
-                                    <Route path={links.PROVIDE_HELP.URL} element={<></>}/>
-                                </>
-                            }
-                            {roleNavigation.role === Role.POLICY_MAKER &&
-                                <>
-                                    <Route path={"/"} element={<PMDashboard/>}/>
-                                    <Route path={links.SUMMARY.URL} element={<PMUser/>}/>
-                                    <Route path={links.FARMERS.URL} element={<FarmersList/>}/>
-                                </>
-                            }
-                          </Routes>
-                      </div>
-                  </Content>
-                  <Footer style={{textAlign: 'center'}}>DREAM 2022</Footer>
-              </Layout>
-          </>
+        <>
+            <SiderNavbarResponsive
+                logo={logo}
+                menuItems={sidebarMenuItems[roleNavigation!.role]}
+            />
+            <Layout>
+                <Header style={{backgroundColor: colors.WHITE, paddingLeft: "70px"}}>
+                    <HorizontalNavbar
+                        menuItems={horizontalMenuItems}
+                    />
+                </Header>
+                <Content style={{padding: "15px"}}>
+                    <div style={{minHeight: "100%", backgroundColor: colors.WHITE}}>
+                        <Routes>
+                          {roleNavigation.role === Role.FARMER &&
+                          <>
+                              <Route path={links.SUMMARY.URL} element={<FarmersSummary/>}/>
+                              <Route path={links.PRODUCTION_DATA.URL} element={<FarmerProductionData/>}/>
+                              <Route path={links.MY_HELP_REQUESTS.URL} element={<HelpRequestList/>}/>
+                              <Route path={links.MY_HELP_REQUESTS_DETAIL.URL}
+                                     element={<HelpRequestListItemDetail/>}/>
+                              <Route path={links.PROVIDE_HELP.URL} element={<></>}/>
+                          </>
+                          }
+                          {roleNavigation.role === Role.POLICY_MAKER &&
+                          <>
+                              <Route path={"/"} element={<PMDashboard/>}/>
+                              <Route path={links.SUMMARY.URL} element={<PMUser/>}/>
+                              <Route path={links.FARMERS.URL} element={<FarmersList/>}/>
+                          </>
+                          }
+                        </Routes>
+                    </div>
+                </Content>
+                <Footer style={{textAlign: 'center'}}>DREAM 2022</Footer>
+            </Layout>
+        </>
       }
     </DefaultLayout>
   );
