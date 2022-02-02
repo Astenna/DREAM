@@ -51,8 +51,10 @@ export const authSlice = createSlice({
       state.tokens.accessToken = action.payload
     },
     setRefreshToken: (state, action: PayloadAction<string>) => {
-      state.authenticated = true
       state.tokens.refreshToken = action.payload
+    },
+    setAuthenticated: (state, action: PayloadAction<boolean>) => {
+      state.authenticated = action.payload
     },
     dashboardNavigate: (state, action: PayloadAction<View>) => {
       state.navigation.view = action.payload
@@ -73,7 +75,8 @@ export const {
   setAccessToken,
   setLoginInfo,
   logout,
-  dashboardNavigate
+  dashboardNavigate,
+  setAuthenticated
 } = authSlice.actions
 
 export default authSlice.reducer

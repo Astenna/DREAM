@@ -1,1 +1,99 @@
 \chapter{Code Structure} \label{ch:code_structure}
+
+\section{Client}
+
+\begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+        directory,
+    },
+    [Code
+        [Client
+            [public]
+            [src
+                [api]
+                [assets]
+                [model]
+                [modules]
+                [store]
+                [stylesheets]
+                [values, 
+                    label=right:\textit{This is a comment about this directory.}
+                ]
+            ]
+            [example\_file.txt, file,
+                label=right:\textit{This is a comment about this file.}
+            ]
+        ]
+    ]
+\end{forest}
+
+\section{Server}
+
+\begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+        directory,
+    },
+    [Code
+        [Server
+            [API
+                [Controllers]
+                [Middleware]
+                [Properties]
+            ]
+            [BusinessLogic
+                [Dtos]
+                [Exceptions]
+                [Mapper]
+                [Queries]
+                [ServiceCollectionExtensions]
+                [Services]
+                [Tools]
+            ]
+            [DataAccess
+                [AutoMigrations]
+                [Configuration]
+                [Entities]
+                [Migrations]
+                [Seeder]
+            ]
+        ]
+    ]
+\end{forest}
+
+\section{System Tests}
+
+\begin{forest}
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+        directory,
+    },
+    [Code
+        [system\_tests
+            [constants
+                [paths.py, file]
+            ]
+            [helpers
+                [create\_account.py, file]
+                [general.py, file]
+                [log\_in.py, file]
+                [log\_out.py, file]
+                [seed\_db.py, file]
+            ]
+            [models
+                [Farm.py, file]
+                [Farmer.py, file]
+                [PolicyMaker.py, file]
+                [Role.py, file]
+                [User.py, file]
+            ]
+            [conftest.py, file]
+            [pytest.ini, file]
+            [requirements.txt, file]
+            [test\_create\_account.py, file]
+            [test\_log\_in.py, file]
+            [test\_log\_out.py, file]
+        ]
+    ]
+\end{forest}

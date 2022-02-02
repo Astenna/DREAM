@@ -18,6 +18,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Docker compose DB + Server
+        run: docker-compose up -d --build
+        working-directory: ./Code
+      - name: Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./Code/Client
+      - name: Run client in background
+        run: npm start &
+        working-directory: ./Code/Client
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
         with:
@@ -29,6 +44,6 @@ jobs:
       - name: Install Chrome
         run: |
           sudo apt install google-chrome-stable
-      - name: Run example test
+      - name: Run tests
         run: |
           pytest
