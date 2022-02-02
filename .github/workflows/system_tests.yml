@@ -44,6 +44,6 @@ jobs:
       - name: Install Chrome
         run: |
           sudo apt install google-chrome-stable
-      - name: Run example test
+      - name: Run tests
         run: |
           pytest
