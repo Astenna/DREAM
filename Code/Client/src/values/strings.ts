@@ -14,13 +14,21 @@ const strings = {
   DREAM_GOAL: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque elementum dictum sagittis. Aliquam tristique quam a ligula pretium, nec ornare sem facilisis. Duis tempus bibendum suscipit. Duis at nisi porta, ultrices nisl at, tristique lorem. Pellentesque nec vulputate metus. Nullam nec eleifend libero, ac placerat sapien. Integer gravida lorem lectus, sagittis convallis dui ultrices tempus. Phasellus sed augue fringilla, rhoncus leo tristique, scelerisque nibh. Mauris pellentesque arcu augue, quis hendrerit neque elementum et. Quisque viverra, ligula at blandit bibendum, orci nibh fringilla purus, eget mattis odio purus eu massa. Sed bibendum tortor at risus tempor porta. Ut consequat tortor non dolor congue efficitur eget id dolor. Phasellus pharetra dolor nisi, vitae porta lorem interdum sed. Pellentesque malesuada nec est eu rutrum.",
   DREAM_GOAL_LABEL: "Our goal",
   SUBMIT: "Submit",
+  SAVE_CHANGES: "Save changes",
   ADD: "Add",
   EDIT: "Edit",
   REMIND_PASSWORD: "Remind password",
   DASHBOARD: "Dashboard",
+  CHANGE: "Change",
+  CHANGE_NOTE: "Change note",
   CREATE_HELP_REQUEST: "Create help request",
   HELP_REQUEST: "Help request",
   ADVICE: "Advice",
+  NOTE: {
+    NEGATIVE: "Negative",
+    NEUTRAL: "Neutral",
+    POSITIVE: "Positive"
+  },
   ROLE: {
     FARMER: "Farmer",
     POLICY_MAKER: "Policy maker",
@@ -59,6 +67,8 @@ const strings = {
       AMOUNT: "Amount",
       DATE: "Date",
       ACTION: "Action",
+      PROBLEM_TYPE: "Problem type",
+      NOTE: "Note",
     },
     ERROR: {
       EMAIL_INCORRECT_FORMAT: "Provided email has incorrect format",
