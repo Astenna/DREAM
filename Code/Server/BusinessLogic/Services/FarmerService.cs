@@ -87,14 +87,49 @@ namespace BusinessLogic.Services
             return _mapper.Map<FarmerNoteDto>(domainNote);
         }
 
-        public async Task<List<FarmerDto>> GetFarmersAsync(FarmersQuery farmersQuery)
+        public async Task<List<ListFarmerDto>> GetFarmersAsync(FarmersQuery farmersQuery)
         {
-            return new List<FarmerDto>();
+            var farmers = _dreamDbContext.Farmers
+                .Include(x => x.User)
+                .Include(x => x.CreatedHelpRequests)
+                .Include(x => x.Farm.Mandal)
+                .Include(x => x.Notes);
+
+            var result = await farmers.Select(
+                x =>
+                new ListFarmerDto
+                {
+                    Id = x.Id,
+                    FarmerNameAndSurname = x.User.Name + " " + x.User.Surname,
+                    FarmMandalName = x.Farm.Mandal.Name,
+                    HelpRequestsCount = x.CreatedHelpRequests.Count,
+                    Notes = x.Notes
+                }).ToListAsync();
+
+            result.ForEach(x => x.CurrentNote = x.Notes.OrderByDescending(x => x.Date.Ticks)
+                                                        .FirstOrDefault()?.Note ?? Note.Neutral);
+            return result;
         }
 
         public async Task<FarmerDto> GetFarmerByIdAsync(int id)
         {
-            return new FarmerDto();
+            var farmer = await _dreamDbContext.Farmers
+                   .Include(x => x.User)
+                   .Include(x => x.CreatedHelpRequests)
+                   .Include(x => x.Farm.Mandal)
+                   .Include(x => x.Notes)
+                   .SingleOrDefaultAsync(x => x.Id == id);
+
+            if (farmer is null)
+            {
+                throw new ApiException($"Farmer with id {id} not found!");
+            }
+
+            var farmerDto = _mapper.Map<FarmerDto>(farmer);
+            farmerDto.CurrentNote = farmer.Notes.OrderByDescending(x => x.Date.Ticks)
+                                                .FirstOrDefault()?.Note ?? Note.Neutral;
+
+            return farmerDto;
         }
     }
 }

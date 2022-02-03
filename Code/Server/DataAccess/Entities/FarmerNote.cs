@@ -20,5 +20,10 @@ namespace DataAccess.Entities
         public int PolicyMakerId { get; set; }
 
         public PolicyMaker PolicyMaker { get; set; }
+
+        public object OrderByDescending(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
