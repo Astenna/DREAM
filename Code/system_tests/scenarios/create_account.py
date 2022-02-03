@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-from constants.paths import URL
+from constants.endpoints import URL
 from helpers.general import wait_and_fill_in_fields, wait_for_pop_up_to_appear
 from models.Role import Role
 

@@ -1,6 +1,6 @@
-from constants.paths import DASHBOARD, URL
+from constants.endpoints import DASHBOARD
 from helpers.general import FAILURE, wait_for_view_change, wait_for_pop_up_to_appear
-from helpers.log_in import fill_in_email_and_password, open_log_in_dialog, log_in, get_invalid_email_alert, \
+from scenarios.log_in import fill_in_email_and_password, open_log_in_dialog, log_in, get_invalid_email_alert, \
     INVALID_EMAIL, get_invalid_password_alert, INVALID_PASSWORD
 from helpers.seed_db import seed_policy_maker, seed_farmer
 from models.User import User

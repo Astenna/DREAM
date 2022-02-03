@@ -1,5 +1,5 @@
-from constants.paths import URL
-from helpers.create_account import open_registration_form, fill_in_common_fields, select_role, \
+from constants.endpoints import URL
+from scenarios.create_account import open_registration_form, fill_in_common_fields, select_role, \
     fill_in_farmer_specific_fields, submit_form
 from models.Farmer import Farmer
 from models.PolicyMaker import PolicyMaker

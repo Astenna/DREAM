@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from constants.paths import URL
+from constants.endpoints import URL
 from constants.timeout import TIMEOUT
 from helpers.general import wait_and_fill_in_fields
 

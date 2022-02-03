@@ -1,4 +1,4 @@
-from helpers.create_account import fill_in_common_fields, submit_form, open_registration_form, \
+from scenarios.create_account import fill_in_common_fields, submit_form, open_registration_form, \
     fill_in_farmer_specific_fields, select_role
 from helpers.general import SUCCESS, FAILURE
 from helpers.seed_db import seed_farmer, seed_policy_maker

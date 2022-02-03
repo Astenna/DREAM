@@ -1,6 +1,6 @@
-from constants.paths import URL
+from constants.endpoints import URL
 from helpers.general import wait_for_view_change
-from helpers.log_out import log_out
+from scenarios.log_out import log_out
 import test_log_in as tli
 
 
