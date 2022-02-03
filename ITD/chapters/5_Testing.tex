@@ -1,7 +1,61 @@
 \chapter{Testing} \label{ch:testing}
 
+As stated in the DD, the project verification approach was centered on three different types of tests: unit, integration, and system tests. Each one addressed a different level of system abstraction.
+
+Furthermore, \textit{GitHub Actions} was the platform utilized for continuous integration. The analysis of the correctness of the code, its format, building it on a container designed for this purpose, and the automated firing of tests with each new code delivery substantially enhanced project quality management. As a result, the faulty or unstable code was unable to be pushed to the main repository branch. All the developed tests were triggered by each push to a release branch, pull request to the main branch, or just manually.
+
 \section{System Testing}
 
-System tests are performed to ensure that the whole system is working properly. They are performed in a controlled environment, such as a virtual machine, and are usually performed by a testing team.
+System tests were designed to ensure that the whole system is working properly. They were performed in a controlled environment, with both the client and server running in the background.
 
-System tests were written in \textit{python} using \textit{pytest} \cite{pytest} and \textit{Selenium WebDriver} \cite{selenium} frameworks.
+System tests were written in \textit{python} using \textit{pytest} \cite{pytest} and \textit{Selenium WebDriver} \cite{selenium} frameworks. These two allowed to test the entire system in a fully automated manner. The following sections describe the implemented test cases, which match the system's use cases previously defined in RASD.
+
+\subsection{Account creation}
+
+\textbf{Use cases:} \textit{Create account}, \textit{Insert role specific data}.
+
+\subsubsection*{Test results}
+\begin{verbnobox}[\tiny]
+    test_create_account.py::test_create_policy_maker_account PASSED          [ 10%]
+    test_create_account.py::test_create_two_policy_makers_with_the_same_data_with_error PASSED [ 20%]
+    test_create_account.py::test_create_farmer_account PASSED                [ 30%]
+    test_create_account.py::test_create_two_farmers_with_the_same_data_with_error PASSED [ 40%]
+\end{verbnobox}
+
+\subsection{Log in}
+
+\textbf{Use cases:} \textit{Log in}.
+
+\subsubsection*{Test results}
+\begin{verbnobox}[\footnotesize]
+    test_log_in.py::test_log_in_policy_maker PASSED                          [ 50%]
+    test_log_in.py::test_log_in_farmer PASSED                                [ 60%]
+    test_log_in.py::test_log_in_unregistered_user PASSED                     [ 70%]
+    test_log_in.py::test_log_in_no_data PASSED                               [ 80%]
+    test_log_out.py::test_log_out_policy_maker PASSED                        [ 90%]
+    test_log_out.py::test_log_out_farmer PASSED                              [100%]
+\end{verbnobox}
+
+\subsection{Delete account}
+
+\textbf{Use cases:} \textit{Delete account}.
+
+\subsection{Forum}
+
+\textbf{Use cases:} \textit{View forum}, \textit{Create forum thread}, \textit{View forum thread}, \textit{Add forum comment}, \textit{Delete forum comment}.
+
+\subsection{Assess farmer's performance}
+
+\textbf{Use cases:} \textit{Assess farmer's performance}.
+
+\subsection{Help requests}
+
+\textbf{Use cases:} \textit{View list of my requests}, \textit{Request help}, \textit{View my request}, \textit{Delete request}, \textit{View list of requests}, \textit{Create response}, \textit{Delete response}.
+
+\subsection{User dashboard}
+
+\textbf{Use cases:} \textit{Display personal suggestions}, \textit{Manage production data}.
+
+\subsection{Farmer's summary}
+
+\textbf{Use cases:} \textit{View farmer's summary}, \textit{Get information about soil humidity}, \textit{Get information about weather forecasts}, \textit{Get information about water usage}.

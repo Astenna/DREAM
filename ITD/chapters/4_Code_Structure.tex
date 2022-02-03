@@ -70,27 +70,29 @@
         directory,
     },
     [Code
-        [system\_tests
-            [constants
-                [paths.py, file]
+        [system\_tests,
+            label=right:\textit{Parent directory for all the system tests.}
+            [constants,
+                label=right:\textit{It contains all the constants used including endpoints and UI messages.}
             ]
-            [helpers
-                [create\_account.py, file]
-                [general.py, file]
-                [log\_in.py, file]
-                [log\_out.py, file]
-                [seed\_db.py, file]
+            [helpers,
+                label=right:\textit{It contains functions facilitating repetitive work and seeding the database.}
             ]
-            [models
-                [Farm.py, file]
-                [Farmer.py, file]
-                [PolicyMaker.py, file]
-                [Role.py, file]
-                [User.py, file]
+            [models,
+                label=right:\textit{It consists of classes that match entities existing in the system.}
             ]
-            [conftest.py, file]
-            [pytest.ini, file]
-            [requirements.txt, file]
+            [scenarios,
+                label=right:\textit{It contains functions responsible for interactions with UI components.}
+            ]
+            [conftest.py, file,
+                label=right:\textit{File containing fixtures used throughout the testing process.}
+            ]
+            [pytest.ini, file,
+                label=right:\textit{Primary configuration file of pytest.}
+            ]
+            [requirements.txt, file,
+                label=right:\textit{Depicts necessary libraries to set up the testing environment.}
+            ]
             [test\_create\_account.py, file]
             [test\_log\_in.py, file]
             [test\_log\_out.py, file]
