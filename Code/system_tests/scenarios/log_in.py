@@ -6,9 +6,6 @@ from constants.endpoints import URL
 from constants.timeout import TIMEOUT
 from helpers.general import wait_and_fill_in_fields
 
-INVALID_EMAIL = 'Provided email has incorrect format'
-INVALID_PASSWORD = 'This field is required'
-
 
 def open_log_in_dialog(driver):
     driver.get(URL)
