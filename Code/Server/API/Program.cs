@@ -13,6 +13,7 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using BusinessLogic.Queries;
 using API.Middleware;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,11 @@ var con = builder.Configuration.GetValue<string>("ConnectionString").ToString();
 
 builder.Services.AddMvc();
 builder.Services.AddControllers()
-    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RegisterDto>());
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RegisterDto>())
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 builder.Services.AddDbContext<DreamDbContext>(o =>
                 o.UseNpgsql(con, x => x.MigrationsAssembly("DataAccess")

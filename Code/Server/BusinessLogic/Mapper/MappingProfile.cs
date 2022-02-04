@@ -3,6 +3,7 @@ using BusinessLogic.Dtos.Account;
 using BusinessLogic.Dtos.Farmer;
 using BusinessLogic.Dtos.Forum;
 using BusinessLogic.Dtos.Requests;
+using DataAccess.Entites;
 using DataAccess.Entites.Actors;
 using DataAccess.Entites.Farms;
 using DataAccess.Entites.Forum;
@@ -36,7 +37,8 @@ namespace BusinessLogic.Mapper
                 .ForMember(dest => dest.CommentsCount, src => src.MapFrom(x => x.Comments.Count));
 
             CreateMap<CreateFarmerNoteDto, FarmerNote>()
-                .ForMember(dest => dest.ProblemType, src => src.Ignore());
+                .ForMember(dest => dest.ProblemType, src => src.Ignore())
+                .ForMember(dest => dest.Note, src => src.MapFrom(x => GetEnumNoteEnumValue(x.Note)));
             CreateMap<FarmerNote, FarmerNoteDto>()
                 .ForMember(dest => dest.ProblemTypeName, src => src.MapFrom(x => x.ProblemType.Name))
                 .ForMember(dest => dest.Farmer, src => src.MapFrom(x => CombineNameAndSurname(x.Farmer.User)))
@@ -66,6 +68,11 @@ namespace BusinessLogic.Mapper
                 .ForMember(dest => dest.FarmPostalCode, src => src.MapFrom(x => x.Farm.PostalCode))
                 .ForMember(dest => dest.HelpRequestsCount, src => src.MapFrom(x => x.CreatedHelpRequests.Count))
                 .ForMember(dest => dest.CurrentNote, src => src.Ignore());
+        }
+
+        private Note GetEnumNoteEnumValue(string note)
+        {
+            return Enum.TryParse(note, out Note parsedNote) ? parsedNote : Note.Neutral;
         }
 
         private static string CombineNameAndSurname(User x)
