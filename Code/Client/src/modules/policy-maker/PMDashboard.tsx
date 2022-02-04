@@ -3,45 +3,13 @@ import "../dashboard/Dashboard.less"
 import {Link} from 'react-router-dom';
 import {EnvironmentOutlined, StarOutlined} from '@ant-design/icons';
 import colors from "../../values/colors";
-
-
-const posFarmers = [
-  {
-    name: "P. K. Banerjee",
-    location: "Mavala",
-    note: "Positive"
-  },
-  {
-    name: "P. Raj",
-    location: "Mavala",
-    note: "Positive"
-  },
-  {
-    name: "Json Rajesh",
-    location: "Mavala",
-    note: "Positive"
-  }
-]
-
-const negFarmers = [
-  {
-    name: "P. K. Banerjee",
-    location: "Mavala",
-    note: "Negative"
-  },
-  {
-    name: "P. Raj",
-    location: "Mavala",
-    note: "Negative"
-  },
-  {
-    name: "Json Rajesh",
-    location: "Mavala",
-    note: "Negative"
-  }
-]
+import {farmerRequests} from '../../api/requests/farmerRequests';
+import links from '../../values/links';
 
 const PMDashboard = () => {
+  const [farmers] = farmerRequests.useGetFarmer()
+  const posFarmers = farmers?.filter(x => x.currentNote === "Positive")?.slice(0, 3)
+  const negFarmers = farmers?.filter(x => x.currentNote === "Negative")?.slice(0, 3)
 
   return (
     <>
@@ -57,17 +25,17 @@ const PMDashboard = () => {
                   <List.Item style={{display: "block", padding: '8px'}}>
                     <Row>
                       <Col span={12} style={{textAlign: 'left'}}>
-                        {item.name}
+                        {item.farmerNameAndSurname}
                       </Col>
                       <Col span={12} style={{textAlign: 'right'}}>
-                        <EnvironmentOutlined style={{color: colors.PRIMARY}}/> {item.location} | <StarOutlined
-                        style={{color: colors.SUCCESS}}/> {item.note}
+                        <EnvironmentOutlined style={{color: colors.PRIMARY}}/> {item.farmMandalName} | <StarOutlined
+                        style={{color: colors.SUCCESS}}/> {item.currentNote}
                       </Col>
                     </Row>
                   </List.Item>
                 )}
               />
-              <Link to={"/"} style={{float: 'right'}}>
+              <Link to={links.DASHBOARD.URL + links.FARMERS.TYPE.POSITIVE} style={{float: 'right'}}>
                 View farmers →
               </Link>
             </Card>
@@ -83,17 +51,17 @@ const PMDashboard = () => {
                   <List.Item style={{display: "block", padding: '8px'}}>
                     <Row>
                       <Col span={12} style={{textAlign: 'left'}}>
-                        {item.name}
+                        {item.farmerNameAndSurname}
                       </Col>
                       <Col span={12} style={{textAlign: 'right'}}>
-                        <EnvironmentOutlined style={{color: colors.PRIMARY}}/> {item.location} | <StarOutlined
-                        style={{color: colors.DANGER}}/> {item.note}
+                        <EnvironmentOutlined style={{color: colors.PRIMARY}}/> {item.farmMandalName} | <StarOutlined
+                        style={{color: colors.DANGER}}/> {item.currentNote}
                       </Col>
                     </Row>
                   </List.Item>
                 )}
               />
-              <Link to={"/"} style={{float: 'right'}}>
+              <Link to={links.DASHBOARD.URL + links.FARMERS.TYPE.NEGATIVE} style={{float: 'right'}}>
                 View farmers →
               </Link>
             </Card>

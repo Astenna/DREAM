@@ -81,7 +81,7 @@ export const useAPILocalSearch =
     const [searchItems, setSearchItems] = useState<T[]>([])
     const api = useAPI()
     useEffect(() => {
-      api(requestPromise()).then(value => {
+      api(requestPromise()).then((value: { data: T[]; }) => {
         const data = value.data.sort()
         setSearchItems(data)
         setAllItems(data);
@@ -104,4 +104,17 @@ export const useAPILocalStringSearch = <T extends string>(requestPromise: () => 
         m.toUpperCase().startsWith(searchString.toUpperCase())).sort().slice(0, count)
   )
   return [searchItems, searchForItems]
+}
+
+export const useAPILoadOnRender = <T>(requestPromise: () => Promise<AxiosResponse<T>>): [T | undefined, () => void] => {
+  const api = useAPI()
+  const [data, setData] = useState<T>()
+
+  const loadData = () => {
+    api(requestPromise()).then(res => setData(res.data))
+  }
+
+  useEffect(() => loadData(), [])
+
+  return [data, loadData]
 }

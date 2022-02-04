@@ -64,11 +64,14 @@ namespace BusinessLogic.Services
                 domainNote.PolicyMaker = policyMaker;
             }
 
-            var farmer = await _dreamDbContext.Farmers.Include(x => x.Farm)
-                                    .SingleOrDefaultAsync(x => x.Id == farmerId);
-            if(farmer is null)
+            var farmer = await _dreamDbContext.Farmers
+                                .Include(x => x.User)
+                                .Include(x => x.Farm)
+                                 .SingleOrDefaultAsync(x => x.Id == farmerId);
+
+            if (farmer is null)
             {
-                throw new ApiException($"Farmer with id {farmerId} does not exists!");
+                throw new ApiException($"Farmer with id {farmerId} does not exist!");
             }
             domainNote.Farmer = farmer;
 
@@ -84,8 +87,12 @@ namespace BusinessLogic.Services
             }
 
             await _dreamDbContext.FarmerNotes.AddAsync(domainNote);
-            await _dreamDbContext.SaveChangesAsync();
-            return _mapper.Map<FarmerNoteDto>(domainNote);
+            await _dreamDbContext.SaveChangesAsync(); 
+            
+            // Fill farmer name as user entity is not loaded after add
+            var mapped = _mapper.Map<FarmerNoteDto>(domainNote);
+            mapped.Farmer = farmer.User.Name + " " + farmer.User.Surname;
+            return mapped;
         }
 
         public async Task<List<ListFarmerDto>> GetFarmersAsync(FarmersQuery farmersQuery)
