@@ -1,2 +1,7 @@
 URL = 'http://localhost:3000/'
 DASHBOARD = f'{URL}dashboard'
+SUMMARY = f'{DASHBOARD}/summary'
+FARMERS = f'{DASHBOARD}/farmers'
+MY_HELP_REQUESTS = f'{DASHBOARD}/my_help_requests'
+MY_HELP_REQUEST = f'{DASHBOARD}/my_help_requests/1'
+PRODUCTION_DATA = f'{DASHBOARD}/production_data'

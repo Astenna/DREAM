@@ -1,7 +1,8 @@
 from constants.endpoints import DASHBOARD
+from constants.labels import FIELD_IS_REQUIRED_WARNING, INVALID_EMAIL
 from helpers.general import FAILURE, wait_for_view_change, wait_for_pop_up_to_appear
 from scenarios.log_in import fill_in_email_and_password, open_log_in_dialog, log_in, get_invalid_email_alert, \
-    INVALID_EMAIL, get_invalid_password_alert, INVALID_PASSWORD
+    get_invalid_password_alert
 from helpers.seed_db import seed_policy_maker, seed_farmer
 from models.User import User
 
@@ -25,7 +26,7 @@ def test_log_in_farmer(driver):
     assert driver.current_url == DASHBOARD
 
 
-def test_log_in_unregistered_user(driver):
+def test_log_in_unregistered_user_with_error(driver):
     unregistered_user = User(
         name='Unreg',
         surname='Unreg',
@@ -44,7 +45,7 @@ def test_log_in_unregistered_user(driver):
     assert notification.text == FAILURE
 
 
-def test_log_in_no_data(driver):
+def test_log_in_no_data_with_error(driver):
     open_log_in_dialog(driver)
 
     fill_in_email_and_password(driver, '', '')
@@ -52,4 +53,4 @@ def test_log_in_no_data(driver):
     log_in(driver)
 
     assert get_invalid_email_alert(driver).text == INVALID_EMAIL
-    assert get_invalid_password_alert(driver).text == INVALID_PASSWORD
+    assert get_invalid_password_alert(driver).text == FIELD_IS_REQUIRED_WARNING
