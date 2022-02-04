@@ -114,7 +114,7 @@ namespace BusinessLogic.Services
                 };
             }
 
-            throw new AuthenticationException();
+            throw new ApiException($"Login credentials not valid!");
         }
 
         public /*async*/ Task ResetPasswordAsync(int id, LoginDto loginDto)
