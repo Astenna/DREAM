@@ -68,7 +68,7 @@ namespace BusinessLogic.Services
             var farmer = await _dreamDbContext.Farmers
                                 .Include(x => x.User)
                                 .Include(x => x.Farm)
-                                 .SingleOrDefaultAsync(x => x.Id == farmerId);
+                                .SingleOrDefaultAsync(x => x.Id == farmerId);
 
             if (farmer is null)
             {
@@ -97,7 +97,7 @@ namespace BusinessLogic.Services
             return mapped;
         }
 
-        public async Task<List<ListFarmerDto>> GetFarmersAsync(FarmersQuery farmersQuery)
+        public async Task<List<FarmerListItemDto>> GetFarmersAsync(FarmersQuery farmersQuery)
         {
             var farmers = _dreamDbContext.Farmers
                 .Include(x => x.User)
@@ -107,7 +107,7 @@ namespace BusinessLogic.Services
 
             var result = await farmers.Select(
                 x =>
-                new ListFarmerDto
+                new FarmerListItemDto
                 {
                     Id = x.Id,
                     FarmerNameAndSurname = x.User.Name + " " + x.User.Surname,

@@ -12,6 +12,6 @@ namespace BusinessLogic.Services
         Task<HelpRequestDto> EditRequestAsync(int id, EditHelpRequestDto editRequestDto);
         Task<HelpResponseDto> EditResponseAsync(int id, EditResponseDto editRequestDto);
         Task<HelpRequestDto> GetRequestByIdAsync(int id);
-        Task<List<HelpRequestDto>> GetRequestsAsync(RequestsQuery requestsQuery);
+        Task<List<HelpRequestListItemDto>> GetRequestsAsync(RequestsQuery requestsQuery);
     }
 }

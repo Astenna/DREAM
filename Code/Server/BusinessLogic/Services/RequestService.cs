@@ -32,22 +32,24 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public async Task<List<HelpRequestDto>> GetRequestsAsync(RequestsQuery requestsQuery)
+        public async Task<List<HelpRequestListItemDto>> GetRequestsAsync(RequestsQuery requestsQuery)
         {
             var requests = _dreamDbContext.HelpRequests
                 .Include(x => x.CreatedBy.User)
                 .Include(x => x.FarmersSent)
                 .ThenInclude(x => x.User)
                 .Include(x => x.AgronomistsSent)
-                .ThenInclude(x => x.User);
-            var results = await _requestsQueryBuilder.With(requests)
+                .ThenInclude(x => x.User)
+                .Include(x => x.HelpResponses);
+            var results = await _requestsQueryBuilder
+                .With(requests)
                 .SearchByTopic(requestsQuery.Topic)
                 .SearchByRecipientId(requestsQuery.RecipientUserId)
                 .SearchByCreatedById(requestsQuery.RequestCreatedById)
                 .AsQueryable()
                 .ToListAsync();
 
-            return _mapper.Map<List<HelpRequestDto>>(results);
+            return _mapper.Map<List<HelpRequestListItemDto>>(results);
         }
 
         public async Task<HelpRequestDto> GetRequestByIdAsync(int id)

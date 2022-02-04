@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.Dtos.Forum
 {
-    public class ListForumThreadDto
+    public class ForumThreadListItemDto
     {
         public int Id { get; set; }
 

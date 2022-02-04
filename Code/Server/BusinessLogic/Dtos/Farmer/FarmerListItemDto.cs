@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BusinessLogic.Dtos.Farmer
 {
-    public class ListFarmerDto
+    public class FarmerListItemDto
     {
         public int Id { get; set; }
 

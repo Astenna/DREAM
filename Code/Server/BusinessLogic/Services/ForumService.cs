@@ -25,13 +25,13 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public async Task<List<ListForumThreadDto>> GetForumThreadsAsync(ForumThreadsQuery forumThreadsQuery)
+        public async Task<List<ForumThreadListItemDto>> GetForumThreadsAsync(ForumThreadsQuery forumThreadsQuery)
         {
             var forumThread = await _dreamDbContext.ForumThreads
                 .Include(x => x.CreatedBy.User)
                 .Include(x => x.Comments)
                 .ToListAsync();
-            var forumThreadDto = _mapper.Map<List<ListForumThreadDto>>(forumThread);
+            var forumThreadDto = _mapper.Map<List<ForumThreadListItemDto>>(forumThread);
             return forumThreadDto;
         }
 

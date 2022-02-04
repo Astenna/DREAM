@@ -32,7 +32,7 @@ namespace BusinessLogic.Mapper
                 .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy.User)));
             CreateMap<ForumThread, ForumThreadDto>()
                 .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy.User)));
-            CreateMap<ForumThread, ListForumThreadDto>()
+            CreateMap<ForumThread, ForumThreadListItemDto>()
                 .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy.User)))
                 .ForMember(dest => dest.CommentsCount, src => src.MapFrom(x => x.Comments.Count));
 
@@ -47,6 +47,9 @@ namespace BusinessLogic.Mapper
             CreateMap<CreateHelpRequestDto, HelpRequest>();
             CreateMap<HelpRequest, HelpRequestDto>()
                 .ForMember(dest => dest.CreatedBy, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy.User)));
+            CreateMap<HelpRequest, HelpRequestListItemDto>()
+                .ForMember(dest => dest.CreatedBy, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy.User)))
+                .ForMember(dest => dest.HelpResponsesCount, src => src.MapFrom(x => x.HelpResponses.Count));
             CreateMap<CreateHelpResponseDto, HelpResponse>();
             CreateMap<HelpResponse, HelpResponseDto>()
                 .ForMember(dest => dest.CreatedByAgronomist, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedByAgronomist.User)))
@@ -68,6 +71,11 @@ namespace BusinessLogic.Mapper
                 .ForMember(dest => dest.FarmPostalCode, src => src.MapFrom(x => x.Farm.PostalCode))
                 .ForMember(dest => dest.HelpRequestsCount, src => src.MapFrom(x => x.CreatedHelpRequests.Count))
                 .ForMember(dest => dest.CurrentNote, src => src.Ignore());
+        }
+
+        private int? GetHelpResponsesCount(HelpRequest x)
+        {
+            return x.HelpResponses?.Count;
         }
 
         private Note GetEnumNoteEnumValue(string note)

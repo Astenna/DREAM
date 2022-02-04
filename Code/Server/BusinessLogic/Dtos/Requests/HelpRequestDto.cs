@@ -8,7 +8,7 @@
 
         public string Description { get; set; }
 
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedOn { get; set; }
 
         public bool IsAutomatic { get; set; }
 
