@@ -60,7 +60,7 @@ namespace BusinessLogic.Services
                 var domainProblemType = _dreamDbContext.ProblemTypes.SingleOrDefault(x => x.Name == createNoteDto.ProblemTypeName);
                 if (domainProblemType is null)
                 {
-                    throw new ApiException($"Incorrect ProblemtType specified!");
+                    throw new ApiException($"Incorrect ProblemType specified!");
                 }
                 domainNote.PolicyMaker = policyMaker;
             }
@@ -72,7 +72,7 @@ namespace BusinessLogic.Services
 
             if (farmer is null)
             {
-                throw new ApiException($"Farmer with id {farmerId} does not exist!");
+                throw new ApiException($"Farmer with id {farmerId} does not exist!", ErrorCode.NotFound);
             }
             domainNote.Farmer = farmer;
 
@@ -132,7 +132,7 @@ namespace BusinessLogic.Services
 
             if (farmer is null)
             {
-                throw new ApiException($"Farmer with id {id} not found!");
+                throw new ApiException($"Farmer with id {id} not found!", ErrorCode.NotFound);
             }
 
             var farmerDto = _mapper.Map<FarmerDto>(farmer);

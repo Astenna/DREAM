@@ -41,6 +41,12 @@ namespace BusinessLogic.Services
                 .Include(x => x.CreatedBy.User)
                 .Include(x => x.Comments)
                 .SingleOrDefault(x => x.Id == id);
+            
+            if (forumThread is null)
+            {
+                throw new ApiException($"Forum thread with id {id} does not exist!", ErrorCode.NotFound);
+            }
+
             var forumThreadDto = _mapper.Map<ForumThreadDto>(forumThread);
             return forumThreadDto;
         }
@@ -68,7 +74,7 @@ namespace BusinessLogic.Services
             var forumThread = await _dreamDbContext.ForumThreads.SingleOrDefaultAsync(x => x.Id == forumThreadId);
             if (forumThread is null)
             {
-                throw new ApiException($"ForumThread with id {forumThreadId} not found!");
+                throw new ApiException($"ForumThread with id {forumThreadId} not found!", ErrorCode.NotFound);
             }
 
             var forumComment = _mapper.Map<ForumComment>(createForumCommentDto);
@@ -91,7 +97,7 @@ namespace BusinessLogic.Services
 
             if(forumThread is null)
             {
-                throw new ApiException($"ForumThread with id {id} not found!");
+                throw new ApiException($"ForumThread with id {id} not found!", ErrorCode.NotFound);
             }
 
             if(!int.TryParse(farmerId, out var parsedFarmerId) || forumThread.CreatedById != parsedFarmerId)

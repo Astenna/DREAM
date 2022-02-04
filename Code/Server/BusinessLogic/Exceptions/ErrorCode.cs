@@ -3,6 +3,7 @@
     public enum ErrorCode
     {
         InvalidInput,
-        AuthorizationException
+        AuthorizationException,
+        NotFound
     }
 }

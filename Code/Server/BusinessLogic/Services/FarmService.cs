@@ -53,6 +53,11 @@ namespace BusinessLogic.Services
                 .Include(x => x.Farm.Farmer)
                 .SingleOrDefaultAsync(x => x.Id == productionDataId);
 
+            if (productionDataToEdit is null)
+            {
+                throw new ApiException($"Production data with id {productionDataId} does not exist!", ErrorCode.NotFound);
+            }
+
             if(farmer.Id != productionDataToEdit.Farm.Farmer.Id)
             {
                 throw new ApiException($"Farmer can edit only his own production data!", ErrorCode.AuthorizationException);
@@ -80,7 +85,7 @@ namespace BusinessLogic.Services
             var farmer = await _dreamDbContext.Farmers.SingleOrDefaultAsync(x => x.Id == farmerId);
             if (farmer is null)
             {
-                throw new ApiException($"Farmer with id {farmerId} not found!");
+                throw new ApiException($"Farmer with id {farmerId} not found!", ErrorCode.NotFound);
             }
 
            var production = _dreamDbContext.FarmProductions

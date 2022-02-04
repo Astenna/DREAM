@@ -50,6 +50,10 @@ namespace API.Middleware
                     context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
                     await context.Response.WriteAsync(json);
                     break;
+                case ApiException apiException when apiException.ErrorCode == ErrorCode.NotFound:
+                    context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    await context.Response.WriteAsync(json);
+                    break;
                 case FluentValidation.ValidationException _:
                     context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     await context.Response.WriteAsync(json);

@@ -4,8 +4,6 @@ using BusinessLogic.Exceptions;
 using BusinessLogic.Queries;
 using BusinessLogic.Tools;
 using DataAccess;
-using DataAccess.Entites;
-using DataAccess.Entites.Actors;
 using DataAccess.Entities;
 using DataAccess.Entities.Actors;
 using Microsoft.AspNetCore.Http;
@@ -61,6 +59,12 @@ namespace BusinessLogic.Services
                 .ThenInclude(x => x.CreatedByAgronomist.User)
                 .Include(x => x.CreatedBy.User)
                 .SingleOrDefaultAsync(x => x.Id == id);
+
+            if (request is null)
+            {
+                throw new ApiException($"Request with id {id} does not exist!", ErrorCode.NotFound);
+            }
+
             return _mapper.Map<HelpRequestDto>(request);
         }
 
@@ -95,11 +99,11 @@ namespace BusinessLogic.Services
             }
 
             var request = await _dreamDbContext.HelpRequests.SingleOrDefaultAsync(x => x.Id == requestId);
-            if(request is null)
+            if (request is null)
             {
-                throw new ApiException($"Request with id {requestId} does not exist!");
+                throw new ApiException($"Request with id {requestId} does not exist!", ErrorCode.NotFound);
             }
-            
+
             var domainHelpResponse = _mapper.Map<HelpResponse>(createResponse);
             domainHelpResponse.HelpRequest = request;
             if (user.Role == Role.Farmer)
@@ -133,7 +137,7 @@ namespace BusinessLogic.Services
             var request = await _dreamDbContext.HelpRequests.SingleOrDefaultAsync(x => x.Id == requestId);
             if (request is null)
             {
-                throw new ApiException($"Request with id {requestId} does not exist!");
+                throw new ApiException($"Request with id {requestId} does not exist!", ErrorCode.NotFound);
             }
 
             var farmer = _dreamDbContext.Farmers
@@ -163,7 +167,7 @@ namespace BusinessLogic.Services
             var response = await _dreamDbContext.HelpResponses.SingleOrDefaultAsync(x => x.Id == responseId);
             if (response is null)
             {
-                throw new ApiException($"Reponse with id {responseId} does not exist!");
+                throw new ApiException($"Reponse with id {responseId} does not exist!", ErrorCode.NotFound);
             }
 
             if (user.Role == Role.Farmer)
@@ -199,10 +203,10 @@ namespace BusinessLogic.Services
             var farmer = _dreamDbContext.Farmers.Single(x => x.UserId == user.Id);
             var requestToDelete = await _dreamDbContext.HelpRequests
                                             .SingleOrDefaultAsync(x => x.Id == id);
-            
+
             if (requestToDelete is null)
             {
-                throw new ApiException($"Request with id {id} not found!");
+                throw new ApiException($"Request with id {id} not found!", ErrorCode.NotFound);
             }
 
             if (requestToDelete.CreatedById != farmer.Id)
@@ -224,7 +228,7 @@ namespace BusinessLogic.Services
 
             if (responseToDelete is null)
             {
-                throw new ApiException($"Request with id {id} not found!");
+                throw new ApiException($"Request with id {id} not found!", ErrorCode.NotFound);
             }
 
             if (responseToDelete.CreatedByFarmerId != farmer.Id)
