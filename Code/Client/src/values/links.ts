@@ -42,8 +42,13 @@ const links = {
     BREADCRUMB: strings.SIDEBAR.FORUM
   },
   FARMERS: {
-    URL: "/farmers",
-    BREADCRUMB: strings.SIDEBAR.FARMERS
+    URL: "/farmers/:type",
+    BREADCRUMB: strings.SIDEBAR.FARMERS,
+    TYPE: {
+      ALL: "/farmers/all",
+      POSITIVE: "/farmers/positive",
+      NEGATIVE: "/farmers/negative",
+    }
   },
   ROOT: {
     URL: "/",

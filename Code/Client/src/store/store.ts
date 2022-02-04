@@ -1,5 +1,6 @@
 import {combineReducers, createStore} from '@reduxjs/toolkit'
 import authReducer from './auth/authSlice'
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 /**
  * Redux reducers combined.
@@ -41,7 +42,8 @@ const loadFromLocalStorage = () => {
  */
 const store = createStore(
   reducers,
-  loadFromLocalStorage()
+  loadFromLocalStorage(),
+  composeWithDevTools()
 )
 store.subscribe(() => saveToLocalStorage(store.getState()))
 
