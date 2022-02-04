@@ -25,11 +25,13 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public async Task<List<ForumThreadDto>> GetForumThreadsAsync(ForumThreadsQuery forumThreadsQuery)
+        public async Task<List<ListForumThreadDto>> GetForumThreadsAsync(ForumThreadsQuery forumThreadsQuery)
         {
             var forumThread = await _dreamDbContext.ForumThreads
-                .Include(x => x.CreatedBy.User).ToListAsync();
-            var forumThreadDto = _mapper.Map<List<ForumThreadDto>>(forumThread);
+                .Include(x => x.CreatedBy.User)
+                .Include(x => x.Comments)
+                .ToListAsync();
+            var forumThreadDto = _mapper.Map<List<ListForumThreadDto>>(forumThread);
             return forumThreadDto;
         }
 
@@ -83,6 +85,7 @@ namespace BusinessLogic.Services
         public async Task DeleteForumCommentAsync(int id)
         {
             var user = _httpContext.GetUserUsingClaims(_dreamDbContext);
+            var farmerId = _httpContext.User.FindFirst("farmerId").Value;
             var forumThread = _dreamDbContext.ForumComments
                 .SingleOrDefault(x => x.Id == id);
 
@@ -91,7 +94,7 @@ namespace BusinessLogic.Services
                 throw new ApiException($"ForumThread with id {id} not found!");
             }
 
-            if(forumThread.CreatedById != user.Id)
+            if(!int.TryParse(farmerId, out var parsedFarmerId) || forumThread.CreatedById != parsedFarmerId)
             {
                 throw new ApiException($"Comments can be deleted only by its authors!",
                     ErrorCode.AuthorizationException);

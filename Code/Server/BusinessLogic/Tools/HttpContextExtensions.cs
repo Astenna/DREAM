@@ -1,7 +1,6 @@
 ﻿using DataAccess;
 using DataAccess.Entites.Actors;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Tools
 {

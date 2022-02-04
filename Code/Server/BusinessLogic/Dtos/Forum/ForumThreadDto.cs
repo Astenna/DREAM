@@ -8,7 +8,7 @@
 
         public string Description { get; set; }
 
-        public DateTime? CreatedDate { get; set; } = DateTime.UtcNow;
+        public DateTime? CreatedDate { get; set; }
 
         public string CreatedByFarmer { get; set; }
 
