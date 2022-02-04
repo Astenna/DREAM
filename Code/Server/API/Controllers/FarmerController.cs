@@ -48,10 +48,10 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("{farmerId}/farm/production-data")]
-        public async Task<IActionResult> PostProductionDataAsync([FromRoute] int farmerId, [FromBody] CreateFarmProductionDto createProductionData)
+        [HttpPost("farm/production-data")]
+        public async Task<IActionResult> PostProductionDataAsync([FromBody] CreateFarmProductionDto createProductionData)
         {
-            var result = await _farmService.AddProductionDataAsync(farmerId, createProductionData);
+            var result = await _farmService.AddProductionDataAsync(createProductionData);
             return Ok(result);
         }
 

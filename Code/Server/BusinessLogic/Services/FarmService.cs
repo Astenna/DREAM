@@ -25,7 +25,7 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public async Task<FarmProductionDataDto> AddProductionDataAsync(int farmerId, CreateFarmProductionDto createProductionData)
+        public async Task<FarmProductionDataDto> AddProductionDataAsync(CreateFarmProductionDto createProductionData)
         {
             var farmer = _httpContext.GetFarmerUsingClaims(_dreamDbContext);
             var domainProductiondata = _mapper.Map<FarmProduction>(createProductionData);
@@ -49,7 +49,14 @@ namespace BusinessLogic.Services
         public async Task<FarmProductionDataDto> EditProductionDataAsync(int productionDataId, EditProductionDataDto editProductionDataDto)
         {
             var farmer = _httpContext.GetFarmerUsingClaims(_dreamDbContext);
-            var productionDataToEdit = await _dreamDbContext.FarmProductions.SingleOrDefaultAsync(x => x.Id == productionDataId);
+            var productionDataToEdit = await _dreamDbContext.FarmProductions
+                .Include(x => x.Farm.Farmer)
+                .SingleOrDefaultAsync(x => x.Id == productionDataId);
+
+            if(farmer.Id != productionDataToEdit.Farm.Farmer.Id)
+            {
+                throw new ApiException($"Farmer can edit only his own production data!", ErrorCode.AuthorizationException);
+            }
 
             var productionDataType = await _dreamDbContext.FarmProductionTypes
                 .SingleOrDefaultAsync(x => x.Name == editProductionDataDto.ProductionType);
