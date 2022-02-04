@@ -133,7 +133,7 @@ namespace BusinessLogic.Services
             var request = await _dreamDbContext.HelpRequests.SingleOrDefaultAsync(x => x.Id == requestId);
             if (request is null)
             {
-                throw new ApiException($"REquest with id {requestId} does not exist!");
+                throw new ApiException($"Request with id {requestId} does not exist!");
             }
 
             var farmer = _dreamDbContext.Farmers

@@ -1,18 +1,14 @@
-﻿using AutoMapper;
-using DataAccess;
+﻿using DataAccess;
 
 namespace BusinessLogic.Services
 {
     public class MandalService : IMandalService
     {
         private readonly DreamDbContext _dreamDbContext;
-        private readonly IMapper _mapper;
 
-        public MandalService(DreamDbContext dreamDbContext,
-            IMapper mapper)
+        public MandalService(DreamDbContext dreamDbContext)
         {
             _dreamDbContext = dreamDbContext;
-            _mapper = mapper;
         }
 
         public List<string> GetMandals()

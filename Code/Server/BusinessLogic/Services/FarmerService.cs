@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BusinessLogic.Dtos.Farmer;
-using BusinessLogic.Dtos.Suggestion;
 using BusinessLogic.Exceptions;
 using BusinessLogic.Queries;
 using BusinessLogic.Tools;
@@ -35,6 +34,8 @@ namespace BusinessLogic.Services
         public List<FarmerNoteDto> GetFarmerNotes(int farmerId)
         {
             var farmerNotes = _dreamDbContext.FarmerNotes
+                .Include(x => x.PolicyMaker.User)
+                .Include(x => x.Farmer.User)
                 .Where(x => x.FarmerId == farmerId)
                 .OrderByDescending(x => x.Date);
             
