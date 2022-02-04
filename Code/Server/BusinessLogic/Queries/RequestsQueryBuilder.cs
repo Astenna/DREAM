@@ -31,8 +31,8 @@ namespace BusinessLogic.Queries
             if (recipientUserId.HasValue)
             {
                 _requestsQuery = _requestsQuery
-                    .Where(x => x.AgronomistsSent.Exists(x => x.UserId == recipientUserId.Value)
-                                || x.FarmersSent.Exists(x => x.UserId == recipientUserId.Value));
+                    .Where(x => x.FarmersSent.Select(x => x.Id).Contains(recipientUserId.Value)
+                                || x.AgronomistsSent.Select(x => x.Id).Contains(recipientUserId.Value));
             }
 
             return this;

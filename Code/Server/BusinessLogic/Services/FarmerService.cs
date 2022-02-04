@@ -18,6 +18,7 @@ namespace BusinessLogic.Services
         private readonly HttpContext _httpContext;
         private readonly IRequestRecipientsProvider _requestRecipientsProvider;
         private readonly IMapper _mapper;
+        private static string AutomaticHelpRequestContent = "This request was created automatically due to receiving a negative note.'";
 
         public FarmerService(DreamDbContext dreamDbContext,
             IHttpContextAccessor httpContextAccessor,
@@ -79,6 +80,7 @@ namespace BusinessLogic.Services
             {
                 var automaticHelpRequest = new HelpRequest {
                     Topic = createNoteDto.ProblemTypeName,
+                    Description = AutomaticHelpRequestContent,
                     FarmersSent = _requestRecipientsProvider.GetRecipientsFarmers(farmer.Farm.MandalId, farmerId),
                     IsAutomatic = true,
                     CreatedById = farmerId

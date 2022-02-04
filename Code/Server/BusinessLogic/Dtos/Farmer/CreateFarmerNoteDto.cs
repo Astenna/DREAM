@@ -17,6 +17,10 @@ namespace BusinessLogic.Dtos.Farmer
         {
             RuleFor(x => x.Note).Must(x => IsDefined(x))
                 .WithMessage(x => $"{x.Note} is not a valid note, choose from: {GetValuesOfNotes()}");
+            RuleFor(x => x.ProblemTypeName)
+                .Must(x => !string.IsNullOrEmpty(x))
+                .When(x => x.Note == Note.Negative.ToString())
+                .WithMessage("ProblemTypeName must be specified when assigning a negative note!");
         }
 
         private bool IsDefined(string value)
