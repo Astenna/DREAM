@@ -72,7 +72,7 @@ namespace BusinessLogic.Services
             }
             domainNote.Farmer = farmer;
 
-            if (createNoteDto.Note == Note.Negative)
+            if (domainNote.Note == Note.Negative)
             {
                 var automaticHelpRequest = new HelpRequest {
                     Topic = createNoteDto.ProblemTypeName,
