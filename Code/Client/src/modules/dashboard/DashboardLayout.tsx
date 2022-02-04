@@ -88,7 +88,7 @@ const DashboardLayout = () => {
       {
         key: "farmers",
         node: strings.SIDEBAR.FARMERS,
-        action: () => navigate(links.DASHBOARD.URL + links.FARMERS.URL),
+        action: () => navigate(links.DASHBOARD.URL + links.FARMERS.TYPE.ALL),
       },
     ]
   }

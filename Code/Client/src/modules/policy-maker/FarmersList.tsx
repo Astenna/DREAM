@@ -1,30 +1,34 @@
-import {ArrowLeftOutlined, EyeOutlined, StarOutlined} from '@ant-design/icons';
-import {Col, Divider, Input, Row, Table} from 'antd';
+import {EyeOutlined, StarOutlined} from '@ant-design/icons';
+import {Col, Input, Row, Select, Table} from 'antd';
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import colors from "../../values/colors";
 import {Note} from "../../model/Note";
+import {useParams} from 'react-router';
+import ViewHeader from '../other/ViewHeader';
+import {farmerRequests} from '../../api/requests/farmerRequests';
 
 const {Search} = Input
+const {Option} = Select;
 
 const dataSource = [
   {
-    name: 'Json Rajesh',
-    helpRequests: 32,
-    mandal: 'Mavala',
-    note: Note.POSITIVE
+    farmerNameAndSurname: 'Json Rajesh',
+    helpRequestsCount: 32,
+    farmMandalName: 'Mavala',
+    currentNote: Note.POSITIVE
   },
   {
-    name: 'Sam Smith',
-    helpRequests: 21,
-    mandal: 'Mavala',
-    note: Note.NEGATIVE
+    farmerNameAndSurname: 'Sam Smith',
+    helpRequestsCount: 21,
+    farmMandalName: 'Mavala',
+    currentNote: Note.NEGATIVE
   },
   {
-    name: 'Luke Skywalker',
-    helpRequests: 48,
-    mandal: 'Mavala',
-    note: Note.NEUTRAL
+    farmerNameAndSurname: 'Luke Skywalker',
+    helpRequestsCount: 48,
+    farmMandalName: 'Mavala',
+    currentNote: Note.NEUTRAL
   },
 ];
 
@@ -33,29 +37,29 @@ const columns = [
     title: () => {
       return <div style={{fontWeight: 'bold'}}>Name</div>;
     },
-    dataIndex: 'name',
-    key: 'name'
+    dataIndex: 'farmerNameAndSurname',
+    key: 'farmerNameAndSurname'
   },
   {
     title: () => {
       return <div style={{fontWeight: 'bold'}}>Help requests</div>;
     },
-    dataIndex: 'helpRequests',
-    key: 'helpRequests',
+    dataIndex: 'helpRequestsCount',
+    key: 'helpRequestsCount',
   },
   {
     title: () => {
       return <div style={{fontWeight: 'bold'}}>Mandal</div>;
     },
-    dataIndex: 'mandal',
-    key: 'mandal',
+    dataIndex: 'farmMandalName',
+    key: 'farmMandalName',
   },
   {
     title: () => {
       return <div style={{fontWeight: 'bold'}}>Note</div>;
     },
-    dataIndex: 'note',
-    key: 'note',
+    dataIndex: 'currentNote',
+    key: 'currentNote',
     render: (note: Note) => (
       <><StarOutlined
         style={{color: note === Note.POSITIVE ? colors.SUCCESS : note === Note.NEGATIVE ? colors.DANGER : undefined}}/> {note}</>
@@ -71,40 +75,59 @@ const columns = [
 ];
 
 const FarmersList = () => {
+  const [nameSearch, setNameSearch] = useState<string>()
+  const [mandalSearch, setMandalSearch] = useState<string>()
+  const [noteSelect, setNoteSelect] = useState<string>()
+  const {type} = useParams<string>()
+  const [farmers] = farmerRequests.useGetFarmer()
+
+  const getViewFarmers = () => {
+    let viewFarmers = farmers
+      ?.filter(f => f.farmerNameAndSurname.toUpperCase().startsWith(nameSearch ? nameSearch.toUpperCase() : ""))
+      ?.filter(f => f.farmMandalName.toUpperCase().startsWith(mandalSearch ? mandalSearch.toUpperCase() : ""))
+    if (noteSelect) {
+      viewFarmers = viewFarmers?.filter(f => f.currentNote === noteSelect)
+    }
+    return viewFarmers
+  }
+
+  useEffect(() => {
+    switch (type) {
+      case "positive":
+        setNoteSelect("Positive");
+        break;
+      case "negative":
+        setNoteSelect("Negative");
+        break;
+    }
+  }, [])
+
   return (
     <>
-      <Row style={{padding: "15px 15px 0 15px"}}>
-        <Col style={{width: "100%"}}>
-          <Row>
-            <Col className={"flex-center"} style={{marginRight: "7px"}}>
-              <ArrowLeftOutlined/>
-            </Col>
-            <Col>
-              <h1 className={"dashboard-h1"}>
-                Farmers
-              </h1>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-      <Divider style={{margin: "10px 0"}}/>
+      <ViewHeader title={"Farmer"}/>
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>
           <Row style={{padding: "0 0 15px 0"}}>
             <Col style={{padding: "0 10px 0 0"}}>
-              <Search placeholder="Search" onSearch={() => {
-              }} style={{width: 250}}/>
+              <Search placeholder="Search" onSearch={setNameSearch} style={{width: 250}}/>
             </Col>
             <Col style={{padding: "0 10px 0 0"}}>
-              <Search placeholder="Mandal" onSearch={() => {
-              }} style={{width: 250}}/>
+              <Search placeholder="Mandal" onSearch={setMandalSearch} style={{width: 250}}/>
             </Col>
             <Col style={{padding: "0 10px 0 0"}}>
-              <Search placeholder="Note" onSearch={() => {
-              }} style={{width: 250}}/>
+              <Select
+                style={{width: "170px"}}
+                onChange={setNoteSelect}
+                value={noteSelect}
+                allowClear
+              >
+                <Option value={"Negative"}>Negative</Option>)
+                <Option value={"Neutral"}>Neutral</Option>)
+                <Option value={"Positive"}>Positive</Option>)
+              </Select>
             </Col>
           </Row>
-          <Table dataSource={dataSource} columns={columns}/>
+          <Table dataSource={getViewFarmers()} columns={columns}/>
         </Col>
       </Row>
     </>

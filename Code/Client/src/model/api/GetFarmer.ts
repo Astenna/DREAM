@@ -1,7 +1,7 @@
 export interface GetFarmerSingle {
   id: number,
   farmerNameAndSurname: string,
-  currentNote: number,
+  currentNote: string,
   farmMandalName: string,
   helpRequestsCount: number
 }

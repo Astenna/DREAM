@@ -13,7 +13,7 @@ import {PostAccountLoginRequest, PostAccountLoginResponse} from '../../model/api
 export const authRequests = {
   refreshToken: (refreshToken: string): Promise<AxiosResponse> => (
     noAuthAPI.post<any>(endpoints.INVALID_REFRESH_TOKEN, {refresh: refreshToken})
-  ), //TODO: precise type
+  ),
 
   usePostCreateAccountFarmer: ():
     (values: CreateAccountFarmerRequest) => Promise<AxiosResponse<CreateAccountFarmerResponse>> => {
