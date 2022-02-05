@@ -40,7 +40,7 @@ export const useLogin =
         .then(response => {
           setModalVisible(false)
           const jwtInfo = decryptJWT(response.data.accessToken)
-          // console.log(jwtInfo)
+          console.log(jwtInfo)
           dispatch(setAuthState({
             authenticated: true,
             info: {

@@ -62,7 +62,7 @@ const DashboardLayout = () => {
     }
   ]
 
-  const sidebarMenuItems: { [name in Role]: NavbarItem[] } = {
+  let sidebarMenuItems: { [name in Role]: NavbarItem[] } = {
     farmer: [
       {
         key: "summary",
@@ -83,6 +83,7 @@ const DashboardLayout = () => {
         key: "provide_help",
         node: strings.SIDEBAR.PROVIDE_HELP,
         action: () => navigate(links.DASHBOARD.URL + links.PROVIDE_HELP.URL),
+        hidden: authInfo?.curreNote !== "Positive"
       },
       {
         key: "forum",
