@@ -1,3 +1,4 @@
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -8,20 +9,23 @@ SUCCESS = 'Account created successfully.'
 FAILURE = 'An unidentified error occurred.'
 
 
-def fill_in_field(driver, element_id, keys):
+def fill_in_field(driver, element_id, keys, edit):
     field = driver.find_element(By.ID, element_id)
+    if edit:
+        field.send_keys(Keys.CONTROL, 'a')
+        field.send_keys(Keys.DELETE)
     field.click()
     field.send_keys(keys)
 
 
-def wait_and_fill_in_fields(driver, data):
+def wait_and_fill_in_fields(driver, data, edit=False):
     for idx, (element_id, keys) in enumerate(data.items()):
         if idx == 0:
             _ = WebDriverWait(driver, TIMEOUT).until(
                 EC.element_to_be_clickable((By.ID, element_id))
             )
 
-        fill_in_field(driver, element_id, keys)
+        fill_in_field(driver, element_id, keys, edit)
 
 
 def wait_for_pop_up_to_appear(driver):

@@ -17,7 +17,7 @@ def driver():
     options = Options()
 
     for option in [
-        '--headless',
+        # '--headless',
         '--disable-gpu',
         '--ignore-certificate-errors',
         '--disable-extensions',
@@ -30,8 +30,8 @@ def driver():
     chrome_driver = webdriver.Chrome(service=Service(ChromeDriverManager(
         chrome_type=ChromeType.CHROMIUM, log_level=logging.ERROR).install()), options=options)
 
-    seed_db(chrome_driver)
+    # seed_db(chrome_driver)
 
     yield chrome_driver
 
-    chrome_driver.close()
+    # chrome_driver.close()
