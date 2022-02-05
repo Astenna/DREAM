@@ -127,6 +127,7 @@ const DashboardLayout = () => {
                               <Route path={"/"} element={<PMDashboard/>}/>
                               <Route path={links.SUMMARY.URL} element={<PMUser/>}/>
                               <Route path={links.FARMERS.URL} element={<FarmersList/>}/>
+                              <Route path={links.FARMERS_FARMER.PARAM} element={<FarmersSummary/>}/>
                           </>
                           }
                         </Routes>

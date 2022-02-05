@@ -1,4 +1,4 @@
-import {noAuthAPI} from '../api';
+import {noAuthAPI, tokenAPI} from '../api';
 import {endpoints} from '../../values/endpoints';
 import {AxiosResponse} from 'axios';
 import {CreateAccountFarmerRequest, CreateAccountFarmerResponse} from '../../model/api/CreateAccountFarmer';
@@ -8,6 +8,7 @@ import {
   CreateAccountPolicyMakerResponse
 } from '../../model/api/CreateAccountPolicyMaker';
 import {PostAccountLoginRequest, PostAccountLoginResponse} from '../../model/api/PostAccountLogin';
+import {DeleteAccountRequest, DeleteAccountResponse} from '../../model/api/DeleteAccount';
 
 
 export const authRequests = {
@@ -34,5 +35,15 @@ export const authRequests = {
     const api = useAPI()
     return (values) =>
       api(noAuthAPI.post<PostAccountLoginResponse>(endpoints.POST_ACCOUNT_LOGIN, values))
+  },
+
+  useDeleteAccount: ():
+    (values: DeleteAccountRequest, id: number) => Promise<AxiosResponse<DeleteAccountResponse>> => {
+    const api = useAPI()
+    return (values, id: number) =>
+      api(tokenAPI.delete<DeleteAccountResponse>(
+        endpoints.DELETE_ACCOUNT.replace(':id', String(id)),
+        {data: values}
+      ))
   },
 }

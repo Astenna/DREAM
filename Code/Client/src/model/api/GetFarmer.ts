@@ -1,7 +1,9 @@
+import {FarmerNote} from '../FarmerNote';
+
 export interface GetFarmerSingle {
   id: number,
   farmerNameAndSurname: string,
-  currentNote: string,
+  currentNote: FarmerNote,
   farmMandalName: string,
   helpRequestsCount: number
 }

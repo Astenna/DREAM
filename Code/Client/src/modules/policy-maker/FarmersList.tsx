@@ -7,30 +7,11 @@ import {Note} from "../../model/Note";
 import {useParams} from 'react-router';
 import ViewHeader from '../other/ViewHeader';
 import {farmerRequests} from '../../api/requests/farmerRequests';
+import links from '../../values/links';
+import {FarmerNote} from '../../model/FarmerNote';
 
 const {Search} = Input
 const {Option} = Select;
-
-const dataSource = [
-  {
-    farmerNameAndSurname: 'Json Rajesh',
-    helpRequestsCount: 32,
-    farmMandalName: 'Mavala',
-    currentNote: Note.POSITIVE
-  },
-  {
-    farmerNameAndSurname: 'Sam Smith',
-    helpRequestsCount: 21,
-    farmMandalName: 'Mavala',
-    currentNote: Note.NEGATIVE
-  },
-  {
-    farmerNameAndSurname: 'Luke Skywalker',
-    helpRequestsCount: 48,
-    farmMandalName: 'Mavala',
-    currentNote: Note.NEUTRAL
-  },
-];
 
 const columns = [
   {
@@ -66,10 +47,11 @@ const columns = [
     )
   },
   {
-    title: '',
+    title: 'Action',
+    dataIndex: 'link',
     key: 'link',
     render: (link: string) => (
-      <a><EyeOutlined href={link}/></a>
+      <a href={link}><EyeOutlined/></a>
     ),
   },
 ];
@@ -77,17 +59,21 @@ const columns = [
 const FarmersList = () => {
   const [nameSearch, setNameSearch] = useState<string>()
   const [mandalSearch, setMandalSearch] = useState<string>()
-  const [noteSelect, setNoteSelect] = useState<string>()
+  const [noteSelect, setNoteSelect] = useState<FarmerNote>()
   const {type} = useParams<string>()
-  const [farmers] = farmerRequests.useGetFarmer()
+  const [farmers] = farmerRequests.useGetFarmerOnRender()
 
   const getViewFarmers = () => {
-    let viewFarmers = farmers
+    let viewFarmers: any = farmers
       ?.filter(f => f.farmerNameAndSurname.toUpperCase().startsWith(nameSearch ? nameSearch.toUpperCase() : ""))
       ?.filter(f => f.farmMandalName.toUpperCase().startsWith(mandalSearch ? mandalSearch.toUpperCase() : ""))
     if (noteSelect) {
-      viewFarmers = viewFarmers?.filter(f => f.currentNote === noteSelect)
+      viewFarmers = viewFarmers?.filter((f: any) => f.currentNote === noteSelect)
     }
+    viewFarmers = viewFarmers?.map((f: any) => ({
+      ...f,
+      link: links.DASHBOARD.URL + links.FARMERS_FARMER.URL + `/${f.id}`
+    }))
     return viewFarmers
   }
 

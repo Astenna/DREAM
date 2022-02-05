@@ -1,10 +1,8 @@
 import {useNavigate} from 'react-router';
 import {notification} from 'antd';
-import {useAppDispatch} from '../store/hooks';
 import {logout} from '../store/auth/authSlice';
 import strings from '../values/strings';
 import {AxiosError, AxiosResponse} from 'axios';
-import links from '../values/links';
 import {ApplicationError} from '../model/ApplicationError';
 import {useEffect, useState} from 'react';
 import {useLogout} from './logoutHooks';
@@ -14,7 +12,6 @@ import {useLogout} from './logoutHooks';
  */
 export const useAPIHandleErrors = () => {
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
   const logout = useLogout()
 
   const isAxiosError = (error: AxiosError | ApplicationError | any): error is AxiosError =>
@@ -27,9 +24,9 @@ export const useAPIHandleErrors = () => {
     let handled = false
     if (isAxiosError(error)) {
       if (error.response?.status === 401 || error?.response?.status === 403) {
-        navigate(links.NO_AUTHORIZED_403.URL)
+        notification['error']({message: strings.ERROR.UNIDENTIFIED_ERROR})
       } else if (error?.response?.status === 404) {
-        navigate(links.NOT_FOUND_404.URL)
+        notification['error']({message: strings.ERROR.UNIDENTIFIED_ERROR})
       } else if (error?.response?.status === 429) {
         notification['error']({message: strings.ERROR.CHILL_FOR_A_MOMENT_429})
       } else if (error?.response?.status === 500) {
@@ -95,18 +92,19 @@ export const useAPILocalSearch =
     return [searchItems, searchForItems]
   }
 
-export const useAPILocalStringSearch = <T extends string>(requestPromise: () => Promise<AxiosResponse<T[]>>, count = 5):
-  [T[], (searchString: string) => void] => {
-  const [searchItems, searchForItems] = useAPILocalSearch<T>(
-    requestPromise,
-    (searchString, values) =>
-      !searchString ? [] : values.filter(m =>
-        m.toUpperCase().startsWith(searchString.toUpperCase())).sort().slice(0, count)
-  )
-  return [searchItems, searchForItems]
-}
+export const useAPILocalStringSearch =
+  <T extends string>(requestPromise: () => Promise<AxiosResponse<T[]>>, count = 5):
+    [T[], (searchString: string) => void] => {
+    const [searchItems, searchForItems] = useAPILocalSearch<T>(
+      requestPromise,
+      (searchString, values) =>
+        !searchString ? [] : values.filter(m =>
+          m.toUpperCase().startsWith(searchString.toUpperCase())).sort().slice(0, count)
+    )
+    return [searchItems, searchForItems]
+  }
 
-export const useAPILoadOnRender = <T>(requestPromise: () => Promise<AxiosResponse<T>>): [T | undefined, () => void] => {
+export const useAPILoad = <T>(requestPromise: () => Promise<AxiosResponse<T>>, onRender: boolean): [T | undefined, () => void] => {
   const api = useAPI()
   const [data, setData] = useState<T>()
 
@@ -114,7 +112,28 @@ export const useAPILoadOnRender = <T>(requestPromise: () => Promise<AxiosRespons
     api(requestPromise()).then(res => setData(res.data))
   }
 
-  useEffect(() => loadData(), [])
+  useEffect(() => {
+    if (onRender) {
+      loadData()
+    }
+  }, [])
 
   return [data, loadData]
 }
+
+
+export const useAPILoadWithParams = <S, T>(requestPromise: (value: S) => Promise<AxiosResponse<T>>):
+  [T | undefined, (value: S) => void] => {
+  const api = useAPI()
+  const [data, setData] = useState<T>()
+
+  const loadData = (value: S) => {
+    api(requestPromise(value)).then(res => setData(res.data))
+  }
+
+  return [data, loadData]
+}
+
+export const useAPILoadOnRender = <T>(requestPromise: () => Promise<AxiosResponse<T>>):
+  [T | undefined, () => void] =>
+  useAPILoad<T>(requestPromise, true)

@@ -1,32 +1,15 @@
 import {Table} from 'antd';
 
 import React from 'react';
-
-const productionHistoryData = [
-  {
-    type: "Carrot",
-    amount: "1500 kg",
-    date: new Date("July, 2019")
-  },
-  {
-    type: "Potato",
-    amount: "12500 kg",
-    date: new Date("July, 2019")
-  },
-  {
-    type: "Rice",
-    amount: "11000 kg",
-    date: new Date("July, 2019")
-  },
-]
+import {GetProductionDataResponse} from '../../model/api/GetProductionData';
 
 const productionHistoryColumns = [
   {
     title: () => {
       return <div style={{fontWeight: 'bold'}}>Type</div>;
     },
-    dataIndex: 'type',
-    key: 'type',
+    dataIndex: 'productionType',
+    key: 'productionType',
   },
   {
     title: () => {
@@ -41,18 +24,22 @@ const productionHistoryColumns = [
     },
     dataIndex: 'date',
     key: 'date',
-    render: (date: Date) => (
-      <>{date.toLocaleDateString()}</>
-      //  TODO: Display in "July, 2019" format
+    render: (date: string) => (
+      <>{new Date(date).toLocaleDateString()}</>
     )
   },
 ]
 
-const ProductionData = () => {
+const ProductionData = (props: { data: GetProductionDataResponse | undefined }) => {
   return (
     <>
       <h1 className={"dashboard-h1"}>Production data</h1>
-      <Table dataSource={productionHistoryData} columns={productionHistoryColumns} pagination={{pageSize: 3}}/>
+      <Table
+        loading={!props.data}
+        dataSource={props.data}
+        columns={productionHistoryColumns}
+        pagination={{pageSize: 3}}
+      />
     </>
   );
 }

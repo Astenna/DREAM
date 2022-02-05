@@ -2,27 +2,10 @@ import {StarOutlined} from '@ant-design/icons';
 import {Table} from 'antd';
 
 import colors from "../../values/colors";
-import {Note} from "../../model/Note";
+import {GetFarmerNoteResponse} from '../../model/api/GetFarmerNote';
+import {FarmerNote} from '../../model/FarmerNote';
 
-const NoteHistory = () => {
-  const noteHistoryData = [
-    {
-      note: Note.POSITIVE,
-      agronomist: 'Json Rajesh Junior',
-      date: new Date("2011-09-02")
-    },
-    {
-      note: Note.NEUTRAL,
-      agronomist: 'Json Rajesh Junior',
-      date: new Date("2011-08-01")
-    },
-    {
-      note: Note.NEGATIVE,
-      agronomist: 'Json Rajesh Junior',
-      date: new Date("2011-09-01")
-    },
-  ]
-
+const NoteHistory = (props: { data: GetFarmerNoteResponse | undefined }) => {
   const noteHistoryColumns = [
     {
       title: () => {
@@ -30,18 +13,24 @@ const NoteHistory = () => {
       },
       dataIndex: 'note',
       key: 'note',
-      render: (note: Note) => (
+      render: (note: FarmerNote) => (
         <><StarOutlined
-          style={{color: note === Note.POSITIVE ? colors.SUCCESS : note === Note.NEGATIVE ? colors.DANGER : undefined}}/> {note}
+          style={{
+            color: note === "Positive" ? colors.SUCCESS :
+              note === "Negative" ? colors.DANGER :
+                undefined
+          }}
+        />
+          &nbsp;{note}
         </>
       )
     },
     {
       title: () => {
-        return <div style={{fontWeight: 'bold'}}>Agronomist</div>;
+        return <div style={{fontWeight: 'bold'}}>Policy maker</div>;
       },
-      dataIndex: 'agronomist',
-      key: 'agronomist',
+      dataIndex: 'policyMaker',
+      key: 'policyMaker',
     },
     {
       title: () => {
@@ -49,16 +38,19 @@ const NoteHistory = () => {
       },
       dataIndex: 'date',
       key: 'date',
-      render: (date: Date) => (
-        <>{date.toLocaleDateString()}</>
-      )
+      render: (date: string) => <>{new Date(date).toLocaleDateString()}</>
     },
   ]
 
   return (
     <>
       <h1 className={"dashboard-h1"}>Note history</h1>
-      <Table dataSource={noteHistoryData} columns={noteHistoryColumns} pagination={{pageSize: 3}}/>
+      <Table
+        loading={!props.data}
+        dataSource={props.data}
+        columns={noteHistoryColumns}
+        pagination={{pageSize: 3}}
+      />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import {Col, Descriptions, Divider, Row} from "antd";
 import React from "react";
-import DeleteAccount from "../farmers-summary/DeleteAccount";
+import DeleteAccount from '../delete-account/DeleteAccount';
 
 const userData = {
   name: "Assish Rai",

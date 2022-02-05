@@ -5,4 +5,11 @@ export const endpoints = {
   POST_ACCOUNT_LOGIN: "/api/account/login",
   GET_MANDALS: "/api/mandals",
   GET_FARMER: "/api/farmer",
+  GET_FARMER_DETAIL: "/api/farmer/:id",
+  GET_PRODUCTION_DATA: "/api/farmer/:id/farm/production-data",
+  GET_FARMER_NOTE: "/api/farmer/:id/note",
+  GET_FARMER_REQUESTS: "/api/requests/?RequestCreatedById=:id",
+  POST_FARMER_NOTE: "/api/farmer/:id/note",
+  GET_PROBLEM_TYPE: "/api/problem-type",
+  DELETE_ACCOUNT: "/api/account/:id",
 }
