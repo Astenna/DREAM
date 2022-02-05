@@ -13,5 +13,9 @@
         public string CreatedByAgronomist { get; set; }
 
         public string CreatedByFarmer { get; set; }
+
+        public int? CreatedByAgronomistId { get; set; }
+
+        public int? CreatedByFarmerId { get; set; }
     }
 }
