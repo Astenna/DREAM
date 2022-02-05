@@ -23,6 +23,7 @@ const strings = {
   CHANGE: "Change",
   CHANGE_NOTE: "Change note",
   CREATE_HELP_REQUEST: "Create help request",
+  CREATE_FORUM: "Create forum thread",
   HELP_REQUEST: "Help request",
   ADVICE: "Advice",
   NOTE: {

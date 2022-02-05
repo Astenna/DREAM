@@ -45,6 +45,10 @@ const links = {
     URL: "/forum",
     BREADCRUMB: strings.SIDEBAR.FORUM
   },
+  FORUM_DETAIL: {
+    URL: "/forum/:id",
+    BREADCRUMB: strings.SIDEBAR.FORUM
+  },
   FARMERS: {
     URL: "/farmers/:type",
     BREADCRUMB: strings.SIDEBAR.FARMERS,

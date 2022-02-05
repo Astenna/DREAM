@@ -2,41 +2,32 @@ import React from 'react';
 import {Form, Input, Modal} from 'antd';
 import strings from '../../../values/strings';
 import {Rule} from 'antd/lib/form';
-import {requestRequests} from '../../../api/requests/requestRequests';
-import {PostHelpRequestRequest} from '../../../model/api/PostHelpRequest';
 
-interface CreateHelpRequestModalProps {
+interface CreateForumModalProps {
   isVisible: boolean,
   setVisible: (value: boolean) => void,
-  reloadCallback: () => void,
+  title: string;
+  onFormSubmit: (formValues: any) => void
 }
 
-const CreateHelpRequestModal = (props: CreateHelpRequestModalProps) => {
+const CreateListItem = (props: CreateForumModalProps) => {
   const [form] = Form.useForm();
-  const postRequest = requestRequests.usePostHelpRequest()
 
   const requiredCheck: Rule = {
     required: true,
     message: strings.FORM.ERROR.REQUIRED,
   }
 
-  const sendForm = (formValues: any) => {
-    postRequest(formValues as PostHelpRequestRequest).then(_ => {
-      props.setVisible(false)
-      props.reloadCallback()
-    })
-  }
-
   return (
     <Modal
-      title={strings.CREATE_HELP_REQUEST}
+      title={props.title}
       visible={props.isVisible}
       onOk={form.submit}
       onCancel={() => props.setVisible(false)}>
       <Form
         form={form}
         layout={"vertical"}
-        onFinish={(formValues) => sendForm(formValues)}>
+        onFinish={(formValues) => props.onFormSubmit(formValues)}>
         <Form.Item
           name="topic"
           rules={[requiredCheck]}
@@ -59,4 +50,4 @@ const CreateHelpRequestModal = (props: CreateHelpRequestModalProps) => {
   );
 };
 
-export default CreateHelpRequestModal;
+export default CreateListItem;

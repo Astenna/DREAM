@@ -28,6 +28,8 @@ import MyHelpRequestList from '../request-forum-lists/my-help-requests/MyHelpReq
 import MyHelpRequestListItemDetail from '../request-forum-lists/my-help-requests/MyHelpRequestListItemDetail';
 import HelpRequestList from '../request-forum-lists/help-requests/HelpRequestList';
 import HelpRequestListItemDetail from '../request-forum-lists/help-requests/HelpRequestListItemDetail';
+import ForumList from '../request-forum-lists/forum/ForumList';
+import ForumListItemDetail from '../request-forum-lists/forum/ForumListItemDetail';
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -125,7 +127,8 @@ const DashboardLayout = () => {
                               <Route path={links.MY_HELP_REQUESTS_DETAIL.URL} element={<MyHelpRequestListItemDetail/>}/>
                               <Route path={links.PROVIDE_HELP.URL} element={<HelpRequestList/>}/>
                               <Route path={links.PROVIDE_HELP_DETAIL.URL} element={<HelpRequestListItemDetail/>}/>
-                              <Route path={links.PROVIDE_HELP.URL} element={<></>}/>
+                              <Route path={links.FORUM.URL} element={<ForumList/>}/>
+                              <Route path={links.FORUM_DETAIL.URL} element={<ForumListItemDetail/>}/>
                           </>
                           }
                           {roleNavigation.role === Role.POLICY_MAKER &&

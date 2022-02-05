@@ -2,59 +2,46 @@ import {Button, Col, Divider, Input, Pagination, Row} from 'antd';
 import React, {useEffect, useState} from 'react';
 import strings from '../../../values/strings';
 import ViewHeader from '../../other/ViewHeader';
-import {requestRequests} from '../../../api/requests/requestRequests';
-import {useAppSelector} from '../../../store/hooks';
-import {selectAuthInfo} from '../../../store/auth/authSlice';
-import {GetRequestsResponse} from '../../../model/api/GetRequest';
 import RequestForumListItem from '../generic/RequestForumListItem';
 import links from '../../../values/links';
+import {forumRequests} from '../../../api/requests/forumRequests';
+import {GetForumThreadResponse} from '../../../model/api/GetForumThread';
 import CreateListItem from '../generic/CreateListItem';
 import {PostHelpRequestRequest} from '../../../model/api/PostHelpRequest';
 
 const {Search} = Input
 
-const MyHelpRequestList = () => {
+const ForumList = () => {
   const [pageSize, setPageSize] = useState(5)
-  const [isCreateHelpRequestModalVisible, setCreateHelpRequestModalVisible] = useState(false)
+  const [isCreateModalVisible, setCreateModalVisible] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const [helpRequestListItem, setHelpRequestListItem] = useState<GetRequestsResponse | undefined>([])
-  const [allMyRequest, load] = requestRequests.useGetFarmerRequests()
-  const farmerID = useAppSelector(selectAuthInfo)?.farmerID
-  const postRequest = requestRequests.usePostHelpRequest()
-
-  const reload = () => {
-    if (farmerID) {
-      load(+farmerID)
-    }
-  }
+  const [listItem, setListItem] = useState<GetForumThreadResponse | undefined>([])
+  const [forumThreads, reload] = forumRequests.useGetForum()
+  const postRequest = forumRequests.usePostForum()
 
   useEffect(() => {
-    reload()
-  }, [farmerID])
-
-  useEffect(() => {
-    setHelpRequestListItem(allMyRequest)
-  }, [allMyRequest])
+    setListItem(forumThreads)
+  }, [forumThreads])
 
   const searchHelpRequestListItem = (searchString: string) => {
-    setHelpRequestListItem(allMyRequest?.filter(m =>
+    setListItem(forumThreads?.filter(m =>
       m.topic.toUpperCase().startsWith(searchString.toUpperCase())))
   }
 
   return (
     <>
       <CreateListItem
-        isVisible={isCreateHelpRequestModalVisible}
-        setVisible={setCreateHelpRequestModalVisible}
-        title={strings.CREATE_HELP_REQUEST}
+        isVisible={isCreateModalVisible}
+        setVisible={setCreateModalVisible}
+        title={strings.CREATE_FORUM}
         onFormSubmit={(formValues) => {
           postRequest(formValues as PostHelpRequestRequest).then(_ => {
-            setCreateHelpRequestModalVisible(false)
+            setCreateModalVisible(false)
             reload()
           })
         }}
       />
-      <ViewHeader title={strings.SIDEBAR.MY_HELP_REQUESTS}/>
+      <ViewHeader title={strings.SIDEBAR.FORUM}/>
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>
           <Row justify={'space-between'}>
@@ -63,24 +50,24 @@ const MyHelpRequestList = () => {
                       onSearch={searchHelpRequestListItem}/>
             </Col>
             <Col>
-              <Button style={{margin: "3px"}} type={"primary"} onClick={() => setCreateHelpRequestModalVisible(true)}>
-                {strings.CREATE_HELP_REQUEST}
+              <Button style={{margin: "3px"}} type={"primary"} onClick={() => setCreateModalVisible(true)}>
+                {strings.CREATE_FORUM}
               </Button>
             </Col>
           </Row>
           <Divider style={{margin: "10px 0"}}/>
           <>
             {
-              helpRequestListItem
+              listItem
                 ?.slice((currentPage - 1) * pageSize, currentPage * pageSize)
                 ?.map((item, key) =>
                   <RequestForumListItem
                     key={key}
                     topic={item.topic}
-                    answersCount={item.helpResponsesCount}
+                    answersCount={item.commentsCount}
                     link={links.DASHBOARD.URL +
-                    links.MY_HELP_REQUESTS_DETAIL.URL.replace(':id', String(item.id))}
-                    createdDate={new Date(item.createdOn)}
+                    links.FORUM_DETAIL.URL.replace(':id', String(item.id))}
+                    createdDate={new Date(item.createdDate)}
                   />)
             }
           </>
@@ -89,7 +76,7 @@ const MyHelpRequestList = () => {
               <Pagination
                 style={{paddingBottom: "15px"}}
                 showSizeChanger
-                total={helpRequestListItem?.length}
+                total={listItem?.length}
                 pageSizeOptions={[5, 10, 20]}
                 pageSize={pageSize}
                 onChange={(c, s) => {
@@ -106,4 +93,4 @@ const MyHelpRequestList = () => {
   );
 };
 
-export default MyHelpRequestList;
+export default ForumList;

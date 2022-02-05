@@ -18,10 +18,16 @@ const RequestForumListItemDetailComment = (props: RequestForumListItemDetailComm
           <span className={"dashboard-item-author"}>
             {props.author}
           </span>
-          <span className={"dashboard-item-attribute-bold"}>&nbsp;|&nbsp;</span>
-          <span className={"dashboard-item-attribute-bold"}>
-            {props.authorRole}
-          </span>
+
+          {
+            props.authorRole &&
+            <>
+                <span className={"dashboard-item-attribute-bold"}>&nbsp;|&nbsp;</span>
+                <span className={"dashboard-item-attribute-bold"}>
+                  {props.authorRole}
+                </span>
+            </>
+          }
           <span className={"dashboard-item-attribute-bold"}>&nbsp;|&nbsp;</span>
           <span className={"dashboard-item-attribute-bold"}>
             {props.createdDate.toLocaleString()}

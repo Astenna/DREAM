@@ -3,16 +3,15 @@ import {useParams} from 'react-router';
 import {Col, Row} from 'antd';
 import strings from '../../../values/strings';
 import ViewHeader from '../../other/ViewHeader';
-import {requestRequests} from '../../../api/requests/requestRequests';
 import RequestForumListItemDetailComment from '../generic/RequestForumListItemDetailComment';
-import {PostHelpRequestAdviceRequest} from '../../../model/api/PostHelpRequestAdvice';
+import {forumRequests} from '../../../api/requests/forumRequests';
 import CreateListItemResponse from '../generic/CreateListItemResponse';
 
-const HelpRequestListItemDetail = () => {
+const ForumListItemDetail = () => {
   const {id} = useParams()
   const requestID: number | undefined = id ? +id : undefined
-  const [requestData, load] = requestRequests.useGetFarmerRequestDetail()
-  const postAdvice = requestRequests.usePostRequestAdvice()
+  const [requestData, load] = forumRequests.useGetFarmerRequestDetail()
+  const postComment = forumRequests.usePostComment()
 
   const reload = () => {
     if (requestID) {
@@ -24,9 +23,9 @@ const HelpRequestListItemDetail = () => {
     reload()
   }, [requestID])
 
-  const sendAdvice = (formValues: any) => {
+  const sendComment = (formValues: any) => {
     if (requestID) {
-      postAdvice(formValues as PostHelpRequestAdviceRequest, requestID)
+      postComment({content: formValues.message}, requestID)
         .then(_ => {
           reload()
         })
@@ -35,7 +34,7 @@ const HelpRequestListItemDetail = () => {
 
   return (
     <>
-      <ViewHeader title={`Help request: ${requestData?.topic}`}/>
+      <ViewHeader title={`Forum: ${requestData?.topic}`}/>
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>
           <Row>
@@ -48,11 +47,11 @@ const HelpRequestListItemDetail = () => {
           <Row justify={'end'}>
             <Col style={{margin: "10px 0 0", display: "flex", flexWrap: "wrap"}}>
               <span className={"dashboard-item-author"}>
-                {requestData?.createdBy}
+                {requestData?.createdByFarmer}
               </span>
               <span className={"dashboard-item-attribute-bold"}>&nbsp;|&nbsp;</span>
               <span className={"dashboard-item-attribute-bold"}>
-                {requestData?.createdOn && new Date(requestData.createdOn).toLocaleString()}
+                {requestData?.createdDate && new Date(requestData.createdDate).toLocaleString()}
               </span>
             </Col>
           </Row>
@@ -63,19 +62,16 @@ const HelpRequestListItemDetail = () => {
               </h1>
             </Col>
           </Row>
-          <CreateListItemResponse sendForm={sendAdvice}/>
+          <CreateListItemResponse sendForm={sendComment}/>
           <Row>
             <Col style={{margin: "10px 0 0", width: "100%"}}>
               {
-                requestData?.helpResponses?.map((item, key) =>
+                requestData?.comments?.map((item, key) =>
                   <RequestForumListItemDetailComment
                     key={key}
-                    createdDate={new Date(item.createdOn)}
-                    author={item.createdByFarmer ? item.createdByFarmer :
-                      item.createdByAgronomist ? item.createdByAgronomist : ""}
-                    authorRole={item.createdByFarmer ? "Farmer" :
-                      item.createdByAgronomist ? "Agronomist" : ""}
-                    content={item.message}
+                    createdDate={new Date(item.createdDate)}
+                    author={item.createdByFarmer ? item.createdByFarmer : ""}
+                    content={item.content}
                     deletable={false}
                   />
                 )
@@ -88,4 +84,4 @@ const HelpRequestListItemDetail = () => {
   );
 };
 
-export default HelpRequestListItemDetail;
+export default ForumListItemDetail;

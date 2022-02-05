@@ -20,4 +20,8 @@ export const endpoints = {
   GET_FARMER_REQUEST_DETAIL: "/api/requests/:id",
   POST_FARMER_REQUEST: "/api/requests",
   POST_REQUEST_ADVICE: "/api/requests/:id/response",
+  GET_FORUM: "/api/forum/thread",
+  POST_FORUM: "/api/forum/thread",
+  GET_FORUM_DETAIL: "/api/forum/thread/:id",
+  POST_FORUM_THREAD_COMMENT: "/api/forum/thread/:id/comment",
 }
