@@ -60,6 +60,7 @@ const strings = {
       MANDALS: "Mandals",
       ADD_MANDALS: "Add mandals",
       ADD_PRODUCTION_DATA: "Add production data",
+      MANAGE_PRODUCTION_DATA: "Manage production data",
       REMIND_PASSWORD: "Please enter the e-mail address associated with your account.",
       TOPIC: "Topic",
       DESCRIPTION: "Description",

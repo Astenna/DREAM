@@ -3,7 +3,7 @@ import {GetFarmProductionDataSingle} from './GetProductionData';
 
 export interface PostProductionDataRequest {
   amount: number,
-  date: Date,
+  date: string,
   productionType: ProductionType
 }
 

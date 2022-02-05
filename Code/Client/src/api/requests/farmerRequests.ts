@@ -8,6 +8,9 @@ import {GetFarmerNoteResponse} from '../../model/api/GetFarmerNote';
 import {GetRequestsResponse} from '../../model/api/GetRequest';
 import {AxiosResponse} from 'axios';
 import {PostFarmerNoteRequest, PostFarmerNoteResponse} from '../../model/api/PostFarmerNote';
+import {GetProductionDataProductionTypesResponse} from '../../model/api/GetProductionDataProductionTypes';
+import {PostProductionDataRequest, PostProductionDataResponse} from '../../model/api/PostProductionData';
+import {PutProductionDataRequest, PutProductionDataResponse} from '../../model/api/PutProductionData';
 
 export const farmerRequests = {
   useGetFarmerOnRender: (): [(GetFarmerResponse | undefined), (() => void)] =>
@@ -38,6 +41,28 @@ export const farmerRequests = {
         endpoints.POST_FARMER_NOTE.replace(':id', String(id)),
         values
       ))
-  }
+  },
+
+  useGetProductionTypesOnRender: (): [(GetProductionDataProductionTypesResponse | undefined), (() => void)] =>
+    useAPILoadOnRender<GetProductionDataProductionTypesResponse>(() =>
+      tokenAPI.get<GetProductionDataProductionTypesResponse>(endpoints.GET_PRODUCTION_TYPES)),
+
+  usePostProductionData: ():
+    (values: PostProductionDataRequest) => Promise<AxiosResponse<PostProductionDataResponse>> => {
+    const api = useAPI()
+    return (values) =>
+      api(tokenAPI.post<PostProductionDataResponse>(endpoints.POST_PRODUCTION_DATA, values))
+  },
+
+  usePutProductionData: ():
+    (values: PutProductionDataRequest, id: number) => Promise<AxiosResponse<PutProductionDataResponse>> => {
+    const api = useAPI()
+    return (values, id) =>
+      api(tokenAPI.put<PutProductionDataResponse>(
+        endpoints.PUT_PRODUCTION_DATA.replace(':id', String(id)),
+        values
+      ))
+  },
+
 
 }

@@ -12,4 +12,7 @@ export const endpoints = {
   POST_FARMER_NOTE: "/api/farmer/:id/note",
   GET_PROBLEM_TYPE: "/api/problem-type",
   DELETE_ACCOUNT: "/api/account/:id",
+  GET_PRODUCTION_TYPES: "/api/farmer/farm/production-data/production-types",
+  POST_PRODUCTION_DATA: "/api/farmer/farm/production-data",
+  PUT_PRODUCTION_DATA: "/api/farmer/farm/production-data/:id",
 }
