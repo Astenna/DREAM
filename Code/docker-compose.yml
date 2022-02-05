@@ -52,6 +52,8 @@ services:
             - server
         ports:
             - '1337:80'
+        networks:
+            - postgres
 
 networks:
     postgres:

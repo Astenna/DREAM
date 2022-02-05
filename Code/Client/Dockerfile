@@ -5,7 +5,7 @@ USER root
 WORKDIR /Client
 COPY package.json /Client/
 COPY package-lock.json /Client/
-RUN npm install
+RUN npm install --no-package-lock
 COPY . /Client/
 RUN npm run build
 
