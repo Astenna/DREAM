@@ -2,7 +2,7 @@ import pytest
 
 from constants.endpoints import DASHBOARD
 from constants.labels import FIELD_IS_REQUIRED_WARNING, INVALID_EMAIL
-from helpers.general import FAILURE, wait_for_view_change, wait_for_pop_up_to_appear
+from helpers.general import wait_for_view_change, wait_for_pop_up_to_appear
 from scenarios.log_in import fill_in_email_and_password, open_log_in_dialog, log_in, get_invalid_email_alert, \
     get_invalid_password_alert, user_does_not_exist_message
 from helpers.seed_db import seed_policy_maker, seed_farmer
