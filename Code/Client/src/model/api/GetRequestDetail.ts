@@ -1,4 +1,4 @@
-export interface RequestResponse {
+export interface RequestAdvice {
   id: number;
   message: string;
   createdOn: string;
@@ -14,5 +14,5 @@ export interface GetRequestDetailResponse {
   createdOn: string;
   isAutomatic: false;
   createdBy: string;
-  helpResponses: RequestResponse[]
+  helpResponses: RequestAdvice[]
 }

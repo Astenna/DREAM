@@ -1,9 +1,9 @@
 import React from 'react';
 import {Form, Input, Modal} from 'antd';
-import strings from '../../values/strings';
+import strings from '../../../values/strings';
 import {Rule} from 'antd/lib/form';
-import {requestRequests} from '../../api/requests/requestRequests';
-import {PostHelpRequestRequest} from '../../model/api/PostHelpRequest';
+import {requestRequests} from '../../../api/requests/requestRequests';
+import {PostHelpRequestRequest} from '../../../model/api/PostHelpRequest';
 
 interface CreateHelpRequestModalProps {
   isVisible: boolean,
@@ -13,7 +13,7 @@ interface CreateHelpRequestModalProps {
 
 const CreateHelpRequestModal = (props: CreateHelpRequestModalProps) => {
   const [form] = Form.useForm();
-  const postRequest = requestRequests.usePostProductionData()
+  const postRequest = requestRequests.usePostHelpRequest()
 
   const requiredCheck: Rule = {
     required: true,

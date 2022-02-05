@@ -2,15 +2,9 @@ import React, {useEffect} from 'react';
 import {useParams} from 'react-router';
 import {Col, Row} from 'antd';
 import strings from '../../../values/strings';
-import {Rule} from 'antd/lib/form';
 import ViewHeader from '../../other/ViewHeader';
 import {requestRequests} from '../../../api/requests/requestRequests';
 import RequestForumListItemDetailComment from '../generic/RequestForumListItemDetailComment';
-
-const requiredCheck: Rule = {
-  required: true,
-  message: strings.FORM.ERROR.REQUIRED,
-}
 
 const MyHelpRequestListItemDetail = () => {
   const {id} = useParams()

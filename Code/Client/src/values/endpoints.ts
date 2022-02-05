@@ -16,6 +16,8 @@ export const endpoints = {
   PUT_PRODUCTION_DATA: "/api/farmer/farm/production-data/:id",
   DELETE_PRODUCTION_DATA: "/api/farmer/farm/production-data/:id",
   GET_FARMER_REQUESTS: "/api/requests/?RequestCreatedById=:id",
+  GET_REQUESTS_PROVIDE_HELP: "/api/requests/?RecipientUserId=:id",
   GET_FARMER_REQUEST_DETAIL: "/api/requests/:id",
   POST_FARMER_REQUEST: "/api/requests",
+  POST_REQUEST_ADVICE: "/api/requests/:id/response",
 }

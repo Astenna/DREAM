@@ -1,23 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useParams} from 'react-router';
 import {Button, Col, Form, Input, Row} from 'antd';
 import strings from '../../../values/strings';
-import {Rule} from 'antd/lib/form';
-import HelpRequestListItemDetailComment from './HelpRequestListItemDetailComment';
 import ViewHeader from '../../other/ViewHeader';
-
-export interface HelpRequestListItemDetail {
-  author: { surname: string; name: string };
-  topic: string;
-  description: string;
-  advices: {
-    author: { role: string; surname: string; name: string };
-    createDateTime: Date;
-    description: string
-  }[];
-  id: string;
-  createDateTime: Date;
-}
+import {requestRequests} from '../../../api/requests/requestRequests';
+import RequestForumListItemDetailComment from '../generic/RequestForumListItemDetailComment';
+import {Rule} from 'antd/lib/form';
+import {PostHelpRequestAdviceRequest} from '../../../model/api/PostHelpRequestAdvice';
 
 const requiredCheck: Rule = {
   required: true,
@@ -25,69 +14,50 @@ const requiredCheck: Rule = {
 }
 
 const HelpRequestListItemDetail = () => {
-  const {stringID} = useParams()
-  const id: number = +!stringID
+  const {id} = useParams()
+  const requestID: number | undefined = id ? +id : undefined
+  const [requestData, load] = requestRequests.useGetFarmerRequestDetail()
+  const postAdvice = requestRequests.usePostRequestAdvice()
 
-  const helpRequestDetail: HelpRequestListItemDetail = {
-    id: "",
-    topic: "Lorem ipsum dolor sit amet",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultrices volutpat quam, in eleifend magna interdum ut. Proin in dignissim eros. Praesent at massa sit amet dolor pulvinar sodales. Quisque pharetra lacus sem, nec facilisis magna efficitur tristique. Donec laoreet hendrerit accumsan. In ac purus pharetra, dictum nulla nec, aliquet risus. Nulla eu fringilla felis, id luctus risus. Maecenas a convallis tellus. Sed et nisi dignissim metus luctus auctor. Curabitur non sodales odio, ac tincidunt ipsum.",
-    createDateTime: new Date("2011-10-05T14:48:00.000Z"),
-    author: {
-      name: "Arun",
-      surname: "Ghosh",
-    },
-    advices: [
-      {
-        author: {
-          name: "Arun",
-          surname: "Ghosh",
-          role: "Agronomist",
-        },
-        createDateTime: new Date("2011-10-05T14:48:00.000Z"),
-        description: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. "
-      },
-      {
-        author: {
-          name: "Arun",
-          surname: "Ghosh",
-          role: "Agronomist",
-        },
-        createDateTime: new Date("2011-10-05T14:48:00.000Z"),
-        description: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. "
-      },
-      {
-        author: {
-          name: "Arun",
-          surname: "Ghosh",
-          role: "Agronomist",
-        },
-        createDateTime: new Date("2011-10-05T14:48:00.000Z"),
-        description: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. "
-      },
-    ]
+  const reload = () => {
+    if (requestID) {
+      load(requestID)
+    }
+  }
+
+  useEffect(() => {
+    reload()
+  }, [requestID])
+
+  const sendAdvice = (formValues: any) => {
+    if (requestID) {
+      postAdvice(formValues as PostHelpRequestAdviceRequest, requestID)
+        .then(_ => {
+          reload()
+        })
+    }
   }
 
   return (
     <>
-      <ViewHeader title={`Help request: ${helpRequestDetail.topic}`}/>
+      <ViewHeader title={`Help request: ${requestData?.topic}`}/>
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>
           <Row>
             <Col>
               <p style={{textAlign: 'justify', margin: "20px 0 0 0"}}>
-                {helpRequestDetail.description}
+                {requestData?.description}
               </p>
             </Col>
           </Row>
           <Row justify={'end'}>
             <Col style={{margin: "10px 0 0", display: "flex", flexWrap: "wrap"}}>
               <span className={"dashboard-item-author"}>
-                {`${helpRequestDetail.author.name} ${helpRequestDetail.author.surname}`}
+                {requestData?.createdBy}
               </span>
               <span className={"dashboard-item-attribute-bold"}>&nbsp;|&nbsp;</span>
               <span className={"dashboard-item-attribute-bold"}>
-                {helpRequestDetail.createDateTime.toLocaleString()}
+                {requestData?.createdOn && new Date(requestData.createdOn).toLocaleString()}
               </span>
             </Col>
           </Row>
@@ -102,10 +72,10 @@ const HelpRequestListItemDetail = () => {
             <Col style={{margin: "10px 0 0", width: "100%"}}>
               <Form
                 name={"provideAdvice"}
-                onFinish={(value) => console.log(value)}
+                onFinish={sendAdvice}
               >
                 <Form.Item
-                  name="content"
+                  name="message"
                   rules={[requiredCheck]}
                   style={{marginBottom: "10px"}}
                 >
@@ -126,8 +96,17 @@ const HelpRequestListItemDetail = () => {
           <Row>
             <Col style={{margin: "10px 0 0", width: "100%"}}>
               {
-                helpRequestDetail.advices.map((item, key) =>
-                  <HelpRequestListItemDetailComment key={key} item={item}/>
+                requestData?.helpResponses?.map((item, key) =>
+                  <RequestForumListItemDetailComment
+                    key={key}
+                    createdDate={new Date(item.createdOn)}
+                    author={item.createdByFarmer ? item.createdByFarmer :
+                      item.createdByAgronomist ? item.createdByAgronomist : ""}
+                    authorRole={item.createdByFarmer ? "Farmer" :
+                      item.createdByAgronomist ? "Agronomist" : ""}
+                    content={item.message}
+                    deletable={false}
+                  />
                 )
               }
             </Col>

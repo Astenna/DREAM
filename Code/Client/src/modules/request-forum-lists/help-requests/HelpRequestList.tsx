@@ -1,67 +1,45 @@
-import {Button, Col, Divider, Input, Pagination, Row} from 'antd';
-import React, {useState} from 'react';
-import HelpRequestListItem, {HelpRequestListItemProps} from './HelpRequestListItem';
+import {Col, Divider, Input, Pagination, Row} from 'antd';
+import React, {useEffect, useState} from 'react';
 import strings from '../../../values/strings';
 import ViewHeader from '../../other/ViewHeader';
+import {GetRequestsResponse} from '../../../model/api/GetRequest';
+import {requestRequests} from '../../../api/requests/requestRequests';
+import {useAppSelector} from '../../../store/hooks';
+import {selectAuthInfo} from '../../../store/auth/authSlice';
+import RequestForumListItem from '../generic/RequestForumListItem';
+import links from '../../../values/links';
 
 const {Search} = Input
 
-let allHelpRequestListItems: HelpRequestListItemProps[] = [
-  {
-    id: "1",
-    title: "Lorem ipsum blah blah blah blah blah",
-    commentCount: 1,
-    lastCommentDate: new Date("2011-10-05"),
-    createDateTime: new Date("2011-10-05T14:48:00.000Z"),
-    author: {
-      name: "Grzegorz",
-      surname: "Grzegoski",
-    }
-  },
-  {
-    id: "1",
-    title: "sdfsdf Lorem ipsum blah blah blah blah blah",
-    commentCount: 1,
-    lastCommentDate: new Date("2011-10-05"),
-    createDateTime: new Date("2011-10-05T14:48:00.000Z"),
-    author: {
-      name: "Grzegorz",
-      surname: "Grzegoski",
-    }
-  },
-  {
-    id: "1",
-    title: "aaaaasdfsdf Lorem ipsum blah blah blah blah blah",
-    commentCount: 1,
-    lastCommentDate: new Date("2011-10-05"),
-    createDateTime: new Date("2011-10-05T14:48:00.000Z"),
-    author: {
-      name: "Grzegorz",
-      surname: "Grzegoski",
-    }
-  },
-]
-
-// dummy values TODO
-// allHelpRequestListItems =
-//   allHelpRequestListItems.reduce((p: HelpRequestListItemProps[], c) =>
-//     p.concat(Array(70).fill(c)), [])
 
 const HelpRequestList = () => {
   const [pageSize, setPageSize] = useState(5)
-  const [isCreateHelpRequestModalVisible, setCreateHelpRequestModalVisible] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const [helpRequestListItem, setHelpRequestListItem] = useState(allHelpRequestListItems)
+  const [helpRequestListItem, setHelpRequestListItem] = useState<GetRequestsResponse | undefined>([])
+  const [allMyRequest, load] = requestRequests.useGetRequestsProvideHelp()
+  const farmerID = useAppSelector(selectAuthInfo)?.farmerID
+
+  const reload = () => {
+    if (farmerID) {
+      load(+farmerID)
+    }
+  }
+
+  useEffect(() => {
+    reload()
+  }, [farmerID])
+
+  useEffect(() => {
+    setHelpRequestListItem(allMyRequest)
+  }, [allMyRequest])
 
   const searchHelpRequestListItem = (searchString: string) => {
-    setHelpRequestListItem(allHelpRequestListItems.filter(m =>
-      m.title.toUpperCase().startsWith(searchString.toUpperCase())))
+    setHelpRequestListItem(allMyRequest?.filter(m =>
+      m.topic.toUpperCase().startsWith(searchString.toUpperCase())))
   }
 
   return (
     <>
-      {/*<CreateHelpRequestModal isVisible={isCreateHelpRequestModalVisible}*/}
-      {/*                        setVisible={setCreateHelpRequestModalVisible}/>*/}
       <ViewHeader title={strings.SIDEBAR.MY_HELP_REQUESTS}/>
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>
@@ -70,19 +48,21 @@ const HelpRequestList = () => {
               <Search style={{margin: "3px", width: 250}} placeholder="Search by name"
                       onSearch={searchHelpRequestListItem}/>
             </Col>
-            <Col>
-              <Button style={{margin: "3px"}} type={"primary"} onClick={() => setCreateHelpRequestModalVisible(true)}>
-                {strings.CREATE_HELP_REQUEST}
-              </Button>
-            </Col>
           </Row>
           <Divider style={{margin: "10px 0"}}/>
           <>
             {
               helpRequestListItem
-                .slice((currentPage - 1) * pageSize, currentPage * pageSize)
-                .map((item, key) =>
-                  <HelpRequestListItem key={key} item={item}/>)
+                ?.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+                ?.map((item, key) =>
+                  <RequestForumListItem
+                    key={key}
+                    topic={item.topic}
+                    answersCount={item.helpResponsesCount}
+                    link={links.DASHBOARD.URL +
+                    links.PROVIDE_HELP_DETAIL.URL.replace(':id', String(item.id))}
+                    createdDate={new Date(item.createdOn)}
+                  />)
             }
           </>
           <Row justify={'end'}>
@@ -90,7 +70,7 @@ const HelpRequestList = () => {
               <Pagination
                 style={{paddingBottom: "15px"}}
                 showSizeChanger
-                total={helpRequestListItem.length}
+                total={helpRequestListItem?.length}
                 pageSizeOptions={[5, 10, 20]}
                 pageSize={pageSize}
                 onChange={(c, s) => {

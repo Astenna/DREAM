@@ -16,11 +16,9 @@ import {Role} from '../../model/Role';
 import {NavbarItem} from '../navbar/NavbarProperties';
 import links from '../../values/links';
 import {Route, Routes} from 'react-router-dom';
-import HelpRequestList from '../request-forum-lists/HelpRequestList';
 import PMUser from "../policy-maker/PMUser";
 import PMDashboard from "../policy-maker/PMDashboard";
 import FarmersList from "../policy-maker/FarmersList";
-import HelpRequestListItemDetail from '../request-forum-lists/HelpRequestListItemDetail';
 import FarmerProductionData from '../production-data/FarmerProductionData';
 import {useLogout} from '../../api/logoutHooks';
 import FarmerDashboard from '../farmer-dashboard/FarmerDashboard';
@@ -28,6 +26,8 @@ import PMFarmersSummary from '../farmers-summary/PMFarmersSummary';
 import MyFarmersSummary from '../farmers-summary/MyFarmersSummary';
 import MyHelpRequestList from '../request-forum-lists/my-help-requests/MyHelpRequestList';
 import MyHelpRequestListItemDetail from '../request-forum-lists/my-help-requests/MyHelpRequestListItemDetail';
+import HelpRequestList from '../request-forum-lists/help-requests/HelpRequestList';
+import HelpRequestListItemDetail from '../request-forum-lists/help-requests/HelpRequestListItemDetail';
 
 const DashboardLayout = () => {
   const navigate = useNavigate();

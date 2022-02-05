@@ -1,7 +1,7 @@
 import {Button, Col, Divider, Input, Pagination, Row} from 'antd';
 import React, {useEffect, useState} from 'react';
 import strings from '../../../values/strings';
-import CreateHelpRequestModal from './../CreateHelpRequestModal';
+import CreateHelpRequestModal from './CreateHelpRequestModal';
 import ViewHeader from '../../other/ViewHeader';
 import {requestRequests} from '../../../api/requests/requestRequests';
 import {useAppSelector} from '../../../store/hooks';
