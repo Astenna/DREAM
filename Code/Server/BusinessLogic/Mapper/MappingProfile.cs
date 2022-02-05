@@ -74,11 +74,6 @@ namespace BusinessLogic.Mapper
                 .ForMember(dest => dest.CurrentNote, src => src.Ignore());
         }
 
-        private int? GetHelpResponsesCount(HelpRequest x)
-        {
-            return x.HelpResponses?.Count;
-        }
-
         private Note GetEnumNoteEnumValue(string note)
         {
             return Enum.TryParse(note, out Note parsedNote) ? parsedNote : Note.Neutral;

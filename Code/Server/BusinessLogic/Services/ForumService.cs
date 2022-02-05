@@ -40,6 +40,7 @@ namespace BusinessLogic.Services
             var forumThread = _dreamDbContext.ForumThreads
                 .Include(x => x.CreatedBy.User)
                 .Include(x => x.Comments)
+                .ThenInclude(x => x.CreatedBy.User)
                 .SingleOrDefault(x => x.Id == id);
             
             if (forumThread is null)

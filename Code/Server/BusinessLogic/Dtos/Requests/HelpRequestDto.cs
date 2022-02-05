@@ -14,6 +14,8 @@
 
         public string CreatedBy { get; set; }
 
+        public int CreatedById { get; set; }
+
         public List<HelpResponseDto> HelpResponses { get; set; }
     }
 }
