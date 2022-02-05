@@ -1,4 +1,4 @@
-URL = 'http://localhost:3000/'
+URL = 'http://localhost:1337/'
 DASHBOARD = f'{URL}dashboard'
 SUMMARY = f'{DASHBOARD}/summary'
 FARMERS = f'{DASHBOARD}/farmers'
