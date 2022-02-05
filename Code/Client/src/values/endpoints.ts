@@ -8,7 +8,6 @@ export const endpoints = {
   GET_FARMER_DETAIL: "/api/farmer/:id",
   GET_PRODUCTION_DATA: "/api/farmer/:id/farm/production-data",
   GET_FARMER_NOTE: "/api/farmer/:id/note",
-  GET_FARMER_REQUESTS: "/api/requests/?RequestCreatedById=:id",
   POST_FARMER_NOTE: "/api/farmer/:id/note",
   GET_PROBLEM_TYPE: "/api/problem-type",
   DELETE_ACCOUNT: "/api/account/:id",
@@ -16,4 +15,6 @@ export const endpoints = {
   POST_PRODUCTION_DATA: "/api/farmer/farm/production-data",
   PUT_PRODUCTION_DATA: "/api/farmer/farm/production-data/:id",
   DELETE_PRODUCTION_DATA: "/api/farmer/farm/production-data/:id",
+  GET_FARMER_REQUESTS: "/api/requests/?RequestCreatedById=:id",
+  GET_FARMER_REQUEST_DETAIL: "/api/requests/:id",
 }

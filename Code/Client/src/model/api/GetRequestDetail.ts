@@ -3,8 +3,8 @@ export interface RequestResponse {
   message: string;
   createdOn: string;
   helpRequestId: number;
-  createdByAgronomist: boolean | null;
-  createdByFarmer: string
+  createdByAgronomist: string | null | undefined;
+  createdByFarmer: string | null | undefined
 }
 
 export interface GetRequestDetailResponse {
