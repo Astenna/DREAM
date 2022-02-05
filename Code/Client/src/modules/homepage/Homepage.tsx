@@ -37,7 +37,11 @@ const Homepage = () => {
       <LogInModal isVisible={isLogInFormVisible} setVisible={setLogInFormVisible}/>
       <CreateAccountModal isVisible={isCreateAccountFormVisible} setVisible={setCreateAccountFormVisible}/>
       <Header style={{backgroundColor: colors.HOMEPAGE.GRAY, padding: "0 10px"}}>
-        <HorizontalNavbarResponsive menuItems={menuItems} menuBarProperties={{backgroundColor: colors.HOMEPAGE.GRAY}}/>
+        <HorizontalNavbarResponsive
+          menuItems={menuItems}
+          menuBarProperties={{backgroundColor: colors.HOMEPAGE.GRAY}}
+          hideLogo
+        />
       </Header>
       <Content style={{backgroundColor: colors.WHITE}}>
         <RowBlock className={"flex-center"} style={{backgroundColor: colors.HOMEPAGE.GRAY}}>

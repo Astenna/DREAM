@@ -35,11 +35,14 @@ const HorizontalNavbarResponsive = (props: NavbarProperties) => {
         <Button className={"h-navbar-dropdown-button"} shape="circle" icon={<UnorderedListOutlined/>} size="large"/>
       </Dropdown>
       <Row className={"h-navbar-header-container"}>
-        <Col className={"flex-center"}>
-          <Link className={"flex-center"} to={"/"}>
-            <Logo/>
-          </Link>
-        </Col>
+        {
+          !props?.hideLogo &&
+          <Col className={"flex-center"}>
+              <Link className={"flex-center"} to={"/"}>
+                  <Logo/>
+              </Link>
+          </Col>
+        }
         <Col className={"h-navbar-h-menu-col"}>
           {horizontalMenu}
         </Col>

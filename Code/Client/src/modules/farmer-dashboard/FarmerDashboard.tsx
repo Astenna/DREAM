@@ -22,6 +22,7 @@ const FarmerDashboard = () => {
             </Col>
           </Row>
 
+          <Row style={{margin: "20px"}}/>
           <Row>
             <Col style={{width: "50%", padding: "0 20px 0 0"}}>
               <RecentProductionData/>

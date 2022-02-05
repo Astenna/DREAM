@@ -9,6 +9,7 @@ export interface NavbarItem {
 }
 
 export interface NavbarProperties {
+  hideLogo?: boolean,
   menuItems: NavbarItem[],
   menuBarProperties?: CSSProperties
 }
