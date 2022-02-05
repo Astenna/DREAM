@@ -1,37 +1,37 @@
 import React from 'react';
 import {Col, Row} from 'antd';
 
-export interface HelpRequestListItemDetailCommentProps {
-  item: {
-    author: { role: string; surname: string; name: string };
-    createDateTime: Date;
-    description: string
-  }
+export interface RequestForumListItemDetailCommentProps {
+  author: string;
+  authorRole?: string;
+  content: string
+  createdDate: Date;
+  deletable: boolean;
+  onDelete?: () => void
 }
 
-const HelpRequestListItemDetailComment = (props: HelpRequestListItemDetailCommentProps) => {
-  const item = props.item
+const RequestForumListItemDetailComment = (props: RequestForumListItemDetailCommentProps) => {
   return (
     <div style={{marginBottom: "5px"}}>
       <Row>
         <Col style={{display: "flex", flexWrap: "wrap"}}>
           <span className={"dashboard-item-author"}>
-            {`${item.author.name} ${item.author.surname}`}
+            {props.author}
           </span>
           <span className={"dashboard-item-attribute-bold"}>&nbsp;|&nbsp;</span>
           <span className={"dashboard-item-attribute-bold"}>
-            {item.author.role}
+            {props.authorRole}
           </span>
           <span className={"dashboard-item-attribute-bold"}>&nbsp;|&nbsp;</span>
           <span className={"dashboard-item-attribute-bold"}>
-            {item.createDateTime.toLocaleString()}
+            {props.createdDate.toLocaleString()}
           </span>
         </Col>
       </Row>
       <Row>
         <Col style={{width: "100%"}}>
           <p style={{textAlign: 'justify'}}>
-            {item.description}
+            {props.content}
           </p>
         </Col>
       </Row>
@@ -39,4 +39,4 @@ const HelpRequestListItemDetailComment = (props: HelpRequestListItemDetailCommen
   );
 };
 
-export default HelpRequestListItemDetailComment;
+export default RequestForumListItemDetailComment;

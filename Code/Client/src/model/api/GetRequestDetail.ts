@@ -1,10 +1,10 @@
-export interface RequestResponse {
+export interface RequestAdvice {
   id: number;
   message: string;
   createdOn: string;
   helpRequestId: number;
-  createdByAgronomist: boolean | null;
-  createdByFarmer: string
+  createdByAgronomist: string | null | undefined;
+  createdByFarmer: string | null | undefined
 }
 
 export interface GetRequestDetailResponse {
@@ -14,5 +14,5 @@ export interface GetRequestDetailResponse {
   createdOn: string;
   isAutomatic: false;
   createdBy: string;
-  helpResponses: RequestResponse[]
+  helpResponses: RequestAdvice[]
 }

@@ -14,13 +14,14 @@ import {Role} from "../../model/Role";
 import ViewHeader from '../other/ViewHeader';
 import {farmerRequests} from '../../api/requests/farmerRequests';
 import DeleteAccount from '../delete-account/DeleteAccount';
+import {requestRequests} from '../../api/requests/requestRequests';
 
 const FarmersSummary = (props: { farmerID: number | undefined }) => {
   const roleNavigation = useAppSelector(selectRoleNavigation);
   const [farmerDetail, loadFarmerDetail] = farmerRequests.useGetFarmerDetail()
   const [productionData, loadProductionData] = farmerRequests.useGetFarmerProductionData()
   const [noteHistory, loadNoteHistory] = farmerRequests.useGetFarmerNoteHistory()
-  const [helpRequests, loadHelpRequests] = farmerRequests.useGetFarmerRequests()
+  const [helpRequests, loadHelpRequests] = requestRequests.useGetFarmerRequests()
   const farmerID = props.farmerID;
 
   useEffect(() => {
