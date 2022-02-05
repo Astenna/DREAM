@@ -3,10 +3,24 @@
 \section{Programming Languages}
 
 \subsection{TypeScript}
-\textit{TypeScript} \cite{type_script},
+TypeScript is a strongly typed programming language build on JavaScript and maintained by Microsoft. According to Stack Overflow 2020 Developer survey, it was the second most loved programming language \cite{type_script}. Its several downsides and upsides are described below.
+
+\textbf{Advantages}
+\begin{itemize}
+    \item Readability - thanks to strong typing, the code is more self-documenting, making it more suitable for large-scale projects.
+    \item Early spotted bugs and types error - data types error are not only detected at runtime like in dynamic typing with JavaScipt, but also during compile time.
+    \item Rich IDE support - information about types combined with IDEs support can produce a significant productivity boost, offering features like autocompletion, suggestions or just better code navigation.
+\end{itemize}
+
+\textbf{Disadvantages}
+\begin{itemize}
+    \item TypeScript is just a subset of JavaScript - experienced JavaScript developers may happen to run into some issues trying to use functions that are not available in TypeScript.
+    \item Requires writing more code - especially in case of generic functions, the types definitions can look bloated and defined inline by default.
+    \item Code needs to be transpiled into JavaScript - it can be done on the fly, but still can be a bottleneck for larger code bases.
+\end{itemize}
 
 \subsection{C\#}
-C\# is a general purpose, strongly typed, object-oriented programming language designed by Microsoft. It runs on .NET execution system called the common language runtime (CLR) that not only provides runtime services, but also extensive libraries designed for building many kinds of apps \cite{c-sharp-tour}. Below, you can find some of its advantages and disadvantages .
+C\# is a general purpose, strongly typed, object-oriented programming language designed by Microsoft. It runs on .NET execution system called the common language runtime (CLR) that not only provides runtime services, but also extensive libraries designed for building many kinds of apps \cite{c-sharp-tour}. Below, you can find some of its advantages and disadvantages.
 
 \textbf{Advantages}
 \begin{itemize}
@@ -24,6 +38,49 @@ C\# is a general purpose, strongly typed, object-oriented programming language d
 
 \section{Frameworks and libraries}
  \textit{React Native} \cite{react_native}, \textit{Ant Design} \cite{ant_design}, \textit{Redux} \cite{redux}
- \subsection{Entity Framework}
+
+\subsection{Entity Framework}
+Entity Framework is an open source, object-relational mapper for .NET that supports many types of databases. It provides support for LINQ queries, updates, schema migrations and change of tracking \cite{ef}\cite{ef-doc}. 
+
+\textbf{Advantages}
+\begin{itemize}
+    \item No SQL knowledge necessary - the developers are not required to write SQL queries to interact with the database since Entity Framework takes the burden of translating the LINQ queries into SQL. 
+    \item Defines a common syntax that can be used both for manipulating collections stored in application's memory or database, regardless of the database engine used.
+\end{itemize}
+
+\textbf{Disadvantages}
+\begin{itemize}
+    \item Possible lack of support for the latest or more sophisticated database engine features - entity framework may not immediately reflect the latest features added to database engines.
+    \item Sometimes, lack of knowledge about the way how LINQ queries are translated may lead to creation of very expensive SQL queries.
+\end{itemize}
+
+\subsection{FluentValidation}
+FluentValidation is a .NET library designed for definition of strongly-typed validation rules. It allows for setting up dedicated validator classes that define validation rules using fluent API \cite{fluentvalidation}.
+
+\textbf{Advantages}
+\begin{itemize}
+    \item Easy creation of readable validation rules with meaningful error messages
+    \item Decouples validation rules and models
+    \item Can be added as a middleware that is executed even before the request with given model reaches controller
+\end{itemize}
+\textbf{Disadvantages}
+\begin{itemize}
+    \item Rules may be hard to debug
+\end{itemize}
+
+\subsection{AutoMapper}
+AutoMapper is a library build for automating object-to-object mapping. The library aims at simplifying the task of mapping one object to another. It automatically maps fields with the same name leveraging reflection and for more complex cases it allows configuration of custom projections.
+
+\textbf{Advantages}
+\begin{itemize}
+    \item Saves time automating mapping of fields with the same value
+    \item Mappings configurations may be tested automatically using functions from the library
+\end{itemize}
+\textbf{Disadvantages}
+\begin{itemize}
+    \item Refactoring issues - after renaming a field that was used in the automatic mapping (name matching), the mapping will break without any compile time errors.
+    \item Hard to debug
+\end{itemize}
+
 \section{Middleware}
 \todo{can we remove it? or, what do we describe here?}
