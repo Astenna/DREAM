@@ -36,21 +36,24 @@ const TipsAndSuggestions = () => {
                   <TipsAndSuggestionsItem key={key} item={item}/>)
             }
           </>
-          <Row justify={'end'}>
-            <Col>
-              <Pagination
-                style={{paddingBottom: "15px"}}
-                showSizeChanger
-                total={suggestions?.length}
-                pageSizeOptions={[3, 5, 10, 20]}
-                pageSize={pageSize}
-                onChange={(c, s) => {
-                  setCurrentPage(c)
-                  setPageSize(s)
-                }}
-              />
-            </Col>
-          </Row>
+          {
+            (suggestions && suggestions.length > 0) &&
+            <Row justify={'end'}>
+                <Col>
+                    <Pagination
+                        style={{paddingBottom: "15px"}}
+                        showSizeChanger
+                        total={suggestions?.length}
+                        pageSizeOptions={[3, 5, 10, 20]}
+                        pageSize={pageSize}
+                        onChange={(c, s) => {
+                          setCurrentPage(c)
+                          setPageSize(s)
+                        }}
+                    />
+                </Col>
+            </Row>
+          }
         </Col>
       </Row>
     </>
