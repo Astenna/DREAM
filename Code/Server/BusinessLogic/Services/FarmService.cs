@@ -32,7 +32,7 @@ namespace BusinessLogic.Services
 
             var productionDataType = await _dreamDbContext.FarmProductionTypes
                 .SingleOrDefaultAsync(x => x.Name == createProductionData.ProductionType);
-            if(productionDataType is null)
+            if (productionDataType is null)
             {
                 throw new ApiException($"ProductionType {createProductionData.ProductionType} is not a valid production type!");
             }
@@ -58,7 +58,7 @@ namespace BusinessLogic.Services
                 throw new ApiException($"Production data with id {productionDataId} does not exist!", ErrorCode.NotFound);
             }
 
-            if(farmer.Id != productionDataToEdit.Farm.Farmer.Id)
+            if (farmer.Id != productionDataToEdit.Farm.Farmer.Id)
             {
                 throw new ApiException($"Farmer can edit only his own production data!", ErrorCode.AuthorizationException);
             }
@@ -80,6 +80,30 @@ namespace BusinessLogic.Services
             return _mapper.Map<FarmProductionDataDto>(productionDataToEdit);
         }
 
+        public async Task<FarmProductionDataDto> DeleteProductionDataAsync(int productionDataId)
+        {
+            var farmer = _httpContext.GetFarmerUsingClaims(_dreamDbContext);
+            var productionData = await _dreamDbContext.FarmProductions
+                .Include(x => x.ProductionType)
+                .Include(x => x.Farm.Farmer)
+                .SingleOrDefaultAsync(x => x.Id == productionDataId);
+
+            if (productionData is null)
+            {
+                throw new ApiException($"Production data with id {productionDataId} not found.", ErrorCode.NotFound);
+            }
+
+            if (farmer.Id != productionData.Farm.Farmer.Id)
+            {
+                throw new ApiException($"Farmer can remove only his own production data!", ErrorCode.AuthorizationException);
+            }
+
+            _dreamDbContext.FarmProductions.Remove(productionData);
+            await _dreamDbContext.SaveChangesAsync();
+
+            return _mapper.Map<FarmProductionDataDto>(productionData);
+        }
+
         public async Task<List<FarmProductionDataDto>> GetProductionDataAsync(int farmerId, ProductionDataQuery productionDataQuery)
         {
             var farmer = await _dreamDbContext.Farmers.SingleOrDefaultAsync(x => x.Id == farmerId);
@@ -88,9 +112,9 @@ namespace BusinessLogic.Services
                 throw new ApiException($"Farmer with id {farmerId} not found!", ErrorCode.NotFound);
             }
 
-           var production = _dreamDbContext.FarmProductions
-                .Include(x => x.ProductionType)
-                .Where(x => x.FarmId == farmer.FarmId);
+            var production = _dreamDbContext.FarmProductions
+                 .Include(x => x.ProductionType)
+                 .Where(x => x.FarmId == farmer.FarmId);
 
             return _mapper.Map<List<FarmProductionDataDto>>(production);
         }

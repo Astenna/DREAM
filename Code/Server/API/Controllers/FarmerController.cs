@@ -62,6 +62,13 @@ namespace API.Controllers
             return Ok(result);
         }
 
+        [HttpDelete("farm/production-data/{productionDataId}")]
+        public async Task<IActionResult> DeleteProductionDataAsync([FromRoute] int productionDataId)
+        {
+            var result = await _farmService.DeleteProductionDataAsync(productionDataId);
+            return Ok(result);
+        }
+
         [HttpGet("{farmerId}/farm/production-data")]
         public async Task<IActionResult> GetProductionDataAsync([FromRoute] int farmerId, [FromQuery] ProductionDataQuery query)
         {
