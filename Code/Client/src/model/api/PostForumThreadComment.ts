@@ -7,4 +7,5 @@ export interface PostForumThreadCommentResponse {
   content: string;
   createdDate: Date;
   createdByFarmer: string;
+  createdByFarmerId: number;
 }

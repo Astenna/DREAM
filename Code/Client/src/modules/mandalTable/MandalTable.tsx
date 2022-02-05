@@ -37,7 +37,6 @@ const MandalTable = (props: MandalTypeProps) => {
     const filteredData = data.filter(value => !selectedRowKeys.includes(value.key))
     setData(filteredData)
     setSelectedRowKeys([])
-    console.log(props?.onChange)
     if (props?.onChange) {
       props.onChange(filteredData.map(value => value.mandal))
     }

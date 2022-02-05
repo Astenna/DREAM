@@ -1,6 +1,5 @@
 /**
  * Links used in application.
- * TODO: not finished
  */
 import strings from './strings';
 

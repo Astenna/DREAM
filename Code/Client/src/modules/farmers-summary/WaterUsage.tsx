@@ -50,7 +50,6 @@ const WaterUsage = () => {
     <>
       <h1 className={"dashboard-h1"} style={{padding: "0 0 10px 0"}}>Water usage</h1>
       <div style={{padding: "0 0 5px 0"}}>Average in August, 2019: 3.6 m3</div>
-      {/*TODO: Add date*/}
       <Table dataSource={waterUsageData} columns={waterUsageDataColumns} pagination={{pageSize: 4}}/>
     </>
   );

@@ -20,11 +20,10 @@ export const useCreateAccount =
       if (loading) {
         return
       }
-      console.log(createAccountForm) //TODO: delete this line
       setLoading(true)
       if (createAccountForm.role === Role.FARMER) {
         const form = createAccountForm as CreateAccountFarmerRequest
-        form.farmName = "dummy" //TODO
+        form.farmName = ""
         postCreateAccountFarmer(form)
           .then(_ => {
             setModalVisible(false)

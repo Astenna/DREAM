@@ -2,16 +2,9 @@ import React from "react";
 import {Col, Divider, Row} from "antd";
 import {ClockCircleOutlined, ShoppingOutlined} from "@ant-design/icons";
 import {purple} from "@ant-design/colors";
-import {Moment} from "moment";
+import {GetFarmProductionDataSingle} from '../../model/api/GetProductionData';
 
-export interface RecentProductionDataItemProps {
-  id: string
-  type: string
-  amount: number
-  date: Moment
-}
-
-const RecentProductionDataItem = (props: { item: RecentProductionDataItemProps }) => {
+const RecentProductionDataItem = (props: { item: GetFarmProductionDataSingle }) => {
   const item = props.item
 
   return (
@@ -20,14 +13,14 @@ const RecentProductionDataItem = (props: { item: RecentProductionDataItemProps }
         <Col style={{width: "100%"}}>
           <Row justify={'space-between'}>
             <div style={{fontWeight: "normal"}} className={"dashboard-list-item-title "}>
-              {item.type}
+              {item.productionType}
             </div>
             <span style={{marginRight: "10px"}}>
               <ShoppingOutlined style={{color: purple.primary, marginRight: "3px"}}/>
               <span className={"dashboard-item-attribute"} style={{marginRight: "10px"}}>{item.amount} kg</span>
 
               <ClockCircleOutlined style={{color: purple.primary, marginRight: "3px"}}/>
-              <span className={"dashboard-item-attribute"}>{item.date.toDate().toLocaleDateString()}</span>
+              <span className={"dashboard-item-attribute"}>{new Date(item.date).toLocaleDateString()}</span>
             </span>
           </Row>
         </Col>

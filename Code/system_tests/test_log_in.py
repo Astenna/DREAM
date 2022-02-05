@@ -1,3 +1,5 @@
+import pytest
+
 from constants.endpoints import DASHBOARD
 from constants.labels import FIELD_IS_REQUIRED_WARNING, INVALID_EMAIL
 from helpers.general import FAILURE, wait_for_view_change, wait_for_pop_up_to_appear
@@ -5,21 +7,33 @@ from scenarios.log_in import fill_in_email_and_password, open_log_in_dialog, log
     get_invalid_password_alert
 from helpers.seed_db import seed_policy_maker, seed_farmer
 from models.User import User
+from scenarios.log_out import log_out
 
 
-def test_log_in_policy_maker(driver):
+@pytest.fixture(scope='function')
+def f_log_out(driver):
+    yield
+    log_out(driver)
+
+
+@pytest.mark.usefixtures('f_log_out')
+def test_log_in_policy_maker(driver, p_policy_maker=None):
+    policy_maker = seed_policy_maker if p_policy_maker is None else p_policy_maker
+
     open_log_in_dialog(driver)
-    fill_in_email_and_password(
-        driver, seed_policy_maker.email, seed_policy_maker.password)
+    fill_in_email_and_password(driver, policy_maker.email, policy_maker.password)
     log_in(driver)
 
     wait_for_view_change(driver, DASHBOARD)
     assert driver.current_url == DASHBOARD
 
 
-def test_log_in_farmer(driver):
+@pytest.mark.usefixtures('f_log_out')
+def test_log_in_farmer(driver, p_farmer=None):
+    farmer = seed_farmer if p_farmer is None else p_farmer
+
     open_log_in_dialog(driver)
-    fill_in_email_and_password(driver, seed_farmer.email, seed_farmer.password)
+    fill_in_email_and_password(driver, farmer.email, farmer.password)
     log_in(driver)
 
     wait_for_view_change(driver, DASHBOARD)

@@ -76,7 +76,6 @@ const Weather = () => {
     <>
       <h1 className={"dashboard-h1"}>Weather</h1>
       <Table dataSource={weatherData} columns={weatherDataColumns} pagination={{pageSize: 4}}/>
-      {/*TODO Insert weather type icon*/}
     </>
   );
 }

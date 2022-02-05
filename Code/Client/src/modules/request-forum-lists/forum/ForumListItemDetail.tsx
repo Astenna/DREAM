@@ -6,12 +6,16 @@ import ViewHeader from '../../other/ViewHeader';
 import RequestForumListItemDetailComment from '../generic/RequestForumListItemDetailComment';
 import {forumRequests} from '../../../api/requests/forumRequests';
 import CreateListItemResponse from '../generic/CreateListItemResponse';
+import {useAppSelector} from '../../../store/hooks';
+import {selectAuthInfo} from '../../../store/auth/authSlice';
 
 const ForumListItemDetail = () => {
   const {id} = useParams()
   const requestID: number | undefined = id ? +id : undefined
   const [requestData, load] = forumRequests.useGetFarmerRequestDetail()
   const postComment = forumRequests.usePostComment()
+  const authInfo = useAppSelector(selectAuthInfo)
+  const deleteComment = forumRequests.useDeleteComment()
 
   const reload = () => {
     if (requestID) {
@@ -30,6 +34,13 @@ const ForumListItemDetail = () => {
           reload()
         })
     }
+  }
+
+  const onCommentDelete = (id: number) => {
+    deleteComment(id)
+      .then(_ => {
+        reload()
+      })
   }
 
   return (
@@ -67,13 +78,16 @@ const ForumListItemDetail = () => {
             <Col style={{margin: "10px 0 0", width: "100%"}}>
               {
                 requestData?.comments?.map((item, key) =>
-                  <RequestForumListItemDetailComment
-                    key={key}
-                    createdDate={new Date(item.createdDate)}
-                    author={item.createdByFarmer ? item.createdByFarmer : ""}
-                    content={item.content}
-                    deletable={false}
-                  />
+                  <>
+                    <RequestForumListItemDetailComment
+                      key={key}
+                      createdDate={new Date(item.createdDate)}
+                      author={item.createdByFarmer ? item.createdByFarmer : ""}
+                      content={item.content}
+                      deletable={authInfo?.farmerID === String(item.createdByFarmerId)}
+                      onDelete={() => onCommentDelete(item.id)}
+                    />
+                  </>
                 )
               }
             </Col>

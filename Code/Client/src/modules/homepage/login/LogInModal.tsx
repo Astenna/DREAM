@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {Col, Form, Input, Modal, Row} from 'antd';
+import {Form, Input, Modal} from 'antd';
 import strings from '../../../values/strings';
 import RemindPasswordModal from '../remind-password/RemindPasswordModal';
 import {LockOutlined, MailOutlined} from '@ant-design/icons';
-import {Link} from 'react-router-dom';
 import {useLogin} from './loginModalHooks';
 import {PostAccountLoginRequest} from '../../../model/api/PostAccountLogin';
 
@@ -80,14 +79,13 @@ const LogInModal = (props: LogInModalProps) => {
             />
           </Form.Item>
         </Form>
-        <Row>
-          <Col span={24} style={{display: 'flex', justifyContent: 'flex-end'}}>
-            <Link to={"#"} onClick={openRemindPasswordModal}>
-              Forgot password?
-            </Link>
-          </Col>
-        </Row>
-
+        {/*<Row>*/}
+        {/*  <Col span={24} style={{display: 'flex', justifyContent: 'flex-end'}}>*/}
+        {/*    <Link to={"#"} onClick={openRemindPasswordModal}>*/}
+        {/*      Forgot password?*/}
+        {/*    </Link>*/}
+        {/*  </Col>*/}
+        {/*</Row>*/}
       </Modal>
     </>
   );

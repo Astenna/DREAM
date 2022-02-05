@@ -31,7 +31,7 @@ import HelpRequestListItemDetail from '../request-forum-lists/help-requests/Help
 import ForumList from '../request-forum-lists/forum/ForumList';
 import ForumListItemDetail from '../request-forum-lists/forum/ForumListItemDetail';
 
-const DashboardLayout = () => {
+const Dashboard = () => {
   const navigate = useNavigate();
   const authenticated = useAppSelector(selectAuthenticated);
   const authInfo = useAppSelector(selectAuthInfo);
@@ -62,7 +62,7 @@ const DashboardLayout = () => {
     }
   ]
 
-  const sidebarMenuItems: { [name in Role]: NavbarItem[] } = {
+  let sidebarMenuItems: { [name in Role]: NavbarItem[] } = {
     farmer: [
       {
         key: "summary",
@@ -83,6 +83,7 @@ const DashboardLayout = () => {
         key: "provide_help",
         node: strings.SIDEBAR.PROVIDE_HELP,
         action: () => navigate(links.DASHBOARD.URL + links.PROVIDE_HELP.URL),
+        hidden: authInfo?.curreNote !== "Positive"
       },
       {
         key: "forum",
@@ -150,4 +151,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default Dashboard;
