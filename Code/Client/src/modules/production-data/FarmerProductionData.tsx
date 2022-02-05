@@ -1,7 +1,7 @@
 import React, {Key, useEffect, useState} from 'react';
 import ViewHeader from '../other/ViewHeader';
 import strings from '../../values/strings';
-import {Button, Col, Form, Row, Space, Table} from 'antd';
+import {Button, Col, Form, notification, Row, Space, Table} from 'antd';
 import {PlusOutlined} from '@ant-design/icons/lib/icons';
 import {DeleteOutlined} from '@ant-design/icons';
 import ModifyProductionDataItem, {ModifyProductionDataItemMode} from './ModifyProductionDataItem';
@@ -14,10 +14,11 @@ const FarmerProductionData = () => {
   const authInfo = useAppSelector(selectAuthInfo)
   const farmerID: number | undefined = authInfo.farmerID ? +authInfo.farmerID : undefined
   const [form] = Form.useForm();
-  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([])
+  const [selectedRowKeys, setSelectedRowKeys] = useState<number[]>([])
   const [isDetailedModalVisible, setDetailedModalVisible] = useState(false);
   const [detailedModalMode, setDetailedModalMode] = useState<ModifyProductionDataItemMode>("add");
   const [productionData, load] = farmerRequests.useGetFarmerProductionData()
+  const deleteProductionData = farmerRequests.useDeleteProductionData()
 
   const reload = () => {
     if (farmerID) {
@@ -28,6 +29,16 @@ const FarmerProductionData = () => {
   useEffect(() => {
     reload()
   }, [farmerID])
+
+  const deleteSelectedRows = () => {
+    Promise.all(
+      selectedRowKeys.map((id) => deleteProductionData(id))
+    ).then(_ => {
+      notification['info']({message: strings.INFO.PRODUCTION_DATA_DELETED})
+      reload()
+    })
+  }
+
 
   const columns = [
     {
@@ -81,7 +92,7 @@ const FarmerProductionData = () => {
 
   const rowSelection = {
     selectedRowKeys,
-    onChange: (selectedRowKeys: Key[]) => setSelectedRowKeys(selectedRowKeys as string[])
+    onChange: (selectedRowKeys: Key[]) => setSelectedRowKeys(selectedRowKeys as number[])
   }
 
   return (
@@ -112,7 +123,7 @@ const FarmerProductionData = () => {
               <Col>
                 <Button
                   shape="circle" size="large" icon={<DeleteOutlined/>}
-                  onClick={() => console.log(selectedRowKeys)}
+                  onClick={deleteSelectedRows}
                 />
               </Col>
             </Space>

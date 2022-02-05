@@ -82,7 +82,8 @@ const strings = {
   INFO: {
     ACCOUNT_CREATED: "Account created successfully.",
     ACCOUNT_DELETED: "Account deleted successfully.",
-    NOTE_SAVED: "Note saved."
+    NOTE_SAVED: "Note saved.",
+    PRODUCTION_DATA_DELETED: "Production data deleted.",
   },
   ERROR: {
     NO_AUTHORIZED_403: "You don't have permissions to perform this action.",

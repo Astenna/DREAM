@@ -15,4 +15,5 @@ export const endpoints = {
   GET_PRODUCTION_TYPES: "/api/farmer/farm/production-data/production-types",
   POST_PRODUCTION_DATA: "/api/farmer/farm/production-data",
   PUT_PRODUCTION_DATA: "/api/farmer/farm/production-data/:id",
+  DELETE_PRODUCTION_DATA: "/api/farmer/farm/production-data/:id",
 }

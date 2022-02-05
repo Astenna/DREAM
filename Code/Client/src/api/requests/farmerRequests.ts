@@ -11,6 +11,7 @@ import {PostFarmerNoteRequest, PostFarmerNoteResponse} from '../../model/api/Pos
 import {GetProductionDataProductionTypesResponse} from '../../model/api/GetProductionDataProductionTypes';
 import {PostProductionDataRequest, PostProductionDataResponse} from '../../model/api/PostProductionData';
 import {PutProductionDataRequest, PutProductionDataResponse} from '../../model/api/PutProductionData';
+import {DeleteProductionDataResponse} from '../../model/api/DeleteProductionData';
 
 export const farmerRequests = {
   useGetFarmerOnRender: (): [(GetFarmerResponse | undefined), (() => void)] =>
@@ -62,6 +63,14 @@ export const farmerRequests = {
         endpoints.PUT_PRODUCTION_DATA.replace(':id', String(id)),
         values
       ))
+  },
+
+  useDeleteProductionData: ():
+    (id: number) => Promise<AxiosResponse<DeleteProductionDataResponse>> => {
+    const api = useAPI()
+    return (id) =>
+      api(tokenAPI.delete<DeleteProductionDataResponse>(
+        endpoints.DELETE_PRODUCTION_DATA.replace(':id', String(id))))
   },
 
 
