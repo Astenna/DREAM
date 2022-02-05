@@ -1,71 +1,79 @@
 import React, {useState} from 'react';
-import {Form, Modal, Select} from 'antd';
+import {Form, Modal, notification, Select} from 'antd';
 import strings from '../../values/strings';
 import {Rule} from 'antd/lib/form';
 import {Note} from "../../model/Note";
+import {problemTypeRequests} from '../../api/requests/problemTypeRequests';
+import {farmerRequests} from '../../api/requests/farmerRequests';
+import {PostFarmerNoteRequest} from '../../model/api/PostFarmerNote';
 
 const {Option} = Select;
 
 interface CreateChangeNoteModalProps {
   isVisible: boolean,
-  setVisible: (value: boolean) => void
+  setVisible: (value: boolean) => void,
+  farmerID: number | undefined,
+  noteChangedCB: () => void,
 }
 
 const CreateChangeNoteModal = (props: CreateChangeNoteModalProps) => {
   const [form] = Form.useForm();
   const [note, setNote] = useState<Note | undefined>(undefined);
-  const [problemType, setProblemType] = useState<string | undefined>(undefined);
+  const [allProblemTypes] = problemTypeRequests.useGetProblemTypesOnRender()
+  const postFarmerNote = farmerRequests.usePostFarmerNote()
 
   const requiredCheck: Rule = {
     required: true,
     message: strings.FORM.ERROR.REQUIRED,
   }
 
-  const cancelChangeNoteForm = () =>
-    props.setVisible(false)
-
-  //TODO: To read problemTypes from database
-  const problemTypes = {
-    "ProblemType1": {
-      key: "ProblemType1",
-      value: "ProblemType1",
-    },
-    "ProblemType2": {
-      key: "ProblemType2",
-      value: "ProblemType2",
-    },
-    "ProblemType3": {
-      key: "ProblemType3",
-      value: "ProblemType3",
+  const sendNoteForm = (form: any) => {
+    if (props.farmerID != null) {
+      postFarmerNote(form as PostFarmerNoteRequest, props.farmerID)
+        .then(_ => {
+          props.setVisible(false)
+          notification['info']({message: strings.INFO.NOTE_SAVED})
+          props.noteChangedCB()
+        })
     }
+  }
+
+  const cancelChangeNoteForm = () => {
+    props.setVisible(false)
   }
 
   const notes = {
     "Negative": {
-      key: Note.NEGATIVE,
-      value: strings.NOTE.NEGATIVE,
+      key: "Negative",
+      value: "Negative",
       additional_fields: [
         <Form.Item
-          name="problemType"
+          name="problemTypeName"
           rules={[requiredCheck]}
         >
-          <Select onChange={setProblemType} placeholder={strings.FORM.LABEL.PROBLEM_TYPE}>
+          <Select placeholder={strings.FORM.LABEL.PROBLEM_TYPE}>
             {
-              Object.values(problemTypes).map(problemType => <Option key={problemType.key}
-                                                                     value={problemType.key}>{problemType.value}</Option>)
+              allProblemTypes?.map(problemType =>
+                <Option
+                  key={problemType}
+                  value={problemType}
+                >
+                  {problemType}
+                </Option>
+              )
             }
           </Select>
         </Form.Item>
       ]
     },
     "Neutral": {
-      key: Note.NEUTRAL,
-      value: strings.NOTE.NEUTRAL,
+      key: "Neutral",
+      value: "Neutral",
       additional_fields: []
     },
     "Positive": {
-      key: Note.POSITIVE,
-      value: strings.NOTE.POSITIVE,
+      key: "Positive",
+      value: "Positive",
       additional_fields: []
     },
   }
@@ -79,8 +87,7 @@ const CreateChangeNoteModal = (props: CreateChangeNoteModalProps) => {
       onCancel={cancelChangeNoteForm}
       okText={strings.SAVE_CHANGES}
     >
-      <Form form={form} layout={"vertical"} onFinish={() => {
-      }}> {/*TODO*/}
+      <Form form={form} layout={"vertical"} onFinish={sendNoteForm}>
         <Form.Item
           name="note"
           rules={[requiredCheck]}

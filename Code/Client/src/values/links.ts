@@ -50,6 +50,10 @@ const links = {
       NEGATIVE: "/farmers/negative",
     }
   },
+  FARMERS_FARMER: {
+    URL: "/farmers/farmer",
+    PARAM: "/farmers/farmer/:id"
+  },
   ROOT: {
     URL: "/",
   }

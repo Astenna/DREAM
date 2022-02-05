@@ -4,6 +4,7 @@
  */
 const strings = {
   LOG_IN: "Log in",
+  DELETE_ACCOUNT: "Delete Account",
   HOME: "Home",
   CREATE_ACCOUNT: "Create account",
   SIGN_OUT: "Sign out",
@@ -59,6 +60,7 @@ const strings = {
       MANDALS: "Mandals",
       ADD_MANDALS: "Add mandals",
       ADD_PRODUCTION_DATA: "Add production data",
+      MANAGE_PRODUCTION_DATA: "Manage production data",
       REMIND_PASSWORD: "Please enter the e-mail address associated with your account.",
       TOPIC: "Topic",
       DESCRIPTION: "Description",
@@ -79,6 +81,8 @@ const strings = {
   },
   INFO: {
     ACCOUNT_CREATED: "Account created successfully.",
+    ACCOUNT_DELETED: "Account deleted successfully.",
+    NOTE_SAVED: "Note saved."
   },
   ERROR: {
     NO_AUTHORIZED_403: "You don't have permissions to perform this action.",
@@ -88,6 +92,7 @@ const strings = {
     UNIDENTIFIED_ERROR: "An unidentified error occurred."
   },
   WARNING: {
+    DELETE_ACCOUNT: "If you are sure that you want to delete your account, provide again your credentials.",
     LOGOUT: "You were logged out.",
   },
   RETURN_HOME: "Return home!",

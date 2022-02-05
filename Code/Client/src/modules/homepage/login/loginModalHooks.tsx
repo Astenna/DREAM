@@ -47,6 +47,8 @@ export const useLogin =
               email: jwtInfo.email,
               name: jwtInfo.name,
               surname: jwtInfo.surname,
+              userID: jwtInfo?.userId,
+              farmerID: jwtInfo?.farmerId
             },
             navigation: {
               role: roleMapping[jwtInfo.role as string] as Role,

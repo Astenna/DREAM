@@ -7,7 +7,7 @@ import {farmerRequests} from '../../api/requests/farmerRequests';
 import links from '../../values/links';
 
 const PMDashboard = () => {
-  const [farmers] = farmerRequests.useGetFarmer()
+  const [farmers] = farmerRequests.useGetFarmerOnRender()
   const posFarmers = farmers?.filter(x => x.currentNote === "Positive")?.slice(0, 3)
   const negFarmers = farmers?.filter(x => x.currentNote === "Negative")?.slice(0, 3)
 

@@ -8,7 +8,9 @@ const initialState: AuthState = {
   info: {
     email: undefined,
     name: undefined,
-    surname: undefined
+    surname: undefined,
+    userID: undefined,
+    farmerID: undefined,
   },
   navigation: {
     role: undefined,
@@ -20,27 +22,9 @@ const initialState: AuthState = {
   },
 }
 
-// const initialState: AuthState = {
-//   authenticated: true,
-//   info: {
-//     email: "dummy@dummy.com",
-//     name: "Bogdan",
-//     surname: "Z Indii"
-//   },
-//   navigation: {
-//     role: Role.FARMER,
-//     view: "dashboard"
-//   },
-//   tokens: {
-//     refreshToken: "",
-//     accessToken: "",
-//   },
-// }
-
 export const authSlice = createSlice({
   name: 'user',
   initialState: initialState,
-  // Dummy actions, before API is ready TODO
   reducers: {
     setAuthState: (state, action: PayloadAction<AuthState>) => action.payload,
     setLoginInfo: (state, action: PayloadAction<AuthStateInfo>) => {

@@ -3,6 +3,7 @@ import {AutoComplete, DatePicker, Form, FormInstance, InputNumber, Modal, Select
 import strings from '../../values/strings';
 import {Rule} from 'antd/lib/form';
 import {Moment} from 'moment';
+import {farmerRequests} from '../../api/requests/farmerRequests';
 
 const {Option} = Select;
 
@@ -21,6 +22,7 @@ export interface ModifyProductionDataItemProps {
   isVisible: boolean,
   setVisible: (value: boolean) => void,
   form: FormInstance,
+  productionDataChanged: () => void,
 }
 
 const requiredCheck: Rule = {
@@ -40,32 +42,55 @@ const formItemLayout = {
 };
 
 const ModifyProductionDataItem = (props: ModifyProductionDataItemProps) => {
-  const types = ["Type1", "Type2"]
+  const [types] = farmerRequests.useGetProductionTypesOnRender()
+  const postProductionDate = farmerRequests.usePostProductionData()
+  const putProductionDate = farmerRequests.usePutProductionData()
+
+  const addProductionData = (form: any) => {
+    postProductionDate({
+      date: form.date.toISOString(),
+      amount: form.amount,
+      productionType: form.productionType,
+    }).then(_ => {
+      props.setVisible(false)
+      props.productionDataChanged()
+    })
+  }
+
+  const editProductionData = (form: any) => {
+    putProductionDate({
+      date: form.date.toISOString(),
+      amount: form.amount,
+      productionType: form.productionType,
+    }, form.id).then(_ => {
+      props.setVisible(false)
+      props.productionDataChanged()
+    })
+  }
 
   return (
     <Modal
-      title={strings.FORM.LABEL.ADD_PRODUCTION_DATA}
+      title={strings.FORM.LABEL.MANAGE_PRODUCTION_DATA}
       visible={props.isVisible}
-      onOk={() => console.log(props.form.getFieldsValue())}
+      onOk={props.form.submit}
       onCancel={() => props.setVisible(false)}
       okText={strings.SUBMIT}
     >
       <Form
         {...formItemLayout}
         form={props.form}
-        onFinish={() => {
-        }}
+        onFinish={props.mode === "add" ? addProductionData : editProductionData}
         name={"addProductionData"}
         scrollToFirstError
       >
         <Form.Item key={"id"} name={"id"} hidden/>
         <Form.Item
-          key="type" name="type" label={strings.FORM.LABEL.TYPE}
+          key="productionType" name="productionType" label={strings.FORM.LABEL.TYPE}
           rules={[requiredCheck]}
         >
           <AutoComplete onSearch={() => {
           }}>
-            {types.map(m =>
+            {types?.map(m =>
               <Option key={m} value={m}>
                 {m}
               </Option>

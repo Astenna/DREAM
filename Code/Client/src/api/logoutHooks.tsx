@@ -11,7 +11,7 @@ export const useLogout = () => {
 
   return () => {
     notification['warning']({message: strings.WARNING.LOGOUT})
-    navigate(links.ROOT.URL)
     dispatch(logout())
+    navigate(links.ROOT.URL)
   }
 }

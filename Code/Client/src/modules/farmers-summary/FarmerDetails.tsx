@@ -1,6 +1,5 @@
-import {Col, Descriptions, Row, Space} from 'antd';
+import {Col, Descriptions, Row, Space, Spin} from 'antd';
 import React, {useState} from 'react';
-import {Note} from "../../model/Note";
 import strings from "../../values/strings";
 import {EditOutlined, StarOutlined} from "@ant-design/icons";
 import CreateChangeNoteModal from "./CreateChangeNoteModal";
@@ -8,37 +7,37 @@ import {useAppSelector} from "../../store/hooks";
 import {selectRoleNavigation} from "../../store/auth/authSlice";
 import colors from "../../values/colors";
 import {Role} from "../../model/Role";
+import {GetFarmerDetailResponse} from '../../model/api/GetFarmerDetail';
 
-
-const userData = {
-  name: "Assish Rai",
-  email: "user@farmer.it",
-  note: Note.POSITIVE,
-  mandal: "Mavala",
-  fullAddress: "Street 1, Mavala 12039"
-}
-
-const FarmerDetails = () => {
+const FarmerDetails = (props: { data: GetFarmerDetailResponse | undefined, noteChangedCB: () => void }) => {
   const roleNavigation = useAppSelector(selectRoleNavigation);
   const [isChangeNoteFormVisible, setChangeNoteFormVisible] = useState(false);
+  const data = props.data
 
   return (
-    <>
-      <CreateChangeNoteModal isVisible={isChangeNoteFormVisible} setVisible={setChangeNoteFormVisible}/>
+    <Spin spinning={!data}>
+      <CreateChangeNoteModal
+        isVisible={isChangeNoteFormVisible}
+        setVisible={setChangeNoteFormVisible}
+        farmerID={data?.id}
+        noteChangedCB={props.noteChangedCB}
+      />
       <Row style={{padding: "15px 0 15px 0"}}>
 
         <Col style={{width: "50%", padding: "0 20px 0 0"}}>
           <Descriptions column={1} bordered>
-            <Descriptions.Item label="Name">{userData.name}</Descriptions.Item>
-            <Descriptions.Item label="E-mail">{userData.email}</Descriptions.Item>
+            <Descriptions.Item label="Name">{data?.farmerNameAndSurname}</Descriptions.Item>
+            <Descriptions.Item label="E-mail">{data?.farmerEmail}</Descriptions.Item>
             <Descriptions.Item label="Note">
               <Space size={"middle"}>
                 <Col>
                   <StarOutlined
                     style={{
-                      color: userData.note === Note.POSITIVE ?
-                        colors.SUCCESS : userData.note === Note.NEGATIVE ? colors.DANGER : undefined
-                    }}/> {userData.note}
+                      color:
+                        data?.currentNote === "Positive" ? colors.SUCCESS :
+                          data?.currentNote === "Negative" ? colors.DANGER :
+                            undefined
+                    }}/> {data?.currentNote}
                 </Col>
 
                 {roleNavigation.role === Role.POLICY_MAKER &&
@@ -55,13 +54,15 @@ const FarmerDetails = () => {
 
         <Col style={{width: "50%", padding: "0 0 0 20px"}}>
           <Descriptions column={1} bordered>
-            <Descriptions.Item label="Number of help requests">{userData.name}</Descriptions.Item>
-            <Descriptions.Item label="Mandal">{userData.mandal}</Descriptions.Item>
-            <Descriptions.Item label="Full address">{userData.fullAddress}</Descriptions.Item>
+            <Descriptions.Item label="Number of help requests">{data?.helpRequestsCount}</Descriptions.Item>
+            <Descriptions.Item label="Mandal">{data?.farmMandalName}</Descriptions.Item>
+            <Descriptions.Item label="Full address">
+              {data ? `${data?.farmAddressLine1}, ${data?.farmAddressLine2}, ${data?.farmPostalCode} ${data?.farmMandalName}` : ""}
+            </Descriptions.Item>
           </Descriptions>
         </Col>
       </Row>
-    </>
+    </Spin>
   );
 }
 

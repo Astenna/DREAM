@@ -1,10 +1,10 @@
 import {ProblemType} from './GetProblemType';
 
-export interface FarmerNote { //TODO
+export interface FarmerNote {
   id: number;
   note: string;
   problemTypeName: ProblemType | undefined | null;
-  date: Date;
+  date: string;
   farmerId: number;
   farmer: string;
   policyMakerId: number;

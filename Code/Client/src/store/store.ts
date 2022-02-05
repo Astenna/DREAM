@@ -15,7 +15,6 @@ const reducers = combineReducers({
  */
 const saveToLocalStorage = (state: any) => {
   try {
-    console.log("eeee")
     const serializedState = JSON.stringify(state);
     localStorage.setItem('state', serializedState);
   } catch (e) {

@@ -20,10 +20,12 @@ import HelpRequestList from '../help-requests/HelpRequestList';
 import PMUser from "../policy-maker/PMUser";
 import PMDashboard from "../policy-maker/PMDashboard";
 import FarmersList from "../policy-maker/FarmersList";
-import FarmersSummary from "../farmers-summary/FarmersSummary";
 import HelpRequestListItemDetail from '../help-requests/HelpRequestListItemDetail';
 import FarmerProductionData from '../production-data/FarmerProductionData';
 import {useLogout} from '../../api/logoutHooks';
+import FarmerDashboard from '../farmer-dashboard/FarmerDashboard';
+import PMFarmersSummary from '../farmers-summary/PMFarmersSummary';
+import MyFarmersSummary from '../farmers-summary/MyFarmersSummary';
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -114,7 +116,8 @@ const DashboardLayout = () => {
                         <Routes>
                           {roleNavigation.role === Role.FARMER &&
                           <>
-                              <Route path={links.SUMMARY.URL} element={<FarmersSummary/>}/>
+                              <Route path={"/"} element={<FarmerDashboard/>}/>
+                              <Route path={links.SUMMARY.URL} element={<MyFarmersSummary/>}/>
                               <Route path={links.PRODUCTION_DATA.URL} element={<FarmerProductionData/>}/>
                               <Route path={links.MY_HELP_REQUESTS.URL} element={<HelpRequestList/>}/>
                               <Route path={links.MY_HELP_REQUESTS_DETAIL.URL}
@@ -127,6 +130,7 @@ const DashboardLayout = () => {
                               <Route path={"/"} element={<PMDashboard/>}/>
                               <Route path={links.SUMMARY.URL} element={<PMUser/>}/>
                               <Route path={links.FARMERS.URL} element={<FarmersList/>}/>
+                              <Route path={links.FARMERS_FARMER.PARAM} element={<PMFarmersSummary/>}/>
                           </>
                           }
                         </Routes>

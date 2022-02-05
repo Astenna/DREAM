@@ -2,8 +2,8 @@ import {ProblemType} from './GetProblemType';
 import {FarmerNote} from './GetFarmerNote';
 
 export interface PostFarmerNoteRequest {
-  note: string; //TODO
-  problemType: ProblemType;
+  note: FarmerNote;
+  problemTypeName: ProblemType;
 }
 
 export interface PostFarmerNoteResponse extends FarmerNote {
