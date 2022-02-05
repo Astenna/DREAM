@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import DeleteAccountModal from './DeleteAccountModal';
 
 const DeleteAccount = () => {
-  const [deleteModalVisible, setDeleteModalVisible] = useState(true);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
   return <>
     <DeleteAccountModal isVisible={deleteModalVisible} setVisible={setDeleteModalVisible}/>
