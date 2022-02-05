@@ -56,13 +56,13 @@ const CreateAccountModal = (props: CreateAccountModalProps) => {
           key="sensorSystemId" name="sensorSystemId" label={strings.FORM.LABEL.SENSOR_SYSTEM_ID}
           rules={[requiredCheck]}
         >
-          <Input/>
+          <Input type={"number"}/>
         </Form.Item>,
         <Form.Item
           key="waterIrrigationSystemId" name="waterIrrigationSystemId" label={strings.FORM.LABEL.WATER_IRRIGATION_ID}
           rules={[requiredCheck]}
         >
-          <Input/>
+          <Input type={"number"}/>
         </Form.Item>,
         <Form.Item
           key="farmAddressLine1" name="farmAddressLine1" label={strings.FORM.LABEL.ADDRESS_LINE_1}
