@@ -25,4 +25,5 @@ export const endpoints = {
   GET_FORUM_DETAIL: "/api/forum/thread/:id",
   POST_FORUM_THREAD_COMMENT: "/api/forum/thread/:id/comment",
   GET_SUGGESTIONS: "/api/suggestion?FarmerId=:id",
+  DELETE_FORUM_COMMENT: "/api/forum/thread/comment/:id",
 }

@@ -50,7 +50,6 @@ const SummaryShort = () => {
           <Row justify={'space-between'}>
             <div>Average soil humidity:</div>
             <span className={"dashboard-item-attribute"}>{summaryData.soilHumidity}</span>
-            {/*TODO: Add navigation*/}
           </Row>
           <Divider style={{margin: "10px 0"}}/>
           <Link

@@ -7,7 +7,7 @@ import NotAuthorized403 from '../http-errors/NotAuthorized403';
 import NotFound404 from '../http-errors/NotFound404';
 import ServerError500 from '../http-errors/ServerError500';
 import links from '../../values/links';
-import DashboardLayout from '../dashboard/DashboardLayout';
+import Dashboard from '../dashboard/Dashboard';
 
 /**
  * Application router.
@@ -27,7 +27,7 @@ const AppRouter = () => {
         <Route path={links.NO_AUTHORIZED_403.URL} element={<NotAuthorized403/>}/>
         <Route path={links.NOT_FOUND_404.URL} element={<NotFound404/>}/>
         <Route path={links.SERVER_ERROR_500.URL} element={<ServerError500/>}/>
-        <Route path={links.DASHBOARD.URL + "/*"} element={<DashboardLayout/>}/>
+        <Route path={links.DASHBOARD.URL + "/*"} element={<Dashboard/>}/>
         <Route path="/home" element={<Homepage/>}/>
       </Routes>
     </Router>
