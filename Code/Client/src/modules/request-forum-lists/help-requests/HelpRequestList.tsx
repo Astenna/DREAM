@@ -74,7 +74,6 @@ const HelpRequestList = () => {
                 pageSizeOptions={[5, 10, 20]}
                 pageSize={pageSize}
                 onChange={(c, s) => {
-                  console.log(s, c)
                   setCurrentPage(c)
                   setPageSize(s)
                 }}

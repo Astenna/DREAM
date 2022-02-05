@@ -35,12 +35,12 @@ export const useLogin =
       if (loading) {
         return
       }
-      console.log(loginRequest) //TODO: delete this line
       setLoading(true)
       postLogin(loginRequest)
         .then(response => {
           setModalVisible(false)
           const jwtInfo = decryptJWT(response.data.accessToken)
+          // console.log(jwtInfo)
           dispatch(setAuthState({
             authenticated: true,
             info: {
@@ -48,7 +48,8 @@ export const useLogin =
               name: jwtInfo.name,
               surname: jwtInfo.surname,
               userID: jwtInfo?.userId,
-              farmerID: jwtInfo?.farmerId
+              farmerID: jwtInfo?.farmerId,
+              curreNote: jwtInfo?.curreNote,
             },
             navigation: {
               role: roleMapping[jwtInfo.role as string] as Role,

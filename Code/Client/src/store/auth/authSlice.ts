@@ -11,6 +11,7 @@ const initialState: AuthState = {
     surname: undefined,
     userID: undefined,
     farmerID: undefined,
+    curreNote: undefined,
   },
   navigation: {
     role: undefined,

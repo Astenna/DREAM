@@ -32,7 +32,7 @@ export const useAPIHandleErrors = () => {
       } else if (error?.response?.status === 500) {
         notification['error']({message: strings.ERROR.UNIDENTIFIED_ERROR})
       } else if (error?.response?.status === 400) {
-        notification['error']({message: strings.ERROR.UNIDENTIFIED_ERROR})
+        notification['error']({message: error?.response?.data})
       } else {
         notification['error']({message: error.toString()})
       }

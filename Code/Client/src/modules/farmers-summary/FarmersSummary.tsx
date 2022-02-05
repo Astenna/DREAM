@@ -33,10 +33,6 @@ const FarmersSummary = (props: { farmerID: number | undefined }) => {
     }
   }, [farmerID])
 
-  useEffect(() => {
-    console.log(farmerDetail)
-  }, [farmerDetail])
-
   return (
     <>
       <ViewHeader title={`Farmer: ${farmerDetail?.farmerNameAndSurname}`}/>

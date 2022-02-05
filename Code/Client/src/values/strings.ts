@@ -94,7 +94,7 @@ const strings = {
     UNIDENTIFIED_ERROR: "An unidentified error occurred."
   },
   WARNING: {
-    DELETE_ACCOUNT: "If you are sure that you want to delete your account, provide again your credentials.",
+    DELETE_ACCOUNT: "If you are sure that you want to delete your account, provide again your password and click Submit.",
     LOGOUT: "You were logged out.",
   },
   RETURN_HOME: "Return home!",

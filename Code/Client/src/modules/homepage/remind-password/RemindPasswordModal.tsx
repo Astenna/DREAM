@@ -17,7 +17,6 @@ interface RemindPasswordModalProps {
 const RemindPasswordModal = (props: RemindPasswordModalProps) => {
   const [form] = Form.useForm();
   const sendRemindPasswordForm = (email: string) => {
-    console.log(email)
     props.setVisible(false)
   }
   const cancelRemindPasswordForm = () => {
