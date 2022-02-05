@@ -14,5 +14,5 @@ class PolicyMaker(User):
                  idx=None
                  ):
         if idx is not None:
-            email = f'{name.lower()}{idx}.{surname.lower()}@mail.com',
+            email = f'{name.lower()}{idx}.{surname.lower()}@mail.com'
         super().__init__(name, surname, email, password, role)

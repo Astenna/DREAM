@@ -81,6 +81,7 @@ def test_create_help_request_no_data_with_error(driver):
 
 
 def test_view_my_help_request(driver):
+    test_create_help_request(driver)
     test_open_my_help_requests_view(driver)
 
     open_my_help_request(driver)

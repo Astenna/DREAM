@@ -27,7 +27,6 @@ def open_delete_account_form(driver):
 
 def fill_in_delete_account_form(driver, policy_maker):
     wait_and_fill_in_fields(driver, {
-        'email': policy_maker.email,
         'password': policy_maker.password,
     })
 
