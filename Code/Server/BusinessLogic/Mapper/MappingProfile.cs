@@ -29,7 +29,8 @@ namespace BusinessLogic.Mapper
             CreateMap<CreateForumThreadDto, ForumThread>();
             CreateMap<CreateForumCommentDto, ForumComment>();
             CreateMap<ForumComment, ForumCommentDto>()
-                .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy.User)));
+                .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy.User)))
+                .ForMember(dest => dest.CreatedByFarmerId, src => src.MapFrom(x => x.CreatedById));
             CreateMap<ForumThread, ForumThreadDto>()
                 .ForMember(dest => dest.CreatedByFarmer, src => src.MapFrom(x => CombineNameAndSurname(x.CreatedBy.User)));
             CreateMap<ForumThread, ForumThreadListItemDto>()
