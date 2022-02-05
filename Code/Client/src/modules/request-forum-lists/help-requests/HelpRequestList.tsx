@@ -40,7 +40,7 @@ const HelpRequestList = () => {
 
   return (
     <>
-      <ViewHeader title={strings.SIDEBAR.MY_HELP_REQUESTS}/>
+      <ViewHeader title={strings.SIDEBAR.PROVIDE_HELP}/>
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>
           <Row justify={'space-between'}>
@@ -74,7 +74,6 @@ const HelpRequestList = () => {
                 pageSizeOptions={[5, 10, 20]}
                 pageSize={pageSize}
                 onChange={(c, s) => {
-                  console.log(s, c)
                   setCurrentPage(c)
                   setPageSize(s)
                 }}

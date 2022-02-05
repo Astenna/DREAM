@@ -20,8 +20,10 @@ const SiderNavbarResponsive = (props: SiderNavbarProperties) => {
     }
   }
 
-  const siderMenuItems = props.menuItems.map((item) =>
-    <Menu.Item key={item.key} icon={item.icon}>{item.node}</Menu.Item>)
+  const siderMenuItems = props.menuItems
+    .filter(item => !item?.hidden)
+    .map((item) =>
+      <Menu.Item key={item.key} icon={item.icon}>{item.node}</Menu.Item>)
 
   const dropDownMenuItems = [
     <Menu.Item key={props.logo.key} icon={props.logo.icon}>{strings.HOME}</Menu.Item>,

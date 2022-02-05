@@ -212,6 +212,11 @@ namespace BusinessLogic.Services
                 throw new ApiException($"Request with id {id} not found!", ErrorCode.NotFound);
             }
 
+            if (requestToDelete.IsAutomatic)
+            {
+                throw new ApiException($"Automatic help requests can not be removed!");
+            }
+
             if (requestToDelete.CreatedById != farmer.Id)
             {
                 throw new ApiException($"Only the author of the request can delete the request!", ErrorCode.AuthorizationException);

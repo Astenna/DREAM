@@ -4,10 +4,12 @@ export interface NavbarItem {
   key: string
   icon?: React.ReactNode
   node: React.ReactNode
-  action: (() => void)
+  action: (() => void),
+  hidden?: boolean
 }
 
 export interface NavbarProperties {
+  hideLogo?: boolean,
   menuItems: NavbarItem[],
   menuBarProperties?: CSSProperties
 }

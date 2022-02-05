@@ -22,7 +22,13 @@ export const useAPIHandleErrors = () => {
 
   return (error: AxiosError | ApplicationError | any): boolean => {
     let handled = false
-    if (isAxiosError(error)) {
+    if (isApplicationError(error)) {
+      if (error.type === 'logout') {
+        logout()
+        handled = true
+      }
+    } else {
+      console.log(error.response?.status)
       if (error.response?.status === 401 || error?.response?.status === 403) {
         notification['error']({message: strings.ERROR.UNIDENTIFIED_ERROR})
       } else if (error?.response?.status === 404) {
@@ -32,19 +38,16 @@ export const useAPIHandleErrors = () => {
       } else if (error?.response?.status === 500) {
         notification['error']({message: strings.ERROR.UNIDENTIFIED_ERROR})
       } else if (error?.response?.status === 400) {
-        notification['error']({message: strings.ERROR.UNIDENTIFIED_ERROR})
+        if (typeof (error?.response?.data) === "string") {
+          notification['error']({message: error?.response?.data})
+        } else if (!!error?.response?.data?.errors) {
+          notification['error']({message: JSON.stringify(error?.response?.data?.errors)})
+        } else {
+          notification['error']({message: strings.ERROR.UNIDENTIFIED_ERROR})
+        }
       } else {
         notification['error']({message: error.toString()})
       }
-      console.error(error)
-      handled = true
-    } else if (isApplicationError(error)) {
-      if (error.type === 'logout') {
-        logout()
-        handled = true
-      }
-    } else {
-      notification['error']({message: strings.ERROR.UNIDENTIFIED_ERROR})
       console.error(error)
       handled = true
     }

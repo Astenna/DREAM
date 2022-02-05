@@ -78,7 +78,6 @@ const CreateChangeNoteModal = (props: CreateChangeNoteModalProps) => {
     },
   }
 
-  //TODO: Add yellow warning about changing note
   return (
     <Modal
       title={strings.CHANGE_NOTE}

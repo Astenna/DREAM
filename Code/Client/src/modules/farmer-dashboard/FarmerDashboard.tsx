@@ -6,6 +6,8 @@ import RecentProductionData from "./RecentProductionData";
 import MyHelpRequestsShort from "./MyHelpRequestsShort";
 
 const FarmerDashboard = () => {
+
+
   return (
     <>
       <Row style={{padding: "15px 15px 0 15px"}}>
@@ -20,6 +22,7 @@ const FarmerDashboard = () => {
             </Col>
           </Row>
 
+          <Row style={{margin: "20px"}}/>
           <Row>
             <Col style={{width: "50%", padding: "0 20px 0 0"}}>
               <RecentProductionData/>

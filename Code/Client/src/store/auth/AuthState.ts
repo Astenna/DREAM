@@ -7,11 +7,12 @@ export interface AuthStateInfo {
   surname?: string,
   farmerID?: string,
   userID?: string
+  curreNote?: string,
 }
 
 export interface AuthStateNavigation {
   role?: Role,
-  view?: View //TODO?
+  view?: View
 }
 
 export interface AuthState {

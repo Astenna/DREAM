@@ -12,7 +12,7 @@ const strings = {
   DREAM_SHORT_DESCRIPTION: "Data-dRiven PrEdictive FArMing in Telangana",
   DREAM_DESCRIPTION: "DREAM is a project that intends to redesign the food production process in the Telangana area in order to create more resilient agricultural systems that will be required to meet the region’s rising food demand.",
   DREAM_IMAGE_FARM: "Farm picture",
-  DREAM_GOAL: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque elementum dictum sagittis. Aliquam tristique quam a ligula pretium, nec ornare sem facilisis. Duis tempus bibendum suscipit. Duis at nisi porta, ultrices nisl at, tristique lorem. Pellentesque nec vulputate metus. Nullam nec eleifend libero, ac placerat sapien. Integer gravida lorem lectus, sagittis convallis dui ultrices tempus. Phasellus sed augue fringilla, rhoncus leo tristique, scelerisque nibh. Mauris pellentesque arcu augue, quis hendrerit neque elementum et. Quisque viverra, ligula at blandit bibendum, orci nibh fringilla purus, eget mattis odio purus eu massa. Sed bibendum tortor at risus tempor porta. Ut consequat tortor non dolor congue efficitur eget id dolor. Phasellus pharetra dolor nisi, vitae porta lorem interdum sed. Pellentesque malesuada nec est eu rutrum.",
+  DREAM_GOAL: "The goal is to help Telangana’s government promote data-driven policy-making in the state by designing, developing, and demonstrating anticipatory governance models for food systems utilizing digital public goods and community-centric approaches. The system aims to enable policy makers to identify farmers who perform well, especially un-der tough weather conditions, farmers who perform particularly badly and require assistance, and understand if agronomist-led steering initiatives yield substantial outcomes. This is going to be achieved by continuous assessment based on the visualizations of the acquired data.",
   DREAM_GOAL_LABEL: "Our goal",
   SUBMIT: "Submit",
   SAVE_CHANGES: "Save changes",
@@ -94,7 +94,7 @@ const strings = {
     UNIDENTIFIED_ERROR: "An unidentified error occurred."
   },
   WARNING: {
-    DELETE_ACCOUNT: "If you are sure that you want to delete your account, provide again your credentials.",
+    DELETE_ACCOUNT: "If you are sure that you want to delete your account, provide again your password and click Submit.",
     LOGOUT: "You were logged out.",
   },
   RETURN_HOME: "Return home!",

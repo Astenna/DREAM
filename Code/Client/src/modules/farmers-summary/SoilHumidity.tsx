@@ -50,7 +50,6 @@ const SoilHumidity = () => {
     <>
       <h1 className={"dashboard-h1"} style={{padding: "0 0 10px 0"}}>Average soil humidity</h1>
       <div style={{padding: "0 0 5px 0"}}>Average in August, 2019: 3.6 g/kg</div>
-      {/*TODO: Add date*/}
       <Table dataSource={soilHumidityData} columns={soilHumidityDataColumns} pagination={{pageSize: 4}}/>
     </>
   );

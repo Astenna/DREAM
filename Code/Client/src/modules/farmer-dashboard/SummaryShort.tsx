@@ -2,6 +2,8 @@ import React from "react";
 import {Col, Divider, Image, Row} from "antd";
 import {ArrowLeftOutlined, EnvironmentOutlined} from "@ant-design/icons";
 import colors from "../../values/colors";
+import {Link} from 'react-router-dom';
+import links from '../../values/links';
 
 const summaryData = {
   dayAndDate: 'Wednesday, 8.12.2021',
@@ -48,10 +50,15 @@ const SummaryShort = () => {
           <Row justify={'space-between'}>
             <div>Average soil humidity:</div>
             <span className={"dashboard-item-attribute"}>{summaryData.soilHumidity}</span>
-            {/*TODO: Add navigation*/}
           </Row>
           <Divider style={{margin: "10px 0"}}/>
-          <a style={{float: "right", marginRight: "0"}}>See all relevant data <ArrowLeftOutlined rotate={180}/></a>
+          <Link
+            to={links.DASHBOARD.URL + links.SUMMARY.URL}
+            style={{float: "right", marginRight: "0"}}
+          >
+            See all relevant data&nbsp;
+            <ArrowLeftOutlined rotate={180}/>
+          </Link>
         </Col>
       </Row>
     </>
