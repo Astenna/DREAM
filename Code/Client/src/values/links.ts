@@ -27,18 +27,26 @@ const links = {
     BREADCRUMB: strings.SIDEBAR.PRODUCTION_DATA
   },
   MY_HELP_REQUESTS: {
-    URL: "/my_help_requests",
+    URL: "/my-help-requests",
     BREADCRUMB: strings.SIDEBAR.MY_HELP_REQUESTS
   },
   MY_HELP_REQUESTS_DETAIL: {
-    URL: "/my_help_requests/:id",
+    URL: "/my-help-requests/:id",
   },
   PROVIDE_HELP: {
-    URL: "/provide_help",
+    URL: "/provide-help",
+    BREADCRUMB: strings.SIDEBAR.PROVIDE_HELP
+  },
+  PROVIDE_HELP_DETAIL: {
+    URL: "/provide-help/:id",
     BREADCRUMB: strings.SIDEBAR.PROVIDE_HELP
   },
   FORUM: {
     URL: "/forum",
+    BREADCRUMB: strings.SIDEBAR.FORUM
+  },
+  FORUM_DETAIL: {
+    URL: "/forum/:id",
     BREADCRUMB: strings.SIDEBAR.FORUM
   },
   FARMERS: {

@@ -18,7 +18,7 @@ namespace BusinessLogic.Services
         private readonly HttpContext _httpContext;
         private readonly IRequestRecipientsProvider _requestRecipientsProvider;
         private readonly IMapper _mapper;
-        private static string AutomaticHelpRequestContent = "This request was created automatically due to receiving a negative note.'";
+        private static string AutomaticHelpRequestContent = "This request was created automatically due to receiving a negative note.";
 
         public FarmerService(DreamDbContext dreamDbContext,
             IHttpContextAccessor httpContextAccessor,

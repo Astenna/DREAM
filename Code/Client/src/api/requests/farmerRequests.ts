@@ -5,7 +5,6 @@ import {endpoints} from '../../values/endpoints';
 import {GetFarmerDetailResponse} from '../../model/api/GetFarmerDetail';
 import {GetProductionDataResponse} from '../../model/api/GetProductionData';
 import {GetFarmerNoteResponse} from '../../model/api/GetFarmerNote';
-import {GetRequestsResponse} from '../../model/api/GetRequest';
 import {AxiosResponse} from 'axios';
 import {PostFarmerNoteRequest, PostFarmerNoteResponse} from '../../model/api/PostFarmerNote';
 import {GetProductionDataProductionTypesResponse} from '../../model/api/GetProductionDataProductionTypes';
@@ -29,10 +28,6 @@ export const farmerRequests = {
   useGetFarmerNoteHistory: (): [(GetFarmerNoteResponse | undefined), ((value: number) => void)] =>
     useAPILoadWithParams<number, GetFarmerNoteResponse>((id: number) =>
       tokenAPI.get<GetFarmerNoteResponse>(endpoints.GET_FARMER_NOTE.replace(':id', String(id)))),
-
-  useGetFarmerRequests: (): [(GetRequestsResponse | undefined), ((value: number) => void)] =>
-    useAPILoadWithParams<number, GetRequestsResponse>((id: number) =>
-      tokenAPI.get<GetRequestsResponse>(endpoints.GET_FARMER_REQUESTS.replace(':id', String(id)))),
 
   usePostFarmerNote: ():
     (values: PostFarmerNoteRequest, id: number) => Promise<AxiosResponse<PostFarmerNoteResponse>> => {

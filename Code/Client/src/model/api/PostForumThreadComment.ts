@@ -6,5 +6,5 @@ export interface PostForumThreadCommentResponse {
   id: number;
   content: string;
   createdDate: Date;
-  createdByFarmer: String;
+  createdByFarmer: string;
 }

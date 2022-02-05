@@ -1,7 +1,9 @@
 ﻿using BusinessLogic.Dtos.Account;
 using DataAccess;
+using DataAccess.Entites;
 using DataAccess.Entites.Actors;
 using DataAccess.Entities.Actors;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -38,8 +40,14 @@ namespace BusinessLogic.Tools
 
             if (user.Role == Role.Farmer)
             {
-                var farmer = _dreamDbContext.Farmers.Single(x => x.UserId == user.Id);
+                var farmer = _dreamDbContext.Farmers
+                    .Include(x => x.Notes)
+                    .Single(x => x.UserId == user.Id);
+                var note = farmer.Notes.OrderByDescending(x => x.Date.Ticks)
+                                       .FirstOrDefault()?.Note ?? Note.Neutral;
+
                 claims.Add(new Claim("farmerId", farmer.Id.ToString()));
+                claims.Add(new Claim("curreNote", note.ToString()));
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();

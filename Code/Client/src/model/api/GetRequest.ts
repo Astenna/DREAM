@@ -3,7 +3,7 @@ export interface GetRequestsResponseSingle {
   topic: string;
   description: string;
   createdOn: string;
-  isAutomatic: boolean | null | undefined;
+  isAutomatic: boolean;
   createdBy: string;
   helpResponsesCount: number;
 }

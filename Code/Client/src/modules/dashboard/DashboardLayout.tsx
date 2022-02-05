@@ -16,16 +16,20 @@ import {Role} from '../../model/Role';
 import {NavbarItem} from '../navbar/NavbarProperties';
 import links from '../../values/links';
 import {Route, Routes} from 'react-router-dom';
-import HelpRequestList from '../help-requests/HelpRequestList';
 import PMUser from "../policy-maker/PMUser";
 import PMDashboard from "../policy-maker/PMDashboard";
 import FarmersList from "../policy-maker/FarmersList";
-import HelpRequestListItemDetail from '../help-requests/HelpRequestListItemDetail';
 import FarmerProductionData from '../production-data/FarmerProductionData';
 import {useLogout} from '../../api/logoutHooks';
 import FarmerDashboard from '../farmer-dashboard/FarmerDashboard';
 import PMFarmersSummary from '../farmers-summary/PMFarmersSummary';
 import MyFarmersSummary from '../farmers-summary/MyFarmersSummary';
+import MyHelpRequestList from '../request-forum-lists/my-help-requests/MyHelpRequestList';
+import MyHelpRequestListItemDetail from '../request-forum-lists/my-help-requests/MyHelpRequestListItemDetail';
+import HelpRequestList from '../request-forum-lists/help-requests/HelpRequestList';
+import HelpRequestListItemDetail from '../request-forum-lists/help-requests/HelpRequestListItemDetail';
+import ForumList from '../request-forum-lists/forum/ForumList';
+import ForumListItemDetail from '../request-forum-lists/forum/ForumListItemDetail';
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -119,10 +123,12 @@ const DashboardLayout = () => {
                               <Route path={"/"} element={<FarmerDashboard/>}/>
                               <Route path={links.SUMMARY.URL} element={<MyFarmersSummary/>}/>
                               <Route path={links.PRODUCTION_DATA.URL} element={<FarmerProductionData/>}/>
-                              <Route path={links.MY_HELP_REQUESTS.URL} element={<HelpRequestList/>}/>
-                              <Route path={links.MY_HELP_REQUESTS_DETAIL.URL}
-                                     element={<HelpRequestListItemDetail/>}/>
-                              <Route path={links.PROVIDE_HELP.URL} element={<></>}/>
+                              <Route path={links.MY_HELP_REQUESTS.URL} element={<MyHelpRequestList/>}/>
+                              <Route path={links.MY_HELP_REQUESTS_DETAIL.URL} element={<MyHelpRequestListItemDetail/>}/>
+                              <Route path={links.PROVIDE_HELP.URL} element={<HelpRequestList/>}/>
+                              <Route path={links.PROVIDE_HELP_DETAIL.URL} element={<HelpRequestListItemDetail/>}/>
+                              <Route path={links.FORUM.URL} element={<ForumList/>}/>
+                              <Route path={links.FORUM_DETAIL.URL} element={<ForumListItemDetail/>}/>
                           </>
                           }
                           {roleNavigation.role === Role.POLICY_MAKER &&

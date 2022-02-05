@@ -1,14 +1,16 @@
 import React from 'react';
 import {Form, Input, Modal} from 'antd';
-import strings from '../../values/strings';
+import strings from '../../../values/strings';
 import {Rule} from 'antd/lib/form';
 
-interface CreateHelpRequestModalProps {
+interface CreateForumModalProps {
   isVisible: boolean,
-  setVisible: (value: boolean) => void
+  setVisible: (value: boolean) => void,
+  title: string;
+  onFormSubmit: (formValues: any) => void
 }
 
-const CreateHelpRequestModal = (props: CreateHelpRequestModalProps) => {
+const CreateListItem = (props: CreateForumModalProps) => {
   const [form] = Form.useForm();
 
   const requiredCheck: Rule = {
@@ -17,10 +19,15 @@ const CreateHelpRequestModal = (props: CreateHelpRequestModalProps) => {
   }
 
   return (
-    <Modal title={strings.CREATE_HELP_REQUEST} visible={props.isVisible} onOk={() => {
-    }} onCancel={() => props.setVisible(false)}>
-      <Form form={form} layout={"vertical"} onFinish={() => {
-      }}> {/*TODO*/}
+    <Modal
+      title={props.title}
+      visible={props.isVisible}
+      onOk={form.submit}
+      onCancel={() => props.setVisible(false)}>
+      <Form
+        form={form}
+        layout={"vertical"}
+        onFinish={(formValues) => props.onFormSubmit(formValues)}>
         <Form.Item
           name="topic"
           rules={[requiredCheck]}
@@ -43,4 +50,4 @@ const CreateHelpRequestModal = (props: CreateHelpRequestModalProps) => {
   );
 };
 
-export default CreateHelpRequestModal;
+export default CreateListItem;
