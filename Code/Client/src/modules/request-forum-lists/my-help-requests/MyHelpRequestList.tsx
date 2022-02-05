@@ -20,10 +20,14 @@ const MyHelpRequestList = () => {
   const [allMyRequest, load] = requestRequests.useGetFarmerRequests()
   const farmerID = useAppSelector(selectAuthInfo)?.farmerID
 
-  useEffect(() => {
+  const reload = () => {
     if (farmerID) {
       load(+farmerID)
     }
+  }
+
+  useEffect(() => {
+    reload()
   }, [farmerID])
 
   useEffect(() => {
@@ -37,8 +41,11 @@ const MyHelpRequestList = () => {
 
   return (
     <>
-      <CreateHelpRequestModal isVisible={isCreateHelpRequestModalVisible}
-                              setVisible={setCreateHelpRequestModalVisible}/>
+      <CreateHelpRequestModal
+        isVisible={isCreateHelpRequestModalVisible}
+        setVisible={setCreateHelpRequestModalVisible}
+        reloadCallback={reload}
+      />
       <ViewHeader title={strings.SIDEBAR.MY_HELP_REQUESTS}/>
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>

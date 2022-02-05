@@ -2,7 +2,6 @@ import {Button, Col, Divider, Input, Pagination, Row} from 'antd';
 import React, {useState} from 'react';
 import HelpRequestListItem, {HelpRequestListItemProps} from './HelpRequestListItem';
 import strings from '../../../values/strings';
-import CreateHelpRequestModal from './../CreateHelpRequestModal';
 import ViewHeader from '../../other/ViewHeader';
 
 const {Search} = Input
@@ -61,8 +60,8 @@ const HelpRequestList = () => {
 
   return (
     <>
-      <CreateHelpRequestModal isVisible={isCreateHelpRequestModalVisible}
-                              setVisible={setCreateHelpRequestModalVisible}/>
+      {/*<CreateHelpRequestModal isVisible={isCreateHelpRequestModalVisible}*/}
+      {/*                        setVisible={setCreateHelpRequestModalVisible}/>*/}
       <ViewHeader title={strings.SIDEBAR.MY_HELP_REQUESTS}/>
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>
