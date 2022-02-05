@@ -29,7 +29,6 @@
 \end{forest}
 
 \section{Server}
-
 \begin{forest}
     pic dir tree,
     where level=0{}{% folder icons by default; override using file for file icons
@@ -38,25 +37,65 @@
     [Code
         [Server
             [API
-                [Controllers]
-                [Middleware]
-                [Properties]
+                [Controllers,
+                    label=right:\textit{Contains controllers with API endpoints definitions.}
+                ]
+                [Middleware \hspace{0.15em}
+                    \textit{Contains exception middleware for mapping exceptions}\\ \textit{to proper HTTP status codes.},
+                    edge path'/.expanded={
+                        ([xshift=\forestregister{folder indent}]!u.parent anchor) |- ([yshift=.6ex].base west)
+                }] 
+                [Properties,
+                    label=right:\textit{Contains launch settings of the application.}
+                ]
             ]
             [BusinessLogic
-                [Dtos]
-                [Exceptions]
-                [Mapper]
-                [Queries]
-                [ServiceCollectionExtensions]
-                [Services]
-                [Tools]
+                [Dtos,
+                    label=right:\textit{Consists of data transfer objects definitions.}]
+                [Exceptions,
+                    label=right:\textit{Contains custom exceptions.}
+                ]
+                [Mapper \hspace{0.15em}
+                    \textit{Contains Mapper Profiles that defines mappings between} \\ \textit{entities and data transfer objects.},
+                    edge path'/.expanded={ ([xshift=\forestregister{folder indent}]!u.parent anchor) |- ([yshift=.6ex].base west)
+                }]
+                [Queries,
+                    label=right:\textit{Contains classes defining query parameters available in API requests.}
+                ]
+                [ServiceCollectionExtensions,
+                    label=right:\textit{Defines classes required for middleware additions.}
+                ]
+                [Services,
+                    label=right:\textit{Contains classes with business logic.}
+                ]
+                [Tools,
+                    label=right:\textit{Contains utility classes such as TokenProvider for generating JWT tokens.}
+                ]
             ]
             [DataAccess
-                [AutoMigrations]
-                [Configuration]
-                [Entities]
-                [Migrations]
-                [Seeder]
+                [AutoMigrations \hspace{0.15em}
+                    \textit{Contains classes required for performing automatic } \\ \textit{database migrations during application startup.},
+                    edge path'/.expanded={ ([xshift=\forestregister{folder indent}]!u.parent anchor) |- ([yshift=.6ex].base west)
+                }]
+                [Configuration,
+                    label=right:\textit{Configures  entities relationships and constraints.}
+                ]
+                [Entities,
+                    label=right:\textit{Consists of entities mapped to database tables.}
+                ]
+                [Migrations,
+                    label=right:\textit{Consists of classes defining database migrations.}
+                ]
+                [Seeder,
+                    label=right:\textit{Contains SQL scripts and classes for seeding the database.}
+                ]
+                [DreamDbContext \hspace{0.15em}
+                    \textit{Class that acts as a bridge between the application}\\ \textit{and the database.},
+                    edge path'/.expanded={ ([xshift=\forestregister{folder indent}]!u.parent anchor) |- ([yshift=.6ex].base west)
+                },
+                base=top,
+                file
+                ]
             ]
         ]
     ]
@@ -96,6 +135,13 @@
             [test\_create\_account.py, file]
             [test\_log\_in.py, file]
             [test\_log\_out.py, file]
+            [test \textit{Also some longer text.}\\\textit{Also some longer text.},
+                edge path'/.expanded={
+                    ([xshift=\forestregister{folder indent}]!u.parent anchor) |- ([yshift=.6ex].base west)
+                },
+                base=top,
+                file
+            ]
         ]
     ]
 \end{forest}
