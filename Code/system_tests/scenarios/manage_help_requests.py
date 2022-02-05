@@ -44,9 +44,6 @@ def submit_form(driver):
     )
     submit_button.click()
 
-    #     TODO: Uncomment after notification is implemented
-    # return wait_for_pop_up_to_appear(driver)
-
 
 def get_invalid_topic_alert(driver):
     return WebDriverWait(driver, TIMEOUT).until(
@@ -74,9 +71,27 @@ def open_my_help_request(driver):
     my_help_request.click()
 
 
+def open_provide_help_view(driver):
+    provide_help_button = driver.find_element(
+        By.XPATH,
+        '//div[@id="root"]/div/section/aside/div/ul/li[5]/span'
+    )
+    provide_help_button.click()
+
+
+def open_help_request(driver):
+    help_request = WebDriverWait(driver, TIMEOUT).until(
+        EC.visibility_of_element_located((
+            By.XPATH,
+            '//div[@id="root"]/div/section/section/main/div/div[3]/div/a/div/div/div/div/h1'
+        ))
+    )
+    help_request.click()
+
+
 def fill_in_response(driver, advice):
     wait_and_fill_in_fields(driver, {
-        'provideAdvice_content': advice,
+        'provideAdvice_message': advice,
     })
 
 
@@ -87,5 +102,11 @@ def submit_response(driver):
     )
     submit_response_button.click()
 
-    # TODO: Uncomment after notification is implemented
-    # return wait_for_pop_up_to_appear(driver)
+
+def verify_latest_response(driver, advice):
+    return WebDriverWait(driver, TIMEOUT).until(
+        EC.text_to_be_present_in_element((
+            By.XPATH,
+            '//div[@id="root"]/div/section/section/main/div/div[3]/div/div[5]/div/div/div[2]/div/p'
+        ), advice)
+    )

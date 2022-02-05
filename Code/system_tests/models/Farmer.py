@@ -10,13 +10,13 @@ class Farmer(User):
                  name='Arun',
                  surname='Ghosh',
                  email=f'arun{id_iter}.ghosh@mail.com',
-                 password='test12324',
+                 password='test1234',
                  role=Role.FARMER,
                  farm=Farm(),
                  idx=None,
                  ):
         if idx is not None:
-            email = f'arun{idx}.ghosh@mail.com'
+            email = f'{name.lower()}{idx}.{surname.lower()}@mail.com'
 
         super().__init__(name, surname, email, password, role)
         self.farm = farm if idx is None else Farm(idx=idx)
