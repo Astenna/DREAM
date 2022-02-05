@@ -40,7 +40,7 @@ namespace BusinessLogic.Services
                 .ThenInclude(x => x.User)
                 .Include(x => x.AgronomistsSent)
                 .ThenInclude(x => x.User)
-                .Include(x => x.HelpResponses);
+                .OrderByDescending(x => x.CreatedOn);
             var results = await _requestsQueryBuilder
                 .With(requests)
                 .SearchByTopic(requestsQuery.Topic)
@@ -55,6 +55,7 @@ namespace BusinessLogic.Services
         public async Task<HelpRequestDto> GetRequestByIdAsync(int id)
         {
             var request = await _dreamDbContext.HelpRequests
+                .Include(x => x.HelpResponses.OrderByDescending(x => x.CreatedOn))
                 .Include(x => x.HelpResponses)
                 .ThenInclude(x => x.CreatedByFarmer.User)
                 .Include(x => x.HelpResponses)
