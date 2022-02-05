@@ -12,19 +12,16 @@ import {selectRoleNavigation} from '../../store/auth/authSlice';
 import {useAppSelector} from "../../store/hooks";
 import {Role} from "../../model/Role";
 import ViewHeader from '../other/ViewHeader';
-import {useParams} from 'react-router';
 import {farmerRequests} from '../../api/requests/farmerRequests';
 import DeleteAccount from '../delete-account/DeleteAccount';
 
-const FarmersSummary = () => {
+const FarmersSummary = (props: { farmerID: number | undefined }) => {
   const roleNavigation = useAppSelector(selectRoleNavigation);
-  const {id} = useParams<string>()
-  const farmerID: number | undefined = id ? +id : undefined
   const [farmerDetail, loadFarmerDetail] = farmerRequests.useGetFarmerDetail()
   const [productionData, loadProductionData] = farmerRequests.useGetFarmerProductionData()
   const [noteHistory, loadNoteHistory] = farmerRequests.useGetFarmerNoteHistory()
   const [helpRequests, loadHelpRequests] = farmerRequests.useGetFarmerRequests()
-
+  const farmerID = props.farmerID;
 
   useEffect(() => {
     if (farmerID) {
@@ -33,7 +30,7 @@ const FarmersSummary = () => {
       loadNoteHistory(farmerID)
       loadHelpRequests(farmerID)
     }
-  }, [id])
+  }, [farmerID])
 
   useEffect(() => {
     console.log(farmerDetail)

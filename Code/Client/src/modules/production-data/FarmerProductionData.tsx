@@ -6,13 +6,14 @@ import {PlusOutlined} from '@ant-design/icons/lib/icons';
 import {DeleteOutlined} from '@ant-design/icons';
 import ModifyProductionDataItem, {ModifyProductionDataItemMode, ProductionDataItem} from './ModifyProductionDataItem';
 import moment from 'moment';
+import {farmerRequests} from '../../api/requests/farmerRequests';
 
 const FarmerProductionData = () => {
   const [form] = Form.useForm();
   const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([])
   const [isDetailedModalVisible, setDetailedModalVisible] = useState(false);
-  // const [detailedModelData, setDetailedModelData] = useState<ProductionDataItem>();
   const [detailedModalMode, setDetailedModalMode] = useState<ModifyProductionDataItemMode>("add");
+  const [productionData, load] = farmerRequests.useGetFarmerProductionData()
 
   const columns = [
     {
@@ -29,6 +30,7 @@ const FarmerProductionData = () => {
       title: strings.FORM.LABEL.DATE,
       dataIndex: "date",
       key: "date",
+
     },
     {
       title: strings.FORM.LABEL.ACTION,
