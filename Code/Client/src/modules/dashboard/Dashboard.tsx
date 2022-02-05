@@ -31,7 +31,7 @@ import HelpRequestListItemDetail from '../request-forum-lists/help-requests/Help
 import ForumList from '../request-forum-lists/forum/ForumList';
 import ForumListItemDetail from '../request-forum-lists/forum/ForumListItemDetail';
 
-const DashboardLayout = () => {
+const Dashboard = () => {
   const navigate = useNavigate();
   const authenticated = useAppSelector(selectAuthenticated);
   const authInfo = useAppSelector(selectAuthInfo);
@@ -151,4 +151,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default Dashboard;

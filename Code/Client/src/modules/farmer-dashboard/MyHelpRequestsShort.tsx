@@ -1,48 +1,26 @@
-import React, {useState} from "react";
+import React, {useEffect} from "react";
 import {Col, Divider, Row} from "antd";
 import {ArrowLeftOutlined} from "@ant-design/icons";
-import MyHelpRequestsShortItem, {MyHelpRequestsShortItemProps} from "./MyHelpRequestsShortItem";
-
-let allMyHelpRequestsShortItems: MyHelpRequestsShortItemProps[] = [
-  {
-    id: "1",
-    title: "Lorem ipsum blah blah blah blah blah",
-    commentCount: 1,
-    lastCommentDate: new Date("2011-10-05"),
-    createDateTime: new Date("2011-10-05T14:48:00.000Z"),
-    author: {
-      name: "Grzegorz",
-      surname: "Grzegoski",
-    }
-  },
-  {
-    id: "1",
-    title: "sdfsdf Lorem ipsum blah blah blah blah blah",
-    commentCount: 1,
-    lastCommentDate: new Date("2011-10-05"),
-    createDateTime: new Date("2011-10-05T14:48:00.000Z"),
-    author: {
-      name: "Grzegorz",
-      surname: "Grzegoski",
-    }
-  },
-  {
-    id: "1",
-    title: "aaaaasdfsdf Lorem ipsum blah blah blah blah blah",
-    commentCount: 1,
-    lastCommentDate: new Date("2011-10-05"),
-    createDateTime: new Date("2011-10-05T14:48:00.000Z"),
-    author: {
-      name: "Grzegorz",
-      surname: "Grzegoski",
-    }
-  },
-]
+import MyHelpRequestsShortItem from "./MyHelpRequestsShortItem";
+import {requestRequests} from '../../api/requests/requestRequests';
+import {useAppSelector} from '../../store/hooks';
+import {selectAuthInfo} from '../../store/auth/authSlice';
+import links from '../../values/links';
+import {Link} from 'react-router-dom';
 
 const MyHelpRequestsShort = () => {
-  const [pageSize, setPageSize] = useState(3)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [myHelpRequestsShortItem, setMyHelpRequestsShortItem] = useState(allMyHelpRequestsShortItems)
+  const [allMyRequest, load] = requestRequests.useGetFarmerRequests()
+  const farmerID = useAppSelector(selectAuthInfo)?.farmerID
+
+  const reload = () => {
+    if (farmerID) {
+      load(+farmerID)
+    }
+  }
+
+  useEffect(() => {
+    reload()
+  }, [farmerID])
 
   return (
     <>
@@ -52,14 +30,15 @@ const MyHelpRequestsShort = () => {
           <Divider style={{margin: "10px 0"}}/>
           <>
             {
-              myHelpRequestsShortItem
-                .slice((currentPage - 1) * pageSize, currentPage * pageSize)
-                .map((item, key) =>
+              allMyRequest
+                ?.slice(0, 3)
+                ?.map((item, key) =>
                   <MyHelpRequestsShortItem key={key} item={item}/>)
             }
           </>
-          {/*TODO: Add navigation*/}
-          <a style={{float: "right", marginRight: "0"}}>Manage my help requests <ArrowLeftOutlined rotate={180}/></a>
+          <Link
+            to={links.DASHBOARD.URL + links.MY_HELP_REQUESTS.URL}
+            style={{float: "right", marginRight: "0"}}>Manage my help requests <ArrowLeftOutlined rotate={180}/></Link>
         </Col>
       </Row>
     </>

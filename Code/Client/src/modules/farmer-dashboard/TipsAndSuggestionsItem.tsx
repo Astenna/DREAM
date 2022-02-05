@@ -1,12 +1,8 @@
 import {Col, Divider, Row} from "antd";
 import React from "react";
+import {Suggestion} from '../../model/api/GetSuggestion';
 
-export interface TipsAndSuggestionsItemProps {
-  id: string
-  text: string
-}
-
-const TipsAndSuggestionsItem = (props: { item: TipsAndSuggestionsItemProps }) => {
+const TipsAndSuggestionsItem = (props: { item: Suggestion }) => {
   const item = props.item
 
   return (
