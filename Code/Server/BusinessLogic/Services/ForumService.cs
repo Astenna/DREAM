@@ -54,8 +54,7 @@ namespace BusinessLogic.Services
 
         public async Task<ForumThreadDto> CreateForumThreadAsync(CreateForumThreadDto createForumThreadDto)
         {
-            var user = _httpContext.GetUserUsingClaims(_dreamDbContext);
-            var farmer = _dreamDbContext.Farmers.Single(x => x.UserId == user.Id);
+            var farmer = _httpContext.GetFarmerUsingClaims(_dreamDbContext);
 
             var forumThread = _mapper.Map<ForumThread>(createForumThreadDto);
             forumThread.CreatedBy = farmer;

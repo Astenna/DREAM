@@ -101,7 +101,9 @@ namespace BusinessLogic.Services
                 throw new ApiException("Only users with role Farmer or Agronomist can create responses!", ErrorCode.AuthorizationException);
             }
 
-            var request = await _dreamDbContext.HelpRequests.SingleOrDefaultAsync(x => x.Id == requestId);
+            var request = await _dreamDbContext.HelpRequests
+                .Include(x => x.FarmersSent)
+                .SingleOrDefaultAsync(x => x.Id == requestId);
             if (request is null)
             {
                 throw new ApiException($"Request with id {requestId} does not exist!", ErrorCode.NotFound);
@@ -113,13 +115,18 @@ namespace BusinessLogic.Services
             {
                 var farmer = _dreamDbContext.Farmers
                     .Single(x => x.UserId == user.Id);
+                if (!request.FarmersSent.Exists(x => x.Id == farmer.Id))
+                {
+                    throw new ApiException($"Farmer with id {farmer.Id} was not a recipient of help request {requestId}");
+                }
                 domainHelpResponse.CreatedByFarmer = farmer;
             }
             else
             {
-                var agronomist = _dreamDbContext.Agronomists
-                    .Single(x => x.UserId == user.Id);
-                domainHelpResponse.CreatedByAgronomist = agronomist;
+                throw new NotImplementedException();
+                //var agronomist = _dreamDbContext.Agronomists
+                //    .Single(x => x.UserId == user.Id);
+                //domainHelpResponse.CreatedByAgronomist = agronomist;
             }
 
             await _dreamDbContext.AddAsync(domainHelpResponse);
@@ -141,6 +148,11 @@ namespace BusinessLogic.Services
             if (request is null)
             {
                 throw new ApiException($"Request with id {requestId} does not exist!", ErrorCode.NotFound);
+            }
+
+            if(request.IsAutomatic)
+            {
+                throw new ApiException("Automatic help requests can not be edited!");
             }
 
             var farmer = _dreamDbContext.Farmers

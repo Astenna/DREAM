@@ -1,4 +1,5 @@
-﻿using DataAccess;
+﻿using BusinessLogic.Exceptions;
+using DataAccess;
 using DataAccess.Entites.Actors;
 using Microsoft.AspNetCore.Http;
 
@@ -27,7 +28,7 @@ namespace BusinessLogic.Tools
 
             if (farmer is null)
             {
-                throw new UnauthorizedAccessException();
+                throw new ApiException($"Only farmers can perform this action!", ErrorCode.AuthorizationException);
             }
 
             return farmer;
