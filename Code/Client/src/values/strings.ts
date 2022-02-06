@@ -5,6 +5,7 @@
 const strings = {
   LOG_IN: "Log in",
   DELETE_ACCOUNT: "Delete Account",
+  CONFIRM_DELETION: "Do you really want to delete?",
   HOME: "Home",
   CREATE_ACCOUNT: "Create account",
   SIGN_OUT: "Sign out",

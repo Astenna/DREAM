@@ -42,4 +42,12 @@ export const requestRequests = {
         endpoints.DELETE_ADVICE.replace(':id', String(id))))
   },
 
+  useDeleteRequest: ():
+    (id: number) => Promise<AxiosResponse> => {
+    const api = useAPI()
+    return (id) =>
+      api(tokenAPI.delete(
+        endpoints.DELETE_REQUEST.replace(':id', String(id))))
+  },
+
 }
