@@ -1,1 +1,64 @@
 \chapter{Installation Guide} \label{ch:installation_guide}
+
+\section{Server}
+
+\todo{To describe, mention tools and versions}
+
+\begin{lstlisting}[language=bash, caption={Install dependencies and build \textit{API}.}, label=lst:api_deps_and_build]
+cd Code/Server/API/
+dotnet restore
+dotnet build --configuration Release --no-restore
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption={Install dependencies and build \textit{BusinessLogic}.}, label=lst:business_logic_deps_and_build]
+cd Code/Server/BusinessLogic/
+dotnet restore
+dotnet build --configuration Release --no-restore
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption={Install dependencies and build \textit{DataAccess}.}, label=lst:data_access_deps_and_build]
+cd Code/Server/DataAccess/
+dotnet build --configuration Release --no-restore
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption={Publish \textit{Server}.}, label=lst:publish_server]
+cd Code/Server/
+dotnet publish --configuration Release
+\end{lstlisting}
+        
+
+\section{Client}
+
+\todo{To describe, mention tools and versions}
+
+\begin{lstlisting}[language=bash, caption={Install dependencies and build \textit{Client}.}, label=lst:client_deps_and_build]
+cd Code/Client/
+npm install
+npm start
+\end{lstlisting}
+
+\section{Docker}
+
+\todo{To describe, mention tools and versions}
+
+\begin{lstlisting}[language=bash, caption={Docker compose.}, label=lst:docker_compose]
+docker-compose up -d --build
+\end{lstlisting}
+
+
+\section{Running System Tests}
+
+\todo{To describe: Mariusz}
+
+\begin{lstlisting}[language=bash, caption={Install requirements.}, label=lst:requirements]
+cd Code/system_tests/
+pip install requirements -r requirements.txt
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption={Install Google Chrome.}]
+sudo apt install google-chrome-stable
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption={Run tests.}]
+pytest
+\end{lstlisting}

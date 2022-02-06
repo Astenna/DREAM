@@ -1,25 +1,171 @@
 \chapter{Testing} \label{ch:testing}
 
-As stated in the DD, the project verification approach was centered on three different types of tests: unit, integration, and system tests. Each one addressed a different level of system abstraction.
+As stated in the DD, the project verification approach was planned to be centered on three different types of tests: unit, integration, and system tests. In the end, however, unit tests were omitted in favor of gaining more time for detailed integration and system tests.
 
 Furthermore, \textit{GitHub Actions} was the platform utilized for continuous integration. The analysis of the correctness of the code, its format, building it on a container designed for this purpose, and the automated firing of tests with each new code delivery substantially enhanced project quality management. As a result, the faulty or unstable code was unable to be pushed to the main repository branch. All the developed tests were triggered by each push to a release branch, pull request to the main branch, or just manually.
+
+\section{Integration Testing}
+The integration testing were performed manually and were focused on Server's API testing using swagger interface. The test cases are described below. For the sake of brevity, the test cases descriptions of GET endpoints were omitted since they were tested together with corresponding POST, DELETE and PUT endpoints.
+
+\subsection{POST \slash api\slash account\slash registration\slash farmer}
+\todo{401 when token missing}
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective}   & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow registering farmer with email already assigned to another account. & Register two farmer's accounts with the same e-mail. & Server responds with 400 error code and description of the error. \\
+	Do not allow registering farmer with mandal name not existing in the GET mandals endpoint. & Register a farmer inserting a random string inside the mandal field. & Server responds with 400 error code and description of the error.\\
+	Do not allow registering farmer with waterIrrigationSystemId already used entered by another user. & Register two accounts with the same waterIrrigationSystemId & Server responds with 400 error code and description of the error.\\
+ 	Do not allow registering farmer with sensorSystemId already used, entered by another user. & Register two accounts with the same sensorSystemId & Server responds with 400 error code and description of the error.\\& & \\
+	 Do not allow registering farmer with data missing in one of the following FarmAddressLine1, FarmCity, FarmPostalCode, Mandal, Name, Surname, Password or Email. & Register with missing data in one of the required fields. & Server responds with 400 error code and description of the error.\\
+	 Allow registering a farmer that entered valid data. & Registering a farmer using valid data. Try to log in using email and password used during registration. & Server responds with status code 200 for both registration and log in request.\\
+	\bottomrule
+\end{longtable}
+
+\subsection{POST \slash api\slash account\slash registration\slash policy-maker}
+
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective}  & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow registering a policy maker with email already assigned to another account & Register two accounts with the same e-mail. & Server responds with 400 error code and description of the error. \\
+	 Do not allow registering farmer with data missing in one of the following fields: Name, Surname, Password or Email. & Register with missing data in one of the required fields. & Server responds with 400 error code and description of the error.\\
+	 Allow registering a policy maker that entered valid data. & Register a policy maker using valid data. Log in using email and password used during registration. & Server responds with status code 200 for both registration and log in request.\\
+	\bottomrule
+\end{longtable}
+
+\subsection{POST \slash api\slash account\slash login}
+\todo{Add JWT to dictionary}
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective}   & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow log in with e-mail that does not exist. & Log in with e-mail that does not exist. &  Server responds with 400 error code and description of the error.\\
+	Do not allow log in with invalid credentials. & Log in with invalid credentials. &  Server responds with 400 error code and description of the error.\\
+	Allow login in with valid credentials. & Log in with valid credentials  &  Server responds with 200 error code and JWT token inside the response body.\\
+	\bottomrule
+\end{longtable}
+
+\subsection{DELETE \slash api\slash account\slash \{id\}}
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective}   & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow account deletion with invalid userId in request route. & Delete account, entering invalid userId. &  Server responds with 404 error code and description of the error.\\
+	Do not allow account deletion with invalid credentials. & Delete account entering invalid credentials. &  Server responds with 400 error code and description of the error.\\
+	Allow account deletion when entering valid credentials and userId in request route. & Delete account, entering valid credentials and userId in request route. Try to log on the deleted account. &  Server responds with status code 200 to the delete request. For the second request, the server responds with status code 404.\\
+	\bottomrule
+\end{longtable}
+
+\subsection{POST\slash api\slash farmer\slash \{farmerId\}\slash note}
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective}   & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow assigning a note that is not one of the specified enum values: Neutral, Positive, Negative & Use header with a JWT token belonging to a policy maker, perform a request to assign a note filling note field with a random string. & Server responds with 400 error code and description of the error. \\
+	Do not allow assigning a negative note without specifying a valid problem type. & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-6mm},after=\vspace{-4mm}]
+	    \item Use header with a JWT token belonging to a policy maker, perform a request to assign a negative note filling a problem type with a random string.
+	    \item Use header with a JWT token belonging to a policy maker, perform a request to assign a negative note leaving a problem type empty.
+	\end{enumerate} & In both cases server responds with 400 error code and description of the error.\\
+	Do not allow assigning a note with invalid farmerId in request route. & Use header with a JWT token belonging to a policy maker, perform a request to assign a note specifying a farmerId that does not exist. & Server responds with 404 error code and description of the error.\\
+	Do not allow assigning a note by a user that is not a policy maker (or a not logged in user). & 
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-6mm},after=\vspace{-4mm}]
+	    \item Use header with a JWT token belonging to a farmer and perform a request to  assign a note using valid input data.
+	    \item Perform a request to assign a negative note leaving a problem type empty (no JWT token in headers).
+	\end{enumerate}
+	 & In the first case, server responds with 403 error code and 401 in the second.\\
+	Allow policy maker to assign a note to a farmer. & Use header with a JWT token belonging to a policy maker, perform a request to assign a note to existing farmer using valid input. Perform GET to retrieve the list of notes for the same farmer.  & The server responds with status code 200 and ID of created note. The note with given ID exists in the list in the GET endpoint for notes.\\
+	\bottomrule
+\end{longtable}
+
+\subsection{POST \slash api\slash farmer\slash farm\slash production-data}
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective}   & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow adding a production data with invalid production type. & Use header with a JWT token belonging to a farmer and perform a request to  add production data using a random string as a production type. & Server responds with 400 error code and description of the error. \\
+	Do not allow adding a production data by a user that is not a farmer. & Use header with a JWT token belonging to a policy maker and perform a request to add production data using valid input data. & Server responds with 403 error code and description of the error. \\
+	Allow adding a production data with valid input data. & Use header with a JWT token belonging to a farmer and perform a request to add production data using a valid input data. Perform GET to retrieve the list of production data of the farmer. & Server responds with status code 200 and ID of added production data. The production data with given ID exists in the list of the GET response. \\
+	\bottomrule
+\end{longtable}
+
+\subsection{POST \slash api\slash forum\slash thread}
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective} & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow creating a forum thread by a user who is not a farmer. & Use header with a JWT token belonging to a policy maker and perform a request to add forum thread using valid input data. & Server responds with 403 error code and description of the error.\\
+	Do not allow creating a forum thread without a topic specified. & Use header with a JWT token belonging to a farmer and perform a request to add forum thread without a topic specified. & Server responds with 400 error code and description of the error.\\
+	Allow creating a forum thread by a farmer. & Use header with a JWT token belonging to a farmer and perform a request to perform a request to add forum thread using a valid input data. Perform GET to retrieve the forum thread by ID.& Server responds with status code 200 and ID of forum thread. The GET request responds with a forum thread created in the POST request.\\
+	\bottomrule
+\end{longtable}
+
+\subsection{DELETE \slash api\slash forum \slash comment \slash\{commentId\}}
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective} & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow deleting a forum comment by a user different from its author. & Use header with a JWT token belonging to a farmer and perform a request to delete a forum comment created by another user. & Server responds with 403 error code and description of the error.\\
+	
+	Do not allow deleting a comment with invalid commentId in request route. & Use header with a JWT token belonging to a farmer, perform a request to delete a comment specifying a commentId that does not exist. & Server responds with 404 error code and description of the error.\\
+	
+	Allow deleting a forum comment by its author. & Use header with a JWT token belonging to a farmer and perform a request to delete a forum comment created by him. Perform GET to retrieve the forum thread related to deleted comment. & Server responds with status code 200 to the delete request. The comment does not exist in the comments list returned to the GET response\\
+	\bottomrule
+\end{longtable}
+
+\subsection{POST \slash api\slash requests}
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective} & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow creating a help request with one the following fields empty: topic, description. & Use header with a JWT token belonging to a farmer and perform a request to create a help request with one of the required fields empty. & Server responds with 400 error code and description of the error.\\
+	Do not allow creating a help request by a user who is not a farmer. & Use header with a JWT token belonging to a policy maker and perform a request to create a help request using valid input data. & Server responds with 403 error code and description of the error.\\
+	Allow creating a help request by farmer with valid input data. & Use header with a JWT token belonging to a farmer and perform a request to create a help request using valid input data. Perform GET to retrieve the created help request by ID. & Server responds with status code 200. The GET request returns the previously created help request.\\
+	\bottomrule
+\end{longtable}
+
+\subsection{POST \slash api\slash requests\slash \{requestId\}\slash response}
+
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective} & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow creating a help response with empty message field. & Use header with a JWT token belonging to a farmer and perform a request to create a help response with message field empty. & Server responds with 400 error code and description of the error.\\
+	
+	
+	Do not creating a help response with invalid requestId in request route. & Use header with a JWT token belonging to a farmer that and perform a request to create a help response specifying a requestId that does note exist. &  Server responds with 404 error code and description of the error.\\
+	
+	Do not allow creating a help response by a user that was not a recipient of given help request. & Use header with a JWT token belonging to a farmer and perform a request to create a help request using valid input data. Create a new farmer account and log in. Use a header with a JWT token obtained from the log in endpoint and perform a request to create a help response using valid input data to a help request created in the first step. & Server responds with 400 error code and description of the error.\todo{add happy path}\\
+	
+	\bottomrule
+\end{longtable}
+
+
+\subsection{PUT \slash api\slash requests\slash \{requestId\}}
+\subsection{PUT \slash api\slash requests\slash response\slash \{responseId\}}
+\subsection{DELETE \slash api\slash requests\slash \{id\}}
+\subsection{DELETE \slash api\slash requests\slash response\slash\{id\}}
+
 
 \section{System Testing}
 
 System tests were designed to ensure that the whole system is working properly. They were performed in a controlled environment, with both the client and server running in the background.
 
-System tests were written in \textit{python} using \textit{pytest} \cite{pytest} and \textit{Selenium WebDriver} \cite{selenium} frameworks. These two allowed to test the entire system in a fully automated manner. The following sections describe the implemented test cases, which match the system's use cases previously defined in RASD.
+System tests were written in \textit{Python} using \textit{pytest} and \textit{Selenium WebDriver} frameworks. These two allowed to test the entire system in a fully automated manner. The following sections describe the implemented test cases, which match the system's use cases previously defined in RASD.
+
+\todo{To add thorough description: Mariusz}
+
 
 \subsection{Account creation}
 
 \textbf{Use cases:} \textit{Create account}, \textit{Insert role specific data}.
 
 \subsubsection*{Test results}
-\begin{verbnobox}[\tiny]
-    test_create_account.py::test_create_policy_maker_account PASSED          [ 10%]
-    test_create_account.py::test_create_two_policy_makers_with_the_same_data_with_error PASSED [ 20%]
-    test_create_account.py::test_create_farmer_account PASSED                [ 30%]
-    test_create_account.py::test_create_two_farmers_with_the_same_data_with_error PASSED [ 40%]
+\begin{verbnobox}[\scriptsize \vbdelim]
+test_create_account.py::test_create_policy_maker_account <PASSED>                            [ 15%]
+test_create_account.py::test_create_two_policy_makers_with_the_same_data_with_error <PASSED> [ 18%]
+test_create_account.py::test_create_farmer_account <PASSED>                                  [ 20%]
+test_create_account.py::test_create_two_farmers_with_the_same_data_with_error <PASSED>       [ 22%]
 \end{verbnobox}
 
 \subsection{Log in}
@@ -27,35 +173,101 @@ System tests were written in \textit{python} using \textit{pytest} \cite{pytest}
 \textbf{Use cases:} \textit{Log in}.
 
 \subsubsection*{Test results}
-\begin{verbnobox}[\footnotesize]
-    test_log_in.py::test_log_in_policy_maker PASSED                          [ 50%]
-    test_log_in.py::test_log_in_farmer PASSED                                [ 60%]
-    test_log_in.py::test_log_in_unregistered_user PASSED                     [ 70%]
-    test_log_in.py::test_log_in_no_data PASSED                               [ 80%]
-    test_log_out.py::test_log_out_policy_maker PASSED                        [ 90%]
-    test_log_out.py::test_log_out_farmer PASSED                              [100%]
+\begin{verbnobox}[\footnotesize \vbdelim]
+test_log_in.py::test_log_in_policy_maker <PASSED>                          [ 29%]
+test_log_in.py::test_log_in_farmer <PASSED>                                [ 31%]
+test_log_in.py::test_log_in_unregistered_user_with_error <PASSED>          [ 34%]
+test_log_in.py::test_log_in_no_data_with_error <PASSED>                    [ 36%]
+test_log_out.py::test_log_out_policy_maker <PASSED>                        [ 38%]
+test_log_out.py::test_log_out_farmer <PASSED>                              [ 40%]
 \end{verbnobox}
 
 \subsection{Delete account}
 
 \textbf{Use cases:} \textit{Delete account}.
 
+\subsubsection*{Test results}
+\begin{verbnobox}[\footnotesize \vbdelim]
+test_delete_account.py::test_delete_account_policy_maker <PASSED>          [ 25%]
+test_delete_account.py::test_delete_account_farmer <PASSED>                [ 27%]
+\end{verbnobox}
+
 \subsection{Forum}
 
 \textbf{Use cases:} \textit{View forum}, \textit{Create forum thread}, \textit{View forum thread}, \textit{Add forum comment}, \textit{Delete forum comment}.
+
+\subsubsection*{Test results}
+\begin{verbnobox}[\footnotesize \vbdelim]
+test_manage_forum.py::test_open_forum_view <PASSED>                                   [ 43%]
+test_manage_forum.py::test_create_forum_thread <PASSED>                               [ 45%]
+test_manage_forum.py::test_create_forum_thread_no_data_with_error <PASSED>            [ 47%]
+test_manage_forum.py::test_view_forum_thread <PASSED>                                 [ 50%]
+test_manage_forum.py::test_add_comment_to_forum_thread <PASSED>                       [ 52%]
+test_manage_forum.py::test_add_comment_to_forum_thread_no_comment_with_error <PASSED> [ 54%]
+test_manage_forum.py::test_delete_forum_comment <PASSED>                              [ 56%]
+\end{verbnobox}
 
 \subsection{Assess farmer's performance}
 
 \textbf{Use cases:} \textit{Assess farmer's performance}.
 
+\subsubsection*{Test results}
+\begin{verbnobox}[\scriptsize \vbdelim]
+test_assess_farmers_performance.py::test_open_farmers_view <PASSED>                             [  2%]
+test_assess_farmers_performance.py::test_open_farmers_summary <PASSED>                          [  4%]
+test_assess_farmers_performance.py::test_give_positive_note <PASSED>                            [  6%]
+test_assess_farmers_performance.py::test_give_neutral_note <PASSED>                             [  9%]
+test_assess_farmers_performance.py::test_give_negative_note <PASSED>                            [ 11%]
+test_assess_farmers_performance.py::test_give_negative_note_no_problem_type_with_error <PASSED> [ 13%]
+\end{verbnobox}
+
 \subsection{Help requests}
 
 \textbf{Use cases:} \textit{View list of my requests}, \textit{Request help}, \textit{View my request}, \textit{Delete request}, \textit{View list of requests}, \textit{Create response}, \textit{Delete response}.
 
+\subsubsection*{Test results}
+\begin{verbnobox}[\footnotesize \vbdelim]
+test_manage_help_requests.py::test_open_my_help_requests_view <PASSED>             [ 59%]
+test_manage_help_requests.py::test_create_help_request <PASSED>                    [ 61%]
+test_manage_help_requests.py::test_create_help_request_no_data_with_error <PASSED> [ 63%]
+test_manage_help_requests.py::test_view_my_help_request <PASSED>                   [ 65%]
+test_manage_help_requests.py::test_open_provide_help_view <PASSED>                 [ 68%]
+test_manage_help_requests.py::test_view_help_request <PASSED>                      [ 70%]
+test_manage_help_requests.py::test_respond_to_help_request <PASSED>                [ 72%]
+test_manage_help_requests.py::test_delete_help_response <PASSED>                   [ 75%]
+test_manage_help_requests.py::test_delete_help_request <PASSED>                    [ 77%]
+\end{verbnobox}
+
+\subsection{Manage production data}
+
+\textbf{Use cases:} \textit{Manage production data}.
+
+\subsubsection*{Test results}
+\begin{verbnobox}[\footnotesize \vbdelim]
+test_manage_production_data.py::test_open_production_data_view <PASSED>              [ 79%]
+test_manage_production_data.py::test_add_production_data <PASSED>                    [ 81%]
+test_manage_production_data.py::test_add_production_data_no_data_with_error <PASSED> [ 84%]
+test_manage_production_data.py::test_delete_production_data <PASSED>                 [ 86%]
+test_manage_production_data.py::test_edit_production_data <PASSED>                   [ 88%]
+test_manage_production_data.py::test_delete_all_production_data <PASSED>             [ 90%]
+\end{verbnobox}
+
 \subsection{User dashboard}
 
-\textbf{Use cases:} \textit{Display personal suggestions}, \textit{Manage production data}.
+\textbf{Use cases:} \textit{Display personal suggestions}.
+
+\subsubsection*{Test results}
+\begin{verbnobox}[\footnotesize \vbdelim]
+test_open_user_dashboard.py::test_open_dashboard_policy_maker <PASSED>     [ 93%]
+test_open_user_dashboard.py::test_open_dashboard_farmer <PASSED>           [ 95%]
+\end{verbnobox}
 
 \subsection{Farmer's summary}
 
 \textbf{Use cases:} \textit{View farmer's summary}, \textit{Get information about soil humidity}, \textit{Get information about weather forecasts}, \textit{Get information about water usage}.
+
+\subsubsection*{Test results}
+\begin{verbnobox}[\footnotesize \vbdelim]
+test_open_user_summary.py::test_open_summary_policy_maker <PASSED>         [ 97%]
+test_open_user_summary.py::test_open_summary_farmer <PASSED>               [100%]
+\end{verbnobox}
