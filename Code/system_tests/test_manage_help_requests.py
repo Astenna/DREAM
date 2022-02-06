@@ -118,16 +118,12 @@ def test_respond_to_help_request(driver):
 
 
 def test_delete_help_response(driver):
-    pass
-    # TODO: Uncomment when ready
-    # test_respond_to_help_request(driver)
-    #
-    # delete_help_response(driver)
+    test_respond_to_help_request(driver)
+
+    delete_help_response(driver)
 
 
 def test_delete_help_request(driver):
-    pass
-    # TODO: Uncomment when ready
-    # test_respond_to_help_request(driver)
-    #
-    # delete_help_request(driver)
+    test_create_help_request(driver)
+
+    delete_help_request(driver)

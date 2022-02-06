@@ -112,12 +112,11 @@ def verify_latest_response(driver, advice):
     )
 
 
-# TODO: to verify
-def delete_help_response(driver):
+def delete_help_request(driver):
     delete_icon = WebDriverWait(driver, TIMEOUT).until(
         EC.element_to_be_clickable((
             By.XPATH,
-            '//div[@id="root"]/div/section/section/main/div/div[3]/div/div[5]/div/div/div/div/span[5]/button/span'
+            '(.//*[normalize-space(text()) and normalize-space(.)="Help request: My carrots are yellow"])[1]/following::*[name()="svg"][1]'
         ))
     )
     delete_icon.click()
@@ -125,18 +124,17 @@ def delete_help_response(driver):
     confirm_option = WebDriverWait(driver, TIMEOUT).until(
         EC.element_to_be_clickable((
             By.XPATH,
-            '(.//*[normalize-space(text()) and normalize-space(.)="No"])[1]/following::span[1]'
+            '(.//*[normalize-space(text()) and normalize-space(.)="Cancel"])[1]/following::button[1]'
         ))
     )
     confirm_option.click()
 
 
-# TODO: to verify
-def delete_help_request(driver):
+def delete_help_response(driver):
     delete_icon = WebDriverWait(driver, TIMEOUT).until(
         EC.element_to_be_clickable((
             By.XPATH,
-            '//div[@id="root"]/div/section/section/main/div/div[3]/div/div[5]/div/div/div/div/span[5]/button/span'
+            '(.//*[normalize-space(text()) and normalize-space(.)="Seed Farmer"])[2]/preceding::*[name()="svg"][1]'
         ))
     )
     delete_icon.click()
