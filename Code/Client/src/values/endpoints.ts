@@ -27,4 +27,5 @@ export const endpoints = {
   GET_SUGGESTIONS: "/api/suggestion?FarmerId=:id",
   DELETE_FORUM_COMMENT: "/api/forum/thread/comment/:id",
   DELETE_ADVICE: "/api/requests/response/:id",
+  DELETE_REQUEST: "/api/requests/:id",
 }

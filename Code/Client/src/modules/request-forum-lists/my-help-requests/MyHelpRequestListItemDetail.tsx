@@ -1,16 +1,20 @@
-import React, {useEffect} from 'react';
-import {useParams} from 'react-router';
-import {Col, Row} from 'antd';
+import React, {useEffect, useState} from 'react';
+import {useNavigate, useParams} from 'react-router';
+import {Button, Col, Modal, Row} from 'antd';
 import strings from '../../../values/strings';
 import {requestRequests} from '../../../api/requests/requestRequests';
 import RequestForumListItemDetailComment from '../generic/RequestForumListItemDetailComment';
 import RequestForumListItemDetailDescription from '../generic/RequestForumListItemDetailDescription';
 import ViewHeader from '../../other/ViewHeader';
+import {DeleteOutlined} from '@ant-design/icons';
 
 const MyHelpRequestListItemDetail = () => {
   const {id} = useParams()
   const requestID: number | undefined = id ? +id : undefined
   const [requestData, load] = requestRequests.useGetFarmerRequestDetail()
+  const deleteRequest = requestRequests.useDeleteRequest()
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (requestID) {
@@ -18,9 +22,34 @@ const MyHelpRequestListItemDetail = () => {
     }
   }, [requestID])
 
+  const onDelete = () => {
+    if (requestID) {
+      deleteRequest(requestID)
+        .then(_ => navigate(-1))
+    }
+  }
+
   return (
     <>
-      <ViewHeader title={`Help request: ${requestData?.topic}`}/>
+      <Modal
+        visible={deleteModalVisible}
+        onOk={() => onDelete()}
+        onCancel={() => setDeleteModalVisible(false)}
+        okType={"danger"}
+      >
+        <p>
+          {strings.CONFIRM_DELETION}
+        </p>
+      </Modal>
+      <ViewHeader
+        title={`Help request: ${requestData?.topic}`}
+        custom={
+          <Button
+            shape="circle" icon={<DeleteOutlined/>}
+            onClick={() => setDeleteModalVisible(true)}
+          />
+        }
+      />
       <RequestForumListItemDetailDescription
         description={requestData?.description}
         createdBy={requestData?.createdBy}
