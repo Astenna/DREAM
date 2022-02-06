@@ -1,6 +1,6 @@
 from constants.endpoints import URL
 from helpers.general import wait_for_view_change
-import test_open_user_summary as tus
+import test_user_summary as tus
 import test_create_account as tca
 from models.Farmer import Farmer
 from models.PolicyMaker import PolicyMaker

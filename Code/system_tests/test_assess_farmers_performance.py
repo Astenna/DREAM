@@ -2,7 +2,7 @@ import re
 
 import pytest
 
-from assess_farmers_performance import open_farmers_view, open_farmers_summary, select_note, NOTE_SAVED, \
+from scenarios.assess_farmers_performance import open_farmers_view, open_farmers_summary, select_note, NOTE_SAVED, \
     open_change_note_form, submit_form, select_problem_type, click_on_save_changes_button, \
     get_invalid_problem_type_alert, search_for_farmer
 from constants.endpoints import URL, FARMERS_ALL, FARMER_SUMMARY_REGEX
