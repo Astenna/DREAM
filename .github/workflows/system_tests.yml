@@ -35,3 +35,6 @@ jobs:
       - name: Run tests
         run: |
           pytest
+      - name: Stop container
+        if: always()
+        run: docker-compose down

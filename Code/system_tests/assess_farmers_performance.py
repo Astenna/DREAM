@@ -11,9 +11,11 @@ NOTE_SAVED = 'Note saved.'
 
 
 def click_on_farmers_button(driver):
-    farmers_button = driver.find_element(
-        By.XPATH,
-        '//div[@id="root"]/div/section/aside/div/ul/li[2]'
+    farmers_button = WebDriverWait(driver, TIMEOUT).until(
+        EC.element_to_be_clickable((
+            By.XPATH,
+            '//div[@id="root"]/div/section/aside/div/ul/li[2]'
+        ))
     )
     farmers_button.click()
 
@@ -50,9 +52,11 @@ def search_for_farmer(driver, farmer):
 
 
 def click_on_farmer(driver):
-    farmers_button = driver.find_element(
-        By.XPATH,
-        '(.//*[normalize-space(text()) and normalize-space(.)="Kataram"])[1]/following::*[name()="svg"][2]'
+    farmers_button = WebDriverWait(driver, TIMEOUT).until(
+        EC.element_to_be_clickable((
+            By.XPATH,
+            '(.//*[normalize-space(text()) and normalize-space(.)="Kataram"])[1]/following::*[name()="svg"][2]'
+        ))
     )
     farmers_button.click()
 
