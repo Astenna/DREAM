@@ -15,5 +15,6 @@ export interface GetRequestDetailResponse {
   createdOn: string;
   isAutomatic: false;
   createdBy: string;
+  createdById: number;
   helpResponses: RequestAdvice[]
 }

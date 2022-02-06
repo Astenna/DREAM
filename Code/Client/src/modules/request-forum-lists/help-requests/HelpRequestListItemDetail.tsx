@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router';
-import {Col, Row} from 'antd';
+import {Button, Col, Modal, Row} from 'antd';
 import strings from '../../../values/strings';
 import {requestRequests} from '../../../api/requests/requestRequests';
 import RequestForumListItemDetailComment from '../generic/RequestForumListItemDetailComment';
@@ -10,6 +10,7 @@ import {useAppSelector} from '../../../store/hooks';
 import {selectAuthInfo} from '../../../store/auth/authSlice';
 import RequestForumListItemDetailDescription from '../generic/RequestForumListItemDetailDescription';
 import ViewHeader from '../../other/ViewHeader';
+import FarmersSummary from '../../farmers-summary/FarmersSummary';
 
 const HelpRequestListItemDetail = () => {
   const {id} = useParams()
@@ -18,6 +19,7 @@ const HelpRequestListItemDetail = () => {
   const postAdvice = requestRequests.usePostRequestAdvice()
   const deleteAdvice = requestRequests.useDeleteAdvice()
   const authInfo = useAppSelector(selectAuthInfo)
+  const [farmerDetailModalVisible, setFarmerDetailModalVisible] = useState(false)
 
   const reload = () => {
     if (requestID) {
@@ -47,11 +49,23 @@ const HelpRequestListItemDetail = () => {
 
   return (
     <>
+      <Modal
+        visible={farmerDetailModalVisible}
+        onOk={() => setFarmerDetailModalVisible(false)}
+        onCancel={() => setFarmerDetailModalVisible(false)}
+        width={800}
+        footer={[<Button type={"primary"} onClick={() => setFarmerDetailModalVisible(false)}>
+          Close
+        </Button>]}
+      >
+        <FarmersSummary farmerID={requestData?.createdById} inModal/>
+      </Modal>
       <ViewHeader title={`Help request: ${requestData?.topic}`}/>
       <RequestForumListItemDetailDescription
         description={requestData?.description}
         createdBy={requestData?.createdBy}
         createdOn={requestData?.createdOn}
+        onAuthorClick={() => setFarmerDetailModalVisible(true)}
       />
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>

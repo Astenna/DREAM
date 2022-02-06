@@ -6,6 +6,7 @@ interface RequestForumListItemDetailDescriptionProps {
   createdBy?: string;
   createdOn?: string | Date;
   inModal?: boolean;
+  onAuthorClick?: () => void;
 }
 
 const RequestForumListItemDetailDescription = (props: RequestForumListItemDetailDescriptionProps) => {
@@ -25,9 +26,16 @@ const RequestForumListItemDetailDescription = (props: RequestForumListItemDetail
           </Row>
           <Row justify={'end'}>
             <Col style={{margin: "10px 0 0", display: "flex", flexWrap: "wrap"}}>
-          <span className={"dashboard-item-author"}>
-            {props?.createdBy}
-          </span>
+              {
+                props?.onAuthorClick ?
+                  <a className={"dashboard-item-author"} onClick={props.onAuthorClick}>
+                    {props?.createdBy}
+                  </a>
+                  :
+                  <span className={"dashboard-item-author"}>
+                    {props?.createdBy}
+                  </span>
+              }
               <span className={"dashboard-item-attribute-bold"}>&nbsp;|&nbsp;</span>
               <span className={"dashboard-item-attribute-bold"}>
             {props?.createdOn && new Date(props.createdOn).toLocaleString()}

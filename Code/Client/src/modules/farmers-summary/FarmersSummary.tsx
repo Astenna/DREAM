@@ -16,7 +16,7 @@ import {farmerRequests} from '../../api/requests/farmerRequests';
 import DeleteAccount from '../delete-account/DeleteAccount';
 import {requestRequests} from '../../api/requests/requestRequests';
 
-const FarmersSummary = (props: { farmerID: number | undefined }) => {
+const FarmersSummary = (props: { farmerID: number | undefined, inModal?: boolean }) => {
   const roleNavigation = useAppSelector(selectRoleNavigation);
   const [farmerDetail, loadFarmerDetail] = farmerRequests.useGetFarmerDetail()
   const [productionData, loadProductionData] = farmerRequests.useGetFarmerProductionData()
@@ -35,8 +35,8 @@ const FarmersSummary = (props: { farmerID: number | undefined }) => {
 
   return (
     <>
-      <ViewHeader title={`Farmer: ${farmerDetail?.farmerNameAndSurname}`}/>
-      <Row style={{padding: "15px 15px 0 15px"}}>
+      <ViewHeader title={`Farmer: ${farmerDetail?.farmerNameAndSurname}`} hideArrow={props.inModal}/>
+      <Row style={!props.inModal ? {padding: "15px 15px 0 15px"} : {}}>
         <Col style={{width: "100%"}}>
 
           <FarmerDetails data={farmerDetail} noteChangedCB={() => {
@@ -65,8 +65,9 @@ const FarmersSummary = (props: { farmerID: number | undefined }) => {
 
           <HelpRequests data={helpRequests}/>
 
-          {roleNavigation.role === Role.FARMER &&
-          <DeleteAccount/>
+          {
+            (roleNavigation.role === Role.FARMER && !props.inModal) &&
+            <DeleteAccount/>
           }
 
         </Col>
