@@ -242,16 +242,6 @@ Function presented in the listing \ref{lst:SetNote} assures that every time a fa
 
 This section presents a database model devised for the DREAM application. One of the design decisions included in the figure (\ref{fig:db-model}) is to use one table per type configuration \cite{ef-Inheritance}. The configuration is used when modelling the class \textit{User}, which is the base of \textit{PolicyMaker}, \textit{Agronomist} and \textit{Farmer} classes. The decision was motivated by the great number of relationships that each of those derived classes has. With three separate classes for each role, these relationships will be easier to manage and maintain since creation of one, huge \textit{User} class is avoided. The major drawback of this decision is the need to perform additional queries to determine the role of a user during the log in process. To tackle this issue, a column \textit{Role} was introduced to the \textit{User} table. However, such column may introduce consistency issues because the \textit{Role} saved in a given row of the User's table must correspond to a foreign key \textit{UserId} in an appropriate table (\textit{PolicyMaker}, \textit{Agronomist} or \textit{Farmer}). This consistency issue is addressed by the implementation of the DREAM server application.
 
-%\begin{figure}[H]
-    %\centering
-    %\includegraphics
-    %[width=\textwidth]
-    %[scale=0.45, origin=c]
-   % {figures/db-diagram.png}
-  %  \caption{Database model}
- %   \label{fig:db-model}
-%\end{figure}
-
 \begin{figure}[H]
     \centering
     \includegraphics
