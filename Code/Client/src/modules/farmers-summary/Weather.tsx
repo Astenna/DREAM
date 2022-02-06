@@ -1,4 +1,3 @@
-import {EyeOutlined} from '@ant-design/icons';
 import {Table} from 'antd';
 
 import React from 'react';
@@ -61,13 +60,6 @@ const weatherDataColumns = [
     render: (date: Date) => (
       <>{date.toLocaleDateString()}</>
     )
-  },
-  {
-    title: '',
-    key: 'link',
-    render: (link: string) => (
-      <a><EyeOutlined href={link}/></a>
-    ),
   },
 ]
 

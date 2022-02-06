@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {Form, Modal, notification, Select} from 'antd';
 import strings from '../../values/strings';
 import {Rule} from 'antd/lib/form';
-import {Note} from "../../model/Note";
 import {problemTypeRequests} from '../../api/requests/problemTypeRequests';
 import {farmerRequests} from '../../api/requests/farmerRequests';
 import {PostFarmerNoteRequest} from '../../model/api/PostFarmerNote';
+import {FarmerNote} from '../../model/FarmerNote';
 
 const {Option} = Select;
 
@@ -18,7 +18,7 @@ interface CreateChangeNoteModalProps {
 
 const CreateChangeNoteModal = (props: CreateChangeNoteModalProps) => {
   const [form] = Form.useForm();
-  const [note, setNote] = useState<Note | undefined>(undefined);
+  const [note, setNote] = useState<FarmerNote | undefined>(undefined);
   const [allProblemTypes] = problemTypeRequests.useGetProblemTypesOnRender()
   const postFarmerNote = farmerRequests.usePostFarmerNote()
 
