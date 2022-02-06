@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [Route("api/mandals")]
+    [Authorize]
     [ApiController]
     public class MandalController : ControllerBase
     {
