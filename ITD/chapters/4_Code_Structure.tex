@@ -1,8 +1,10 @@
 \chapter{Code Structure} \label{ch:code_structure}
 
+This chapter delves into the code's structure, including the structuring of the modules and the usage of several programming languages. It gives a high-level overview of the project directory as well as a deep look into each part of the system.
+
 \section{High Level Overview}
 
-\todo{Describe, mention dockerfile}
+For the reasons described in chapter \ref{ch:development_frameworks} the server application was implemented using C\# programming language and the client application using TypeScript. The high level overview of the code directory contents reflects the division into the client and server application code base. Additionally, a folder for the system tests written in Python was introduced. Finally, the directory contains a docker compose file required for launching the application using docker containers.  
 
 \begin{forest}
     pic dir tree/.style={%
@@ -22,16 +24,18 @@
         directory,
     },
     [Code
-        [Client]
-        [Server]
-        [system\_tests]
-        [docker-compose.yml, file]
+        [Client,
+            label=right:\textit{Source code of the Client-side application.}]
+        [Server,
+            label=right:\textit{Source code of the Server-side application.}]
+        [system\_tests,
+            label=right:\textit{Source code of the system tests.}]
+        [docker-compose.yml, file,
+            label=right:\textit{Docker Compose configuration file.}]
     ]
 \end{forest}
 
 \section{Client}
-
-\todo{For multiline comments look at Kinga's solution: Józef}
 
 \begin{forest}
     pic dir tree/.style={%
@@ -54,20 +58,44 @@
     },
     [\texttt{Code}
         [\texttt{Client}
-            [\texttt{public}]
-            [\texttt{src}
-                [\texttt{api}]
-                [\texttt{assets}]
-                [\texttt{model}]
-                [\texttt{modules}]
-                [\texttt{store}]
-                [\texttt{stylesheets}]
-                [\texttt{values}, 
-                    label=right:\textit{This is a comment about this directory.}
+            [\texttt{public}, 
+                    label=right:\textit{Static HTML files of the application.}
                 ]
-            ]
-            [\texttt{example\_file.txt}, file,
-                label=right:\textit{This is a comment about this file.}
+            [\texttt{src}
+                [\texttt{api}, 
+                    label=right:\textit{Hooks and functions for handling API management and requests.}
+                ]
+                [\texttt{assets}, 
+                    label=right:\textit{Graphics and icons.}
+                ]
+                [\texttt{model},
+                        label=right:\textit{Data model described using TypeScript interfaces.}
+                    [\texttt{api},
+                        label=right:\textit{API-specific interfaces.}]
+                ]
+                [\texttt{modules},
+                        label=right:\textit{React components, divided into modules with similar functionality.}]
+                [\texttt{store},
+                        label=right:\textit{Redux store, actions and reducers.}]
+                [\texttt{stylesheets},
+                        label=right:\textit{Stylesheets common to whole application.}]
+                [\texttt{values},
+                        label=right:\textit{Static values common to application, like endpoints, strings, etc.}]
+                [\texttt{package.json}, file,
+                    label=right:\textit{Node.js configuration file.}
+                ]
+                [\texttt{craco.config.json}, file,
+                    label=right:\textit{Create React App configuration file.}
+                ]
+                [\texttt{tsconfig.json}, file,
+                    label=right:\textit{TypeScript configuration file.}
+                ]
+                [\texttt{Dockerfile}, file,
+                    label=right:\textit{Docker configuration file.}
+                ]
+                [\texttt{nginx.conf}, file,
+                    label=right:\textit{nginx  configuration file.}
+                ]
             ]
         ]
     ]
@@ -151,6 +179,8 @@
 \end{forest}
 
 \section{System Tests}
+
+The directory tree in which the system tests were organized is depicted below. All the tests were written in \textit{Python} using \textit{Selenium WebDriver} (see section \ref{subsec:selenium_webdriver}) and \textit{pytest} (section \ref{subsec:pytest}). A thorough description of system tests together with their results is to be found in section \ref{sec:system_testing}.
 
 \begin{forest}
     pic dir tree/.style={%

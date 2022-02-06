@@ -1,5 +1,7 @@
 \chapter{Product Functions} \label{ch:product_functions}
 
+This chapter explains the criteria and functions that are actually implemented in the program's initial prototype, as well as the logic for adding them and rejecting others.
+
 \section{Implemented Functions}
 
 According to the assignment description, groups of three students should simulate the gathering of data from the other elements of the system by implementing the features supplied to two of the three stakeholders in the project. The product's initial prototype focuses on functions relevant to farmers and policy makers.
@@ -17,7 +19,6 @@ All the requirements that are satisfied with the initial prototype of the progra
 	\textbf{R2.} & The system must allow an unregistered user to create an account with a chosen role. \\
 	\textbf{R4.} & The system must ensure that a farmer inserts his farm data during the registration process.\\
 	\textbf{R6.} & The system must allow a registered user to log in to the application. \\
-	\textbf{R7.} & The system must allow a registered user to reset his password. \\
 	\textbf{R8.} & The system must allow a logged-in user to sign out of the application. \\
 	\textbf{R9.} & The system must allow a registered user to delete his account. \\
     \midrule
@@ -59,14 +60,6 @@ All the requirements that are satisfied with the initial prototype of the progra
 	\textbf{R41.} & The system must allow a farmer to create a comment in a forum thread.\\
 	\textbf{R42.} & The system must allow a farmer to delete a comment in a forum thread, only if it was created by him.\\
 	\textbf{R43.} & The system must allow a farmer to create a forum thread.\\
-	\midrule
-
-    & \textbf{\textit{External systems}}\todo{Decide on the implementation: Kinga?}\\
-    \midrule
-	\textbf{R65.} & The system must read and update weather forecasts every day. \\
-	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
-	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
-	\textbf{R68.} & The system must ensure that a farmer who creates a help request cannot be its recipient.\\
 		
 	\bottomrule
 \end{longtable}
@@ -74,6 +67,10 @@ All the requirements that are satisfied with the initial prototype of the progra
 \section{Excluded Functions}
 
 Functions relevant to the agronomist's role and responsibilities (including farm visits) were determined not to be added in the product's original prototype. All the requirements that are not satisfied are mentioned below.
+
+Although the information from external systems is presented in the client application, the functionalities related to interaction with external systems were excluded. Therefore, the data presented to the users are a collection of static, mocked data. The server application also contains definitions of API endpoints for external systems' data retrieval, but the functionality was not developed due to absence of any real data sources. 
+
+The only excluded function relevant to the farmers and policy maker is the reset password functionality. The omission was motivated by the low business value and the preference for more thorough testing in return.
 
 \begin{longtable}{@{}p{0.06\linewidth} p{0.88\linewidth}}
 	\toprule
@@ -83,6 +80,7 @@ Functions relevant to the agronomist's role and responsibilities (including farm
 	%Authentication
 	\textbf{R3.} & The system must ensure that an agronomist chooses the area of responsibility during the registration process. \\
 	\textbf{R5.} & The system must ensure that two casual farm visits are scheduled for each year of the farm's existence.\\
+	\textbf{R7.} & The system must allow a registered user to reset his password. \\
 	
 	%Policy maker
     \textbf{R14.} & The system must ensure that a farm is visited more often in the event of any problems.\\
@@ -112,6 +110,13 @@ Functions relevant to the agronomist's role and responsibilities (including farm
 	\textbf{R62.} & The system must ensure that a deleted visit is marked as rejected.\\
 	\textbf{R63.} & The system must ensure that in case of rejecting a casual visit, a new one is created in maximally 5 days.\\
 	\textbf{R64.} & The system must allow replanning any different visit than a casual one without any constraints.\\
+	\midrule
+	& \textbf{\textit{External systems}}\\
+    \midrule
+	\textbf{R65.} & The system must read and update weather forecasts every day. \\
+	\textbf{R66.} & The system must read and store data from humidity sensors every day. \\
+	\textbf{R67.} & The system must read and store data from water irrigation systems every day. \\
+	\textbf{R68.} & The system must ensure that a farmer who creates a help request cannot be its recipient.\\
 		
 	\bottomrule
 \end{longtable}

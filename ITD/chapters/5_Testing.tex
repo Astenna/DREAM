@@ -2,57 +2,68 @@
 
 As stated in the DD, the project verification approach was planned to be centered on three different types of tests: unit, integration, and system tests. In the end, however, unit tests were omitted in favor of gaining more time for detailed integration and system tests.
 
-Furthermore, \textit{GitHub Actions} was the platform utilized for continuous integration. The analysis of the correctness of the code, its format, building it on a container designed for this purpose, and the automated firing of tests with each new code delivery substantially enhanced project quality management. As a result, the faulty or unstable code was unable to be pushed to the main repository branch. All the developed tests were triggered by each push to a release branch, pull request to the main branch, or just manually.
+Furthermore, \textit{GitHub Actions} was the platform utilized for continuous integration. The analysis of the correctness of the code, its format, building it on a container designed for this purpose, and the automated firing of system tests with each new code delivery substantially enhanced project quality management. As a result, the faulty or unstable code was unable to be pushed to the main repository branch. All the developed tests were triggered by each push to a release branch, pull request to the main branch, or just manually.
 
 \section{Integration Testing}
-The integration testing were performed manually and were focused on Server's API testing using swagger interface. The test cases are described below. For the sake of brevity, the test cases descriptions of GET endpoints were omitted since they were tested together with corresponding POST, DELETE and PUT endpoints.
+The integration testing were performed manually and were focused on Server's API testing using \textit{Swagger} interface. The test cases are described below. For the sake of brevity, the test cases descriptions of GET endpoints were omitted since they were tested together with corresponding POST, DELETE and PUT endpoints.
+
+Additionally, each endpoint apart from the one in \textit{account} path was tested to ensure that the server returns 401 status code for all requests performed without a valid JWT token.
 
 \subsection{POST \slash api\slash account\slash registration\slash farmer}
-\todo{401 when token missing}
-\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+\begin{longtable}{p{0.30\linewidth}p{0.28\linewidth}p{0.25\linewidth}}
 	\toprule
 	\textbf{Test Case Objective}   & \textbf{Test Case Description} & \textbf{Expected Result}\\
 	\midrule
 	Do not allow registering farmer with email already assigned to another account. & Register two farmer's accounts with the same e-mail. & Server responds with 400 error code and description of the error. \\
+	\midrule
 	Do not allow registering farmer with mandal name not existing in the GET mandals endpoint. & Register a farmer inserting a random string inside the mandal field. & Server responds with 400 error code and description of the error.\\
-	Do not allow registering farmer with waterIrrigationSystemId already used entered by another user. & Register two accounts with the same waterIrrigationSystemId & Server responds with 400 error code and description of the error.\\
- 	Do not allow registering farmer with sensorSystemId already used, entered by another user. & Register two accounts with the same sensorSystemId & Server responds with 400 error code and description of the error.\\& & \\
+	\midrule
+	Do not allow registering farmer with waterIrrigationSystemId already used, entered by another user. & Register two accounts with the same waterIrrigationSystemId & Server responds with 400 error code and description of the error.\\
+	\midrule
+ 	Do not allow registering farmer with sensorSystemId already used, entered by another user. & Register two accounts with the same sensorSystemId & Server responds with 400 error code and description of the error.\\
+ 	\midrule
 	 Do not allow registering farmer with data missing in one of the following FarmAddressLine1, FarmCity, FarmPostalCode, Mandal, Name, Surname, Password or Email. & Register with missing data in one of the required fields. & Server responds with 400 error code and description of the error.\\
+	 \midrule
 	 Allow registering a farmer that entered valid data. & Registering a farmer using valid data. Try to log in using email and password used during registration. & Server responds with status code 200 for both registration and log in request.\\
 	\bottomrule
 \end{longtable}
 
 \subsection{POST \slash api\slash account\slash registration\slash policy-maker}
 
-\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
-	\toprule
-	\textbf{Test Case Objective}  & \textbf{Test Case Description} & \textbf{Expected Result}\\
-	\midrule
-	Do not allow registering a policy maker with email already assigned to another account & Register two accounts with the same e-mail. & Server responds with 400 error code and description of the error. \\
-	 Do not allow registering farmer with data missing in one of the following fields: Name, Surname, Password or Email. & Register with missing data in one of the required fields. & Server responds with 400 error code and description of the error.\\
-	 Allow registering a policy maker that entered valid data. & Register a policy maker using valid data. Log in using email and password used during registration. & Server responds with status code 200 for both registration and log in request.\\
+\begin{longtable}{p{0.30\linewidth}p{0.28\linewidth}p{0.25\linewidth}}
+    \toprule
+    \textbf{Test Case Objective}  & \textbf{Test Case Description} & \textbf{Expected Result}\\
+    \midrule
+    Do not allow registering a policy maker with email already assigned to another account. & Register two accounts with the same e-mail. & Server responds with 400 error code and description of the error. \\
+    \midrule
+    Do not allow registering farmer with data missing in one of the following fields: Name, Surname, Password, or Email. & Register with missing data in one of the required fields. & Server responds with 400 error code and description of the error.\\
+    \midrule
+    Allow registering a policy maker that entered valid data. & Register a policy maker using valid data. Log in using email and password used during registration. & Server responds with status code 200 for both registration and log in request.\\
 	\bottomrule
 \end{longtable}
 
 \subsection{POST \slash api\slash account\slash login}
-\todo{Add JWT to dictionary}
-\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+\begin{longtable}{p{0.28\linewidth}p{0.30\linewidth}p{0.25\linewidth}}
 	\toprule
 	\textbf{Test Case Objective}   & \textbf{Test Case Description} & \textbf{Expected Result}\\
 	\midrule
 	Do not allow log in with e-mail that does not exist. & Log in with e-mail that does not exist. &  Server responds with 400 error code and description of the error.\\
+	\midrule
 	Do not allow log in with invalid credentials. & Log in with invalid credentials. &  Server responds with 400 error code and description of the error.\\
+	\midrule
 	Allow login in with valid credentials. & Log in with valid credentials  &  Server responds with 200 error code and JWT token inside the response body.\\
 	\bottomrule
 \end{longtable}
 
 \subsection{DELETE \slash api\slash account\slash \{id\}}
-\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+\begin{longtable}{p{0.30\linewidth}p{0.28\linewidth}p{0.25\linewidth}}
 	\toprule
 	\textbf{Test Case Objective}   & \textbf{Test Case Description} & \textbf{Expected Result}\\
 	\midrule
 	Do not allow account deletion with invalid userId in request route. & Delete account, entering invalid userId. &  Server responds with 404 error code and description of the error.\\
-	Do not allow account deletion with invalid credentials. & Delete account entering invalid credentials. &  Server responds with 400 error code and description of the error.\\
+	\midrule
+	Do not allow account deletion with invalid credentials. & Delete account, entering invalid credentials. &  Server responds with 400 error code and description of the error.\\
+	\midrule
 	Allow account deletion when entering valid credentials and userId in request route. & Delete account, entering valid credentials and userId in request route. Try to log on the deleted account. &  Server responds with status code 200 to the delete request. For the second request, the server responds with status code 404.\\
 	\bottomrule
 \end{longtable}
@@ -62,19 +73,25 @@ The integration testing were performed manually and were focused on Server's API
 	\toprule
 	\textbf{Test Case Objective}   & \textbf{Test Case Description} & \textbf{Expected Result}\\
 	\midrule
-	Do not allow assigning a note that is not one of the specified enum values: Neutral, Positive, Negative & Use header with a JWT token belonging to a policy maker, perform a request to assign a note filling note field with a random string. & Server responds with 400 error code and description of the error. \\
+	Do not allow assigning a note that is not one of the specified enum values: Neutral, Positive, Negative. & Use header with a JWT token belonging to a policy maker, perform a request to assign a note filling note field with a random string. & Server responds with 400 error code and description of the error. \\
+	\midrule
 	Do not allow assigning a negative note without specifying a valid problem type. & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-6mm},after=\vspace{-4mm}]
 	    \item Use header with a JWT token belonging to a policy maker, perform a request to assign a negative note filling a problem type with a random string.
 	    \item Use header with a JWT token belonging to a policy maker, perform a request to assign a negative note leaving a problem type empty.
-	\end{enumerate} & In both cases server responds with 400 error code and description of the error.\\
+	\end{enumerate} & In both cases, the server responds with 400 error code and description of the error.\\
+	\midrule
 	Do not allow assigning a note with invalid farmerId in request route. & Use header with a JWT token belonging to a policy maker, perform a request to assign a note specifying a farmerId that does not exist. & Server responds with 404 error code and description of the error.\\
-	Do not allow assigning a note by a user that is not a policy maker (or a not logged in user). & 
+	\midrule
+	Do not allow assigning a note by a user that is not a policy maker (or a not logged-in user). & 
 	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-6mm},after=\vspace{-4mm}]
 	    \item Use header with a JWT token belonging to a farmer and perform a request to  assign a note using valid input data.
-	    \item Perform a request to assign a negative note leaving a problem type empty (no JWT token in headers).
+	    \item Perform a request to assign a negative note, leaving a problem type empty (no JWT token in headers).
 	\end{enumerate}
-	 & In the first case, server responds with 403 error code and 401 in the second.\\
+	 & In the first case, the server responds with 403 error code and 401 in the second.\\
+	 \midrule
 	Allow policy maker to assign a note to a farmer. & Use header with a JWT token belonging to a policy maker, perform a request to assign a note to existing farmer using valid input. Perform GET to retrieve the list of notes for the same farmer.  & The server responds with status code 200 and ID of created note. The note with given ID exists in the list in the GET endpoint for notes.\\
+	\midrule
+	Create an automatic help request to another farmer with a positive note when assigning a negative note. & Use header with a JWT token belonging to a policy maker, perform a request to assign a positive note to existing farmer using valid input. Then, assign a negative note to another farmer that is in the same mandal as the one with a positive note. Perform GET to \slash API\slash requests with RecipientUserId set to UserId of farmer with positive note.  & The last, GET request returns a requests list in which one of the requests has field IsAutomatic set to true, the topic set to the problemTypeName specified during negative note assignment and the description that informs that it is an automatic help request created due to negative note assignment.\\
 	\bottomrule
 \end{longtable}
 
@@ -83,19 +100,23 @@ The integration testing were performed manually and were focused on Server's API
 	\toprule
 	\textbf{Test Case Objective}   & \textbf{Test Case Description} & \textbf{Expected Result}\\
 	\midrule
-	Do not allow adding a production data with invalid production type. & Use header with a JWT token belonging to a farmer and perform a request to  add production data using a random string as a production type. & Server responds with 400 error code and description of the error. \\
-	Do not allow adding a production data by a user that is not a farmer. & Use header with a JWT token belonging to a policy maker and perform a request to add production data using valid input data. & Server responds with 403 error code and description of the error. \\
+	Do not allow adding a production data with invalid production type. & Use a header with a JWT token belonging to a farmer and perform a request to  add production data using a random string as a production type. & Server responds with 400 error code and description of the error. \\
+	\midrule
+	Do not allow adding a production data by a user that is not a farmer. & Use a header with a JWT token belonging to a policy maker and perform a request to add production data using valid input data. & Server responds with 403 error code and description of the error. \\
+	\midrule
 	Allow adding a production data with valid input data. & Use header with a JWT token belonging to a farmer and perform a request to add production data using a valid input data. Perform GET to retrieve the list of production data of the farmer. & Server responds with status code 200 and ID of added production data. The production data with given ID exists in the list of the GET response. \\
 	\bottomrule
 \end{longtable}
-
+\newpage
 \subsection{POST \slash api\slash forum\slash thread}
 \begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
 	\toprule
 	\textbf{Test Case Objective} & \textbf{Test Case Description} & \textbf{Expected Result}\\
 	\midrule
-	Do not allow creating a forum thread by a user who is not a farmer. & Use header with a JWT token belonging to a policy maker and perform a request to add forum thread using valid input data. & Server responds with 403 error code and description of the error.\\
+	Do not allow creating a forum thread by a user who is not a farmer. & Use a header with a JWT token belonging to a policy maker and perform a request to add forum thread using valid input data. & Server responds with 403 error code and description of the error.\\
+	\midrule
 	Do not allow creating a forum thread without a topic specified. & Use header with a JWT token belonging to a farmer and perform a request to add forum thread without a topic specified. & Server responds with 400 error code and description of the error.\\
+	\midrule
 	Allow creating a forum thread by a farmer. & Use header with a JWT token belonging to a farmer and perform a request to perform a request to add forum thread using a valid input data. Perform GET to retrieve the forum thread by ID.& Server responds with status code 200 and ID of forum thread. The GET request responds with a forum thread created in the POST request.\\
 	\bottomrule
 \end{longtable}
@@ -106,9 +127,9 @@ The integration testing were performed manually and were focused on Server's API
 	\textbf{Test Case Objective} & \textbf{Test Case Description} & \textbf{Expected Result}\\
 	\midrule
 	Do not allow deleting a forum comment by a user different from its author. & Use header with a JWT token belonging to a farmer and perform a request to delete a forum comment created by another user. & Server responds with 403 error code and description of the error.\\
-	
+	\midrule
 	Do not allow deleting a comment with invalid commentId in request route. & Use header with a JWT token belonging to a farmer, perform a request to delete a comment specifying a commentId that does not exist. & Server responds with 404 error code and description of the error.\\
-	
+	\midrule
 	Allow deleting a forum comment by its author. & Use header with a JWT token belonging to a farmer and perform a request to delete a forum comment created by him. Perform GET to retrieve the forum thread related to deleted comment. & Server responds with status code 200 to the delete request. The comment does not exist in the comments list returned to the GET response\\
 	\bottomrule
 \end{longtable}
@@ -118,49 +139,113 @@ The integration testing were performed manually and were focused on Server's API
 	\toprule
 	\textbf{Test Case Objective} & \textbf{Test Case Description} & \textbf{Expected Result}\\
 	\midrule
-	Do not allow creating a help request with one the following fields empty: topic, description. & Use header with a JWT token belonging to a farmer and perform a request to create a help request with one of the required fields empty. & Server responds with 400 error code and description of the error.\\
+	Do not allow creating a help request with one of the following fields empty: topic, description. & Use a header with a JWT token belonging to a farmer and perform a request to create a help request with one of the required fields empty. & Server responds with 400 error code and description of the error.\\
+	\midrule
 	Do not allow creating a help request by a user who is not a farmer. & Use header with a JWT token belonging to a policy maker and perform a request to create a help request using valid input data. & Server responds with 403 error code and description of the error.\\
+	\midrule
 	Allow creating a help request by farmer with valid input data. & Use header with a JWT token belonging to a farmer and perform a request to create a help request using valid input data. Perform GET to retrieve the created help request by ID. & Server responds with status code 200. The GET request returns the previously created help request.\\
 	\bottomrule
 \end{longtable}
 
 \subsection{POST \slash api\slash requests\slash \{requestId\}\slash response}
 
-\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+\begin{longtable}{p{0.25\linewidth}p{0.34\linewidth}p{0.24\linewidth}}
 	\toprule
 	\textbf{Test Case Objective} & \textbf{Test Case Description} & \textbf{Expected Result}\\
 	\midrule
 	Do not allow creating a help response with empty message field. & Use header with a JWT token belonging to a farmer and perform a request to create a help response with message field empty. & Server responds with 400 error code and description of the error.\\
-	
-	
-	Do not creating a help response with invalid requestId in request route. & Use header with a JWT token belonging to a farmer that and perform a request to create a help response specifying a requestId that does note exist. &  Server responds with 404 error code and description of the error.\\
-	
-	Do not allow creating a help response by a user that was not a recipient of given help request. & Use header with a JWT token belonging to a farmer and perform a request to create a help request using valid input data. Create a new farmer account and log in. Use a header with a JWT token obtained from the log in endpoint and perform a request to create a help response using valid input data to a help request created in the first step. & Server responds with 400 error code and description of the error.\todo{add happy path}\\
-	
+	\midrule
+	Do not allow creating a help response with invalid requestId in request route. & Use a header with a JWT token belonging to a farmer that and perform a request to create a help response specifying a requestId that does not exist. &  Server responds with 404 error code and description of the error.\\
+	\midrule
+	Do not allow creating a help response by a user that was not a recipient of given help request. & Use header with a JWT token belonging to a farmer and perform a request to create a help request using valid input data. Create a new farmer account and log in. Use a header with a JWT token obtained from the log in endpoint and perform a request to create a help response using valid input data to a help request created in the first step. & Server responds with 400 error code and description of the error.\\
+	\midrule
+	Allow creating a help response by a farmer with valid input data. & Use a header with a JWT token belonging to a farmer and perform a request to create a help response using valid input data. Perform GET to retrieve the created help request by ID. & Server responds with status code 200. The GET request returns given help request with previously created help response.\\
+
 	\bottomrule
 \end{longtable}
 
 
 \subsection{PUT \slash api\slash requests\slash \{requestId\}}
+
+\begin{longtable}{p{0.25\linewidth}p{0.35\linewidth}p{0.23\linewidth}}
+	\toprule
+	\textbf{Test Case Objective} & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow updating a help request with one of the following fields empty: topic, description. & Use a header with a JWT token belonging to a farmer and perform a request to update a help request with one of the required fields empty. & Server responds with 400 error code and description of the error.\\
+	\midrule
+	Do not allow updating a help request by a user who is not an author of the help request. & Use header with a JWT token belonging to a farmer who is not an author of the help request and perform a request to update a help request using valid input data. & Server responds with 403 error code and description of the error.\\
+	\midrule
+	Do not allow updating an automatic help request. & Use a header with a JWT token belonging to a farmer and perform a request to update an automatic help request created on behalf of that farmer using valid input data. & Server responds with 400 error code and description of the error.\\
+	\midrule
+	Do not allow updating a help request with invalid requestId in request route. & Use header with a JWT token belonging to a farmer that and perform a request to update a help request specifying a requestId that does not exist. &  Server responds with 404 error code and description of the error.\\
+	\midrule
+	Allow updating a help request with valid input data by its author. & Use header with a JWT token belonging to a farmer and perform a request to update a help request created by him using valid input data. Perform GET to retrieve the updated help request by ID. & Server responds with status code 200. The GET request returns the help request with updated fields.\\
+	\bottomrule
+\end{longtable}
+
 \subsection{PUT \slash api\slash requests\slash response\slash \{responseId\}}
+
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective} & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow updating a help response with empty message field. & Use a header with a JWT token belonging to a farmer and perform a request to update a help response, putting empty string in the message field. & Server responds with 400 error code and description of the error.\\
+	\midrule
+	Do not allow updating a help response by a user who is not an author of the help response. & Use a header with a JWT token belonging to a farmer who is not an author of the help response, and perform a request to update a help response using valid input data. & Server responds with 403 error code and description of the error.\\
+	\midrule
+	Do not allow updating a help response with invalid responseId in request route. & Use a header with a JWT token belonging to a farmer that and perform a request to update a help response specifying a responseId that does not exist. &  Server responds with 404 error code and description of the error.\\
+	\midrule
+	Allow updating a help response with valid input data by its author. & Use a header with a JWT token belonging to a farmer and perform a request to update a help response using valid input data. Perform GET to retrieve the help request to which the response was assigned. & Server responds with status code 200. The GET request returns the help request with response list that contains the modified response with updated fields.\\
+	\bottomrule
+\end{longtable}
+
 \subsection{DELETE \slash api\slash requests\slash \{id\}}
+
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective} & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow deleting a help request by a user who is not its author. & Use header with a JWT token belonging to a farmer and perform a request to delete a help request that was not created by that farmer. & Server responds with 403 error code and description of the error.\\
+	\midrule
+	Do not allow deleting an automatic help request. & Use header with a JWT token belonging to a farmer on whose behalf an automatic was help request was created. Perform a request to delete that help request. & Server responds with 400 error code and description of the error.\\
+	\midrule
+	Do not allow deleting a help request with invalid id in request route. & Use header with a JWT token belonging to a farmer that and perform a request to delete a help request specifying an id of a help request that does exist. &  Server responds with 404 error code and description of the error.\\
+	\midrule
+	Allow deleting a help request by its author. & Use a header with a JWT token belonging to a farmer and perform a request to delete a help request that was created by the same farmer. Perform GET to retrieve the help request list. & Server responds with status code 200. The GET request returns the help request list. The deleted request is not present in the returned list.\\
+	\bottomrule
+\end{longtable}
+
+\newpage
 \subsection{DELETE \slash api\slash requests\slash response\slash\{id\}}
 
 
-\section{System Testing}
+\begin{longtable}{p{0.25\linewidth}p{0.33\linewidth}p{0.25\linewidth}}
+	\toprule
+	\textbf{Test Case Objective} & \textbf{Test Case Description} & \textbf{Expected Result}\\
+	\midrule
+	Do not allow deleting a help response by a user who is not its author. & Use a header with a JWT token belonging to a farmer who is not an author of the help response, and perform a request to delete a help response using valid input data. & Server responds with 403 error code and description of the error.\\	
+	\midrule
+	Do not allow deleting a help response with invalid id in request route. & Use a header with a JWT token belonging to a farmer and perform a request to delete a help response specifying an id of a help response that does exist. &  Server responds with 404 error code and description of the error.\\
+	\midrule
+	Allow deleting a help response by its author. & Use a header with a JWT token belonging to a farmer and perform a request to delete a help response that was created by the same farmer. Perform GET to retrieve the help request to which the response was assigned. & Server responds with status code 200. The GET request returns the help request with responses list. The deleted response is not present in the responses list.\\
+	\bottomrule
+\end{longtable}
 
-System tests were designed to ensure that the whole system is working properly. They were performed in a controlled environment, with both the client and server running in the background.
+\section{System Testing} \label{sec:system_testing}
+
+System tests were designed to ensure that the whole system is working properly. They were performed in a controlled environment, with both the client and server running in the background through the means of the dockerized environment.
 
 System tests were written in \textit{Python} using \textit{pytest} and \textit{Selenium WebDriver} frameworks. These two allowed to test the entire system in a fully automated manner. The following sections describe the implemented test cases, which match the system's use cases previously defined in RASD.
-
-\todo{To add thorough description: Mariusz}
-
 
 \subsection{Account creation}
 
 \textbf{Use cases:} \textit{Create account}, \textit{Insert role specific data}.
 
-\subsubsection*{Test results}
+Account creation process was tested for both actors: farmers and policy makers. The test cases follow a series of steps: opening of the registration form, filling in the common fields, selecting a role (farmer or policy maker), specifying role specific data (optional, for farmers only), and lastly submitting the form. The tests verify if a correct success notification appeared on the screen.
+
+Additionally, error handling was also verified through testing if it is possible to create two accounts providing the exact same data. Similarly to the positive test cases, a popup of the appropriate notification was verified.
+
+\textbf{Test results}
 \begin{verbnobox}[\scriptsize \vbdelim]
 test_create_account.py::test_create_policy_maker_account <PASSED>                            [ 15%]
 test_create_account.py::test_create_two_policy_makers_with_the_same_data_with_error <PASSED> [ 18%]
@@ -172,7 +257,11 @@ test_create_account.py::test_create_two_farmers_with_the_same_data_with_error <P
 
 \textbf{Use cases:} \textit{Log in}.
 
-\subsubsection*{Test results}
+This group of tests focuses on verification of the logging in and logging out functionality. As the previous group, the tests go through the scenarios for both actors. The steps look as follows: opening the log in dialog, filling in email and password, and waiting for a redirection to user's dashboard.
+
+Furthermore, negative scenarios were tested as well. They include an attempt to log in by an unregistered user and to log in without providing email nor password. The appearance of appropriate error messages was checked.
+
+\textbf{Test results}
 \begin{verbnobox}[\footnotesize \vbdelim]
 test_log_in.py::test_log_in_policy_maker <PASSED>                          [ 29%]
 test_log_in.py::test_log_in_farmer <PASSED>                                [ 31%]
@@ -186,7 +275,9 @@ test_log_out.py::test_log_out_farmer <PASSED>                              [ 40%
 
 \textbf{Use cases:} \textit{Delete account}.
 
-\subsubsection*{Test results}
+The functionality of deleting an account for both the policy maker and farmer was also tested. The test cases consist of: opening of user's summary, opening delete account form, filling in the form, and then submitting it. Tests assert that the success message appeared, and the user was logged out.
+
+\textbf{Test results}
 \begin{verbnobox}[\footnotesize \vbdelim]
 test_delete_account.py::test_delete_account_policy_maker <PASSED>          [ 25%]
 test_delete_account.py::test_delete_account_farmer <PASSED>                [ 27%]
@@ -196,7 +287,13 @@ test_delete_account.py::test_delete_account_farmer <PASSED>                [ 27%
 
 \textbf{Use cases:} \textit{View forum}, \textit{Create forum thread}, \textit{View forum thread}, \textit{Add forum comment}, \textit{Delete forum comment}.
 
-\subsubsection*{Test results}
+This group of tests verifies the functionalities related to the forum. The actions of opening the forum view, creating a new thread, viewing a forum thread, adding comments in it, and also deleting these comments were all tested.
+
+In case of opening the forum view or a particular thread, redirections to correct addresses were asserted. Creation of a forum thread or just addition of a comment were verified by checking if they eventually appeared either in the forum view or inside a particular thread. For the case of deletion of a comment, the tests verified if it is possible to go through the whole process without receiving any warning.
+
+Moreover, the appearance of error messages in case of attempts to create a forum thread or adding a forum comment without providing any data was also checked.
+
+\textbf{Test results}
 \begin{verbnobox}[\footnotesize \vbdelim]
 test_manage_forum.py::test_open_forum_view <PASSED>                                   [ 43%]
 test_manage_forum.py::test_create_forum_thread <PASSED>                               [ 45%]
@@ -211,7 +308,9 @@ test_manage_forum.py::test_delete_forum_comment <PASSED>                        
 
 \textbf{Use cases:} \textit{Assess farmer's performance}.
 
-\subsubsection*{Test results}
+These tests focus on the policy maker's functionality that allows him to assess farmer's performance via changing his note. They verify if it is possible to open the summary of a chosen farmer by asserting that the policy maker was redirected to a valid address. Subsequently, the assignment of a positive, neutral, and negative note were all verified. In case of a negative note, the tests ensured that it was mandatory to select a problem type. In all the cases, appearing messages were verified. They were either positive for successful scenarios, or negative if no problem type was specified.
+
+\textbf{Test results}
 \begin{verbnobox}[\scriptsize \vbdelim]
 test_assess_farmers_performance.py::test_open_farmers_view <PASSED>                             [  2%]
 test_assess_farmers_performance.py::test_open_farmers_summary <PASSED>                          [  4%]
@@ -225,7 +324,9 @@ test_assess_farmers_performance.py::test_give_negative_note_no_problem_type_with
 
 \textbf{Use cases:} \textit{View list of my requests}, \textit{Request help}, \textit{View my request}, \textit{Delete request}, \textit{View list of requests}, \textit{Create response}, \textit{Delete response}.
 
-\subsubsection*{Test results}
+This group of tests was responsible for the verification of all the functionalities related to help requests. Tests verified if a farmer can see a list of his help requests, a list of incoming help requests (in case he has a positive note) as well as each particular request either created by him or an incoming one by verifying if he was redirected to an appropriate address. Subsequently, the processes of creation of a help request or responding to an incoming one as well as deletion of a response were tested.
+
+\textbf{Test results}
 \begin{verbnobox}[\footnotesize \vbdelim]
 test_manage_help_requests.py::test_open_my_help_requests_view <PASSED>             [ 59%]
 test_manage_help_requests.py::test_create_help_request <PASSED>                    [ 61%]
@@ -242,7 +343,9 @@ test_manage_help_requests.py::test_delete_help_request <PASSED>                 
 
 \textbf{Use cases:} \textit{Manage production data}.
 
-\subsubsection*{Test results}
+The process of management of the production data by the farmer was also thoroughly tested. The tests asserted that a farmer can open his production data view, which results in address change. Furthermore, the processes of addition, editing, and deletion of either one entry or all production data on one page were tested. The asserts verified if the messages shown in system's notifications in case of deletion were appropriate. When checking the addition of a new entry or editing of an existing one, the tests verified if the latest production data entry was correct.
+
+\textbf{Test results}
 \begin{verbnobox}[\footnotesize \vbdelim]
 test_manage_production_data.py::test_open_production_data_view <PASSED>              [ 79%]
 test_manage_production_data.py::test_add_production_data <PASSED>                    [ 81%]
@@ -256,7 +359,9 @@ test_manage_production_data.py::test_delete_all_production_data <PASSED>        
 
 \textbf{Use cases:} \textit{Display personal suggestions}.
 
-\subsubsection*{Test results}
+This group of tests checked if it was possible for both actors to enter their specific dashboards. In case of the farmer, asserts verified that his summary, recent production data, help requests, and suggestions tailored for him were displayed, whereas in case of the policy maker they checked if two separate lists of farmers with positive and negative notes were presented.
+
+\textbf{Test results}
 \begin{verbnobox}[\footnotesize \vbdelim]
 test_open_user_dashboard.py::test_open_dashboard_policy_maker <PASSED>     [ 93%]
 test_open_user_dashboard.py::test_open_dashboard_farmer <PASSED>           [ 95%]
@@ -266,7 +371,9 @@ test_open_user_dashboard.py::test_open_dashboard_farmer <PASSED>           [ 95%
 
 \textbf{Use cases:} \textit{View farmer's summary}, \textit{Get information about soil humidity}, \textit{Get information about weather forecasts}, \textit{Get information about water usage}.
 
-\subsubsection*{Test results}
+Similarly to the previous case, the verification of the user's summary was also tested for both actors. The tests verified that when opening the summary view, users were redirected to an appropriate address. Additionally, for the farmers, the existence of components displaying information about the soil humidity, water usage, and weather forecasts was checked.
+
+\textbf{Test results}
 \begin{verbnobox}[\footnotesize \vbdelim]
 test_open_user_summary.py::test_open_summary_policy_maker <PASSED>         [ 97%]
 test_open_user_summary.py::test_open_summary_farmer <PASSED>               [100%]

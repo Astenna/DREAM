@@ -1,8 +1,36 @@
 \chapter{Installation Guide} \label{ch:installation_guide}
 
-\section{Server}
+This section contains instructions for installing and running the application successfully. It specifies all the conditions that must be met in order for the program to execute correctly.
 
-\todo{To describe, mention tools and versions}
+The simplest way to run the application with just a single, simple command is by using docker compose. The prerequisites and the simple command is described in the section \ref{sec:docker}. 
+
+Moreover, the application can also be run without docker containers. In that case, however, the installation steps are much longer and complex. It requires: 
+\begin{itemize}
+    \item Postgres database installation (recommended version: 14.1)
+    \begin{itemize}
+        \item Configured to accept requests at port 5432.
+        \item If necessary, adjust the connection string in \textit{Code\slash Server\slash API\slash appsettings.json} (the Server address in the \textit{appsettings} should be set to 127.0.0.1 instead of \textit{postgres} as in the docker approach).
+    \end{itemize}
+    \item Following the steps described in \ref{sec:server} for Server installation.
+    \item Following the steps described in \ref{sec:client} for Client installation.
+\end{itemize}
+
+Depending on the installation approach choice, the client application will be available on:
+\begin{itemize}
+    \item Port 1337 for the installation with docker containers.
+    \item Port 3000 for the installation without docker containers.
+\end{itemize}
+
+\section{Docker} \label{sec:docker}
+Before executing the command depicted in \ref{lst:docker_compose} install the latest Docker Desktop version from the \href{https://www.docker.com/products/docker-desktop}{official website}. The minimum version of docker required is 4.4.4 (73704). After successful installation, open a terminal in the \textit{Code} directory and run the command from the listing \ref{lst:docker_compose}.\\
+
+\begin{lstlisting}[language=bash, caption={Docker compose.}, label=lst:docker_compose]
+docker-compose up -d --build
+\end{lstlisting}
+
+\section{Server}\label{sec:server}
+The only prerequisite is installation of the .NET 6.0 SDK. Then, the installation requires execution of commands in a terminal opened inside the root project's directory presented in listings: \ref{lst:api_deps_and_build}, \ref{lst:business_logic_deps_and_build}, \ref{lst:data_access_deps_and_build}, \ref{lst:publish_server}. It is important to preserve the order of listings. 
+
 
 \begin{lstlisting}[language=bash, caption={Install dependencies and build \textit{API}.}, label=lst:api_deps_and_build]
 cd Code/Server/API/
@@ -21,15 +49,15 @@ cd Code/Server/DataAccess/
 dotnet build --configuration Release --no-restore
 \end{lstlisting}
 
-\begin{lstlisting}[language=bash, caption={Publish \textit{Server}.}, label=lst:publish_server]
+\begin{lstlisting}[language=bash, caption={Publish and run server application.}, label=lst:publish_server]
 cd Code/Server/
 dotnet publish --configuration Release
+cd ./API/bin/Release/net6.0/publish/
+dotnet run ./API.dll
 \end{lstlisting}
-        
 
-\section{Client}
-
-\todo{To describe, mention tools and versions}
+\section{Client}\label{sec:client}
+Before executing npm commands, it is necessary to install node.js instance. Recommended versions: 14.17 or 16.13. Afterwards, open terminal in the root directory of the project, run the npm commands from the listing \ref{lst:client_deps_and_build} should be executed.\\
 
 \begin{lstlisting}[language=bash, caption={Install dependencies and build \textit{Client}.}, label=lst:client_deps_and_build]
 cd Code/Client/
@@ -37,28 +65,25 @@ npm install
 npm start
 \end{lstlisting}
 
-\section{Docker}
-
-\todo{To describe, mention tools and versions}
-
-\begin{lstlisting}[language=bash, caption={Docker compose.}, label=lst:docker_compose]
-docker-compose up -d --build
-\end{lstlisting}
-
-
 \section{Running System Tests}
 
-\todo{To describe: Mariusz}
+The whole system testing process requires downloading and installation of \href{https://www.python.org/downloads/release/python-3100/}{Python 3.10}. This is the version used throughout the development process of the initial prototype of the system.
+
+The second step is to install all the necessary packages. Those are listed inside \textit{requirements.txt} file. See listing \ref{lst:requirements} for specific commands to execute.
 
 \begin{lstlisting}[language=bash, caption={Install requirements.}, label=lst:requirements]
 cd Code/system_tests/
 pip install requirements -r requirements.txt
 \end{lstlisting}
 
-\begin{lstlisting}[language=bash, caption={Install Google Chrome.}]
+Additionally, since \textit{Selenium WebDriver} is employed, it is necessary to install a web browser. The one used in system tests is \textit{Google Chrome}. Its latest stable release could be downloaded via the \href{https://www.google.com/intl/en/chrome/}{official website} or a package manager as shown in the listing \ref{lst:install_chrome}. Throughout the development process, system tests were executed in the headless mode (without visible browser's UI shell). This could be changed inside \textit{conftest.py} configuration file.
+
+\begin{lstlisting}[language=bash, caption={Install Google Chrome.}, label={lst:install_chrome}]
 sudo apt install google-chrome-stable
 \end{lstlisting}
 
-\begin{lstlisting}[language=bash, caption={Run tests.}]
+Finally, after all the previous steps are completed, it is possible to run the system tests using \textit{pytest} as depicted in the listing \ref{lst:run_pytest}. If it is needed to run only a particular subset of available test cases, please refer to \href{https://docs.pytest.org/en/latest/how-to/usage.html}{pytest documentation}.
+
+\begin{lstlisting}[language=bash, caption={Run system tests.}, label={lst:run_pytest}]
 pytest
 \end{lstlisting}
