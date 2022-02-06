@@ -40,6 +40,7 @@ The system aims to solve a very challenging problem, which involves the collabor
     \begin{longtable}{@{}p{0.28\linewidth} p{0.68\linewidth}@{}}
 		\toprule
 		\textbf{Expression}     & \textbf{Definition}\\
+		\midrule
 		Mockup					& A static wireframe that adds additional aesthetic and visual user interface aspects to provide a realistic depiction of what the final page will look like.\\
 		Water irrigation system & Collection of external devices which gather information about the amount of water used on a given farm. Collected data are available via an API. \\
         Sensor/Humidity sensor 	& External device which collects information about the humidity of soil on a given farm.\\
@@ -111,15 +112,18 @@ The system aims to solve a very challenging problem, which involves the collabor
 \section{Revision History}
 
 \begin{center}
-	\begin{longtable}{@{}p{0.18\linewidth} p{0.18\linewidth} p{0.57\linewidth}@{}}
+	\begin{longtable}{@{}p{0.18\linewidth} p{0.12\linewidth} p{0.62\linewidth}@{}}
 		\toprule
 		\textbf{Date}   & \textbf{Revision} & \textbf{Notes}\\
 		\midrule
         09.01.2022      & v.1.0             & First release.\\
-% 		\date{} & v.1.1 & \begin{itemize}[label={--},leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3.5mm},after=\vspace{-4mm}]
-% 			\item Change 1
-% 			\item Change 2
-% 		\end{itemize}\\
+        06.02.2022      & v.1.1             & Changes to database model presented in the Figure \ref{fig:db-model} after ITD completion:
+        \begin{enumerate}[noitemsep]
+            \item Added column \textit{IsAutomatic} to \textit{HelpRequest} table
+            \item Added column \textit{Topic} to \textit{HelpRequest} table
+            \item Renamed column \textit{Message} to \textit{Description} in \textit{HelpRequest} table
+            \item Added \textit{MandalId} column to \textit{Farm} table
+        \end{enumerate}\\
 		\bottomrule
 	\end{longtable}
 \end{center}
