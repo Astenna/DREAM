@@ -7,12 +7,16 @@ import {requestRequests} from '../../../api/requests/requestRequests';
 import RequestForumListItemDetailComment from '../generic/RequestForumListItemDetailComment';
 import {PostHelpRequestAdviceRequest} from '../../../model/api/PostHelpRequestAdvice';
 import CreateListItemResponse from '../generic/CreateListItemResponse';
+import {useAppSelector} from '../../../store/hooks';
+import {selectAuthInfo} from '../../../store/auth/authSlice';
 
 const HelpRequestListItemDetail = () => {
   const {id} = useParams()
   const requestID: number | undefined = id ? +id : undefined
   const [requestData, load] = requestRequests.useGetFarmerRequestDetail()
   const postAdvice = requestRequests.usePostRequestAdvice()
+  const deleteAdvice = requestRequests.useDeleteAdvice()
+  const authInfo = useAppSelector(selectAuthInfo)
 
   const reload = () => {
     if (requestID) {
@@ -31,6 +35,13 @@ const HelpRequestListItemDetail = () => {
           reload()
         })
     }
+  }
+
+  const onAdviceDelete = (id: number) => {
+    deleteAdvice(id)
+      .then(_ => {
+        reload()
+      })
   }
 
   return (
@@ -76,7 +87,8 @@ const HelpRequestListItemDetail = () => {
                     authorRole={item.createdByFarmer ? "Farmer" :
                       item.createdByAgronomist ? "Agronomist" : ""}
                     content={item.message}
-                    deletable={false}
+                    deletable={authInfo?.farmerID === String(item.createdByFarmerId)}
+                    onDelete={() => onAdviceDelete(item.id)}
                   />
                 )
               }

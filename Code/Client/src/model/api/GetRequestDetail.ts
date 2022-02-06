@@ -4,7 +4,8 @@ export interface RequestAdvice {
   createdOn: string;
   helpRequestId: number;
   createdByAgronomist: string | null | undefined;
-  createdByFarmer: string | null | undefined
+  createdByFarmer: string | null | undefined;
+  createdByFarmerId: number;
 }
 
 export interface GetRequestDetailResponse {
