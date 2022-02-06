@@ -2,9 +2,9 @@ import pytest
 
 from constants.endpoints import DASHBOARD
 from constants.labels import FIELD_IS_REQUIRED_WARNING, INVALID_EMAIL
-from helpers.general import FAILURE, wait_for_view_change, wait_for_pop_up_to_appear
+from helpers.general import wait_for_view_change, wait_for_pop_up_to_appear
 from scenarios.log_in import fill_in_email_and_password, open_log_in_dialog, log_in, get_invalid_email_alert, \
-    get_invalid_password_alert
+    get_invalid_password_alert, user_does_not_exist_message
 from helpers.seed_db import seed_policy_maker, seed_farmer
 from models.User import User
 from scenarios.log_out import log_out
@@ -56,7 +56,7 @@ def test_log_in_unregistered_user_with_error(driver):
     log_in(driver)
 
     notification = wait_for_pop_up_to_appear(driver)
-    assert notification.text == FAILURE
+    assert notification.text == user_does_not_exist_message(unregistered_user.email)
 
 
 def test_log_in_no_data_with_error(driver):

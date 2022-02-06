@@ -6,6 +6,8 @@ from constants.endpoints import URL
 from constants.timeout import TIMEOUT
 from helpers.general import wait_and_fill_in_fields
 
+FARM_ALREADY_CREATED = 'Farm with given sensorId was already created!'
+
 
 def open_log_in_dialog(driver):
     driver.get(URL)
@@ -13,7 +15,7 @@ def open_log_in_dialog(driver):
     element = WebDriverWait(driver, TIMEOUT).until(
         EC.visibility_of_element_located((
             By.XPATH,
-            '//div[@id="root"]/div/section/header/div/div[2]/ul/li/span'
+            '//div[@id="root"]/div/section/header/div/div/ul/li/span'
         ))
     )
     element.click()
@@ -51,3 +53,11 @@ def get_invalid_password_alert(driver):
             '(.//*[normalize-space(text()) and normalize-space(.)="Provided email has incorrect format"])[1]/following::div[6]'
         ))
     )
+
+
+def user_does_not_exist_message(email):
+    return f'User with email: {email} doesn\'t exist!'
+
+
+def email_already_in_use_message(email):
+    return f'Email: {email} already in use!'

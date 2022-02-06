@@ -1,27 +1,72 @@
 \chapter{Code Structure} \label{ch:code_structure}
 
-\section{Client}
+\section{High Level Overview}
+
+\todo{Describe, mention dockerfile}
 
 \begin{forest}
+    pic dir tree/.style={%
+        for tree={%
+            folder,
+            font=\ttfamily,
+            grow'=0,
+        },
+        before typesetting nodes={%
+            for tree={%
+                edge label+/.option={pic me},
+            },
+        },
+    },
     pic dir tree,
     where level=0{}{% folder icons by default; override using file for file icons
         directory,
     },
     [Code
-        [Client
-            [public]
-            [src
-                [api]
-                [assets]
-                [model]
-                [modules]
-                [store]
-                [stylesheets]
-                [values, 
+        [Client]
+        [Server]
+        [system\_tests]
+        [docker-compose.yml, file]
+    ]
+\end{forest}
+
+\section{Client}
+
+\todo{For multiline comments look at Kinga's solution: Józef}
+
+\begin{forest}
+    pic dir tree/.style={%
+        for tree={%
+            folder,
+            % font=\ttfamily,
+            grow'=0,
+            % align=left,
+            % inner sep=0.009cm
+        },
+        before typesetting nodes={%
+            for tree={%
+                edge label+/.option={pic me},
+            },
+        },
+    },
+    pic dir tree,
+    where level=0{}{% folder icons by default; override using file for file icons
+        directory,
+    },
+    [\texttt{Code}
+        [\texttt{Client}
+            [\texttt{public}]
+            [\texttt{src}
+                [\texttt{api}]
+                [\texttt{assets}]
+                [\texttt{model}]
+                [\texttt{modules}]
+                [\texttt{store}]
+                [\texttt{stylesheets}]
+                [\texttt{values}, 
                     label=right:\textit{This is a comment about this directory.}
                 ]
             ]
-            [example\_file.txt, file,
+            [\texttt{example\_file.txt}, file,
                 label=right:\textit{This is a comment about this file.}
             ]
         ]
@@ -29,68 +74,72 @@
 \end{forest}
 
 \section{Server}
+
 \begin{forest}
     pic dir tree,
     where level=0{}{% folder icons by default; override using file for file icons
         directory,
     },
-    [Code
-        [Server
-            [API
-                [Controllers,
-                    label=right:\textit{Contains controllers with API endpoints definitions.}
+    [\texttt{Code}
+        [\texttt{Server}
+            [\texttt{API}
+                [\texttt{Controllers},
+                    label=right:\textit{Contains controllers with API endpoints definitions.},
                 ]
-                [Middleware \hspace{0.15em}
-                    \textit{Contains exception middleware for mapping exceptions}\\ \textit{to proper HTTP status codes.},
+                [\texttt{Middleware} \hspace{0.15em}
+                    \textit{Contains exception middleware for mapping exceptions}\\ \hspace{21mm} \hspace{\parindent*5}
+                    \textit{to proper HTTP status codes.},
                     edge path'/.expanded={
                         ([xshift=\forestregister{folder indent}]!u.parent anchor) |- ([yshift=.6ex].base west)
                 }] 
-                [Properties,
+                [\texttt{Properties},
                     label=right:\textit{Contains launch settings of the application.}
                 ]
             ]
-            [BusinessLogic
-                [Dtos,
+            [\texttt{BusinessLogic}
+                [\texttt{Dtos},
                     label=right:\textit{Consists of data transfer objects definitions.}]
-                [Exceptions,
+                [\texttt{Exceptions},
                     label=right:\textit{Contains custom exceptions.}
                 ]
-                [Mapper \hspace{0.15em}
-                    \textit{Contains Mapper Profiles that defines mappings between} \\ \textit{entities and data transfer objects.},
+                [\texttt{Mapper} \hspace{0.15em}
+                    \textit{Contains Mapper Profiles that defines mappings between} \\ \hspace{14mm} 
+                    \textit{entities and data transfer objects.},
                     edge path'/.expanded={ ([xshift=\forestregister{folder indent}]!u.parent anchor) |- ([yshift=.6ex].base west)
                 }]
                 [Queries,
                     label=right:\textit{Contains classes defining query parameters available in API requests.}
                 ]
-                [ServiceCollectionExtensions,
+                [\texttt{ServiceCollectionExtensions},
                     label=right:\textit{Defines classes required for middleware additions.}
                 ]
-                [Services,
+                [\texttt{Services},
                     label=right:\textit{Contains classes with business logic.}
                 ]
-                [Tools,
+                [\texttt{Tools},
                     label=right:\textit{Contains utility classes such as TokenProvider for generating JWT tokens.}
                 ]
             ]
-            [DataAccess
-                [AutoMigrations \hspace{0.15em}
-                    \textit{Contains classes required for performing automatic } \\ \textit{database migrations during application startup.},
+            [\texttt{DataAccess}
+                [\texttt{AutoMigrations} \hspace{0.15em}
+                    \textit{Contains classes required for performing automatic } \\ \hspace{30mm} \textit{database migrations during application startup.},
                     edge path'/.expanded={ ([xshift=\forestregister{folder indent}]!u.parent anchor) |- ([yshift=.6ex].base west)
                 }]
-                [Configuration,
+                [\texttt{Configuration},
                     label=right:\textit{Configures  entities relationships and constraints.}
                 ]
-                [Entities,
+                [\texttt{Entities},
                     label=right:\textit{Consists of entities mapped to database tables.}
                 ]
-                [Migrations,
+                [\texttt{Migrations},
                     label=right:\textit{Consists of classes defining database migrations.}
                 ]
-                [Seeder,
+                [\texttt{Seeder},
                     label=right:\textit{Contains SQL scripts and classes for seeding the database.}
                 ]
-                [DreamDbContext \hspace{0.15em}
-                    \textit{Class that acts as a bridge between the application}\\ \textit{and the database.},
+                [\texttt{DreamDbContext} \hspace{0.15em}
+                    \textit{Class that acts as a bridge between the application}\\ \hspace{30mm}
+                    \textit{and the database.},
                     edge path'/.expanded={ ([xshift=\forestregister{folder indent}]!u.parent anchor) |- ([yshift=.6ex].base west)
                 },
                 base=top,
@@ -104,6 +153,20 @@
 \section{System Tests}
 
 \begin{forest}
+    pic dir tree/.style={%
+        for tree={%
+            folder,
+            font=\ttfamily,
+            grow'=0,
+            % align=left,
+            % inner sep=0.009cm
+        },
+        before typesetting nodes={%
+            for tree={%
+                edge label+/.option={pic me},
+            },
+        },
+    },
     pic dir tree,
     where level=0{}{% folder icons by default; override using file for file icons
         directory,
@@ -112,16 +175,16 @@
         [system\_tests,
             label=right:\textit{Parent directory for all the system tests.}
             [constants,
-                label=right:\textit{It contains all the constants used including endpoints and UI messages.}
+                label=right:\textit{Contains all the constants used including endpoints and UI messages.}
             ]
             [helpers,
-                label=right:\textit{It contains functions facilitating repetitive work and seeding the database.}
+                label=right:\textit{Contains functions facilitating repetitive work and seeding the database.}
             ]
             [models,
-                label=right:\textit{It consists of classes that match entities existing in the system.}
+                label=right:\textit{Consists of classes that match entities existing in the system.}
             ]
             [scenarios,
-                label=right:\textit{It contains functions responsible for interactions with UI components.}
+                label=right:\textit{Contains functions responsible for interactions with UI components.}
             ]
             [conftest.py, file,
                 label=right:\textit{File containing fixtures used throughout the testing process.}
@@ -132,16 +195,16 @@
             [requirements.txt, file,
                 label=right:\textit{Depicts necessary libraries to set up the testing environment.}
             ]
+            [test\_assess\_farmers\_performance.py, file]
             [test\_create\_account.py, file]
+            [test\_delete\_account.py, file]
             [test\_log\_in.py, file]
             [test\_log\_out.py, file]
-            [test \textit{Also some longer text.}\\\textit{Also some longer text.},
-                edge path'/.expanded={
-                    ([xshift=\forestregister{folder indent}]!u.parent anchor) |- ([yshift=.6ex].base west)
-                },
-                base=top,
-                file
-            ]
+            [test\_manage\_forum.py, file]
+            [test\_manage\_help\_requests.py, file]
+            [test\_manage\_production\_data.py, file]
+            [test\_user\_dashboard.py, file]
+            [test\_user\_summary.py, file]
         ]
     ]
 \end{forest}

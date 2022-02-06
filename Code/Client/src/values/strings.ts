@@ -12,7 +12,7 @@ const strings = {
   DREAM_SHORT_DESCRIPTION: "Data-dRiven PrEdictive FArMing in Telangana",
   DREAM_DESCRIPTION: "DREAM is a project that intends to redesign the food production process in the Telangana area in order to create more resilient agricultural systems that will be required to meet the region’s rising food demand.",
   DREAM_IMAGE_FARM: "Farm picture",
-  DREAM_GOAL: "The goal is to help Telangana’s government promote data-driven policy-making in the state by designing, developing, and demonstrating anticipatory governance models for food systems utilizing digital public goods and community-centric approaches. The system aims to enable policy makers to identify farmers who perform well, especially un-der tough weather conditions, farmers who perform particularly badly and require assistance, and understand if agronomist-led steering initiatives yield substantial outcomes. This is going to be achieved by continuous assessment based on the visualizations of the acquired data.",
+  DREAM_GOAL: "The goal is to help Telangana’s government promote data-driven policy-making in the state by designing, developing, and demonstrating anticipatory governance models for food systems utilizing digital public goods and community-centric approaches. The system aims to enable policy makers to identify farmers who perform well, especially under tough weather conditions, farmers who perform particularly badly and require assistance, and understand if agronomist-led steering initiatives yield substantial outcomes. This is going to be achieved by continuous assessment based on the visualizations of the acquired data.",
   DREAM_GOAL_LABEL: "Our goal",
   SUBMIT: "Submit",
   SAVE_CHANGES: "Save changes",

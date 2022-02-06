@@ -3,7 +3,6 @@ import {Col, Input, Row, Select, Table} from 'antd';
 
 import React, {useEffect, useState} from 'react';
 import colors from "../../values/colors";
-import {Note} from "../../model/Note";
 import {useParams} from 'react-router';
 import ViewHeader from '../other/ViewHeader';
 import {farmerRequests} from '../../api/requests/farmerRequests';
@@ -41,9 +40,9 @@ const columns = [
     },
     dataIndex: 'currentNote',
     key: 'currentNote',
-    render: (note: Note) => (
+    render: (note: FarmerNote) => (
       <><StarOutlined
-        style={{color: note === Note.POSITIVE ? colors.SUCCESS : note === Note.NEGATIVE ? colors.DANGER : undefined}}/> {note}</>
+        style={{color: note === "Positive" ? colors.SUCCESS : note === "Negative" ? colors.DANGER : undefined}}/> {note}</>
     )
   },
   {

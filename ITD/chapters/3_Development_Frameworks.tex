@@ -33,11 +33,30 @@ C\# is a general purpose, strongly typed, object-oriented programming language d
 \begin{itemize}
     \item Stability issues for new releases - together with great transformations of C\# and .NET mentioned in the advantages list, some previously supported frameworks and functionalities were abandoned. In addition, the new releases of .NET Core introduced many breaking-changes \cite{net-breaking-changes}. 
     \item No standalone compiler, being tied to .NET's Common Language Runtime - the code can not be compiled into a machine code. Instead, it uses proprietary byte code that is executed on a virtual machine called \textit{Common Language Runtime} that needs to be available on the machine to run a C\# application \cite{c-sharp-tour}.
-    \item Tied to .NET and Microsoft - the developers do not have the full control over the language, and for some people the relation with Microsoft is a disadvantage, since they dislike Microsoft \todo{is it OK? or too opinion-based?}.
+\end{itemize}
+
+\subsection{Python}
+
+Python is a high-level general-purpose programming language that is interpreted. With the usage of considerable indentation, its design philosophy prioritizes code readability. Its language elements and object-oriented approach are intended to assist programmers in writing clear, logical code for small and large-scale projects. Its advantages as well as drawbacks are presented below.
+
+\textbf{Advantages}
+\begin{itemize}
+    \item High-level language that boosts productivity. When compared to other languages, the language features rich support libraries and clean object-oriented designs that enhance programmer efficiency by a significant margin.
+    \item Interpreted language - Python runs the code immediately, line by line. In the event of an error, it suspends further execution and communicates the problem. Due to the fact that the language shows only one error at a time, it makes debugging simple.
+    \item Portability - programming languages, such as C/C++, generate a need to rewrite the code in order to run the application on other platforms. Python, on the other hand, is not the same. Due to the usage of interpreter, code written in this language is platform-independent.
+
+You should, however, take care not to add any system-dependent features.
+\end{itemize}
+
+\textbf{Disadvantages}
+\begin{itemize}
+    \item Execution speed - Python is a dynamically typed interpreted language. Because the language is interpreted, each line of code must be explicitly interpreted for execution. This is time-consuming, and hence slows down the execution process.
+    \item Memory consumption - a necessary sacrifice for Python using dynamic typing is very high memory usage. It makes it practically unusable in scenarios when the program's performance plays an important role.
+    \item Runtime errors - being a dynamically typed language means that the data type of variable can change any time. This may lead to unexpected runtime errors.
 \end{itemize}
 
 \section{Frameworks and libraries}
- \textit{React Native} \cite{react_native}, \textit{Ant Design} \cite{ant_design}, \textit{Redux} \cite{redux}
+ \textit{React} \cite{react}, \textit{Ant Design} \cite{ant_design}, \textit{Redux} \cite{redux}
 
 \subsection{Entity Framework}
 Entity Framework is an open source, object-relational mapper for .NET that supports many types of databases. It provides support for LINQ queries, updates, schema migrations and change of tracking \cite{ef}\cite{ef-doc}. 
@@ -80,6 +99,38 @@ AutoMapper is a library build for automating object-to-object mapping. The libra
 \begin{itemize}
     \item Refactoring issues - after renaming a field that was used in the automatic mapping (name matching), the mapping will break without any compile time errors.
     \item Hard to debug
+\end{itemize}
+
+\subsection{Selenium}
+
+\textit{Selenium WebDriver} \cite{selenium}
+
+\todo{To describe: Mariusz}
+
+\textbf{Advantages}
+\begin{itemize}
+    \item Test
+\end{itemize}
+
+\textbf{Disadvantages}
+\begin{itemize}
+    \item Test.
+\end{itemize}
+
+\subsection{Pytest}
+
+\todo{To describe: Mariusz}
+
+As a comprehensive Python testing tool, \textit{pytest} \cite{pytest} may be used for numerous sorts of software testing at various levels of abstraction. It is now one of the most widely used testing frameworks. It has sophisticated capabilities like'assert' rewriting, a third-party plugin model, and a powerful yet simple fixture model.
+
+\textbf{Advantages}
+\begin{itemize}
+    \item Test
+\end{itemize}
+
+\textbf{Disadvantages}
+\begin{itemize}
+    \item Test.
 \end{itemize}
 
 \section{Middleware}

@@ -2,9 +2,10 @@ import React, {useEffect} from 'react';
 import {useParams} from 'react-router';
 import {Col, Row} from 'antd';
 import strings from '../../../values/strings';
-import ViewHeader from '../../other/ViewHeader';
 import {requestRequests} from '../../../api/requests/requestRequests';
 import RequestForumListItemDetailComment from '../generic/RequestForumListItemDetailComment';
+import RequestForumListItemDetailDescription from '../generic/RequestForumListItemDetailDescription';
+import ViewHeader from '../../other/ViewHeader';
 
 const MyHelpRequestListItemDetail = () => {
   const {id} = useParams()
@@ -20,26 +21,13 @@ const MyHelpRequestListItemDetail = () => {
   return (
     <>
       <ViewHeader title={`Help request: ${requestData?.topic}`}/>
+      <RequestForumListItemDetailDescription
+        description={requestData?.description}
+        createdBy={requestData?.createdBy}
+        createdOn={requestData?.createdOn}
+      />
       <Row style={{padding: "0 35px 0 35px"}}>
         <Col style={{width: "100%"}}>
-          <Row>
-            <Col>
-              <p style={{textAlign: 'justify', margin: "20px 0 0 0"}}>
-                {requestData?.description}
-              </p>
-            </Col>
-          </Row>
-          <Row justify={'end'}>
-            <Col style={{margin: "10px 0 0", display: "flex", flexWrap: "wrap"}}>
-              <span className={"dashboard-item-author"}>
-                {requestData?.createdBy}
-              </span>
-              <span className={"dashboard-item-attribute-bold"}>&nbsp;|&nbsp;</span>
-              <span className={"dashboard-item-attribute-bold"}>
-                {requestData?.createdOn && new Date(requestData.createdOn).toLocaleString()}
-              </span>
-            </Col>
-          </Row>
           {
             !!requestData?.helpResponses?.length && (requestData.helpResponses.length > 0) &&
             <Row justify={'start'}>

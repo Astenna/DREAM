@@ -34,4 +34,12 @@ export const requestRequests = {
       api(tokenAPI.post<PostHelpRequestAdviceResponse>(endpoints.POST_REQUEST_ADVICE.replace(':id', String(id)), values))
   },
 
+  useDeleteAdvice: ():
+    (id: number) => Promise<AxiosResponse> => {
+    const api = useAPI()
+    return (id) =>
+      api(tokenAPI.delete(
+        endpoints.DELETE_ADVICE.replace(':id', String(id))))
+  },
+
 }
