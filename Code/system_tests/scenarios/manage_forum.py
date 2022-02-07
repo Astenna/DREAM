@@ -98,7 +98,7 @@ def verify_latest_comment(driver, comment):
     return WebDriverWait(driver, TIMEOUT).until(
         EC.text_to_be_present_in_element((
             By.XPATH,
-            '//div[@id="root"]/div/section/section/main/div/div[3]/div/div[5]/div/div/div[2]/div/p'
+            '//div[@id="root"]/div/section/section/main/div/div[4]/div/div[3]/div/div/div[2]/div/p'
         ), comment)
     )
 
@@ -106,8 +106,8 @@ def verify_latest_comment(driver, comment):
 def delete_forum_comment(driver):
     delete_icon = WebDriverWait(driver, TIMEOUT).until(
         EC.element_to_be_clickable((
-            By.XPATH,
-            '//div[@id="root"]/div/section/section/main/div/div[3]/div/div[5]/div/div/div/div/span[5]/button/span'
+            By.CSS_SELECTOR,
+            'span.anticon.anticon-delete > svg'
         ))
     )
     delete_icon.click()

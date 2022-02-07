@@ -43,6 +43,10 @@ def setup_module(driver):
     driver.get(URL)
     log_out(driver)
     tda.test_delete_account_farmer(driver, negative_farmer)
+    tli.test_log_in_policy_maker(driver)
+    tafp.test_give_neutral_note(driver, seed_farmer)
+    driver.get(URL)
+    log_out(driver)
 
 
 @pytest.fixture(autouse=True, scope='function')
@@ -124,6 +128,6 @@ def test_delete_help_response(driver):
 
 
 def test_delete_help_request(driver):
-    test_create_help_request(driver)
+    test_view_my_help_request(driver)
 
     delete_help_request(driver)

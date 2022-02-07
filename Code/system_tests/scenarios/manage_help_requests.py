@@ -64,9 +64,11 @@ def get_invalid_description_alert(driver):
 
 
 def open_my_help_request(driver):
-    my_help_request = driver.find_element(
-        By.XPATH,
-        '//div[@id="root"]/div/section/section/main/div/div[3]/div/a/div/div/div/div/h1'
+    my_help_request = WebDriverWait(driver, TIMEOUT).until(
+        EC.visibility_of_element_located((
+            By.XPATH,
+            '//div[@id="root"]/div/section/section/main/div/div[3]/div/a/div/div/div/div/h1'
+        ))
     )
     my_help_request.click()
 
@@ -107,7 +109,7 @@ def verify_latest_response(driver, advice):
     return WebDriverWait(driver, TIMEOUT).until(
         EC.text_to_be_present_in_element((
             By.XPATH,
-            '//div[@id="root"]/div/section/section/main/div/div[3]/div/div[5]/div/div/div[2]/div/p'
+            '//div[@id="root"]/div/section/section/main/div/div[4]/div/div[3]/div/div/div[2]/div/p'
         ), advice)
     )
 
@@ -133,8 +135,8 @@ def delete_help_request(driver):
 def delete_help_response(driver):
     delete_icon = WebDriverWait(driver, TIMEOUT).until(
         EC.element_to_be_clickable((
-            By.XPATH,
-            '(.//*[normalize-space(text()) and normalize-space(.)="Seed Farmer"])[2]/preceding::*[name()="svg"][1]'
+            By.CSS_SELECTOR,
+            'span.anticon.anticon-delete > svg'
         ))
     )
     delete_icon.click()
