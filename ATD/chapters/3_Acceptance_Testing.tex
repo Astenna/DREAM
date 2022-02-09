@@ -1,7 +1,6 @@
 \chapter{Acceptance Testing} \label{ch:acceptance_testing}
 
-\todo{Add description of the chapter.}
-% Mention that the application was tested manually.
+The following chapter reminds all project details that are considered to be valuable to design the test cases. Furthermore, it elaborates in detail on how the verification was performed, showing all the scenarios and their results.
 
 \section{Project Specifics}
 
@@ -75,9 +74,13 @@ Goals, use cases, as well as functional requirements that are defined throughout
 	\item [\textbf{R27.}] The system allows the farmer to insert their position when they first register.
 \end{enumerate}
 
-\section{Test Cases}
+\section{Test Cases} \label{sec:test_cases}
 
-The following test cases are used in the process of acceptance testing of the initial prototype of the DREAM system. The test cases are based on the project's use cases, which are additionally mapped to the functional requirements and so that the fulfillment of both is verified.
+The following test cases are used in the process of acceptance testing of the initial prototype of the DREAM system. They are directly based on the project's use cases, which are additionally mapped to the functional requirements so that the fulfillment of both is verified. All the testing was conducted manually.
+
+Before starting the acceptance tests, the application was seeded with data required for specified test cases. Two farmer's accounts, help requests together with responses, forum topics and comments, products and their production data, as well as meetings and knowledge items were created.
+
+\subsection{Show Farmer's Home Page}
 
 \begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
 	\toprule
@@ -89,19 +92,22 @@ The following test cases are used in the process of acceptance testing of the in
 	\midrule
 	\textbf{Actor} & Farmer\\
 	\midrule
-	\textbf{Input} & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		\item Example
-		\item Example:\newline
-		Email: test@example.com\newline
-		Password: test1234
-		\item Example;
-	\end{itemize}\\
+	\textbf{Scenario} & 
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Open \textit{Farmer's WebApplication}.
+		\item Click the \textit{Sign In} button.
+		\item Fill in \textit{E-Mail} and \textit{Password} fields with credentials used in the \textit{Sign Up} process.
+		\item Press the \textit{Sign In} button.
+	\end{enumerate}\\
 	\midrule
 	\textbf{Expected Output} & The \textit{Home Page} with weather forecast, knowledge, and planned meetings is displayed.\\
 	\midrule
 	\textbf{Test Result} & Success\\
 	\bottomrule
+	\caption{Test case verifying U1.}
 \end{longtable}
+
+\subsection{Show Agronomist's Home Page}
 
 \begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
 	\toprule
@@ -113,19 +119,22 @@ The following test cases are used in the process of acceptance testing of the in
 	\midrule
 	\textbf{Actor} & Agronomist\\
 	\midrule
-	\textbf{Input} & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		\item Example
-		\item Example:\newline
-		Email: test@example.com\newline
-		Password: test1234
-		\item Example;
-	\end{itemize}\\
+	\textbf{Scenario} & 
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Open \textit{Agronomist's WebApplication}.
+		\item Click the \textit{Sign In} button.
+		\item Fill in \textit{E-Mail} and \textit{Password} fields with credentials used in the backend setup process.
+		\item Press the \textit{Sign In} button.
+	\end{enumerate}\\
 	\midrule
 	\textbf{Expected Output} & The \textit{Home Page} with weather forecast, help requests, and planned meetings is displayed.\\
 	\midrule
 	\textbf{Test Result} & Success\\
 	\bottomrule
+	\caption{Test case verifying U2.}
 \end{longtable}
+
+\subsection{Show Topic Pane}
 
 \begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
 	\toprule
@@ -137,19 +146,20 @@ The following test cases are used in the process of acceptance testing of the in
 	\midrule
 	\textbf{Actor} & Farmer\\
 	\midrule
-	\textbf{Input} & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		\item Example
-		\item Example:\newline
-		Email: test@example.com\newline
-		Password: test1234
-		\item Example;
-	\end{itemize}\\
+	\textbf{Scenario} & 
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Sign in to the \textit{Farmer's WebApplication}.
+		\item Click the \textit{Forum} tab.
+	\end{enumerate}\\
 	\midrule
 	\textbf{Expected Output} & The \textit{Topic Page} containing a list of forum topics is displayed.\\
 	\midrule
 	\textbf{Test Result} & Success\\
 	\bottomrule
+	\caption{Test case verifying U3.}
 \end{longtable}
+
+\subsection{Show Production}
 
 \begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
 	\toprule
@@ -161,19 +171,20 @@ The following test cases are used in the process of acceptance testing of the in
 	\midrule
 	\textbf{Actor} & Farmer\\
 	\midrule
-	\textbf{Input} & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		\item Example
-		\item Example:\newline
-		Email: test@example.com\newline
-		Password: test1234
-		\item Example;
-	\end{itemize}\\
+	\textbf{Scenario} &
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Sign in to the \textit{Farmer's WebApplication}.
+		\item Click the \textit{Production} tab.
+	\end{enumerate}\\
 	\midrule
 	\textbf{Expected Output} & The \textit{Production Page} with farmer's production data is displayed.\\
 	\midrule
 	\textbf{Test Result} & Success\\
 	\bottomrule
+	\caption{Test case verifying U4.}
 \end{longtable}
+
+\subsection{Show Farm Info}
 
 \begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
 	\toprule
@@ -185,19 +196,24 @@ The following test cases are used in the process of acceptance testing of the in
 	\midrule
 	\textbf{Actor} & Farmer\\
 	\midrule
-	\textbf{Input} & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		\item Example
-		\item Example:\newline
-		Email: test@example.com\newline
-		Password: test1234
-		\item Example;
-	\end{itemize}\\
+	\textbf{Scenario} &
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Sign in to the \textit{Farmer's WebApplication}.
+		\item Click the \textit{Farm Info} tab.
+	\end{enumerate}\\
 	\midrule
 	\textbf{Expected Output} & The \textit{Farm Info Page} containing soil, production, and sensor data is displayed.\\
 	\midrule
-	\textbf{Test Result} & Success\\
+	\textbf{Test Result} & Failure\\
 	\bottomrule
+	\caption{Test case verifying U5.}
 \end{longtable}
+
+\subsubsection*{Failure Description}
+
+There is no tab called \textit{Farm Info} available. Such data can be seen inside \textit{Production} tab, nonetheless, it does not follow the use case description and no information regarding that change could be found in the provided documents.
+
+\subsection{Send Request for Help}
 
 \begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
 	\toprule
@@ -209,16 +225,134 @@ The following test cases are used in the process of acceptance testing of the in
 	\midrule
 	\textbf{Actor} & Farmer\\
 	\midrule
-	\textbf{Input} & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
-		\item Example
-		\item Example:\newline
-		Email: test@example.com\newline
-		Password: test1234
-		\item Example;
-	\end{itemize}\\
+	\textbf{Scenario} &
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Sign in to the \textit{Farmer's WebApplication}.
+		\item Click the \textit{Help} tab.
+		\item Press the \textit{Create a new help request} button.
+		\item Fill in the \textit{Subject} and \textit{Body} fields.
+	\end{enumerate}\\
 	\midrule
 	\textbf{Expected Output} & A request is created and sent to the agronomist responsible for the given area.\\
 	\midrule
 	\textbf{Test Result} & Success\\
 	\bottomrule
+    \caption{Test case verifying U6.}
+\end{longtable}
+
+\subsubsection*{Unexpected Behavior}
+
+The case when valid data is introduced works as expected. However, the system allows creating empty help requests and no input validation is in place.
+
+\noindent\rule{\textwidth}{1pt} \todo{This line is only temporal: Józef, delete when finished}
+
+\subsection{Create New Topic}
+
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U14.} Create New Topic \\
+	\midrule
+	\textbf{Goals} & G1\\
+	\midrule
+	\textbf{Requirements} & R15, R16 \\
+	\midrule
+	\textbf{Actor} & Farmer\\
+	\midrule
+	\textbf{Scenario} & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Log in as a farmer to the \textit{Farmer's WebApplication}.
+		\item Click on \textit{Forum} in the navigation top bar.
+		\item Click on the \textit{Create new topic} button in the left bottom corner.
+		\item Fill the body, tag and the topic.
+		\item Click on the \textit{Create} button.
+	\end{enumerate}\\
+	\midrule
+	\textbf{Expected Output} & A topic is successfully created and shown in the forum view.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+	\caption{Test case verifying U14.}
+\end{longtable}
+
+
+\subsection{Update Production Data}
+
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U15.} Update Production Data \\
+	\midrule
+	\textbf{Goals} & G2\\
+	\midrule
+	\textbf{Requirements} & \textit{No valid requirement specified.}\\
+	\midrule
+	\textbf{Actor} & Farmer\\
+	\midrule
+	\textbf{Scenario} & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Log in as a farmer to the \textit{Farmer's WebApplication}.
+		\item Click on the \textit{Production} in the navigation top bar.
+		\item Click on the \textit{See more} button at the bottom of \textit{Production} box.
+		\item Click on the pencil icon button present in the item of the production entries list that is to be edited.
+		\item Change amount and note in the pop-up.
+		\item Click on the \textit{OK} button.
+	\end{enumerate}\\
+	\midrule
+	\textbf{Expected Output} & The production data is updated and new, updated values are presented in the production entries list.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+	\caption{Test case verifying U15.}
+\end{longtable}
+
+\subsection{Comment Topic}
+
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U16.} Comment Topic \\
+	\midrule
+	\textbf{Goals} & G1\\
+	\midrule
+	\textbf{Requirements} & R17\\
+	\midrule
+	\textbf{Actor} & Farmer\\
+	\midrule
+	\textbf{Scenario} & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Log in as a farmer to the \textit{Farmer's WebApplication}.
+		\item Click on \textit{Forum} in the navigation top bar.
+		\item Click on the comment icon button in the left bottom corner of a topic.
+		\item Write a comment in the text box.
+		\item Click on the send icon button.
+	\end{enumerate}\\
+	\midrule
+	\textbf{Expected Output} & The comment is saved in a topic and the number of topic's comment has been increased.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+	\caption{Test case verifying U16.}
+\end{longtable}
+
+
+\subsection{Answer Help Request}
+
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U17.} Answer Help Request \\
+	\midrule
+	\textbf{Goals} & G1\\
+	\midrule
+	\textbf{Requirements} & R12\\
+	\midrule
+	\textbf{Actor} & Farmer\\
+	\midrule
+	\textbf{Scenario} & \begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Log in as an agronomist to the \textit{Agronomist's WebApplication}.
+		\item Click on \textit{Help requests} in the navigation top bar.
+		\item Click on the comment icon button in the bottom right corner of a help request to be answered.
+		\item Fill a text box with response.
+		\item Click on the send icon button.
+	\end{enumerate}\\
+	\midrule
+	\textbf{Expected Output} & The response is saved and visible in the farmer that is the help request's author.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+	\caption{Test case verifying U17.}
 \end{longtable}
