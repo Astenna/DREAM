@@ -13,6 +13,32 @@
 \RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{listings}
 
+% Define Colors
+\usepackage{color}
+\definecolor{eclipseBlue}{RGB}{42,0.0,255}
+\definecolor{eclipseGreen}{RGB}{63,127,95}
+\definecolor{eclipsePurple}{RGB}{127,0,85}
+ 
+% Set Language
+\lstset{
+    basicstyle=\footnotesize\ttfamily, % Global Code Style
+    captionpos=b, % Position of the Caption (t for top, b for bottom)
+    extendedchars=true, % Allows 256 instead of 128 ASCII characters
+    tabsize=4, % number of spaces indented when discovering a tab 
+    columns=fixed, % make all characters equal width
+    keepspaces=true, % does not ignore spaces to fit width, convert tabs to spaces
+    showstringspaces=false, % lets spaces in strings appear as real spaces
+    breaklines=true, % wrap lines if they don't fit
+    frame=trbl, % draw a frame at the top, right, left and bottom of the listing
+    frameround=false, % make the frame round at all four corners
+    framesep=4pt, % quarter circle size of the round corners
+    numbers=left, % show line numbers at the left
+    numberstyle=\tiny\ttfamily, % style of the line numbers
+    commentstyle=\color{eclipseGreen}, % style of comments
+    keywordstyle=\color{eclipsePurple}, % style of keywords
+    stringstyle=\color{eclipseBlue}, % style of strings
+}
+
 \RequirePackage[scaled]{helvet}
 \renewcommand*\familydefault{\sfdefault}
 
@@ -21,6 +47,62 @@
 
 \RequirePackage{babel}
 \RequirePackage{csquotes}
+
+\RequirePackage{verbatimbox}
+
+\definecolor{successsgreen}{rgb}{0.38, 0.68, 0.4}
+
+\catcode`>=\active %
+\catcode`<=\active %
+\def\openesc{\color{successsgreen}}
+\def\closeesc{\color{black}}
+\def\vbdelim{\catcode`<=\active\catcode`>=\active%
+\def<{\openesc}
+\def>{\closeesc}}
+\catcode`>=12 %
+\catcode`<=12 %
+
+\RequirePackage[edges]{forest}
+
+\definecolor{folderbg}{RGB}{255,233,162}
+\definecolor{folderborder}{RGB}{248,215,117}
+\newlength\Size
+\setlength\Size{4pt}
+\tikzset{%
+  folder/.pic={%
+    \filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);
+    \filldraw [draw=folderborder, top color=folderbg!50, bottom color=folderbg] (-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+  },
+  file/.pic={%
+    \filldraw [draw=folderborder, top color=folderbg!5, bottom color=folderbg!10] (-\Size,.4*\Size+5pt) coordinate (a) |- (\Size,-1.2*\Size) coordinate (b) -- ++(0,1.6*\Size) coordinate (c) -- ++(-5pt,5pt) coordinate (d) -- cycle (d) |- (c) ;
+  },
+}
+\forestset{%
+    declare autowrapped toks={pic me}{},
+    pic dir tree/.style={%
+        for tree={%
+            folder,
+            grow'=0,
+            align=left,
+            inner sep=0.002cm
+        },
+        before typesetting nodes={%
+            for tree={%
+                edge label+/.option={pic me},
+            },
+        },
+    },
+    pic me set/.code n args=2{%
+        \forestset{%
+            #1/.style={%
+                inner xsep=2\Size,
+                pic me={pic {#2}},
+            }
+        }
+    },
+    pic me set={directory}{folder},
+    pic me set={file}{file},
+}
 
 \RequirePackage{parskip}
 \setlength{\parindent}{0pt}

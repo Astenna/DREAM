@@ -1,1 +1,59 @@
 \chapter{Installation Setup} \label{ch:installation_setup}
+
+This chapter describes in detail the steps performed to install and successfully run the initial prototype of the \textit{DREAM} application provided. The system consists of two different parts: backend and frontend, which were installed separately.
+
+\section{Backend}
+
+A database and a server constituted together the backend of the system. The database was created using the \textit{MySQL} database management system \cite{mysql}, whereas the server run on the \textit{Java Virtual Machine (JVM)} and was implemented in the \textit{Spring Boot} framework \cite{spring_boot}.
+
+\subsection{Server Prerequisites}
+
+\begin{enumerate}
+    \item Downloaded backend code from the \href{https://github.com/marticaffa/CaffagniniFaouziButtiglione/tree/main/Code/back-end}{backend repository}. Nonetheless, it \textbf{was not} prepared in the form of a \textit{.zip} file as specified by the assignment document.
+    \item Installed \textit{IntelliJ Ultimate} from the \href{https://www.jetbrains.com/idea/download/}{official website}.
+    \item Allowed the IDE to resolve all the dependencies of the backend code.
+    \item Built the code.
+\end{enumerate}
+
+\subsection{Database Prerequisites}
+
+\begin{enumerate}
+    \item Installed \textit{MySQL Sever \& Workbench} from the \href{https://dev.mysql.com/downloads/installer/}{official website} by accepting only community \textit{Server}, \textit{Workbench}, and \textit{Connector/J} packages.
+    \item Set the default username and password for \textit{MySQL} server to \textit{"root"}. However, this \textbf{did not work} since it was not set to \textit{"root"} inside \textit{application.properties} file, which should be the case according to the instruction provided in the group's ITD document. Instead, it was set to \textit{"6EG7DGkcfH8pv2"}. This required the user to manually change the password to \textit{"root"} in the aforementioned file.
+    \item Created database schema called \textit{db\_dream}.
+\end{enumerate}
+
+\subsection{Backend Setup}
+
+\begin{enumerate}
+    \item Run \textit{DreamApplication.java} inside \textit{IntelliJ Ultimate}.
+    \item Executed \textit{db\_initialization.sql} inside \textit{MySQL Workbench}.
+\end{enumerate}
+
+\section{Frontend}
+
+The frontend of the system was developed using \textit{JavaScript} together with \textit{ReactJS} \cite{reactjs}.
+
+\subsection{Basic Setup}
+
+Opened the following links inside a web browser: \href{https://dreamfarmerse2.firebaseapp.com}{farmer's app}, \href{https://dreamagronomistse2.firebaseapp.com}{agronomist's app}. This setup was utilized to perform the acceptance testing.
+
+\subsection{Setup Used for Code Verification Purpose}
+
+The following setup (see the listings \ref{lst:agronomist_web_app} and \ref{lst:farmer_web_app}) was employed to manually build the source code, and thereby, to verify its correctness. It is important to notice that there was no instruction provided inside the group's ITD that would help with this process.
+
+\subsubsection*{Agronomist's WebApplication}
+
+\begin{lstlisting}[language=bash, caption={Install dependencies and build \textit{Agronomist's WebApplication}.}, label=lst:agronomist_web_app]
+cd Code/UI/dream-agronomist-webapp/
+npm install
+npm start
+\end{lstlisting}
+
+\subsubsection*{Farmer's WebApplication}
+
+\begin{lstlisting}[language=bash, caption={Install dependencies and build \textit{Farmer's WebApplication}.}, label=lst:farmer_web_app]
+cd Code/UI/dream-farmer-webapp/
+npm install
+npm start
+\end{lstlisting}
