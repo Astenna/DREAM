@@ -1,11 +1,93 @@
 \chapter{Acceptance Testing} \label{ch:acceptance_testing}
 
+\todo{Add description of the chapter.}
+% Mention that the application was tested manually.
+
+\section{Project Specifics}
+
+Goals, use cases, as well as functional requirements that are defined throughout the RASD document are listed below. They are further exploited to define particular test cases in the process of acceptance testing. Since the functionalities were implemented to satisfy only the needs of agronomists and farmers, all the information related to the role of a policy maker is crossed out.
+
+\subsection{Goals}
+
+\begin{enumerate}
+	\item [\textbf{G1.}] Allowing farmer to share their knowledge and problems with other farmers and help them with their farm by creating and commenting a topic.
+	\item [\textbf{G2.}] Allowing farmer to keep track of their production.
+	\item [\textbf{G3.}] Showing the farmer personalized advice regarding specific subjects of their need, shared by the agronomist.
+	\item [\textbf{G4.}] Allowing farmers to make a request for help to agronomists.
+	\item [\textbf{G5.}] Allowing agronomists to help farmers in their area by answering to their request.
+	\item [\textbf{G6.}] Allowing agronomists to help farmers in their area by sharing their knowledge and giving them advice.
+	\item [\textbf{G7.}] Allowing agronomists to plan visits with farmers to check their progress and if needed, help them.
+	\item [\textbf{G8.}] \sout{Allowing policy makers to monitor the performance of the farmers to help them or to give them special incentives to encourage them to share their experience.} (\textbf{Not implemented.})
+	\item [\textbf{G9.}] Showing customers weather forecasts allowing them to have a better approach with the climate changes.
+\end{enumerate}
+
+\subsection{Use Cases}
+
+\begin{enumerate}
+	\item [\textbf{U1.}] Show Farmer's Home Page.
+	\item [\textbf{U2.}] Show Agronomist's Home Page.
+	\item [\textbf{U3.}] Show Topic Page.
+	\item [\textbf{U4.}] Show Production.
+	\item [\textbf{U5.}] Show Farm Info.
+	\item [\textbf{U6.}] Send Request for Help.
+	\item [\textbf{U7.}] Sign Up.
+	\item [\textbf{U8.}] Log In.
+	\item [\textbf{U9.}] Create Meeting
+	\item [\textbf{U10.}] Create Knowledge.
+	\item [\textbf{U11.}] Insert Farm Data.
+	\item [\textbf{U12.}] Notification New Farmer.
+	\item [\textbf{U13.}] \sout{Show Policy Maker's Home Page.} (\textbf{Not implemented.})
+	\item [\textbf{U14.}] Create New Topic.
+	\item [\textbf{U15.}] Update Production Data.
+	\item [\textbf{U16.}] Comment Topic.
+	\item [\textbf{U17.}] Answer Help Request.
+\end{enumerate}
+
+\subsection{Requirements}
+
+\begin{enumerate}
+	\item [\textbf{R1.}] The system allows the farmer to add data concerning his production.
+	\item [\textbf{R2.}] The system allows the agronomist to view the data concerning their farmers' production.
+	\item [\textbf{R3.}] The system allows the agronomist to book an appointment with the farmer by showing all available slots.
+	\item [\textbf{R4.}] The system allows the agronomist to modify a booked appointment with the farmer.
+	\item [\textbf{R5.}] The system allows the agronomist to cancel a booked appointment with a farmer.
+	\item [\textbf{R6.}] The system check that the agronomist booked at least two appointments per year with each farmer.
+	\item [\textbf{R7.}] The system alerts the farmer before the appointment.
+	\item [\textbf{R8.}] The system alerts the agronomist before the appointment.
+	\item [\textbf{R9.}] The system allows the agronomist to view the calendar.
+	\item [\textbf{R10.}] The system allows the farmer to view the calendar.
+	\item [\textbf{R11.}] The system allows the farmer to send a help request to the agronomist.
+	\item [\textbf{R12.}] The system allows the agronomist to answer to the help requests that are sent to him.
+	\item [\textbf{R13.}] The system allows the agronomist to view all the help requests sent to him.
+	\item [\textbf{R14.}] The system allows the farmer to view all the help requests sent by him.
+	\item [\textbf{R15.}] The system allows the farmer to publish a topic on the forum.
+	\item [\textbf{R16.}] The system allows all farmers to view the forum.
+	\item [\textbf{R17.}] The system allows all farmers to publish an answer to a topic on the forum.
+	\item [\textbf{R18.}] The system allows the farmers to check the weather forecasts for their area.
+	\item [\textbf{R19.}] The system allows the agronomists to share knowledge with the farmer.
+	\item [\textbf{R20.}] The system allows the farmers to visualize the \textit{knowledges} shared by their agronomist.
+	\item [\textbf{R21.}] The system allows all agronomists to check the weather forecasts for their area.
+	\item [\textbf{R22.}] The system allows the agronomists to publish a grade for each farmer after each visit.
+	\item [\textbf{R23.}] \sout{The system allows the policy makers to view the grades of all farmers of Telangana.} (\textbf{Not implemented.})
+	\item [\textbf{R24.}] The system requires a sign up and a login to access to the data.
+	\item [\textbf{R25.}] The system shows to each agronomist the list of all farmers they are responsible for.
+	\item [\textbf{R26.}] The system notifies the agronomists when a new farmer has registered under their area.
+	\item [\textbf{R27.}] The system allows the farmer to insert their position when they first register.
+\end{enumerate}
+
+\section{Test Cases}
+
+The following test cases are used in the process of acceptance testing of the initial prototype of the DREAM system. The test cases are based on the project's use cases, which are additionally mapped to the functional requirements and so that the fulfillment of both is verified.
 
 \begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
 	\toprule
-	\textbf{ID} & Log In \\
+	\textbf{Use case} & \textbf{U1.} Show Farmer's Home Page\\
 	\midrule
-	\textbf{Description} & Login as a farmer in the application. \\
+	\textbf{Goals} & G1, G2, G3, G4, G9\\
+	\midrule
+	\textbf{Requirements} & R7, R18, R20\\
+	\midrule
+	\textbf{Actor} & Farmer\\
 	\midrule
 	\textbf{Input} & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
 		\item Example
@@ -15,7 +97,127 @@
 		\item Example;
 	\end{itemize}\\
 	\midrule
-	\textbf{Expected Output} & User correctly logged in and redirected to the bashboard page.\\
+	\textbf{Expected Output} & The \textit{Home Page} with weather forecast, knowledge, and planned meetings is displayed.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+\end{longtable}
+
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U2.} Show Agronomist's Home Page\\
+	\midrule
+	\textbf{Goals} & G5, G6, G7, G9\\
+	\midrule
+	\textbf{Requirements} & R8, R13, R21\\
+	\midrule
+	\textbf{Actor} & Agronomist\\
+	\midrule
+	\textbf{Input} & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Example
+		\item Example:\newline
+		Email: test@example.com\newline
+		Password: test1234
+		\item Example;
+	\end{itemize}\\
+	\midrule
+	\textbf{Expected Output} & The \textit{Home Page} with weather forecast, help requests, and planned meetings is displayed.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+\end{longtable}
+
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U3.} Show Topic Pane\\
+	\midrule
+	\textbf{Goals} & G1\\
+	\midrule
+	\textbf{Requirements} & R17\\
+	\midrule
+	\textbf{Actor} & Farmer\\
+	\midrule
+	\textbf{Input} & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Example
+		\item Example:\newline
+		Email: test@example.com\newline
+		Password: test1234
+		\item Example;
+	\end{itemize}\\
+	\midrule
+	\textbf{Expected Output} & The \textit{Topic Page} containing a list of forum topics is displayed.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+\end{longtable}
+
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U4.} Show Production\\
+	\midrule
+	\textbf{Goals} & G2\\
+	\midrule
+	\textbf{Requirements} & \textit{No valid requirement specified.}\\
+	\midrule
+	\textbf{Actor} & Farmer\\
+	\midrule
+	\textbf{Input} & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Example
+		\item Example:\newline
+		Email: test@example.com\newline
+		Password: test1234
+		\item Example;
+	\end{itemize}\\
+	\midrule
+	\textbf{Expected Output} & The \textit{Production Page} with farmer's production data is displayed.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+\end{longtable}
+
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U5.} Show Farm Info\\
+	\midrule
+	\textbf{Goals} & G6\\
+	\midrule
+	\textbf{Requirements} & \textit{No valid requirement specified.}\\
+	\midrule
+	\textbf{Actor} & Farmer\\
+	\midrule
+	\textbf{Input} & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Example
+		\item Example:\newline
+		Email: test@example.com\newline
+		Password: test1234
+		\item Example;
+	\end{itemize}\\
+	\midrule
+	\textbf{Expected Output} & The \textit{Farm Info Page} containing soil, production, and sensor data is displayed.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+\end{longtable}
+
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U6.} Send Request for Help\\
+	\midrule
+	\textbf{Goals} & G4\\
+	\midrule
+	\textbf{Requirements} & R11, R14\\
+	\midrule
+	\textbf{Actor} & Farmer\\
+	\midrule
+	\textbf{Input} & \begin{itemize}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Example
+		\item Example:\newline
+		Email: test@example.com\newline
+		Password: test1234
+		\item Example;
+	\end{itemize}\\
+	\midrule
+	\textbf{Expected Output} & A request is created and sent to the agronomist responsible for the given area.\\
 	\midrule
 	\textbf{Test Result} & Success\\
 	\bottomrule
