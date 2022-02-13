@@ -15,7 +15,7 @@ Goals, use cases, as well as functional requirements that are defined throughout
 	\item [\textbf{G4.}] Allowing farmers to make a request for help to agronomists.
 	\item [\textbf{G5.}] Allowing agronomists to help farmers in their area by answering to their request.
 	\item [\textbf{G6.}] Allowing agronomists to help farmers in their area by sharing their knowledge and giving them advice.
-	\item [\textbf{G7.}] Allowing agronomists to plan visits with farmers to check their progress and if needed, help them.
+	\item [\textbf{G7.}] Allowing agronomists to plan visits with farmers to check their progress and, if needed, help them.
 	\item [\textbf{G8.}] \sout{Allowing policy makers to monitor the performance of the farmers to help them or to give them special incentives to encourage them to share their experience.} (\textbf{Not implemented.})
 	\item [\textbf{G9.}] Showing customers weather forecasts allowing them to have a better approach with the climate changes.
 \end{enumerate}
@@ -76,7 +76,7 @@ Goals, use cases, as well as functional requirements that are defined throughout
 
 \section{Test Cases} \label{sec:test_cases}
 
-The following test cases are used in the process of acceptance testing of the initial prototype of the DREAM system. They are directly based on the project's use cases, which are additionally mapped to the functional requirements so that the fulfillment of both is verified. All the testing was conducted manually.
+The following test cases are used in the process of acceptance testing of the initial prototype of the DREAM system. They are derived from project's use cases, which are additionally mapped to the functional requirements so that the fulfillment of both is verified. All the testing was conducted manually.
 
 Before starting the acceptance tests, the application was seeded with data required for specified test cases. Two farmer's accounts, help requests together with responses, forum topics and comments, products and their production data, as well as meetings and knowledge items were created.
 
@@ -204,7 +204,7 @@ Before starting the acceptance tests, the application was seeded with data requi
 	\midrule
 	\textbf{Expected Output} & The \textit{Farm Info Page} containing soil, production, and sensor data is displayed.\\
 	\midrule
-	\textbf{Test Result} & Failure\\
+	\textbf{Test Result} & \textbf{Failure}\\
 	\bottomrule
 	\caption{Test case verifying U5.}
 \end{longtable}
@@ -240,11 +240,197 @@ There is no tab called \textit{Farm Info} available. Such data can be seen insid
     \caption{Test case verifying U6.}
 \end{longtable}
 
+
 \subsubsection*{Unexpected Behavior}
 
 The case when valid data is introduced works as expected. However, the system allows creating empty help requests and no input validation is in place.
 
-\noindent\rule{\textwidth}{1pt} \todo{This line is only temporal: Józef, delete when finished}
+
+\subsection{Sign Up}
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U7.} Sign Up\\
+	\midrule
+	\textbf{Goals} & G1 - G9\\
+	\midrule
+	\textbf{Requirements} & R24, R26, R27\\
+	\midrule
+	\textbf{Actor} & Farmer\\
+	\midrule
+	\textbf{Scenario} &
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Open \textit{Farmer's WebApplication}
+		\item Click the \textit{Sign In} button.
+		\item Click \textit{Don't have an account? Sign Up} button.
+		\item Provide \textit{First Name, Last Name, Aadhaar, Telephone number, E-Mail, Password}.
+		\item Click \textit{Sign Up} button.
+ 	\end{enumerate}\\
+	\midrule
+	\textbf{Expected Output} & An account is created.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+    \caption{Test case verifying U7.}
+\end{longtable}
+
+\subsubsection*{Unexpected Behavior}
+The system correctly checks for missing fields and existing accounts. Agronomist receives a notification about a new farmer in the area.
+
+However, the system does not ask user for the password confirmation, as described in the use case description in the RASD. Moreover, the system does not validate the format of the inserted data. 
+
+
+\subsection{Login}
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U8.} Login Page\\
+	\midrule
+	\textbf{Goals} & G1 - G9\\
+	\midrule
+	\textbf{Requirements} & R24\\
+	\midrule
+	\textbf{Actor} & Farmer, Agronomist\\
+	\midrule
+	\textbf{Scenario} &
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Open \textit{Farmer's WebApplication}/\textit{Agronomist's WebApplication}.
+		\item Click the \textit{Sign In} button.
+		\item Provide \textit{E-Mail, Password}.
+		\item Click the \textit{Sign In} button.
+ 	\end{enumerate}\\
+	\midrule
+	\textbf{Expected Output} & User is logged in and redirected to the home page.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+    \caption{Test case verifying U8.}
+\end{longtable}
+
+\subsubsection*{Additional Notes}
+The case was tested and resulted in \textit{Success} on both clients' panels.
+
+
+\subsection{Create Meeting}
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U9.} Create Meeting\\
+	\midrule
+	\textbf{Goals} & G7\\
+	\midrule
+	\textbf{Requirements} & R3, R4, R5, R6\\
+	\midrule
+	\textbf{Actor} & Agronomist\\
+	\midrule
+	\textbf{Scenario} &
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Sign in to the \textit{Agronomist's WebApplication}.
+		\item Click on \textit{Farmers} in the navigation top bar.
+		\item Click the button with three dots.
+		\item Choose \textit{Plan a meeting} option.
+		\item Insert \textit{Date, Start time, End time}.
+		\item Click the \textit{OK} button.
+ 	\end{enumerate}\\
+	\midrule
+	\textbf{Expected Output} & A meeting is correctly created and displayed on the meeting list.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+    \caption{Test case verifying U9.}
+\end{longtable}
+
+\subsubsection*{Unexpected Behavior}
+The system correctly checks for overlapping time periods during meeting creation, however allows meeting with the same start and end time. The system does not allow creating a meeting during \textit{working hours}, nonetheless their definition is not provided neither in the RASD nor in the DD. 
+
+
+\subsection{Create Knowledge}
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U10.} Create Meeting\\
+	\midrule
+	\textbf{Goals} & G6\\
+	\midrule
+	\textbf{Requirements} & R19\\
+	\midrule
+	\textbf{Actor} & Agronomist\\
+	\midrule
+	\textbf{Scenario} &
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Sign in to the \textit{Agronomist's WebApplication}.
+		\item Click on \textit{Knowledge} in the navigation top bar.
+		\item Provide \textit{Title, Category, Description, Article}.
+		\item Click the \textit{OK} button.
+ 	\end{enumerate}\\
+	\midrule
+	\textbf{Expected Output} & A Knowledge instance is correctly created.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+    \caption{Test case verifying U10.}
+\end{longtable}
+
+
+\subsection{Insert Farm Data}
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U11.} Insert Farm Data\\
+	\midrule
+	\textbf{Goals} & G7, G8\\
+	\midrule
+	\textbf{Requirements} & \textit{No valid requirement specified.}\\
+	\midrule
+	\textbf{Actor} & Farmer\\
+	\midrule
+	\textbf{Scenario} &
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Open \textit{Farmer's WebApplication}
+		\item Click the \textit{Sign In} button.
+		\item Click \textit{Don't have an account? Sign Up} button.
+		\item Provide \textit{First Name, Last Name, Aadhaar, Telephone number, E-Mail, Password}.
+		\item Click \textit{Sign Up} button.
+		\item Provide \textit{Area, Address, Square kilometer}.
+		\item Click \textit{Sign Up} button.
+ 	\end{enumerate}\\
+	\midrule
+	\textbf{Expected Output} & Farm data is updated, and the user is redirected to the home page.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+    \caption{Test case verifying U11.}
+\end{longtable}
+
+\subsubsection*{Unexpected Behavior}
+Input format is not validated, which makes it possible to input negative number of farm's square kilometers.
+
+
+\subsection{New Farmer Notification}
+\begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
+	\toprule
+	\textbf{Use case} & \textbf{U12.} Notification New Farmer\\
+	\midrule
+	\textbf{Goals} & G7\\
+	\midrule
+	\textbf{Requirements} & R26\\
+	\midrule
+	\textbf{Actor} & Farmer\\
+	\midrule
+	\textbf{Scenario} &
+	\begin{enumerate}[leftmargin=.4cm,noitemsep,topsep=0pt,before=\vspace{-3mm},after=\vspace{-4mm}]
+		\item Open \textit{Farmer's WebApplication}
+		\item Click the \textit{Sign In} button.
+		\item Click \textit{Don't have an account? Sign Up} button.
+		\item Provide \textit{First Name, Last Name, Aadhaar, Telephone number, E-Mail, Password}.
+		\item Click \textit{Sign Up} button.
+		\item Provide \textit{Area, Address, Square kilometer}.
+		\item Click \textit{Sign Up} button.
+		\item Sign in to the \textit{Agronomist's WebApplication}.
+ 	\end{enumerate}\\
+	\midrule
+	\textbf{Expected Output} & There is a notification regarding a new farmer in the area in Agronomist's home page.\\
+	\midrule
+	\textbf{Test Result} & Success\\
+	\bottomrule
+    \caption{Test case verifying U12.}
+\end{longtable}
+
 
 \subsection{Create New Topic}
 
@@ -273,6 +459,8 @@ The case when valid data is introduced works as expected. However, the system al
 	\caption{Test case verifying U14.}
 \end{longtable}
 
+\subsubsection*{Unexpected Behavior}
+It is possible to create a new topic with empty title, body, and without tags.
 
 \subsection{Update Production Data}
 
@@ -302,6 +490,11 @@ The case when valid data is introduced works as expected. However, the system al
 	\caption{Test case verifying U15.}
 \end{longtable}
 
+
+\subsubsection*{Unexpected Behavior}
+Input format for the \textit{Amount} in the \textit{Edit the production} pop-up allows for inserting alphanumerical characters. Additionally, the inputs can be cleared and successfully saved. In both cases, the production data entry contains the \textit{Q.ta} field equal to zero and empty \textit{Note} field.
+
+
 \subsection{Comment Topic}
 
 \begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
@@ -330,6 +523,9 @@ The case when valid data is introduced works as expected. However, the system al
 \end{longtable}
 
 
+\subsubsection*{Unexpected Behavior}
+It is possible to add comment with empty content.
+
 \subsection{Answer Help Request}
 
 \begin{longtable}{@{}p{0.25\linewidth}p{0.71\linewidth}@{}}
@@ -356,3 +552,10 @@ The case when valid data is introduced works as expected. However, the system al
 	\bottomrule
 	\caption{Test case verifying U17.}
 \end{longtable}
+
+
+\subsubsection*{Unexpected Behavior}
+\begin{itemize}
+    \item It is possible to add a response with empty content.
+    \item When the farmer tries to see the response, he selects the \textit{Forum} tab in the top navigation bar. The response is available in the \textit{No feed} tab, what is very counter-intuitive. Then, if the farmer answers again to the agronomist's response, the help request is considered as \textit{Closed} what is even more misleading. The names of help request's states does not reflect the states for described in the RASD, in the Figure 3.
+\end{itemize}

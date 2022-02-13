@@ -1,7 +1,5 @@
 \chapter{Comments and Remarks} \label{ch:comments_and_remarks}
 
-\todo{Józef: Fill the chapter with any comments you think are valid.}
-
 The following sections are intended to communicate any issues or remarks that arose throughout the acceptance testing process. They are concerned with the user interface, the documentation and code provided, and the implemented functionalities in general.
 
 \section{Documentation Concerns}
@@ -9,7 +7,12 @@ The following sections are intended to communicate any issues or remarks that ar
 \subsection{General Concerns}
 
 \begin{itemize}
+    \item Requirements and use cases look like they were not revised in further stages of the project, which leads to inconsistencies between them and the final product.
+    \item Some use cases are missing. An example of such use case can be a farmer responding to a meeting request, which is mentioned in scenarios and use case diagrams, but not in use cases and requirements. This functionality is partially implemented, and always results in an error due to forbidden access, when trying to confirm/reject a meeting. This restricts possibility to test further functionalities, like meeting evaluation.
+    \item Some of the terms are not explained clearly enough. An example of such a term can be \textit{Farm data}, which is only briefly mentioned in one paragraph of the DD.
+    \item The Sign Up functionality, described in \textbf{U8} is available only for farmers. There is no possibility to add a new agronomist inside the \textit{Agronomist's WebApplication} is available only for farmers as stated in the provided documents. During testing, there was only one agronomist utilized, that was added using the provided SQL script.
     \item The requirements do not cover all the specified use cases. Such examples occurring in the section \ref{sec:test_cases} are marked as \textit{"No valid requirement specified"}.
+    \item There are requirements, which do not correspond to the state of the final system and were not implemented. An example can be \textbf{R27}, which mentions insertion of farmer's location during sign up.
     \item There is no information on how to specify what area is an agronomist responsible for throughout the documents provided by the development team.
 \end{itemize}
 
@@ -39,24 +42,20 @@ Taking all the above into consideration, it is impossible to clearly answer the 
 
 \begin{itemize}
     \item The back-end part of the system is very well commented.
-    \item During the build of the frontend application, a great number of warning is produced about \textit{declared but not used} variables.
+    \item During building of the frontend application, a great number of warnings is produced about \textit{declared but not used} variables.
     \item POST HTTP methods are used for both creating and updating API resources. For updates, PUT, or PATCH methods would be more appropriate. 
+    \item POST HTTP request is sent every time a user wants to save changes to some data (for example, edit of production or meeting data), even when no data was actually changed.
     \item Commit messages do not carry any meaningful information.
 \end{itemize}
 
 
-\section{Availability and quality of functionalities}
+\section{Additional functionalities}
 
-\textbf{Positive:}\\
 The application has some small additional features that compose supplementary value to the users. Specifically:
 \begin{itemize}
     \item Farmers are able to see the graphs of selected production type in the \textit{Production} view.
     \item Farmers are able to like comments inside specific forum topics.
-\end{itemize}
-
-\textbf{Negative:}
-\begin{itemize}
-    \item The Sign Up functionality, described in \textbf{U8} is available only for farmers. There is no possibility to add a new agronomist inside the \textit{Agronomist's WebApplication}. During testing, there was only one agronomist utilized, that was added using the provided SQL script.
+    \item Users receive notifications regarding important events that occurred in the system.
 \end{itemize}
 
 \section{User Interface Remarks}
