@@ -17,8 +17,48 @@ Telangana is India's 11th biggest state, having a land area of 122,077 km2 and a
 ## Goals
 
 1. Improve farmers performance by providing them with personalized suggestions.
-2. Acquire, combine, and visualize data from external systems. 
+2. Acquire, combine, and visualize data from external systems.
 3. Facilitate performance assessment of the farmers.
 4. Promote regular farms' visits by agronomists, depending on the type of problems they face.
 5. Enable agronomists to exchange information with farmers.
 6. Enable farmers to exchange their knowledge.
+
+## Built with
+
+Frontend side:
+
+- React + Redux
+- Typescript
+- Ant design
+
+Backend side:
+
+- C# and .NET 6
+- Entity Framework
+- FluentValidations
+- Automapper
+- PostgreSQL
+
+System tests:
+
+- Python
+- Pytest
+- Selenium Web Driver
+
+## Getting started
+
+This is an example of how you may give instructions on setting up your project locally. To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+- docker desktop
+
+### Installation
+
+Open a terminal in the Code directory and run the command
+
+```docker - compose up -d -- build```
+
+### Usage
+
+The frontend docker container is configured to work on the port 1337.

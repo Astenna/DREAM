@@ -60,7 +60,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var authEnabled = builder.Configuration.GetSection("AuthOptions")
-                                 .GetValue<bool>("Enalbed");
+                                 .GetValue<bool>("Enabled");
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>
