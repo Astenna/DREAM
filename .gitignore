@@ -325,6 +325,7 @@ msbuild.wrn
 *.lck
 *.bak_*
 venv/
+.venv/
 *.exe
 __pycache__/
 .pytest_cache/

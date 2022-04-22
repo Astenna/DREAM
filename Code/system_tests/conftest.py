@@ -17,7 +17,7 @@ def driver():
     options = Options()
 
     for option in [
-        '--headless',
+        # '--headless',
         '--disable-gpu',
         '--ignore-certificate-errors',
         '--disable-extensions',

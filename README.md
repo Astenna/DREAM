@@ -23,42 +23,64 @@ Telangana is India's 11th biggest state, having a land area of 122,077 km2 and a
 5. Enable agronomists to exchange information with farmers.
 6. Enable farmers to exchange their knowledge.
 
-## Built with
+## Technology
 
-Frontend side:
+Frontend:
 
 - React + Redux
 - Typescript
 - Ant design
 
-Backend side:
+Backend:
 
 - C# and .NET 6
 - Entity Framework
-- FluentValidations
-- Automapper
+- FluentValidation
+- AutoMapper
 - PostgreSQL
 
 System tests:
 
 - Python
-- Pytest
+- pytest
 - Selenium Web Driver
 
 ## Getting started
 
-This is an example of how you may give instructions on setting up your project locally. To get a local copy up and running follow these simple example steps.
+This is an example of how you may give instructions on setting up your project locally. To get a local copy up and running follow these simple example steps. **DISCLAIMER: Full installation guide can be found in *DeliveryFolder/ITD1.pdf*.**
+
+### Project Organization
+
+    ├───.github
+    │   └───workflows       <- Workflow files for GitHub Actions.
+    ├───Assignments
+    ├───ATD                 <- Acceptance Test Deliverable source files.
+    ├───Code
+    │   ├───Client          <- Client source code.
+    │   ├───Server          <- Server source code.
+    │   └───system_tests    <- System tests source code.
+    ├───DD                  <- Design Document source files.
+    ├───DeliveryFolder      <- Folder containing all the created documents.
+    ├───ITD                 <- Implementation and Test Deliverable source files.
+    ├───RASD                <- Requirements Analysis and Specifications Document source files.
+    └───images              <- Images used in README.
 
 ### Prerequisites
 
-- docker desktop
+- Docker Desktop
 
 ### Installation
 
-Open a terminal in the Code directory and run the command
+Open a terminal in the *Code/* directory and run the command below.
 
-```docker - compose up -d -- build```
+```bash
+docker-compose up -d --build
+```
 
 ### Usage
 
 The frontend docker container is configured to work on the port 1337.
+
+## Demo
+
+![DREAM Demo](images/dream_demo.gif)
